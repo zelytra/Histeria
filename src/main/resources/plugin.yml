@@ -1,0 +1,7 @@
+name: Histeria
+version: ${project.version}
+main: fr.zelytra.histeria.Histeria
+api-version: 1.16
+authors: [ Zelytra ]
+description: Histeria server core
+website: http://zelytra.fr
