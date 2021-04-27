@@ -1,5 +1,6 @@
 package fr.zelytra.histeria;
 
+import fr.zelytra.histeria.commands.ServerSelector;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
@@ -35,7 +36,7 @@ public final class Histeria extends JavaPlugin {
     }
 
     private void regCommands() {
-
+        getCommand("server").setExecutor(new ServerSelector());
     }
 
     private void setupServer() {
@@ -52,7 +53,7 @@ public final class Histeria extends JavaPlugin {
     }
 
     public static void log(String msg) {
-        if(log){
+        if (log) {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.getConsolePrefixe() + msg);
         }
     }

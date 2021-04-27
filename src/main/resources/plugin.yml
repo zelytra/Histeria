@@ -5,3 +5,7 @@ api-version: 1.16
 authors: [ Zelytra ]
 description: Histeria server core
 website: http://zelytra.fr
+
+commands:
+  server:
+    description: Open server selector interface
