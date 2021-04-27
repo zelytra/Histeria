@@ -1,8 +1,11 @@
 package fr.zelytra.histeria;
 
-import fr.zelytra.histeria.commands.ServerSelector;
+import fr.zelytra.histeria.commands.customItems.HGive;
+import fr.zelytra.histeria.commands.customItems.HGiveTab;
+import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
+import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -29,16 +32,19 @@ public final class Histeria extends JavaPlugin {
         regPluginMessage();
         setupServer();
         EventManager.regEvents(this);
-
+        new CraftManager();
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+
     }
 
     private void regCommands() {
         getCommand("server").setExecutor(new ServerSelector());
+
+        getCommand("hgive").setExecutor(new HGive());
+        getCommand("hgive").setTabCompleter(new HGiveTab());
     }
 
     private void setupServer() {

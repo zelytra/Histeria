@@ -29,7 +29,7 @@ public class PacketSender {
             OutputStream output = socket.getOutputStream();
             PacketBuilder playerPacket = new PacketBuilder(this.player);
             output.write(playerPacket.build());
-            Histeria.log("§a" + this.player.getName() + " inventory's send to the server...");
+            Histeria.log("§e" + this.player.getName() + " inventory's send to the server...");
 
             //Confirm
             InputStream input = socket.getInputStream();
@@ -43,7 +43,7 @@ public class PacketSender {
                 socket.close();
                 return;
             }
-            Histeria.log("§aInventory received.");
+            Histeria.log("§eInventory received.");
             this.isReceived =true;
             socket.close();
 

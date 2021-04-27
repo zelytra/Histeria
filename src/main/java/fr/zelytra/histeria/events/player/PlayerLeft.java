@@ -2,6 +2,7 @@ package fr.zelytra.histeria.events.player;
 
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,8 @@ public class PlayerLeft implements Listener {
                 SwitchServer.getPlayerSwitching().remove(e.getPlayer());
                 return;
             }
-
+            PacketSender packetSender = new PacketSender(e.getPlayer());
+            packetSender.save();
         });
 
     }

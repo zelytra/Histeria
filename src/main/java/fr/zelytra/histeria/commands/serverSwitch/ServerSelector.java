@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands;
+package fr.zelytra.histeria.commands.serverSwitch;
 
 import fr.zelytra.histeria.builder.Interface;
 import fr.zelytra.histeria.builder.InterfaceBuilder;

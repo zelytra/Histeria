@@ -63,7 +63,9 @@ public class PlayerDat {
 
         // Potion effect
         Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
-            player.getActivePotionEffects().clear();
+            for (PotionEffect effect : player.getActivePotionEffects()) {
+                player.removePotionEffect(effect.getType());
+            }
             player.addPotionEffects(Arrays.asList(this.effects));
         });
 

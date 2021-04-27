@@ -9,3 +9,6 @@ website: http://zelytra.fr
 commands:
   server:
     description: Open server selector interface
+
+  hgive:
+    description: Give custom item
