@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 
 public class PacketSender {
-
+    private boolean isReceived = false;
     private Player player;
 
     public PacketSender(Player player) {
@@ -29,7 +29,7 @@ public class PacketSender {
             OutputStream output = socket.getOutputStream();
             PacketBuilder playerPacket = new PacketBuilder(this.player);
             output.write(playerPacket.build());
-            Histeria.log("§a " + this.player.getName() + " inventory's send to the server...");
+            Histeria.log("§a" + this.player.getName() + " inventory's send to the server...");
 
             //Confirm
             InputStream input = socket.getInputStream();
@@ -38,17 +38,24 @@ public class PacketSender {
             int messageLength = Integer.reverseBytes(ByteBuffer.wrap(Rbyte).getInt());
             byte[] Mbyte = new byte[messageLength];
             input.read(Mbyte);
-            if (Integer.reverseBytes(ByteBuffer.wrap(Rbyte).getInt()) == 1) {
+            if (Integer.reverseBytes(ByteBuffer.wrap(Rbyte).getInt()) != 1) {
+                Histeria.log("§cInventory not received.");
                 socket.close();
                 return;
             }
-            Histeria.log("§a Inventory received.");
+            Histeria.log("§aInventory received.");
+            this.isReceived =true;
             socket.close();
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean isReceived() {
+        return this.isReceived;
     }
 
     private Socket connexion() {
@@ -59,7 +66,7 @@ public class PacketSender {
             InetAddress serveur = InetAddress.getByName(server);
             return new Socket(serveur, port);
         } catch (Exception e) {
-            Histeria.log("§c Failed to connect to sync server");
+            Histeria.log("§cFailed to connect to sync server");
         }
         return null;
     }

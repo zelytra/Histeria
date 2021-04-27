@@ -2,6 +2,7 @@ package fr.zelytra.histeria;
 
 import fr.zelytra.histeria.commands.ServerSelector;
 import fr.zelytra.histeria.events.EventManager;
+import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -25,6 +26,7 @@ public final class Histeria extends JavaPlugin {
     public void onEnable() {
         regCommands();
         regRepeatingTask();
+        regPluginMessage();
         setupServer();
         EventManager.regEvents(this);
 
@@ -48,6 +50,11 @@ public final class Histeria extends JavaPlugin {
         }
     }
 
+    private void regPluginMessage(){
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PluginMessage());
+    }
+
     private void regRepeatingTask() {
 
     }
@@ -57,5 +64,7 @@ public final class Histeria extends JavaPlugin {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.getConsolePrefixe() + msg);
         }
     }
+
+
 
 }

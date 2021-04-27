@@ -2,6 +2,7 @@ package fr.zelytra.histeria.events;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
+import fr.zelytra.histeria.events.gui.ServerSelector;
 import fr.zelytra.histeria.events.player.PlayerJoin;
 import fr.zelytra.histeria.events.player.PlayerLeft;
 import org.bukkit.Bukkit;
@@ -17,6 +18,7 @@ public class EventManager {
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(),pl);
+        pm.registerEvents(new ServerSelector(),pl);
 
     }
 }

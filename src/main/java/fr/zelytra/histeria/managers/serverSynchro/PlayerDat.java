@@ -1,5 +1,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
+import fr.zelytra.histeria.Histeria;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -60,8 +62,11 @@ public class PlayerDat {
         player.setLevel(this.xp);
 
         // Potion effect
-        player.getActivePotionEffects().clear();
-        player.addPotionEffects(Arrays.asList(this.effects));
+        Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+            player.getActivePotionEffects().clear();
+            player.addPotionEffects(Arrays.asList(this.effects));
+        });
+
 
         // Health
         if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() < this.health) {

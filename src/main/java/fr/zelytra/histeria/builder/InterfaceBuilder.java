@@ -8,10 +8,8 @@ import org.bukkit.inventory.ItemStack;
 public class InterfaceBuilder {
 
     private Inventory inventory;
-    private Player player;
 
-    public InterfaceBuilder(int size, String name, Player player) {
-        this.player = player;
+    public InterfaceBuilder(int size, String name) {
         this.inventory = Bukkit.createInventory(new CustomGUI(), size, name);
     }
 
@@ -19,8 +17,8 @@ public class InterfaceBuilder {
         this.inventory.setContents(content);
     }
 
-    public void open() {
-        this.player.openInventory(this.inventory);
+    public void open(Player player) {
+        player.openInventory(this.inventory);
     }
 
 

@@ -59,7 +59,7 @@ public class PacketBuilder {
             outputStream.write(playerEffect);
 
         } catch (IOException e) {
-            Histeria.log("§c Failed to build the byte message");
+            Histeria.log("§cFailed to build the byte message");
         }
         return outputStream.toByteArray();
     }

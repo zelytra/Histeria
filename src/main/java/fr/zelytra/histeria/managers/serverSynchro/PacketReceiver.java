@@ -32,7 +32,7 @@ public class PacketReceiver {
             InetAddress serveur = InetAddress.getByName(server);
             return new Socket(serveur, port);
         } catch (Exception e) {
-            Histeria.log("§c Failed to connect to sync server");
+            Histeria.log("§cFailed to connect to sync server");
         }
         return null;
     }
@@ -55,7 +55,7 @@ public class PacketReceiver {
             byte[] id = new byte[1];
             input.read(id);
             if (id[0] == (byte) 254) {
-                Histeria.log("§a " + player.getName() + " is a new player. Nothing to do.");
+                Histeria.log("§a" + player.getName() + " is a new player. Nothing to do.");
                 socket.close();
                 this.isNew = true;
                 return;
@@ -104,7 +104,7 @@ public class PacketReceiver {
             input.read(potionEffect);
             playerDat.setEffects(potionArrayFromBase64(potionEffect));
 
-            Histeria.log("§a " + player.getName() + " inventory's has been synchronised.");
+            Histeria.log("§a" + player.getName() + " inventory's has been synchronised.");
             this.isLoaded = true;
             socket.close();
         } catch (Exception e) {

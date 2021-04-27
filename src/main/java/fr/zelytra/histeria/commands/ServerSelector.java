@@ -19,9 +19,9 @@ public class ServerSelector implements CommandExecutor, Interface{
             return false;
         }
         Player player = (Player) sender;
-        InterfaceBuilder selector = new InterfaceBuilder(9, "§9Select a server:", player);
+        InterfaceBuilder selector = new InterfaceBuilder(9, "§9Select a server:");
         selector.setContent(contentBuilder());
-        selector.open();
+        selector.open(player);
         return true;
     }
 

@@ -11,7 +11,7 @@ public enum VisualType {
     BLANK_GRAY_GLASSE(new VisualItemStack(Material.GRAY_STAINED_GLASS_PANE, " ", false)),
     BLANK_LIGHT_GRAY_GLASSE(new VisualItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE, " ", false));
 
-    private VisualItemStack item;
+    private final VisualItemStack item;
 
     VisualType(VisualItemStack item) {
         this.item = item;
