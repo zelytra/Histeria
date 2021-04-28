@@ -42,7 +42,9 @@ public class PacketReceiver {
             Socket socket = connexion();
             // Righting message
             byte[] Sbyte = requestDatBuilder();
-            assert socket != null;
+            if(socket==null){
+                return;
+            }
             OutputStream output = socket.getOutputStream();
 
             // Sending message

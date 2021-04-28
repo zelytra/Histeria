@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.commands.customItems;
 
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.items.ItemType;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -19,6 +20,9 @@ public class HGiveTab implements TabCompleter {
         List<String> commandsList = new ArrayList<>();
         if (args.length == 1) {
             for (CustomMaterial material : CustomMaterial.values()) {
+                if(material.getItemType()== ItemType.BLOCK){
+                    continue;
+                }
                 commandsList.add(material.getName());
             }
             commandsList = Utils.dynamicTab(commandsList, args[0]);
