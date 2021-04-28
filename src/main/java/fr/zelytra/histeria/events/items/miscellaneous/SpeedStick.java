@@ -1,6 +1,6 @@
 package fr.zelytra.histeria.events.items.miscellaneous;
 
-import fr.zelytra.histeria.events.items.ItemFunction;
+import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;

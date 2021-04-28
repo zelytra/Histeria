@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.events.items;
+package fr.zelytra.histeria.events.items.itemHandler;
 
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
