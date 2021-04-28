@@ -27,6 +27,7 @@ public final class Histeria extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Message.startup();
         regCommands();
         regRepeatingTask();
         regPluginMessage();

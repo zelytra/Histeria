@@ -20,13 +20,13 @@ public enum CustomMaterial {
     ALPIN_HOOK("§bAlpin Hook", "alpin_hook", "Permet l'ascension de toute surface verticale", 39, Material.STONE_PICKAXE, ItemType.TOOL),
     UNCLAIM_FINDER("§9Unclaim Finder", "unclaim_finder", "Cet item vous indique le nombre#de coffres dans zone de 128x128#autour de vous", 40, Material.COMPASS, ItemType.MISCELLANEOUS),
 
-    NOCTURITE_SWORD("§5Nocturite Sword", "nocturite_sword", "Durabilité: 3600#Pouvoir: projette toute entité alentour", 30, Material.GOLDEN_SWORD, ItemType.TOOL),
-    HISTERITE_SWORD("§cHisterite Sword", "histerite_sword", 28, Material.GOLDEN_SWORD, ItemType.TOOL),
-    HISTERITE_PICKAXE("§cHisterite Pickaxe", "histerite_pickaxe", "Durabilité: 3000#Casse une colonne de deux blocs de haut", 5, Material.NETHERITE_PICKAXE, ItemType.TOOL),
-    HISTERITE_AXE("§cHisterite Axe", "histerite_axe", "Durabilité: 2900#Casse une colonne de bois continue", 41, Material.GOLDEN_AXE, ItemType.TOOL),
-    HISTERITE_SHOVEL("§cHisterite Shovel", "histerite_shovel", "Durabilité: 2900#Creuse une zone plate de 5x5", 38, Material.GOLDEN_SHOVEL, ItemType.TOOL),
-    HISTERITE_HOE("§cHisterite Hoe", "histerite_hoe", "Durabilité: 2900#Laboure une zone de:#- 5x5 (Clic Droit)#- 10x1 (Sneak+Clic Droit)", 37, Material.GOLDEN_HOE, ItemType.TOOL),
-    HAMMER("§6Hammer", "hammer", "Durabilité: 3500#Casse une zone cube de 3x3x3", 6, Material.NETHERITE_PICKAXE, ItemType.TOOL),
+    NOCTURITE_SWORD("§5Nocturite Sword", "nocturite_sword", "Durabilité: 3600#Pouvoir: projette toute entité alentour", 30, Material.GOLDEN_SWORD, ItemType.TOOL, 3600, 12, EquipmentSlot.HAND),
+    HISTERITE_SWORD("§cHisterite Sword", "histerite_sword", "Durabilité: 2800", 28, Material.GOLDEN_SWORD, ItemType.TOOL, 2800, 10, EquipmentSlot.HAND),
+    HISTERITE_PICKAXE("§cHisterite Pickaxe", "histerite_pickaxe", "Durabilité: 3000#Casse une colonne de deux blocs de haut", 5, Material.NETHERITE_PICKAXE, ItemType.TOOL, 3000),
+    HISTERITE_AXE("§cHisterite Axe", "histerite_axe", "Durabilité: 2900#Casse une colonne de bois continue", 41, Material.GOLDEN_AXE, ItemType.TOOL, 2900),
+    HISTERITE_SHOVEL("§cHisterite Shovel", "histerite_shovel", "Durabilité: 2900#Creuse une zone plate de 5x5", 38, Material.GOLDEN_SHOVEL, ItemType.TOOL, 2900),
+    HISTERITE_HOE("§cHisterite Hoe", "histerite_hoe", "Durabilité: 2900#Laboure une zone de:#- 5x5 (Clic Droit)#- 10x1 (Sneak+Clic Droit)", 37, Material.GOLDEN_HOE, ItemType.TOOL, 2900),
+    HAMMER("§6Hammer", "hammer", "Durabilité: 3500#Casse une zone cube de 3x3x3", 6, Material.NETHERITE_PICKAXE, ItemType.TOOL, 3500),
 
     HISTERITE_NUGGET("§cHisterite Nugget", "histerite_nugget", 47, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
     HISTERITE_INGOT("§cHisterite Ingot", "histerite_ingot", 15, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
@@ -59,15 +59,15 @@ public enum CustomMaterial {
     CRUSHING_TABLE(Material.FLETCHING_TABLE, ItemType.BLOCK),
 
 
-    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 5, 4, EquipmentSlot.HEAD),
-    HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 10, 6, EquipmentSlot.CHEST),
-    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 8, 6, EquipmentSlot.LEGS),
-    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 6, Material.LEATHER_BOOTS, ItemType.ARMOR, 26, 4, EquipmentSlot.FEET),
+    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD),
+    HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 1700, 10, 6, EquipmentSlot.CHEST),
+    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 6, EquipmentSlot.LEGS),
+    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 6, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 26, 4, EquipmentSlot.FEET),
 
-    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 6, 5, EquipmentSlot.HEAD),
-    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 13, 9, EquipmentSlot.CHEST),
-    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 11, 9, EquipmentSlot.LEGS),
-    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 6, 5, EquipmentSlot.FEET);
+    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD),
+    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST),
+    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 11, 9, EquipmentSlot.LEGS),
+    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 6, 5, EquipmentSlot.FEET);
 
 
     private String displayName;
@@ -80,6 +80,7 @@ public enum CustomMaterial {
     private int armor;
     private int damage;
     private int extraHeart;
+    private int durability;
     private String description;
 
     CustomMaterial(Material material, ItemType itemType) {
@@ -104,18 +105,7 @@ public enum CustomMaterial {
         this.description = description;
     }
 
-    CustomMaterial(String displayName, String name, int CMD, Material material, ItemType itemType, int armor, int extraHeart, EquipmentSlot slot) {
-        this.displayName = displayName;
-        this.name = name;
-        this.customModelData = CMD;
-        this.vanillaMaterial = material;
-        this.itemType = itemType;
-        this.armor = armor;
-        this.extraHeart = extraHeart;
-        this.slot = slot;
-    }
-
-    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int armor, int extraHeart, EquipmentSlot slot) {
+    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int armor, int extraHeart, EquipmentSlot slot) {
         this.displayName = displayName;
         this.name = name;
         this.customModelData = CMD;
@@ -125,6 +115,29 @@ public enum CustomMaterial {
         this.extraHeart = extraHeart;
         this.slot = slot;
         this.description = description;
+        this.durability = durability;
+    }
+
+    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int damage, EquipmentSlot slot) {
+        this.displayName = displayName;
+        this.name = name;
+        this.customModelData = CMD;
+        this.vanillaMaterial = material;
+        this.itemType = itemType;
+        this.slot = slot;
+        this.description = description;
+        this.durability = durability;
+        this.damage = damage;
+    }
+
+    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability) {
+        this.displayName = displayName;
+        this.name = name;
+        this.customModelData = CMD;
+        this.vanillaMaterial = material;
+        this.itemType = itemType;
+        this.description = description;
+        this.durability = durability;
     }
 
     public int getCustomModelData() {
@@ -176,4 +189,7 @@ public enum CustomMaterial {
         return null;
     }
 
+    public int getDurability() {
+        return durability;
+    }
 }

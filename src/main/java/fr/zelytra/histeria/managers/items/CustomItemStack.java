@@ -5,17 +5,20 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class CustomItemStack {
     private final static NamespacedKey itemKey = new NamespacedKey(Histeria.getInstance(), "daedalus");
-    private final NamespacedKey descriptionKey = new NamespacedKey(Histeria.getInstance(), "description");
+    private final static NamespacedKey descriptionKey = new NamespacedKey(Histeria.getInstance(), "description");
+    private final static NamespacedKey durabilityKey = new NamespacedKey(Histeria.getInstance(), "durability");
 
     private final ItemStack item;
     private final CustomMaterial customMaterial;
@@ -27,80 +30,47 @@ public class CustomItemStack {
     public CustomItemStack(CustomMaterial material, int amount) {
 
         this.customMaterial = material;
+        this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
+        ItemMeta meta = this.item.getItemMeta();
+        assert meta != null;
+        meta.setCustomModelData(this.customMaterial.getCustomModelData());
+        meta.setDisplayName(this.customMaterial.getDisplayName());
+
+        PersistentDataContainer itemData = meta.getPersistentDataContainer();
+        itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
+        if (this.customMaterial.getDescription() != null) {
+            itemData.set(descriptionKey, PersistentDataType.STRING, this.customMaterial.getDescription());
+        }
+
         switch (material.getItemType()) {
             case ARMOR:
-                this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
-                ItemMeta meta = this.item.getItemMeta();
-                assert meta != null;
-                meta.setCustomModelData(this.customMaterial.getCustomModelData());
-                meta.setDisplayName(this.customMaterial.getDisplayName());
-
+                meta.setUnbreakable(true);
+                meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                 meta.addAttributeModifier(Attribute.GENERIC_ARMOR, AttributeGenerator.armor(material.getArmor(), material.getSlot()));
                 meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, AttributeGenerator.extraHeart(material.getExtraHeart(), material.getSlot()));
-
-                PersistentDataContainer itemData = meta.getPersistentDataContainer();
-                itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
-                //itemData.set(descriptionKey, PersistentDataType.STRING, );
-                //meta.setLore(lore);
-                this.item.setItemMeta(meta);
+                itemData.set(durabilityKey, PersistentDataType.INTEGER, this.customMaterial.getDurability());
+                ArrayList<String> lore = new ArrayList<>();
+                lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
+                meta.setLore(lore);
                 break;
-
-            default:
-                this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
-                meta = this.item.getItemMeta();
-                assert meta != null;
-                meta.setCustomModelData(this.customMaterial.getCustomModelData());
-                meta.setDisplayName(this.customMaterial.getDisplayName());
-                itemData = meta.getPersistentDataContainer();
-                itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
-                //itemData.set(descriptionKey, PersistentDataType.STRING, );
-                //meta.setLore(lore);
-                this.item.setItemMeta(meta);
+            case TOOL:
+                meta.setUnbreakable(true);
+                meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+                if (this.customMaterial.getDamage() != 0) {
+                    meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, AttributeGenerator.attack(material.getDamage(), material.getSlot()));
+                }
+                if (this.customMaterial.getDurability() != 0) {
+                    itemData.set(durabilityKey, PersistentDataType.INTEGER, this.customMaterial.getDurability());
+                    lore = new ArrayList<>();
+                    lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
+                    meta.setLore(lore);
+                }
+                break;
+            case MISCELLANEOUS:
                 break;
 
         }
-
-    }
-
-    /**
-     * @param material Custom material of the item
-     */
-
-    public CustomItemStack(CustomMaterial material) {
-
-        this.customMaterial = material;
-        switch (material.getItemType()) {
-            case ARMOR:
-                this.item = new ItemStack(this.customMaterial.getVanillaMaterial());
-                ItemMeta meta = this.item.getItemMeta();
-                assert meta != null;
-                meta.setCustomModelData(this.customMaterial.getCustomModelData());
-                meta.setDisplayName(this.customMaterial.getDisplayName());
-
-                meta.addAttributeModifier(Attribute.GENERIC_ARMOR, AttributeGenerator.armor(material.getArmor(), material.getSlot()));
-                meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, AttributeGenerator.extraHeart(material.getExtraHeart(), material.getSlot()));
-
-                PersistentDataContainer itemData = meta.getPersistentDataContainer();
-                itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
-                //itemData.set(descriptionKey, PersistentDataType.STRING, );
-                //meta.setLore(lore);
-                this.item.setItemMeta(meta);
-                break;
-
-            default:
-                this.item = new ItemStack(this.customMaterial.getVanillaMaterial());
-                meta = this.item.getItemMeta();
-                assert meta != null;
-                meta.setCustomModelData(this.customMaterial.getCustomModelData());
-                meta.setDisplayName(this.customMaterial.getDisplayName());
-                itemData = meta.getPersistentDataContainer();
-                itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
-                //itemData.set(descriptionKey, PersistentDataType.STRING, );
-                //meta.setLore(lore);
-                this.item.setItemMeta(meta);
-                break;
-
-        }
+        this.item.setItemMeta(meta);
 
     }
 
@@ -156,5 +126,15 @@ public class CustomItemStack {
         return false;
     }
 
+    public static NamespacedKey getDescriptionKey() {
+        return descriptionKey;
+    }
 
+    public static NamespacedKey getDurabilityKey() {
+        return durabilityKey;
+    }
+
+    public static NamespacedKey getItemKey() {
+        return itemKey;
+    }
 }
