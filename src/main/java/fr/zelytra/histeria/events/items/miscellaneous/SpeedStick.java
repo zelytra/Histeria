@@ -36,7 +36,7 @@ public class SpeedStick implements Listener {
                     p.playSound(player.getLocation(), Sound.ENTITY_EVOKER_CAST_SPELL, 1, 1);
                 }
 
-                ItemFunction.removeHeldItem(e, customMaterial);
+                ItemFunction.removeHeldItem(player, customMaterial);
             }
         }
     }

@@ -6,8 +6,7 @@ import fr.zelytra.histeria.events.gui.ServerSelector;
 import fr.zelytra.histeria.events.items.miscellaneous.*;
 import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
-import fr.zelytra.histeria.events.items.tools.AlpinHook;
-import fr.zelytra.histeria.events.items.tools.HisteritePickaxe;
+import fr.zelytra.histeria.events.items.tools.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 
@@ -34,9 +33,17 @@ public class EventManager {
         pm.registerEvents(new ChestExplorer(),pl);
         pm.registerEvents(new Dynamite(),pl);
         pm.registerEvents(new Shuriken(),pl);
+        pm.registerEvents(new HisteriteApple(),pl);
 
         /* Tools */
         pm.registerEvents(new HisteritePickaxe(),pl);
+        pm.registerEvents(new Hammer(),pl);
+        pm.registerEvents(new HisteriteAxe(),pl);
+        pm.registerEvents(new HisteriteHoe(),pl);
+        pm.registerEvents(new HisteriteShovel(),pl);
+        pm.registerEvents(new HisteriteSword(),pl);
+        pm.registerEvents(new NocturiteSword(),pl);
+
 
     }
 }

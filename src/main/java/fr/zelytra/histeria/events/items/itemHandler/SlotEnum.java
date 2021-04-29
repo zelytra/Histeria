@@ -30,4 +30,21 @@ public enum SlotEnum {
         }
     }
 
+    public void removeItem(Player player){
+        switch (this) {
+            case MAIN_HAND:
+                player.getInventory().clear(player.getInventory().getHeldItemSlot());
+            case OFF_HAND:
+                player.getInventory().clear(45);
+            case HEAD:
+                player.getInventory().clear(5);
+            case CHEST:
+                player.getInventory().clear(6);
+            case LEGS:
+                player.getInventory().clear(7);
+            case FEET:
+                player.getInventory().clear(8);
+        }
+    }
+
 }

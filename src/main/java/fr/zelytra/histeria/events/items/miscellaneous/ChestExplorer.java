@@ -37,7 +37,7 @@ public class ChestExplorer implements Listener {
                     pl.playSound(e.getPlayer().getLocation(), Sound.ITEM_SHIELD_BREAK, 1, 1);
                 }
 
-                ItemFunction.removeHeldItem(e, customMaterial);
+                ItemFunction.removeHeldItem(player, customMaterial);
             }
         }
     }

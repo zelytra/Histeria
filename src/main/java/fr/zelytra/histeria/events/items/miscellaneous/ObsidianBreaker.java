@@ -40,7 +40,7 @@ public class ObsidianBreaker implements Listener {
                     default:
                         return;
                 }
-                ItemFunction.removeHeldItem(e, customMaterial);
+                ItemFunction.removeHeldItem(e.getPlayer(), customMaterial);
             }
         }
     }

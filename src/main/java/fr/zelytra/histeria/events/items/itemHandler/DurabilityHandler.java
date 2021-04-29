@@ -3,7 +3,6 @@ package fr.zelytra.histeria.events.items.itemHandler;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -19,6 +18,7 @@ public class DurabilityHandler {
     private final CustomMaterial material;
     private int durability;
     private final Player player;
+    private final SlotEnum slot;
 
     /**
      * @param player   Player who held the item
@@ -27,6 +27,7 @@ public class DurabilityHandler {
      */
 
     public DurabilityHandler(Player player, CustomMaterial material, SlotEnum slot) {
+        this.slot = slot;
         this.item = slot.getItem(player);
         this.material = material;
         this.player = player;
@@ -58,13 +59,15 @@ public class DurabilityHandler {
                         }
                 }
             }
+            else {
+                durability--;
+            }
         } else {
             durability--;
         }
         updateIndicator();
-
         if (durability <= 0) {
-            this.item.setType(Material.AIR);
+            this.slot.removeItem(player);
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
             }
@@ -83,6 +86,11 @@ public class DurabilityHandler {
 
     private String getIndicator() {
         return "§bDurability§l>§r§f" + this.durability + "/" + this.material.getDurability();
+    }
+
+    public void setDurability(int value) {
+        durability = value;
+        updateIndicator();
     }
 
 

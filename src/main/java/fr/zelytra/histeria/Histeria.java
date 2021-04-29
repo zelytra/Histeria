@@ -1,5 +1,6 @@
 package fr.zelytra.histeria;
 
+import fr.zelytra.histeria.commands.Test;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
@@ -14,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Histeria extends JavaPlugin {
     private static Histeria instance;
     public static boolean log = true;
+    private static boolean saberFaction = false;
 
     public static Histeria getInstance() {
         return instance;
@@ -42,6 +44,8 @@ public final class Histeria extends JavaPlugin {
     }
 
     private void regCommands() {
+        getCommand("test").setExecutor(new Test());
+
         getCommand("server").setExecutor(new ServerSelector());
 
         getCommand("hgive").setExecutor(new HGive());
@@ -66,12 +70,19 @@ public final class Histeria extends JavaPlugin {
 
     }
 
+    private void loadAPI(){
+        if (!(getServer().getPluginManager().getPlugin("Factions") == null)) {
+            saberFaction = true;
+        }
+    }
+
     public static void log(String msg) {
         if (log) {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.getConsolePrefixe() + msg);
         }
     }
 
-
-
+    public static boolean isSaberFaction() {
+        return saberFaction;
+    }
 }

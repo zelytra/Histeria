@@ -47,7 +47,7 @@ public class BubbleWand implements Listener {
                     pl.playSound(e.getPlayer().getLocation(), Sound.ENTITY_DOLPHIN_SPLASH, 1, 1);
                 }
 
-                ItemFunction.removeHeldItem(e, customMaterial);
+                ItemFunction.removeHeldItem(player, customMaterial);
             }
         }
     }

@@ -7,6 +7,9 @@ description: Histeria server core
 website: http://zelytra.fr
 
 commands:
+  test:
+    description: a test command
+
   server:
     description: Open server selector interface
 
