@@ -9,8 +9,6 @@ import org.bukkit.inventory.ItemStack;
 public class ItemFunction {
 
     public static void removeHeldItem(Player player, CustomMaterial material) {
-
-
         if (CustomItemStack.hasCustomItemInMainHand(material.getName(), player)) {
             if (player.getInventory().getItemInMainHand().getAmount() > 1) {
                 ItemStack newItem = player.getInventory().getItemInMainHand();
@@ -28,6 +26,6 @@ public class ItemFunction {
                 player.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
             }
         }
-
     }
+
 }

@@ -3,6 +3,8 @@ package fr.zelytra.histeria.events;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.gui.ServerSelector;
+import fr.zelytra.histeria.events.items.armors.*;
+import fr.zelytra.histeria.events.items.armors.handler.ArmorListener;
 import fr.zelytra.histeria.events.items.miscellaneous.*;
 import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
@@ -34,6 +36,8 @@ public class EventManager {
         pm.registerEvents(new Dynamite(),pl);
         pm.registerEvents(new Shuriken(),pl);
         pm.registerEvents(new HisteriteApple(),pl);
+        pm.registerEvents(new LotteryTicket(),pl);
+        pm.registerEvents(new XPOrb(),pl);
 
         /* Tools */
         pm.registerEvents(new HisteritePickaxe(),pl);
@@ -43,6 +47,21 @@ public class EventManager {
         pm.registerEvents(new HisteriteShovel(),pl);
         pm.registerEvents(new HisteriteSword(),pl);
         pm.registerEvents(new NocturiteSword(),pl);
+
+        /* Armor */
+        pm.registerEvents(new ArmorListener(pl.getConfig().getStringList("blocked")), pl);
+        pm.registerEvents(new HisteriteHelmet(),pl);
+        pm.registerEvents(new HisteriteChestplate(),pl);
+        pm.registerEvents(new HisteriteLeggings(),pl);
+        pm.registerEvents(new HisteriteBoots(),pl);
+
+        pm.registerEvents(new NocturiteHelmet(),pl);
+        pm.registerEvents(new NocturiteChestplate(),pl);
+        pm.registerEvents(new NocturiteLeggings(),pl);
+        pm.registerEvents(new NocturiteBoots(),pl);
+
+        /* Environment */
+
 
 
     }

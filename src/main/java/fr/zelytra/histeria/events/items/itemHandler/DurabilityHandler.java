@@ -58,8 +58,7 @@ public class DurabilityHandler {
                             break;
                         }
                 }
-            }
-            else {
+            } else {
                 durability--;
             }
         } else {
@@ -91,6 +90,12 @@ public class DurabilityHandler {
     public void setDurability(int value) {
         durability = value;
         updateIndicator();
+    }
+
+    public boolean isBroken() {
+        if (durability <= 0) {
+            return true;
+        } else return false;
     }
 
 

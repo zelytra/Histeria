@@ -30,21 +30,43 @@ public enum SlotEnum {
         }
     }
 
-    public void removeItem(Player player){
+    public void removeItem(Player player) {
         switch (this) {
             case MAIN_HAND:
                 player.getInventory().clear(player.getInventory().getHeldItemSlot());
+                break;
             case OFF_HAND:
                 player.getInventory().clear(45);
+                break;
             case HEAD:
-                player.getInventory().clear(5);
+                player.getInventory().clear(39);
+                break;
             case CHEST:
-                player.getInventory().clear(6);
+                player.getInventory().clear(38);
+                break;
             case LEGS:
-                player.getInventory().clear(7);
+                player.getInventory().clear(37);
+                break;
             case FEET:
-                player.getInventory().clear(8);
+                player.getInventory().clear(36);
+                break;
         }
+    }
+
+    public static SlotEnum getArmorSlot(ItemStack item) {
+        switch (item.getType().getEquipmentSlot()) {
+            case HEAD:
+                return HEAD;
+            case CHEST:
+                return CHEST;
+            case LEGS:
+                return LEGS;
+            case FEET:
+                return FEET;
+            default:
+                return null;
+        }
+
     }
 
 }

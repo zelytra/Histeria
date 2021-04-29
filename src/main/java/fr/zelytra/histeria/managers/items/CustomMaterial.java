@@ -62,7 +62,7 @@ public enum CustomMaterial {
     HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD),
     HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 1700, 10, 6, EquipmentSlot.CHEST),
     HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 6, EquipmentSlot.LEGS),
-    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 6, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 26, 4, EquipmentSlot.FEET),
+    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 26, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 26, 4, EquipmentSlot.FEET),
 
     NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD),
     NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST),
