@@ -2,6 +2,8 @@ package fr.zelytra.histeria.managers.items;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public enum CustomMaterial {
     HEAL_STICK("§dHealStick", "healstick", "Rend un total de quatre coeurs", 3, Material.STICK, ItemType.MISCELLANEOUS),
@@ -59,14 +61,14 @@ public enum CustomMaterial {
     CRUSHING_TABLE(Material.FLETCHING_TABLE, ItemType.BLOCK),
 
 
-    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD),
+    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true)),
     HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 1700, 10, 6, EquipmentSlot.CHEST),
-    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 6, EquipmentSlot.LEGS),
-    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 26, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 26, 4, EquipmentSlot.FEET),
+    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 6, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 0, false, false, true)),
+    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 26, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 5, 4, EquipmentSlot.FEET),
 
-    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD),
-    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST),
-    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 11, 9, EquipmentSlot.LEGS),
+    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true), new PotionEffect(PotionEffectType.WATER_BREATHING, 999999, 1, false, false, true)),
+    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST, new PotionEffect(PotionEffectType.FAST_DIGGING, 999999, 0, false, false, true)),
+    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 11, 9, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
     NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 6, 5, EquipmentSlot.FEET);
 
 
@@ -82,6 +84,7 @@ public enum CustomMaterial {
     private int extraHeart;
     private int durability;
     private String description;
+    private PotionEffect[] potions;
 
     CustomMaterial(Material material, ItemType itemType) {
         this.vanillaMaterial = material;
@@ -105,7 +108,7 @@ public enum CustomMaterial {
         this.description = description;
     }
 
-    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int armor, int extraHeart, EquipmentSlot slot) {
+    CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int armor, int extraHeart, EquipmentSlot slot, PotionEffect... potions) {
         this.displayName = displayName;
         this.name = name;
         this.customModelData = CMD;
@@ -116,6 +119,7 @@ public enum CustomMaterial {
         this.slot = slot;
         this.description = description;
         this.durability = durability;
+        this.potions = potions;
     }
 
     CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int damage, EquipmentSlot slot) {
@@ -178,6 +182,10 @@ public enum CustomMaterial {
 
     public String getDescription() {
         return description;
+    }
+
+    public PotionEffect[] getPotions() {
+        return potions;
     }
 
     public static CustomMaterial getByName(String name) {
