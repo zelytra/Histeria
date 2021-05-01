@@ -7,6 +7,7 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.items.CraftManager;
+import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Histeria extends JavaPlugin {
     private static Histeria instance;
     public static boolean log = true;
+    public static LootTableManager lootTableManager;
     private static boolean saberFaction = false;
 
     public static Histeria getInstance() {
@@ -36,6 +38,7 @@ public final class Histeria extends JavaPlugin {
         setupServer();
         EventManager.regEvents(this);
         new CraftManager();
+        lootTableManager = new LootTableManager();
     }
 
     @Override

@@ -1,11 +1,14 @@
 package fr.zelytra.histeria.events;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.events.blocks.Elevator;
+import fr.zelytra.histeria.events.blocks.LuckyBlock;
+import fr.zelytra.histeria.events.environement.ShulkerStorage;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.gui.ServerSelector;
-import fr.zelytra.histeria.events.items.armors.ArmorsHandler;
 import fr.zelytra.histeria.events.items.armors.NocturiteBoots;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorListener;
+import fr.zelytra.histeria.events.items.armors.handler.ArmorsHandler;
 import fr.zelytra.histeria.events.items.miscellaneous.*;
 import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
@@ -39,6 +42,7 @@ public class EventManager {
         pm.registerEvents(new HisteriteApple(),pl);
         pm.registerEvents(new LotteryTicket(),pl);
         pm.registerEvents(new XPOrb(),pl);
+        pm.registerEvents(new Compress_Cobblestone(),pl);
 
         /* Tools */
         pm.registerEvents(new HisteritePickaxe(),pl);
@@ -54,8 +58,12 @@ public class EventManager {
         pm.registerEvents(new ArmorsHandler(),pl);
         pm.registerEvents(new NocturiteBoots(),pl);
 
-        /* Environment */
+        /* Blocks */
+        pm.registerEvents(new Elevator(),pl);
+        pm.registerEvents(new LuckyBlock(),pl);
 
+        /* Environment */
+        pm.registerEvents(new ShulkerStorage(),pl);
 
 
     }

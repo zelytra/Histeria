@@ -1,6 +1,5 @@
-package fr.zelytra.histeria.events.items.armors;
+package fr.zelytra.histeria.events.items.armors.handler;
 
-import fr.zelytra.histeria.events.items.armors.handler.ArmorEquipEvent;
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.managers.items.CustomItemStack;

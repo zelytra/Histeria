@@ -1,17 +1,21 @@
 package fr.zelytra.histeria.managers.loottable;
 
 
+import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 
 public enum LootsEnum {
-    TEST(new ItemStack(Material.ACACIA_BOAT));
+    CC_OBSIDIAN(new ItemStack(Material.OBSIDIAN),20),
+    CC_DIAMOND(new ItemStack(Material.DIAMOND),10),
+    CC_IRON(new ItemStack(Material.IRON_INGOT),20),
+    CC_HISTERITE(new CustomItemStack(CustomMaterial.HISTERITE_INGOT,1).getItem(),2),
+    CC_GOLD(new ItemStack(Material.GOLD_INGOT),10);
 
 
     private ItemStack item;
     private double luck;
-    private PotionEffect potionEffect;
 
     LootsEnum(ItemStack item, double luck) {
         this.item = item;
@@ -23,16 +27,8 @@ public enum LootsEnum {
 
     }
 
-    LootsEnum(PotionEffect potion) {
-        this.potionEffect = potion;
-    }
-
     public ItemStack getItem() {
         return item;
-    }
-
-    public PotionEffect getPotionEffect() {
-        return potionEffect;
     }
 
     public double getLuck() {
