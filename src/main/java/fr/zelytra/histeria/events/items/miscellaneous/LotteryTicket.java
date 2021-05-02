@@ -22,6 +22,7 @@ public class LotteryTicket implements Listener {
                 //TODO Event action
 
                 ItemFunction.removeHeldItem(player, customMaterial);
+                return;
             }
         }
     }

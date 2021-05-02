@@ -15,6 +15,7 @@ import com.sk89q.worldedit.world.World;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.utils.Message;
 import net.minecraft.server.v1_16_R3.EntityPufferFish;
 import net.minecraft.server.v1_16_R3.EntitySpider;
 import net.minecraft.server.v1_16_R3.EntityTypes;
@@ -30,6 +31,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -42,6 +44,16 @@ import java.io.InputStream;
 
 public class LuckyBlock implements Listener {
     static private int count;
+
+    @EventHandler
+    public void placeLucky(BlockPlaceEvent e){
+        if(e.getBlock().getType()==CustomMaterial.LUCKY_BLOCK.getVanillaMaterial()){
+            if(e.getBlock().getLocation().getY()<=15){
+                e.getPlayer().sendMessage(Message.getPlayerPrefixe()+"§cYou cannot place LuckyBlock under layer 15");
+                e.setCancelled(true);
+            }
+        }
+    }
 
     @EventHandler
     public void luckyBreak(BlockBreakEvent e) {
