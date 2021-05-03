@@ -3,9 +3,11 @@ package fr.zelytra.histeria.events;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.events.blocks.Elevator;
+import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
 import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
 import fr.zelytra.histeria.events.environement.ShulkerStorage;
+import fr.zelytra.histeria.events.environement.SilverFish;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.items.armors.NocturiteBoots;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorListener;
@@ -47,7 +49,7 @@ public class EventManager {
         pm.registerEvents(new HisteriteApple(), pl);
         pm.registerEvents(new LotteryTicket(), pl);
         pm.registerEvents(new XPOrb(), pl);
-        pm.registerEvents(new Compress_Cobblestone(), pl);
+        pm.registerEvents(new CompressCobblestone(), pl);
 
         /* Tools */
         pm.registerEvents(new HisteritePickaxe(), pl);
@@ -67,10 +69,11 @@ public class EventManager {
         pm.registerEvents(new Elevator(), pl);
         pm.registerEvents(new LuckyBlock(), pl);
         pm.registerEvents(new NocturiteGenerator(), pl);
+        pm.registerEvents(new LootBox(), pl);
 
         /* Environment */
         pm.registerEvents(new ShulkerStorage(), pl);
-
+        pm.registerEvents(new SilverFish(), pl);
 
     }
 }

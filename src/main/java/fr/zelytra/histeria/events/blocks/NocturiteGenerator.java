@@ -46,12 +46,15 @@ public class NocturiteGenerator implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         if (e.getBlock().getType() == CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()) {
             if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
-                e.getBlock().breakNaturally(new ItemStack(CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()));
+                e.getBlock().breakNaturally();
+                e.getBlock().getWorld().dropItem(e.getBlock().getLocation(),new ItemStack(CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()));
+            }
+            if(noctInventorywatcher.containsKey(keyBuilder(e.getBlock().getLocation()))){
+                noctInventorywatcher.get(keyBuilder(e.getBlock().getLocation())).closeInventory();
             }
             PersistentDataContainer data = e.getBlock().getChunk().getPersistentDataContainer();
             data.remove(keyBuilder(e.getBlock().getLocation()));
         }
-
     }
 
     @EventHandler
@@ -86,7 +89,7 @@ public class NocturiteGenerator implements Listener {
             InterfaceBuilder gui = new InterfaceBuilder(27, interfaceName);
             gui.setContent(contentBuilder(time));
             gui.open(player);
-
+            e.getPlayer().playSound(e.getPlayer().getLocation(), Sound.ENTITY_ZOMBIE_VILLAGER_CONVERTED, 0.5F, 0.1F);
         }
 
     }
