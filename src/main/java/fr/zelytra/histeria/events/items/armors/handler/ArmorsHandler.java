@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 
 public class ArmorsHandler implements Listener {
@@ -19,13 +18,13 @@ public class ArmorsHandler implements Listener {
         Player player = e.getPlayer();
         CustomMaterial material;
         if (CustomItemStack.hasTag(e.getNewArmorPiece())) {
-            material = CustomMaterial.getByName(e.getNewArmorPiece().getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+            material = CustomItemStack.getCustomMaterial(e.getNewArmorPiece());
             for (PotionEffect potion : material.getPotions()) {
                 player.addPotionEffect(potion);
             }
 
         } else if (CustomItemStack.hasTag(e.getOldArmorPiece())) {
-            material = CustomMaterial.getByName(e.getOldArmorPiece().getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+            material = CustomItemStack.getCustomMaterial(e.getOldArmorPiece());
             for (PotionEffect potion : material.getPotions()) {
                 player.removePotionEffect(potion.getType());
             }
@@ -45,7 +44,7 @@ public class ArmorsHandler implements Listener {
                 return;
             }
 
-            CustomMaterial material = CustomMaterial.getByName(armor.getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+            CustomMaterial material = CustomItemStack.getCustomMaterial(armor);
             DurabilityHandler durability = new DurabilityHandler(player, material, SlotEnum.getArmorSlot(armor));
             durability.iterate();
 

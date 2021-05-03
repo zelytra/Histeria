@@ -126,6 +126,13 @@ public class CustomItemStack {
         return false;
     }
 
+    public static CustomMaterial getCustomMaterial(ItemStack item) {
+        if (!hasTag(item)) {
+            return null;
+        }
+        return CustomMaterial.getByName(item.getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+    }
+
     public static NamespacedKey getDescriptionKey() {
         return descriptionKey;
     }

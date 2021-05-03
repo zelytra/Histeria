@@ -115,7 +115,7 @@ public class NocturiteGenerator implements Listener {
         if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals(interfaceName)) {
             if (e.getCurrentItem() != null && CustomItemStack.hasTag(e.getCurrentItem())) {
                 e.setCancelled(true);
-                CustomMaterial material = CustomMaterial.getByName(e.getCurrentItem().getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+                CustomMaterial material = CustomItemStack.getCustomMaterial(e.getCurrentItem());
                 switch (material) {
                     case NOCTURITE_CORE:
                         return;

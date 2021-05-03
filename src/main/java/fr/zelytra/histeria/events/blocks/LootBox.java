@@ -17,7 +17,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 
@@ -26,7 +25,7 @@ public class LootBox implements Listener {
     public void useKey(PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType() == CustomMaterial.LOOT_BOX.getVanillaMaterial()) {
             if (e.getHand() == EquipmentSlot.HAND && CustomItemStack.hasTag(e.getPlayer().getInventory().getItemInMainHand())) {
-                CustomMaterial material = CustomMaterial.getByName(e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
+                CustomMaterial material = CustomItemStack.getCustomMaterial(e.getPlayer().getInventory().getItemInMainHand());
                 Player player = e.getPlayer();
                 ItemStack item;
                 if (Utils.getEmptySlots(player) < 2) {

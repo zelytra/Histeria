@@ -17,8 +17,8 @@ public class DurabilityHandler {
     private final ItemStack item;
     private final CustomMaterial material;
     private int durability;
-    private final Player player;
-    private final SlotEnum slot;
+    private Player player;
+    private SlotEnum slot;
 
     /**
      * @param player   Player who held the item
@@ -31,6 +31,15 @@ public class DurabilityHandler {
         this.item = slot.getItem(player);
         this.material = material;
         this.player = player;
+        if (this.item.getItemMeta().getPersistentDataContainer().has(CustomItemStack.getDurabilityKey(), PersistentDataType.INTEGER)) {
+            this.durability = this.item.getItemMeta().getPersistentDataContainer().get(CustomItemStack.getDurabilityKey(), PersistentDataType.INTEGER);
+        }
+    }
+
+    public DurabilityHandler(ItemStack item, CustomMaterial material) {
+        this.item = item;
+        this.material = material;
+
         if (this.item.getItemMeta().getPersistentDataContainer().has(CustomItemStack.getDurabilityKey(), PersistentDataType.INTEGER)) {
             this.durability = this.item.getItemMeta().getPersistentDataContainer().get(CustomItemStack.getDurabilityKey(), PersistentDataType.INTEGER);
         }
@@ -88,12 +97,21 @@ public class DurabilityHandler {
     }
 
     public void setDurability(int value) {
-        durability = value;
+        this.durability = value;
+        updateIndicator();
+    }
+
+    public void addDurability(int value) {
+        if (this.durability + value <= this.material.getDurability()) {
+            this.durability += value;
+        } else {
+            this.durability = this.material.getDurability();
+        }
         updateIndicator();
     }
 
     public boolean isBroken() {
-        if (durability <= 0) {
+        if (this.durability <= 0) {
             return true;
         } else return false;
     }

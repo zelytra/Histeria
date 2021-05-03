@@ -15,6 +15,7 @@ import fr.zelytra.histeria.events.items.armors.handler.ArmorsHandler;
 import fr.zelytra.histeria.events.items.miscellaneous.*;
 import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
+import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.PlayerJoinSync;
 import fr.zelytra.histeria.events.player.PlayerLeftSync;
@@ -74,6 +75,7 @@ public class EventManager {
         /* Environment */
         pm.registerEvents(new ShulkerStorage(), pl);
         pm.registerEvents(new SilverFish(), pl);
+        pm.registerEvents(new AnvilListener(), pl);
 
     }
 }
