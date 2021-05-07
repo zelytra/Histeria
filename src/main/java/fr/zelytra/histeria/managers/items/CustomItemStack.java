@@ -16,7 +16,7 @@ import java.util.Objects;
 
 
 public class CustomItemStack {
-    private final static NamespacedKey itemKey = new NamespacedKey(Histeria.getInstance(), "daedalus");
+    private final static NamespacedKey itemKey = new NamespacedKey(Histeria.getInstance(), "itemName");
     private final static NamespacedKey descriptionKey = new NamespacedKey(Histeria.getInstance(), "description");
     private final static NamespacedKey durabilityKey = new NamespacedKey(Histeria.getInstance(), "durability");
 
@@ -28,8 +28,13 @@ public class CustomItemStack {
      * @param amount   Item amount
      */
     public CustomItemStack(CustomMaterial material, int amount) {
-
         this.customMaterial = material;
+
+        if(material.getItemType()==ItemType.BLOCK){
+            this.item = new ItemStack(material.getVanillaMaterial());
+            return;
+        }
+
         this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
         ItemMeta meta = this.item.getItemMeta();
         assert meta != null;
@@ -99,6 +104,7 @@ public class CustomItemStack {
 
         return false;
     }
+
 
     public static boolean hasCustomItemInMainHand(String name, Player player) {
         player.getInventory().getItemInMainHand();

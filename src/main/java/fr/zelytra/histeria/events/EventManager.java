@@ -2,6 +2,7 @@ package fr.zelytra.histeria.events;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
+import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
@@ -35,6 +36,7 @@ public class EventManager {
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
         pm.registerEvents(new ServerSelector(), pl);
+        pm.registerEvents(new Wiki(), pl);
 
         /* Items */
         pm.registerEvents(new HealStick(), pl);

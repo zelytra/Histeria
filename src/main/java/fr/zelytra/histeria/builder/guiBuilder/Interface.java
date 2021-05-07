@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.builder;
+package fr.zelytra.histeria.builder.guiBuilder;
 
 import org.bukkit.inventory.ItemStack;
 

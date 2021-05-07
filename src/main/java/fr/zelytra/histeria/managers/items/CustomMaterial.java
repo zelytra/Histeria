@@ -36,7 +36,7 @@ public enum CustomMaterial {
     HISTERITE_CORE("§cHisterite Core", "histerite_core", 34, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
     HISTERITE_STICK("§cHisterite Stick", "histerite_stick", 33, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
     HISTERITE_APPLE("§cHisterite Apple", "histerite_apple", 29, Material.GOLDEN_APPLE, ItemType.MISCELLANEOUS),
-    RED_MATTER("§4Red Matter", "red_matter", "Allez checker le shop 2 sec...", 50, Material.APPLE, ItemType.MISCELLANEOUS),
+    RED_MATTER("§4Red Matter", "red_matter", "Allez checker le shop 2 sec...", 50, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
 
     NOCTURITE_NUGGET("§5Nocturite Nugget", "nocturite_nugget", "Générée à partir du Nocturite Generator", 48, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
     NOCTURITE_INGOT("§5Nocturite Ingot", "nocturite_ingot", 16, Material.PHANTOM_MEMBRANE, ItemType.MISCELLANEOUS),
@@ -48,17 +48,16 @@ public enum CustomMaterial {
     HISTERITE_KEY("§cHisterite Key", "histerite_key", "Obtenable via Kit Monarch#Utilisable sur la LootBox", 11, Material.GHAST_TEAR, ItemType.MISCELLANEOUS),
     NOCTURITE_KEY("§5Nocturite Key", "nocturite_key", "Obtenable via Kit Demigod#Utilisable sur la LootBox", 12, Material.GHAST_TEAR, ItemType.MISCELLANEOUS),
 
-    NOCTURITE_GENERATOR(Material.INFESTED_COBBLESTONE, ItemType.BLOCK),
-    ELEVATOR(Material.INFESTED_CHISELED_STONE_BRICKS, ItemType.BLOCK),
-    HISTERITE_BLOCK(Material.PURPUR_BLOCK, ItemType.BLOCK),
-    NOCTURITE_BLOCK(Material.PURPUR_PILLAR, ItemType.BLOCK),
-    HISTERITE_ORE(Material.CHISELED_NETHER_BRICKS, ItemType.BLOCK),
-    REINFORCED_OBSIDIAN(Material.LODESTONE, ItemType.BLOCK),
-    LUCKY_BLOCK(Material.HONEYCOMB_BLOCK, ItemType.BLOCK),
-    LOOT_BOX(Material.END_PORTAL_FRAME, ItemType.BLOCK),
-    COBBLESTONE_CRUSHER(Material.FLETCHING_TABLE, ItemType.BLOCK),
-    CAVE_BLOCK(Material.CRACKED_NETHER_BRICKS, ItemType.BLOCK),
-    CRUSHING_TABLE(Material.FLETCHING_TABLE, ItemType.BLOCK),
+    NOCTURITE_GENERATOR("nocturite_generator", Material.INFESTED_COBBLESTONE, ItemType.BLOCK),
+    ELEVATOR("elevator", Material.INFESTED_CHISELED_STONE_BRICKS, ItemType.BLOCK),
+    HISTERITE_BLOCK("histerite_block", Material.PURPUR_BLOCK, ItemType.BLOCK),
+    NOCTURITE_BLOCK("nocturite_block", Material.PURPUR_PILLAR, ItemType.BLOCK),
+    HISTERITE_ORE("histerite_ore", Material.CHISELED_NETHER_BRICKS, ItemType.BLOCK),
+    REINFORCED_OBSIDIAN("reinforced_obsidian", Material.LODESTONE, ItemType.BLOCK),
+    LUCKY_BLOCK("lucky_block", Material.HONEYCOMB_BLOCK, ItemType.BLOCK),
+    LOOT_BOX("loot_box", Material.END_PORTAL_FRAME, ItemType.BLOCK),
+    CAVE_BLOCK("cave_block", Material.CRACKED_NETHER_BRICKS, ItemType.BLOCK),
+    CRUSHING_TABLE("crushing_table", Material.FLETCHING_TABLE, ItemType.BLOCK),
 
 
     HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true)),
@@ -69,7 +68,13 @@ public enum CustomMaterial {
     NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true), new PotionEffect(PotionEffectType.WATER_BREATHING, 999999, 1, false, false, true)),
     NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST, new PotionEffect(PotionEffectType.FAST_DIGGING, 999999, 0, false, false, true)),
     NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 11, 9, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
-    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 6, 5, EquipmentSlot.FEET);
+    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 6, 5, EquipmentSlot.FEET),
+
+    NEXT_ARROW("§bNext", "next_arrow",42, Material.POTATO, ItemType.SPECIAL),
+    PREVIOUS_ARROW("§bPrevious","previous_arrow",43, Material.BAKED_POTATO, ItemType.SPECIAL),
+    SELL_BUTTON("§aSell","sell_button",44, Material.COOKED_MUTTON, ItemType.SPECIAL),
+    BUY_BUTTON("§aBuy","buy_button",45, Material.MUTTON, ItemType.SPECIAL),
+    VALIDAY("§aConfirm","validay",46, Material.SLIME_BALL, ItemType.SPECIAL);
 
 
     private String displayName;
@@ -86,7 +91,8 @@ public enum CustomMaterial {
     private String description;
     private PotionEffect[] potions;
 
-    CustomMaterial(Material material, ItemType itemType) {
+    CustomMaterial(String name, Material material, ItemType itemType) {
+        this.name = name;
         this.vanillaMaterial = material;
         this.itemType = itemType;
     }

@@ -1,9 +1,9 @@
 package fr.zelytra.histeria.events.blocks;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.builder.CustomGUI;
-import fr.zelytra.histeria.builder.InterfaceBuilder;
-import fr.zelytra.histeria.builder.VisualType;
+import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
+import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
+import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;

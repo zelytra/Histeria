@@ -11,9 +11,16 @@ website: http://zelytra.fr
 commands:
   test:
     description: a test command
+    permission: histeria.test
 
   server:
     description: Open server selector interface
+    permission: histeria.server
 
   hgive:
     description: Give custom item
+    permission: histeria.hgive
+
+  wiki:
+    description: Acces to wiki page
+    permission: histeria.hgive

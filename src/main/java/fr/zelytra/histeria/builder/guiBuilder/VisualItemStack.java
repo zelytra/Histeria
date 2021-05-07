@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.builder;
+package fr.zelytra.histeria.builder.guiBuilder;
 
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
@@ -22,6 +22,7 @@ public class VisualItemStack {
             item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+        item.setItemMeta(meta);
     }
 
     public VisualItemStack(CustomMaterial material, String name, boolean isEnchanted, String... subMessage) {
@@ -33,6 +34,7 @@ public class VisualItemStack {
             item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+        item.setItemMeta(meta);
     }
 
     public VisualItemStack(Material material, String name, boolean isEnchanted) {
@@ -43,6 +45,7 @@ public class VisualItemStack {
             item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+        item.setItemMeta(meta);
     }
 
     public VisualItemStack(CustomMaterial material, String name, boolean isEnchanted) {
@@ -53,6 +56,7 @@ public class VisualItemStack {
             item.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
+        item.setItemMeta(meta);
     }
 
     public ItemStack getItem() {

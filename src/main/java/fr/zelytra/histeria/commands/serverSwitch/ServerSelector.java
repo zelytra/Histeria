@@ -1,6 +1,6 @@
 package fr.zelytra.histeria.commands.serverSwitch;
 
-import fr.zelytra.histeria.builder.*;
+import fr.zelytra.histeria.builder.guiBuilder.*;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.Material;

@@ -30,8 +30,7 @@ public class HGive implements CommandExecutor {
 
         }else if (args.length == 1) {
             if (CustomMaterial.getByName(args[0]) != null) {
-                CustomItemStack cItem = new CustomItemStack(CustomMaterial.getByName(args[0]), 1);
-                player.getInventory().addItem(cItem.getItem());
+                player.getInventory().addItem(new CustomItemStack(CustomMaterial.getByName(args[0]), 1).getItem());
                 player.sendMessage(Message.getPlayerPrefixe() + "§aGave 1 §6§l" + args[0] + "§r§a to " + player.getName());
                 playItemSound(player);
                 return true;

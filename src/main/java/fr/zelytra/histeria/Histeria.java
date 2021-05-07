@@ -4,6 +4,7 @@ import fr.zelytra.histeria.commands.Test;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
+import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.items.CraftManager;
@@ -51,6 +52,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("test").setExecutor(new Test());
 
         getCommand("server").setExecutor(new ServerSelector());
+        getCommand("wiki").setExecutor(new Wiki());
 
         getCommand("hgive").setExecutor(new HGive());
         getCommand("hgive").setTabCompleter(new HGiveTab());

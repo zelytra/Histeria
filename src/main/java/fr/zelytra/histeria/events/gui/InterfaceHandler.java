@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.events.gui;
 
-import fr.zelytra.histeria.builder.CustomGUI;
-import fr.zelytra.histeria.builder.VisualType;
+import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
+import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;

@@ -4,5 +4,6 @@ public enum ItemType {
     ARMOR,
     TOOL,
     BLOCK,
+    SPECIAL,
     MISCELLANEOUS;
 }
