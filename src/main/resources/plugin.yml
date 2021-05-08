@@ -1,5 +1,5 @@
 name: Histeria
-version: ${project.version}
+version: 2.0
 main: fr.zelytra.histeria.Histeria
 depend:
   - WorldEdit

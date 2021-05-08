@@ -5,6 +5,9 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum CustomMaterial {
     HEAL_STICK("§dHealStick", "healstick", "Rend un total de quatre coeurs", 3, Material.STICK, ItemType.MISCELLANEOUS),
     JUMP_STICK("§aJumpStick", "jumpstick", "Applique un effet de Jump Boost III pendant 10 sec", 1, Material.STICK, ItemType.MISCELLANEOUS),
@@ -192,6 +195,16 @@ public enum CustomMaterial {
 
     public PotionEffect[] getPotions() {
         return potions;
+    }
+
+    public static List<Material> getCustomBlocks(){
+        List<Material> materials = new ArrayList<>();
+        for (CustomMaterial material: CustomMaterial.values()) {
+            if(material.getItemType()==ItemType.BLOCK){
+                materials.add(material.getVanillaMaterial());
+            }
+        }
+        return materials;
     }
 
     public static CustomMaterial getByName(String name) {

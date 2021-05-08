@@ -30,7 +30,7 @@ public class CustomItemStack {
     public CustomItemStack(CustomMaterial material, int amount) {
         this.customMaterial = material;
 
-        if(material.getItemType()==ItemType.BLOCK){
+        if (material.getItemType() == ItemType.BLOCK) {
             this.item = new ItemStack(material.getVanillaMaterial());
             return;
         }
@@ -102,6 +102,13 @@ public class CustomItemStack {
             return Objects.requireNonNull(itemData.get(itemKey, PersistentDataType.STRING)).equalsIgnoreCase(customMaterial.getName());
         }
 
+        return false;
+    }
+
+    public static boolean isCustomBlock(ItemStack item) {
+        if (CustomMaterial.getCustomBlocks().contains(item.getType())) {
+            return true;
+        }
         return false;
     }
 

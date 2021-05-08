@@ -1,10 +1,14 @@
 package fr.zelytra.histeria.managers.items;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.customCraft.ShapeLessRecipeBuilder;
 import fr.zelytra.histeria.builder.customCraft.ShapedRecipeBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.BlastingRecipe;
+import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
@@ -78,6 +82,26 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
         shapedRecipeBuilder.register();
 
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_HELMET);
+        shapedRecipeBuilder.setShape("///", "/*/", "***");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_CHESTPLATE);
+        shapedRecipeBuilder.setShape("/*/", "///", "///");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_LEGGINGS);
+        shapedRecipeBuilder.setShape("///", "/*/", "/*/");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_BOOTS);
+        shapedRecipeBuilder.setShape("/*/", "/*/", "***");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.register();
+
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_APPLE);
         shapedRecipeBuilder.setShape("///", "/a/", "///");
         shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
@@ -95,6 +119,11 @@ public class CraftManager {
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_BLOCK);
         shapedRecipeBuilder.setShape("///", "///", "///");
         shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_BLOCK);
+        shapedRecipeBuilder.setShape("///", "///", "///");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_INGOT);
         shapedRecipeBuilder.register();
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_STICK);
@@ -143,7 +172,7 @@ public class CraftManager {
         shapedRecipeBuilder.setShape("a/a", "/r/", "a/a");
         shapedRecipeBuilder.assigneSymbol('a', Material.IRON_INGOT);
         shapedRecipeBuilder.assigneSymbol('/', Material.REDSTONE);
-        shapedRecipeBuilder.assigneSymbol('r', CustomMaterial.HISTERITE_CORE);
+        shapedRecipeBuilder.assigneSymbol('r', CustomMaterial.HISTERITE_CRYSTAL);
         shapedRecipeBuilder.register();
 
         ShapeLessRecipeBuilder shapelessRecipe = new ShapeLessRecipeBuilder(CustomMaterial.HISTERITE_INGOT, 9);
@@ -154,38 +183,101 @@ public class CraftManager {
         shapelessRecipe.setIngredient(CustomMaterial.NOCTURITE_BLOCK);
         shapelessRecipe.register();
 
-        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_NUGGET,9);
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_NUGGET, 9);
         shapedRecipeBuilder.setShape("/**", "***", "***");
         shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
         shapedRecipeBuilder.register();
 
-        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_NUGGET,9);
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_NUGGET, 9);
         shapedRecipeBuilder.setShape("/**", "***", "***");
         shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_INGOT);
         shapedRecipeBuilder.register();
 
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_CORE);
+        shapedRecipeBuilder.setShape("a/a", "/r/", "a/a");
+        shapedRecipeBuilder.assigneSymbol('a', Material.IRON_INGOT);
+        shapedRecipeBuilder.assigneSymbol('/', Material.REDSTONE);
+        shapedRecipeBuilder.assigneSymbol('r', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.register();
 
-        /*
-        shapelessRecipe = new ShapeLessRecipeBuilder(CustomMaterial.NOCTURITE_NUGGET, 9);
-        shapelessRecipe.setIngredient(CustomMaterial.NOCTURITE_INGOT);
-        shapelessRecipe.register();*/
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.CRUSHING_TABLE);
+        shapedRecipeBuilder.setShape("aa*", "ss*", "xx*");
+        shapedRecipeBuilder.assigneSymbol('a', Material.IRON_INGOT);
+        shapedRecipeBuilder.assigneSymbol('s', Material.SPRUCE_PLANKS);
+        shapedRecipeBuilder.assigneSymbol('x', Material.NETHERITE_BLOCK);
+        shapedRecipeBuilder.register();
 
-        /*
-        List<Recipe> recipes = Bukkit.getServer().getRecipesFor(new CustomItemStack(CustomMaterial.HISTERITE_HELMET, 1).getItem());
-        for (Recipe recipe : recipes) {
-            if (recipe instanceof ShapedRecipe) {
-                ShapedRecipe shapedRecipe = (ShapedRecipe) recipe;
-                for (Map.Entry<Character, ItemStack> map : shapedRecipe.getIngredientMap().entrySet()) {
-                    if (map.getValue() != null) {
-                        if (CustomItemStack.hasTag(map.getValue())) {
-                            System.out.println(map.getKey() + " " + CustomItemStack.getCustomMaterial(map.getValue()).getName());
-                        } else {
-                            System.out.println(map.getKey() + " " + map.getValue().getType());
-                        }
-                    }
-                }
-            }
-        }*/
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.REINFORCED_OBSIDIAN);
+        shapedRecipeBuilder.setShape("a/a", "///", "a/a");
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.assigneSymbol('/', Material.OBSIDIAN);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.SHURIKEN);
+        shapedRecipeBuilder.setShape("*/*", "///", "*/*");
+        shapedRecipeBuilder.assigneSymbol('/', Material.IRON_INGOT);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.UNCLAIM_FINDER);
+        shapedRecipeBuilder.setShape("ici", "dod", "ivi");
+        shapedRecipeBuilder.assigneSymbol('i', Material.IRON_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('d', Material.DIAMOND_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('c', Material.TRAPPED_CHEST);
+        shapedRecipeBuilder.assigneSymbol('o', Material.COMPASS);
+        shapedRecipeBuilder.assigneSymbol('v', Material.ENDER_CHEST);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.setShape("///", "///", "///");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_NUGGET);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_INGOT);
+        shapedRecipeBuilder.setShape("///", "///", "///");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_NUGGET);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_SWORD);
+        shapedRecipeBuilder.setShape("/**", "/**", "a**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_STICK);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_AXE);
+        shapedRecipeBuilder.setShape("//*", "a/*", "a**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_STICK);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_SHOVEL);
+        shapedRecipeBuilder.setShape("/**", "a**", "a**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_STICK);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_HOE);
+        shapedRecipeBuilder.setShape("//*", "a**", "a**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_STICK);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_SWORD);
+        shapedRecipeBuilder.setShape("/**", "/**", "a**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.assigneSymbol('a', Material.STICK);
+        shapedRecipeBuilder.register();
+
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_GENERATOR);
+        shapedRecipeBuilder.setShape("///", "aba", "///");
+        shapedRecipeBuilder.assigneSymbol('/', Material.CRYING_OBSIDIAN);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.HISTERITE_CRYSTAL);
+        shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.NOCTURITE_CORE);
+        shapedRecipeBuilder.register();
+
+        NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "Histerite_ore");
+        Bukkit.getServer().addRecipe(new FurnaceRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5,180));
+        Bukkit.getServer().addRecipe(new BlastingRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(),(float) 1.5, 100));
+
 
     }
 

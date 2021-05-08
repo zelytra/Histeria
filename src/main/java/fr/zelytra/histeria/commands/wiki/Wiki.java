@@ -89,7 +89,14 @@ public class Wiki implements CommandExecutor, Listener {
     private ItemStack[] contentCraftBuilder(ItemStack item) {
         ItemStack[] content = new ItemStack[36];
         ShapedRecipe shapedRecipe;
-        Recipe recipes = Bukkit.getServer().getRecipe(new NamespacedKey(Histeria.getInstance(), CustomItemStack.getCustomMaterial(item).getName() + "0"));
+        Recipe recipes = null;
+        if (CustomItemStack.getCustomMaterial(item) == null) {
+            if (Bukkit.getServer().getRecipesFor(item) != null && !Bukkit.getServer().getRecipesFor(item).isEmpty()) {
+                recipes = Bukkit.getServer().getRecipesFor(item).get(0);
+            }
+        } else {
+            recipes = Bukkit.getServer().getRecipe(new NamespacedKey(Histeria.getInstance(), CustomItemStack.getCustomMaterial(item).getName() + "0"));
+        }
         for (int x = 0; x < 36; x++) {
             content[x] = VisualType.BLANK_BLACK_GLASSE.getItem();
         }
@@ -97,8 +104,7 @@ public class Wiki implements CommandExecutor, Listener {
             content[x] = VisualType.BLANK_CYAN_GLASSE.getItem();
         }
         content[31] = VisualType.RETURN.getItem();
-
-        if (recipes instanceof ShapedRecipe) {
+        if (recipes != null && recipes instanceof ShapedRecipe) {
             shapedRecipe = (ShapedRecipe) recipes;
             content[2] = new ItemStack(Material.AIR);
             content[3] = new ItemStack(Material.AIR);
@@ -209,9 +215,12 @@ public class Wiki implements CommandExecutor, Listener {
                     InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, wikiName);
                     interfaceBuilder.setContent(contentBuilder(0));
                     interfaceBuilder.open((Player) e.getWhoClicked());
+                } else if (CustomItemStack.isCustomBlock(e.getCurrentItem())) {
+                    InterfaceBuilder interfaceBuilder = new InterfaceBuilder(36, wikiName);
+                    interfaceBuilder.setContent(contentCraftBuilder(e.getCurrentItem()));
+                    interfaceBuilder.open((Player) e.getWhoClicked());
                 }
                 e.setCancelled(true);
-
             }
         }
     }
