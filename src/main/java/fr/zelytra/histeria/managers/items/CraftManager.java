@@ -38,6 +38,7 @@ public class CraftManager {
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.LEATHER_CHESTPLATE)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.LEATHER_LEGGINGS)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.LEATHER_BOOTS)));
+        recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.WRITABLE_BOOK)));
         recipes.stream().filter(r -> r instanceof Keyed).map(r -> ((Keyed) r).getKey()).forEach(Bukkit::removeRecipe);
     }
 
@@ -274,7 +275,7 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.NOCTURITE_CORE);
         shapedRecipeBuilder.register();
 
-        NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "Histerite_ore");
+        NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "histerite_ore");
         Bukkit.getServer().addRecipe(new FurnaceRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5,180));
         Bukkit.getServer().addRecipe(new BlastingRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(),(float) 1.5, 100));
 

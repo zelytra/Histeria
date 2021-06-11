@@ -1,0 +1,8 @@
+synchServer:
+  server:
+  port:
+
+MySQL:
+  host: localhost
+  user: zelytra
+  password: 123123

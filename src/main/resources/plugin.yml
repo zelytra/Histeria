@@ -3,6 +3,7 @@ version: 2.0
 main: fr.zelytra.histeria.Histeria
 depend:
   - WorldEdit
+  - LuckPerms
 api-version: 1.16
 authors: [ Zelytra ]
 description: Histeria server core
@@ -23,4 +24,8 @@ commands:
 
   wiki:
     description: Acces to wiki page
-    permission: histeria.hgive
+    permission: histeria.wiki
+
+  hguard:
+    description: all hguard command
+    permission: histeria.hguard

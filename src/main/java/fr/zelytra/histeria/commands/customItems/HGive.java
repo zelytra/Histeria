@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.commands.customItems;
 
-import fr.zelytra.histeria.commands.commandsHandler.HelpCommands;
+
+import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;

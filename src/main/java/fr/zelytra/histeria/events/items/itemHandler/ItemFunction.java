@@ -15,7 +15,6 @@ public class ItemFunction {
         }
         if (CustomItemStack.hasCustomItemInMainHand(material.getName(), player)) {
             if (player.getInventory().getItemInMainHand().getAmount() > 1) {
-                System.out.println("item <=1");
                 ItemStack newItem = player.getInventory().getItemInMainHand();
                 newItem.setAmount(newItem.getAmount() - 1);
                 player.getInventory().setItemInMainHand(newItem);

@@ -20,6 +20,7 @@ import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.PlayerJoinSync;
 import fr.zelytra.histeria.events.player.PlayerLeftSync;
+import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 
@@ -78,6 +79,7 @@ public class EventManager {
         pm.registerEvents(new ShulkerStorage(), pl);
         pm.registerEvents(new SilverFish(), pl);
         pm.registerEvents(new AnvilListener(), pl);
+        pm.registerEvents(new HGuardListener(), pl);
 
     }
 }

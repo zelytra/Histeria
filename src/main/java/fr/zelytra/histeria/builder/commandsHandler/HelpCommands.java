@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands.commandsHandler;
+package fr.zelytra.histeria.builder.commandsHandler;
 
 import org.bukkit.entity.Player;
 
