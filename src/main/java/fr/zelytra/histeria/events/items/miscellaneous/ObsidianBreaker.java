@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.events.items.miscellaneous;
 
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
+import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;
@@ -22,7 +23,12 @@ public class ObsidianBreaker implements Listener {
     public void onInteract(PlayerInteractEvent e) {
         if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
             if ((e.getHand() == EquipmentSlot.HAND && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) || (e.getHand() == EquipmentSlot.OFF_HAND && CustomItemStack.hasCustomItemInOffHand(customMaterial.getName(), e.getPlayer()))) {
+                CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
+                Bukkit.getPluginManager().callEvent(customItemEvent);
 
+                if(customItemEvent.isCancelled()){
+                    return;
+                }
                 switch (e.getClickedBlock().getType()) {
                     case OBSIDIAN:
                         breakBlockFX(e);

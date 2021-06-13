@@ -138,6 +138,10 @@ public class HGuard {
         HGuardList.remove(this);
     }
 
+    public void save() {
+        HGuardPersistent.save(this);
+    }
+
 
     public String getName() {
         return name;
@@ -145,6 +149,26 @@ public class HGuard {
 
     public World getWorld() {
         return world;
+    }
+
+    public static List<HGuard> getHGuardList() {
+        return HGuardList;
+    }
+
+    public BoundingBox getArea() {
+        return area;
+    }
+
+    public Location getCenter() {
+        return center;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public Shape getShape() {
+        return shape;
     }
 
     public int getPriorityLevel() {

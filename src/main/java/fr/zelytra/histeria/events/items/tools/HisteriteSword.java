@@ -16,6 +16,7 @@ public class HisteriteSword implements Listener {
     public void swordAttack(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), (Player) e.getDamager())) {
             Player player = (Player) e.getDamager();
+
             DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
             durabilityHandler.iterate();
 

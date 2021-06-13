@@ -4,8 +4,10 @@ import com.massivecraft.factions.*;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
+import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,6 +23,12 @@ public class Hammer implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         if (CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) {
             Player player = e.getPlayer();
+            CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
+            Bukkit.getPluginManager().callEvent(customItemEvent);
+
+            if(customItemEvent.isCancelled()){
+                return;
+            }
 
             Location BLocation = e.getBlock().getLocation();
             Material block = e.getBlock().getType();

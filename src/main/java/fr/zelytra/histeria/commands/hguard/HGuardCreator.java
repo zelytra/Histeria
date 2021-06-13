@@ -143,7 +143,7 @@ public class HGuardCreator implements CommandExecutor {
                         player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group added to the  whitelist ");
                         return true;
                     } else if (args[2].equalsIgnoreCase("remove")) {
-                        hGuard.addGroupe(args[4]);
+                        hGuard.removeGroupe(args[4]);
                         player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group removed from the  whitelist ");
                         return true;
                     } else {

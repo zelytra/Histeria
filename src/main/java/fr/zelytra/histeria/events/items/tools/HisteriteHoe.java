@@ -2,8 +2,10 @@ package fr.zelytra.histeria.events.items.tools;
 
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
+import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +27,13 @@ public class HisteriteHoe implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer()) && isDirtBlock(e.getClickedBlock().getType())) {
 
             Player player = e.getPlayer();
+            CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
+            Bukkit.getPluginManager().callEvent(customItemEvent);
+
+            if(customItemEvent.isCancelled()){
+                return;
+            }
+
             Location BLocation = e.getClickedBlock().getLocation();
             DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
 

@@ -2,10 +2,12 @@ package fr.zelytra.histeria.events.items.miscellaneous;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
+import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.loottable.LootsEnum;
 import fr.zelytra.histeria.utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
@@ -24,6 +26,12 @@ public class CompressCobblestone implements Listener {
             if (e.getClickedBlock().getType() == CustomMaterial.CRUSHING_TABLE.getVanillaMaterial()) {
                 if ((e.getHand() == EquipmentSlot.HAND && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) || (e.getHand() == EquipmentSlot.OFF_HAND && CustomItemStack.hasCustomItemInOffHand(customMaterial.getName(), e.getPlayer()))) {
                     Player player = e.getPlayer();
+                    CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
+                    Bukkit.getPluginManager().callEvent(customItemEvent);
+
+                    if(customItemEvent.isCancelled()){
+                        return;
+                    }
                     int random = (int) (Math.random() * (100 - 1) + 1);
                     for (LootsEnum loots : Histeria.lootTableManager.getCCrusher().getLoots()) {
                         if (random < loots.getLuck()) {

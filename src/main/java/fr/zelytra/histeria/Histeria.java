@@ -9,6 +9,7 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
+import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.utils.Message;
@@ -19,12 +20,15 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Histeria extends JavaPlugin {
+
     private static Histeria instance;
     public static boolean log = true;
     public static boolean synchro = false;
-    public static LootTableManager lootTableManager;
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
+
+    public static LootTableManager lootTableManager;
+    public static ConfigurationManager configurationManager;
 
     public static Histeria getInstance() {
         return instance;
@@ -47,10 +51,16 @@ public final class Histeria extends JavaPlugin {
         EventManager.regEvents(this);
         new CraftManager();
         lootTableManager = new LootTableManager();
+
+        configurationManager = new ConfigurationManager();
+        configurationManager.load();
     }
+
+
 
     @Override
     public void onDisable() {
+        configurationManager.unload();
 
     }
 

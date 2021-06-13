@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.hguard;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import net.luckperms.api.model.user.User;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -148,7 +149,23 @@ public class HGuardListener implements Listener {
         e.setCancelled(true);
     }
 
-    //TODO CustomItem
+    @EventHandler
+    public void onCustomItemUse(CustomItemEvent e) {
+        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
+            return;
+        }
+        HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
+        if (Histeria.getLuckPerms() != null) {
+            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
+            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
+                return;
+        }
+
+        if (hguard.getCustomItemWhiteList().contains(e.getCustomMaterial()))
+            return;
+
+        e.setCancelled(true);
+    }
 
     @EventHandler
     public void onFoodChange(FoodLevelChangeEvent e) {
