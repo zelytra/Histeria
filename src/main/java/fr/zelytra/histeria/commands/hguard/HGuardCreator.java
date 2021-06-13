@@ -5,7 +5,10 @@ import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
 import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.hguard.Shape;
 import fr.zelytra.histeria.managers.hguard.WorldEditHandler;
+import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.Utils;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -68,38 +71,112 @@ public class HGuardCreator implements CommandExecutor {
                 return false;
             }
 
-            if (args.length == 3) {
+            if (args.length == 4) {
 
-                if (args[1].equalsIgnoreCase("pvp")) {
+                if (args[2].equalsIgnoreCase("pvp")) {
 
-                    if (args[2].equalsIgnoreCase("true")) {
+                    if (args[3].equalsIgnoreCase("true")) {
                         hGuard.setPvp(true);
                         player.sendMessage(Message.getPlayerPrefixe() + "§aPVP parameter set to TRUE");
-                    } else if (args[2].equalsIgnoreCase("false")) {
+                        return true;
+                    } else if (args[3].equalsIgnoreCase("false")) {
                         hGuard.setPvp(false);
                         player.sendMessage(Message.getPlayerPrefixe() + "§aPVP parameter set to §cFALSE");
+                        return true;
                     } else {
                         player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
                         return false;
                     }
 
-                } else if (args[1].equalsIgnoreCase("priorityLevel")) {
+                } else if (args[2].equalsIgnoreCase("priorityLevel")) {
+                    if (Utils.isNumeric(args[3])) {
+                        int value = Integer.parseInt(args[3]);
+                        if (value < 0) {
+                            player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a positive value");
+                            return false;
+                        }
+                        hGuard.setPriorityLevel(value);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§aPriorityLevel parameter set to " + value);
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a number");
+                        return false;
+                    }
 
-                } else if (args[1].equalsIgnoreCase("breakBlock")) {
 
-                } else if (args[1].equalsIgnoreCase("placeBlock")) {
+                } else if (args[2].equalsIgnoreCase("breakBlock")) {
+                    if (args[3].equalsIgnoreCase("true")) {
+                        hGuard.setBreakBlock(true);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§aBreakBlock parameter set to TRUE");
+                        return true;
+                    } else if (args[3].equalsIgnoreCase("false")) {
+                        hGuard.setBreakBlock(false);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§aBreakBlock parameter set to §cFALSE");
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        return false;
+                    }
+
+                } else if (args[2].equalsIgnoreCase("placeBlock")) {
+                    if (args[3].equalsIgnoreCase("true")) {
+                        hGuard.setPlaceBlock(true);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§aPlaceBlock parameter set to TRUE");
+                        return true;
+                    } else if (args[3].equalsIgnoreCase("false")) {
+                        hGuard.setPlaceBlock(false);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§aPlaceBlock parameter set to §cFALSE");
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        return false;
+                    }
 
                 } else {
                     player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
                     return false;
                 }
-            } else if (args.length == 4) {
-                if (args[1].equalsIgnoreCase("group")) {
+            } else if (args.length == 5) {
+                if (args[2].equalsIgnoreCase("group")) {
+                    if (args[3].equalsIgnoreCase("add")) {
+                        hGuard.addGroupe(args[4]);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group added to the  whitelist ");
+                        return true;
+                    } else if (args[2].equalsIgnoreCase("remove")) {
+                        hGuard.addGroupe(args[4]);
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group removed from the  whitelist ");
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        return false;
+                    }
+                } else if (args[2].equalsIgnoreCase("customItem")) {
+                    if (args[3].equalsIgnoreCase("add")) {
+                        hGuard.addCustomItem(CustomMaterial.getByName(args[4]));
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " custom item added to the whitelist ");
+                        return true;
+                    } else if (args[3].equalsIgnoreCase("remove")) {
+                        hGuard.removeCustomItem(CustomMaterial.getByName(args[4]));
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " custom item removed from the  whitelist ");
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        return false;
+                    }
 
-                } else if (args[1].equalsIgnoreCase("customItem")) {
-
-                } else if (args[1].equalsIgnoreCase("interact")) {
-
+                } else if (args[2].equalsIgnoreCase("interact")) {
+                    if (args[3].equalsIgnoreCase("add")) {
+                        hGuard.addInteract(Material.getMaterial(args[4]));
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " material added to the whitelist ");
+                        return true;
+                    } else if (args[3].equalsIgnoreCase("remove")) {
+                        hGuard.removeInteract(Material.getMaterial(args[4]));
+                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " material removed from the  whitelist ");
+                        return true;
+                    } else {
+                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        return false;
+                    }
                 }
             }
             player.sendMessage(Message.getHelp(cmd.getName()));

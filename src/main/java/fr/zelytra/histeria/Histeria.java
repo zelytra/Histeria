@@ -40,6 +40,7 @@ public final class Histeria extends JavaPlugin {
     public void onEnable() {
         Message.startup();
         regCommands();
+        loadAPI();
         regRepeatingTask();
         regPluginMessage();
         setupServer();

@@ -89,7 +89,7 @@ public class HGuardTabCompleter implements TabCompleter {
                         } else if (args[2].equalsIgnoreCase("customItem")) {
 
                             for (CustomMaterial material : CustomMaterial.values())
-                                commandsList.add(material.name());
+                                commandsList.add(material.getName());
 
                         } else if (args[2].equalsIgnoreCase("group")) {
                             for (Group group : Histeria.getLuckPerms().getGroupManager().getLoadedGroups())
@@ -98,7 +98,25 @@ public class HGuardTabCompleter implements TabCompleter {
                     }
                 }
                 if (args[3].equalsIgnoreCase("remove")) {
+                    HGuard hguard = HGuard.getByName(args[1]);
 
+                    if (hguard == null)
+                        return commandsList;
+
+                    if (args[2].equalsIgnoreCase("interact")) {
+
+                        for (Material material : hguard.getInteractWhiteList())
+                            commandsList.add(material.name());
+
+                    } else if (args[2].equalsIgnoreCase("customItem")) {
+
+                        for (CustomMaterial material : hguard.getCustomItemWhiteList())
+                            commandsList.add(material.name());
+
+                    } else if (args[2].equalsIgnoreCase("group")) {
+                        for (String group : hguard.getGroupWhiteList())
+                            commandsList.add(group);
+                    }
                 }
                 commandsList = Utils.dynamicTab(commandsList, args[4]);
             }

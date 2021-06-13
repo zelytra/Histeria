@@ -121,20 +121,20 @@ public class HGuard {
 
     @Override
     public String toString() {
-        return "§8---------------§6[ HGuard ] §8---------------" + "\n" +
+        return "§8---------------§6 [ HGuard ] §8---------------" + "\n" +
                 "§8● §6Name: §f" + this.name + "\n" +
                 "§8● §6Shape: §f" + this.shape + "\n" +
                 "§8● §6World: §f" + this.world.getName() + "\n" +
                 "§8● §6Priority level: §f" + this.priorityLevel + "\n" +
                 "§8● §6CustomItem (WL): §f" + Arrays.toString(this.customItemWhiteList.toArray()) + "\n" +
-                "§8● §6Groupe (WL): §f" + Arrays.toString(this.groupWhiteList.toArray()) + "\n" +
+                "§8● §6Group (WL): §f" + Arrays.toString(this.groupWhiteList.toArray()) + "\n" +
                 "§8● §6Interact (WL): §f" + Arrays.toString(this.interactWhiteList.toArray()) + "\n" +
                 "§8● §6PlaceBlock: §f" + (this.placeBlock ? "§aTRUE" : "§cFALSE") + "\n" +
                 "§8● §6BreakBlock: §f" + (this.breakBlock ? "§aTRUE" : "§cFALSE") + "\n" +
                 "§8● §6PVP: §f" + (this.pvp ? "§aTRUE" : "§cFALSE") + "\n" + "\n";
     }
 
-    public void delete(){
+    public void delete() {
         HGuardList.remove(this);
     }
 
@@ -175,24 +175,8 @@ public class HGuard {
         return pvp;
     }
 
-    public void setRadius(int radius) {
-        this.radius = radius;
-    }
-
     public void setPriorityLevel(int priorityLevel) {
         this.priorityLevel = priorityLevel;
-    }
-
-    public void setCustomItemWhiteList(List<CustomMaterial> customItemWhiteList) {
-        this.customItemWhiteList = customItemWhiteList;
-    }
-
-    public void setGroupWhiteList(List<String> groupWhiteList) {
-        this.groupWhiteList = groupWhiteList;
-    }
-
-    public void setInteractWhiteList(List<Material> interactWhiteList) {
-        this.interactWhiteList = interactWhiteList;
     }
 
     public void setPlaceBlock(boolean placeBlock) {
@@ -205,5 +189,32 @@ public class HGuard {
 
     public void setPvp(boolean pvp) {
         this.pvp = pvp;
+    }
+
+    public void addGroupe(String groupe) {
+        groupWhiteList.add(groupe);
+    }
+
+    public void removeGroupe(String groupe) {
+        if (groupWhiteList.contains(groupe))
+            groupWhiteList.remove(groupe);
+    }
+
+    public void addCustomItem(CustomMaterial material) {
+        customItemWhiteList.add(material);
+    }
+
+    public void removeCustomItem(CustomMaterial material) {
+        if (customItemWhiteList.contains(material))
+            customItemWhiteList.remove(material);
+    }
+
+    public void addInteract(Material material) {
+        interactWhiteList.add(material);
+    }
+
+    public void removeInteract(Material material) {
+        if (interactWhiteList.contains(material))
+            interactWhiteList.remove(material);
     }
 }

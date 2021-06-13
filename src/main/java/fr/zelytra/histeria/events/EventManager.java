@@ -7,6 +7,7 @@ import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
 import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
+import fr.zelytra.histeria.events.environement.PortalListener;
 import fr.zelytra.histeria.events.environement.ShulkerStorage;
 import fr.zelytra.histeria.events.environement.SilverFish;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
@@ -80,6 +81,7 @@ public class EventManager {
         pm.registerEvents(new SilverFish(), pl);
         pm.registerEvents(new AnvilListener(), pl);
         pm.registerEvents(new HGuardListener(), pl);
+        pm.registerEvents(new PortalListener(), pl);
 
     }
 }
