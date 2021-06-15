@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Cooldown {
     private static final HashMap<Cooldown, Player> cooldownsList = new HashMap<>();
 
@@ -13,6 +14,14 @@ public class Cooldown {
     private final long checkTime;
 
     private final String tag;
+
+    /**
+     * Init a player cooldown
+     *
+     * @param p           Player link to the cooldown
+     * @param timeSeconds Time before removing cooldown in seconds
+     * @param tag         Unique tag which permit to stack different cooldown on the same player
+     */
 
     public Cooldown(Player p, long timeSeconds, String tag) {
         this.player = p;
@@ -67,11 +76,12 @@ public class Cooldown {
     /**
      *
      * @param player Player to check
-     * @param tag Tag of the cooldown
+     * @param tag    Tag of the cooldown
      * @return true if cooldown ended and false if cooldown is running
+     * @return if return is false, it will print the time remaining to the player
      */
 
-    public static boolean cooldownCheck(Player player,String tag){
+    public static boolean cooldownCheck(Player player, String tag) {
         Cooldown toRemove = null;
         for (Map.Entry<Cooldown, Player> entry : cooldownsList.entrySet()) {
             if (entry.getKey().getTag().equalsIgnoreCase(tag) && entry.getValue().getUniqueId() == player.getUniqueId()) {

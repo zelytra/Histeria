@@ -1,5 +1,7 @@
 package fr.zelytra.histeria.utils;
 
+import fr.zelytra.histeria.Histeria;
+import net.luckperms.api.model.user.User;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import net.minecraft.server.v1_16_R3.PacketPlayOutEntityStatus;
 import org.bukkit.Material;
@@ -70,5 +72,19 @@ public class Utils {
             return true;
         }
         return false;
+    }
+
+    public static boolean canByPass(Player player) {
+        User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
+        switch (user.getPrimaryGroup()) {
+            case "fondateur":
+            case "moderator":
+            case "administrator":
+                return true;
+
+            default:
+                return false;
+        }
+
     }
 }

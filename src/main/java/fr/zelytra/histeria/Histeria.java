@@ -5,6 +5,7 @@ import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
+import fr.zelytra.histeria.commands.miscellaneous.*;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.EventManager;
@@ -67,14 +68,31 @@ public final class Histeria extends JavaPlugin {
     private void regCommands() {
         getCommand("test").setExecutor(new Test());
 
+        /* Server */
         getCommand("server").setExecutor(new ServerSelector());
+
+        /* Wiki */
         getCommand("wiki").setExecutor(new Wiki());
 
+        /* HGuard */
         getCommand("hguard").setExecutor(new HGuardCreator());
         getCommand("hguard").setTabCompleter(new HGuardTabCompleter());
 
+        /* HGive */
         getCommand("hgive").setExecutor(new HGive());
         getCommand("hgive").setTabCompleter(new HGiveTab());
+
+        /* Miscellaneous */
+        getCommand("speed").setExecutor(new Speed());
+        getCommand("nightvision").setExecutor(new NightVision());
+        getCommand("feed").setExecutor(new Feed());
+        getCommand("enderchest").setExecutor(new EnderChest());
+        getCommand("ping").setExecutor(new Ping());
+        getCommand("craft").setExecutor(new Craft());
+        getCommand("heal").setExecutor(new Heal());
+        getCommand("hat").setExecutor(new Hat());
+        getCommand("xpbottle").setExecutor(new XpBottle());
+
     }
 
     private void setupServer() {

@@ -29,3 +29,50 @@ commands:
   hguard:
     description: all hguard command
     permission: histeria.hguard
+
+  speed:
+    description: Change player fly speed
+    permission: histeria.speed
+
+  nightvision:
+    description: Give/Remove nightvision to the player
+    permission: histeria.nightvision
+    aliases:
+      - nv
+      - night
+
+  feed:
+    description: Feed a player
+    permission: histeria.feed
+
+  enderchest:
+    description: Open the player enderchest
+    permission: histeria.enderchest
+    aliases:
+      - ec
+      - enderc
+      - echest
+
+  ping:
+    description: Get player ping
+    permission: histeria.ping
+
+  craft:
+    description: Open a crafting inventory
+    permission: histeria.craft
+
+  heal:
+    description: Heal a player
+    permission: histeria.heal
+
+  hat:
+    description: Set any item on player head
+    permission: histeria.hat
+
+  fly:
+    description: Allow a player to fly
+    permission: histeria.fly
+
+  xpbottle:
+    description: Convert player experienc into experience orb
+    permission: histeria.xpbottle

@@ -114,8 +114,7 @@ public class HGuardTabCompleter implements TabCompleter {
                             commandsList.add(material.name());
 
                     } else if (args[2].equalsIgnoreCase("group")) {
-                        for (String group : hguard.getGroupWhiteList())
-                            commandsList.add(group);
+                        commandsList.addAll(hguard.getGroupWhiteList());
                     }
                 }
                 commandsList = Utils.dynamicTab(commandsList, args[4]);
