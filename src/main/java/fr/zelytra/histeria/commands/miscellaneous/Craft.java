@@ -1,11 +1,9 @@
 package fr.zelytra.histeria.commands.miscellaneous;
 
-import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 
 public class Craft implements CommandExecutor {
@@ -15,8 +13,7 @@ public class Craft implements CommandExecutor {
 
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            InterfaceBuilder interfaceBuilder = new InterfaceBuilder(InventoryType.CRAFTING, "Crafting");
-            interfaceBuilder.open(player);
+            player.openWorkbench(null,true);
             return true;
         }
         return false;

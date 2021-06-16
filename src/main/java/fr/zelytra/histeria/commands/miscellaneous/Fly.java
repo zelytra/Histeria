@@ -29,6 +29,8 @@ public class Fly implements CommandExecutor {
                 player.setFlying(true);
                 player.sendMessage(Message.getPlayerPrefixe() + "§aFly enabled.");
                 return true;
+            }else {
+                player.sendMessage(Message.getPlayerPrefixe()+"§cYou cannot change fly mode on this gamemode.");
             }
 
         }

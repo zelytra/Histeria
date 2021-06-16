@@ -31,13 +31,15 @@ public class NocturiteBoots implements Listener {
     @EventHandler
     public void setFlyOnJump(PlayerToggleFlightEvent e) {
         Player jumper = e.getPlayer();
+        if (CustomItemStack.getCustomMaterial(jumper.getInventory().getBoots()) != CustomMaterial.NOCTURITE_BOOTS)
+            return;
         if (e.isFlying() && jumper.getGameMode() == GameMode.SURVIVAL) {
-                jumper.setFlying(false);
-                Vector jump = jumper.getLocation().getDirection().multiply(0.2).setY(0.8);
-                jumper.setVelocity(jumper.getVelocity().add(jump));
-                jumper.setAllowFlight(false);
-                runIsNotOnGround(jumper.getUniqueId());
-                e.setCancelled(true);
+            jumper.setFlying(false);
+            Vector jump = jumper.getLocation().getDirection().multiply(0.2).setY(0.8);
+            jumper.setVelocity(jumper.getVelocity().add(jump));
+            jumper.setAllowFlight(false);
+            runIsNotOnGround(jumper.getUniqueId());
+            e.setCancelled(true);
         }
     }
 

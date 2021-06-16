@@ -13,6 +13,7 @@ import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
+import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public final class Histeria extends JavaPlugin {
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
 
+    public static MySQL mySQL;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
 
@@ -51,8 +53,9 @@ public final class Histeria extends JavaPlugin {
         setupServer();
         EventManager.regEvents(this);
         new CraftManager();
-        lootTableManager = new LootTableManager();
 
+        lootTableManager = new LootTableManager();
+        mySQL = new MySQL();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
     }
@@ -92,6 +95,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("heal").setExecutor(new Heal());
         getCommand("hat").setExecutor(new Hat());
         getCommand("xpbottle").setExecutor(new XpBottle());
+        getCommand("fly").setExecutor(new Fly());
 
     }
 
