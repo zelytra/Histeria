@@ -68,7 +68,7 @@ public class HGive implements CommandExecutor {
                 return false;
             }
         } else {
-            player.sendMessage(Message.getHelp("hgive"));
+            player.sendMessage(Message.getHelp(command.getName()));
             return false;
         }
     }

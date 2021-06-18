@@ -19,8 +19,7 @@ import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
 import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
-import fr.zelytra.histeria.events.player.PlayerJoinSync;
-import fr.zelytra.histeria.events.player.PlayerLeftSync;
+import fr.zelytra.histeria.events.player.*;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -34,6 +33,9 @@ public class EventManager {
             pm.registerEvents(new PlayerJoinSync(), pl);
             pm.registerEvents(new PlayerLeftSync(), pl);
         }
+        pm.registerEvents(new PlayerJoinData(), pl);
+        pm.registerEvents(new PlayerLeftData(), pl);
+        pm.registerEvents(new PlayerDeathListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

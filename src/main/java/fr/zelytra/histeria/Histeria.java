@@ -1,6 +1,8 @@
 package fr.zelytra.histeria;
 
 import fr.zelytra.histeria.commands.Test;
+import fr.zelytra.histeria.commands.bank.BankCommands;
+import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
@@ -65,6 +67,7 @@ public final class Histeria extends JavaPlugin {
     @Override
     public void onDisable() {
         configurationManager.unload();
+        //TODO Save all data of players in case of shutting down server
 
     }
 
@@ -85,6 +88,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("hgive").setExecutor(new HGive());
         getCommand("hgive").setTabCompleter(new HGiveTab());
 
+        /* Bank */
+        getCommand("bank").setExecutor(new BankCommands());
+        getCommand("bank").setTabCompleter(new BankTab());
+
         /* Miscellaneous */
         getCommand("speed").setExecutor(new Speed());
         getCommand("nightvision").setExecutor(new NightVision());
@@ -96,6 +103,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("hat").setExecutor(new Hat());
         getCommand("xpbottle").setExecutor(new XpBottle());
         getCommand("fly").setExecutor(new Fly());
+        getCommand("gmc").setExecutor(new GameMode());
+        getCommand("gms").setExecutor(new GameMode());
+        getCommand("gmsc").setExecutor(new GameMode());
+        getCommand("stats").setExecutor(new Stats());
 
     }
 

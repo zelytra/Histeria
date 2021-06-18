@@ -74,11 +74,10 @@ public class Cooldown {
     }
 
     /**
-     *
      * @param player Player to check
      * @param tag    Tag of the cooldown
      * @return true if cooldown ended and false if cooldown is running
-     * @return if return is false, it will print the time remaining to the player
+     * if return is false, it will print the time remaining to the player
      */
 
     public static boolean cooldownCheck(Player player, String tag) {

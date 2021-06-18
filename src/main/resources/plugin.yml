@@ -76,3 +76,27 @@ commands:
   xpbottle:
     description: Convert player experienc into experience orb
     permission: histeria.xpbottle
+
+  gmc:
+    description: Change player gamemode to creative
+    permission: histeria.gamemode
+
+  gms:
+    description: Change player gamemode to survival
+    permission: histeria.gamemode
+
+  gmsc:
+    description: Change player gamemode to spectator
+    permission: histeria.gamemode
+
+  stats:
+    description: Show statistic of a player
+    permission: histeria.stats
+    aliases:
+      - stat
+      - statistic
+
+  bank:
+    description: Bank commands
+    permission: histeria.bank
+

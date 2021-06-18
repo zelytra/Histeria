@@ -1,14 +1,13 @@
 package fr.zelytra.histeria.managers.mysql;
 
 import fr.zelytra.histeria.Histeria;
-import org.bukkit.Bukkit;
 
 import java.sql.*;
 
 public class MySQL {
     private Connection connection;
     private Statement statement;
-    private Object synchroObject;
+    private Object synchroObject = new Object();
 
     public MySQL() {
 
@@ -31,15 +30,15 @@ public class MySQL {
     }
 
     public void update(String query) {
-        Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-            try {
-                synchronized (synchroObject) {
-                    statement.executeUpdate(query);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+
+        try {
+            synchronized (synchroObject) {
+                statement.executeUpdate(query);
             }
-        });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public ResultSet query(String query) {
