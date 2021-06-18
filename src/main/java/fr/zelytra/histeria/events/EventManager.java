@@ -20,6 +20,7 @@ import fr.zelytra.histeria.events.items.projectile.Shuriken;
 import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.*;
+import fr.zelytra.histeria.managers.chat.ChatListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -36,6 +37,7 @@ public class EventManager {
         pm.registerEvents(new PlayerJoinData(), pl);
         pm.registerEvents(new PlayerLeftData(), pl);
         pm.registerEvents(new PlayerDeathListener(), pl);
+        pm.registerEvents(new ChatListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

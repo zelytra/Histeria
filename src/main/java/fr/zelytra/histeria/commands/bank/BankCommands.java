@@ -1,5 +1,6 @@
 package fr.zelytra.histeria.commands.bank;
 
+import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
@@ -9,6 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public class BankCommands implements CommandExecutor {
 
@@ -37,25 +40,37 @@ public class BankCommands implements CommandExecutor {
                     return false;
                 }
 
+                assert customPlayer != null;
                 if (customPlayer.getBankAccount().hasEnoughFor(amount)) {
 
                     customPlayer.getBankAccount().takeMoney(amount);
-                    CustomPlayer.getCustomPlayer(args[1]).getBankAccount().addMoney(amount);
+                    Objects.requireNonNull(CustomPlayer.getCustomPlayer(args[1])).getBankAccount().addMoney(amount);
 
                     player.sendMessage(Message.getPlayerPrefixe() + "§aYou sent §6" + amount + "$§a to " + args[1]);
-                    Bukkit.getPlayer(args[1]).sendMessage(Message.getPlayerPrefixe() + "§aYou received §6" + amount + " §afrom " + player.getName());
+                    Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Message.getPlayerPrefixe() + "§aYou received §6" + amount + " §afrom " + player.getName());
 
                 } else {
                     player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have enough money");
                     return false;
                 }
 
+            } else if (args.length == 0) {
+
+                CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+                assert customPlayer != null;
+                player.sendMessage(Message.getPlayerPrefixe() + "§aYou currently have §6" + customPlayer.getBankAccount().getMoney() + "$§a in your bank account.");
+
+            } else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
+
+                HelpCommands help = new HelpCommands(command.getName());
+                help.addCommand("[send]", "[player]","[amount]");
+                help.printPlayer(player);
+
             } else {
                 player.sendMessage(Message.getHelp(command.getName()));
                 return false;
             }
         }
-
 
         return false;
     }
