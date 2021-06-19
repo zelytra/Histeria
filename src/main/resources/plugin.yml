@@ -100,3 +100,7 @@ commands:
     description: Bank commands
     permission: histeria.bank
 
+  emote:
+    description: Show all emote
+    permission: histeria.emote
+

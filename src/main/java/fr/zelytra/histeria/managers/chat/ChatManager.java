@@ -2,6 +2,9 @@ package fr.zelytra.histeria.managers.chat;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.utils.Utils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -11,12 +14,12 @@ public class ChatManager {
 
     private final Player player;
     private final String group;
-    private String message;
-    private boolean canUseEmote;
+    private final String message;
+    private final boolean canUseEmote;
 
     private static final List<String> groupWhitelist = new ArrayList<>();
 
-    {
+    static {
         groupWhitelist.add("monarch");
         groupWhitelist.add("lord");
         groupWhitelist.add("demigod");
@@ -32,43 +35,41 @@ public class ChatManager {
 
     }
 
-    public String getProcessMessage() {
-        if (canUseEmote)
-            return prefix() + emoteMessage();
-        else {
-            System.out.println(prefix());
-            System.out.println(rawMessage());
-            return prefix() + rawMessage();
+    public TextComponent getProcessMessage() {
+
+        GroupFX groupFX = GroupFX.getByName(this.group);
+        TextComponent.Builder processMessage;
+        if (canUseEmote) {
+            processMessage = Component.text()
+                    .content(groupFX.getBadge().toString()+" ")
+                    .color(NamedTextColor.WHITE)
+                    .append(Component.text().content(player.getName()).color(groupFX.getNameColor()))
+                    .append(Component.text().content(groupFX.getSplitter()).color(groupFX.getSplittercolor()));
+
+            for (String word : message.split(" ")) {
+                if (word.contains(":")) {
+                    processMessage.append(Component.text().content(Emote.getByName(word) + " ").color(GroupFX.DEFAULT.getMessageColor()));
+                } else {
+                    processMessage.append(Component.text().content(word + " ").color(groupFX.getMessageColor()));
+                }
+            }
+
+        } else {
+            processMessage = Component.text()
+                    .content(groupFX.getBadge().toString()+" ")
+                    .color(NamedTextColor.WHITE)
+                    .append(Component.text().content(player.getName()).color(groupFX.getNameColor()))
+                    .append(Component.text().content(groupFX.getSplitter()).color(groupFX.getSplittercolor()))
+                    .append(Component.text().content(rawMessage()).color(groupFX.getMessageColor()));
+
+
         }
+        return processMessage.build();
 
     }
 
     private String rawMessage() {
-        return message;
-    }
-
-    private String emoteMessage() {
-        if (message.contains(":")) {
-
-            String[] splitMessage = message.split(" ");
-            StringBuilder finalMessage = new StringBuilder();
-
-            for (String word : splitMessage) {
-
-                if (word.contains(":")) {
-                    word = Emote.getByName(word);
-                }
-
-                finalMessage.append(word + " ");
-            }
-            message = finalMessage.toString();
-        }
-
-        return message;
-    }
-
-    private String prefix() {
-        return player.getName() + " > ";
+        return this.message;
     }
 
 

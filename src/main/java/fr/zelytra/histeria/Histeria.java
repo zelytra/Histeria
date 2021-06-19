@@ -5,6 +5,7 @@ import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
+import fr.zelytra.histeria.commands.emote.EmoteCommand;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.miscellaneous.*;
@@ -27,7 +28,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
 
@@ -107,6 +108,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("gms").setExecutor(new GameMode());
         getCommand("gmsc").setExecutor(new GameMode());
         getCommand("stats").setExecutor(new Stats());
+        getCommand("emote").setExecutor(new EmoteCommand());
 
     }
 
