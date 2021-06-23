@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.managers.chat;
+package fr.zelytra.histeria.managers.visual.chat;
 
 public enum Emote {
     /**
@@ -26,7 +26,11 @@ public enum Emote {
     DEMIGOD_BADGE("\u9015", ":null", EmoteType.BADGE),
     MONARCH_BADGE("\u9016", ":null", EmoteType.BADGE),
     LORD_BADGE("\u9017", ":null", EmoteType.BADGE),
-    VOTE("\u9018", ":null", EmoteType.BADGE);
+    VOTE("\u9018", ":null", EmoteType.BADGE),
+
+    WWW("\u9019", ":null", EmoteType.ICON),
+    DISCORD("\u9020", ":null", EmoteType.ICON),
+    SHOP("\u9021", ":null", EmoteType.ICON);
 
 
     private final String UTF8;

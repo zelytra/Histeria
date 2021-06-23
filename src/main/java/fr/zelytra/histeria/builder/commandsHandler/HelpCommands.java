@@ -20,12 +20,12 @@ public class HelpCommands {
     }
 
     public void printPlayer(Player player){
-        player.sendMessage("§9§m---------------[--§r§l§bHisteria§9§m--]---------------");
+        player.sendMessage("§9§m               §r§l§9[  §r§l§bHisteria§9§l  ]§m               ");
         player.sendMessage("");
         for (String s :commands) {
             player.sendMessage(s);
         }
         player.sendMessage("");
-        player.sendMessage("§9§m---------------[------------]---------------");
+        player.sendMessage("§9§m               §r§l§9[            ]§m               ");
     }
 }

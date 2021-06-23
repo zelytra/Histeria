@@ -20,8 +20,10 @@ import fr.zelytra.histeria.events.items.projectile.Shuriken;
 import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.*;
-import fr.zelytra.histeria.managers.chat.ChatListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.visual.chat.ChatListener;
+import net.luckperms.api.event.EventBus;
+import net.luckperms.api.event.user.UserDataRecalculateEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 
@@ -38,6 +40,8 @@ public class EventManager {
         pm.registerEvents(new PlayerLeftData(), pl);
         pm.registerEvents(new PlayerDeathListener(), pl);
         pm.registerEvents(new ChatListener(), pl);
+        pm.registerEvents(new PlayerJoinVisual(), pl);
+        pm.registerEvents(new PlayerLeftVisual(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
@@ -86,6 +90,10 @@ public class EventManager {
         pm.registerEvents(new AnvilListener(), pl);
         pm.registerEvents(new HGuardListener(), pl);
         pm.registerEvents(new PortalListener(), pl);
+
+        /* LuckPerms */
+        EventBus eventBus = Histeria.getLuckPerms().getEventBus();
+        eventBus.subscribe(pl, UserDataRecalculateEvent.class, PlayerJoinVisual::onParentChange);
 
     }
 

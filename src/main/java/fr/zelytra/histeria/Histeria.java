@@ -17,6 +17,7 @@ import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
@@ -28,13 +29,14 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
 
     public static MySQL mySQL;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
+    public static VisualTeamManager visualTeamManager;
 
     public static Histeria getInstance() {
         return instance;
@@ -61,6 +63,7 @@ public final class Histeria extends JavaPlugin {
         mySQL = new MySQL();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
+        visualTeamManager = new VisualTeamManager();
     }
 
 
@@ -109,6 +112,8 @@ public final class Histeria extends JavaPlugin {
         getCommand("gmsc").setExecutor(new GameMode());
         getCommand("stats").setExecutor(new Stats());
         getCommand("emote").setExecutor(new EmoteCommand());
+        getCommand("bug").setExecutor(new Bug());
+        getCommand("social").setExecutor(new Social());
 
     }
 

@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.managers.chat;
+package fr.zelytra.histeria.managers.visual.chat;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.utils.Utils;

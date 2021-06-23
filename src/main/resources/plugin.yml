@@ -104,3 +104,19 @@ commands:
     description: Show all emote
     permission: histeria.emote
 
+  bug:
+    description: Show discord link to report a bug or a problem
+    permission: histeria.bug
+    aliases:
+      - problem
+      - report
+
+  social:
+    description: Show all social link of the server
+    permission: histeria.social
+    aliases:
+      - discord
+      - website
+      - web
+      - link
+

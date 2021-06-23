@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.managers.chat;
+package fr.zelytra.histeria.managers.visual.chat;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.utils.Utils;
@@ -48,7 +48,7 @@ public class ChatManager {
 
             for (String word : message.split(" ")) {
                 if (word.contains(":")) {
-                    processMessage.append(Component.text().content(Emote.getByName(word) + " ").color(GroupFX.DEFAULT.getMessageColor()));
+                    processMessage.append(Component.text().content(Emote.getByName(word) + " ").color(NamedTextColor.WHITE));
                 } else {
                     processMessage.append(Component.text().content(word + " ").color(groupFX.getMessageColor()));
                 }

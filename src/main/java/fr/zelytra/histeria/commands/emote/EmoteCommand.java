@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.commands.emote;
 
-import fr.zelytra.histeria.managers.chat.Emote;
-import fr.zelytra.histeria.managers.chat.EmoteType;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.managers.visual.chat.EmoteType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
