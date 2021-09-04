@@ -15,6 +15,8 @@ import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
+import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.logs.Logs;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
@@ -29,7 +31,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
 
@@ -37,6 +39,7 @@ public final class Histeria extends JavaPlugin {
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
     public static VisualTeamManager visualTeamManager;
+    private static Logs logs;
 
     public static Histeria getInstance() {
         return instance;
@@ -60,10 +63,13 @@ public final class Histeria extends JavaPlugin {
         new CraftManager();
 
         lootTableManager = new LootTableManager();
+        logs = new Logs();
         mySQL = new MySQL();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
+
         visualTeamManager = new VisualTeamManager();
+        logs.log("Histeria successfully start",LogType.INFO);
     }
 
 
@@ -146,10 +152,12 @@ public final class Histeria extends JavaPlugin {
         }
     }
 
-    public static void log(String msg) {
+    public static void log(String msg, LogType type) {
         if (log) {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.getConsolePrefixe() + msg);
         }
+        logs.log(msg,type);
+
     }
 
     public static boolean isSaberFaction() {

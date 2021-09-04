@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.mysql;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 
 import java.sql.*;
 
@@ -21,7 +22,7 @@ public class MySQL {
                     , configuration.getUserName()
                     , configuration.getPassword());
             this.statement = this.connection.createStatement();
-            Histeria.log("Connected to dataBase !");
+            Histeria.log("Connected to dataBase !", LogType.INFO);
 
         } catch (SQLException exception) {
             exception.printStackTrace();

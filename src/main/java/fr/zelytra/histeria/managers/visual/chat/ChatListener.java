@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.visual.chat;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.Utils;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
@@ -21,7 +22,7 @@ public class ChatListener implements Listener {
                 if (Utils.canByPass(player))
                     player.sendMessage("§6[§eSTAFF§6] §e" + e.getPlayer().getName() + "§6 > §f" + PlainComponentSerializer.plain().serialize(e.message()).substring(1));
 
-            Histeria.log("§6[§eSTAFF§6] §e" + e.getPlayer().getName() + "§6 > §f" + PlainComponentSerializer.plain().serialize(e.message()).substring(1));
+            Histeria.log("§6[§eSTAFF§6] §e" + e.getPlayer().getName() + "§6 > §f" + PlainComponentSerializer.plain().serialize(e.message()).substring(1), LogType.INFO);
             return;
         }
 

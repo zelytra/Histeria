@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class PacketSender {
             OutputStream output = socket.getOutputStream();
             PacketBuilder playerPacket = new PacketBuilder(this.player);
             output.write(playerPacket.build());
-            Histeria.log("§e" + this.player.getName() + " inventory's send to the server...");
+            Histeria.log("§e" + this.player.getName() + " inventory's send to the server...", LogType.INFO);
 
             //Confirm
             InputStream input = socket.getInputStream();
@@ -39,11 +40,11 @@ public class PacketSender {
             byte[] Mbyte = new byte[messageLength];
             input.read(Mbyte);
             if (Integer.reverseBytes(ByteBuffer.wrap(Rbyte).getInt()) != 1) {
-                Histeria.log("§cInventory not received.");
+                Histeria.log("§cInventory not received.",LogType.WARN);
                 socket.close();
                 return;
             }
-            Histeria.log("§eInventory received.");
+            Histeria.log("§eInventory received.",LogType.INFO);
             this.isReceived =true;
             socket.close();
 
@@ -66,7 +67,7 @@ public class PacketSender {
             InetAddress serveur = InetAddress.getByName(server);
             return new Socket(serveur, port);
         } catch (Exception e) {
-            Histeria.log("§cFailed to connect to sync server");
+            Histeria.log("§cFailed to connect to sync server",LogType.ERROR);
         }
         return null;
     }

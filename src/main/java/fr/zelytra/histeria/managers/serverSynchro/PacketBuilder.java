@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -59,7 +60,7 @@ public class PacketBuilder {
             outputStream.write(playerEffect);
 
         } catch (IOException e) {
-            Histeria.log("§cFailed to build the byte message");
+            Histeria.log("§cFailed to build the byte message", LogType.ERROR);
         }
         return outputStream.toByteArray();
     }

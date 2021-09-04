@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.hguard;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -69,9 +70,11 @@ public abstract class HGuardPersistent {
             configFile.set("BreakBlock", hGuard.canBreakBlock());
             configFile.set("PVP", hGuard.isPvp());
             configFile.save(hguardFile);
+            Histeria.log("[HGuard] " + hGuard.getName() + " area has been saved", LogType.INFO);
 
         } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
+            Histeria.log("[HGuard] Failed to save area : " + hGuard.getName(), LogType.ERROR);
         }
 
     }
@@ -115,10 +118,12 @@ public abstract class HGuardPersistent {
             for (String group : configFile.getStringList("Groups")) {
                 hGuard.addGroupe(group);
             }
-
+            Histeria.log("[HGuard] " + name + " area has been loaded", LogType.INFO);
+            Histeria.log("[HGuard] " + hGuard, LogType.INFO);
 
         } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
+            Histeria.log("[HGuard] Failed to load area : " + file.getName(), LogType.ERROR);
         }
 
     }

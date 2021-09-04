@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -32,7 +33,7 @@ public class PacketReceiver {
             InetAddress serveur = InetAddress.getByName(server);
             return new Socket(serveur, port);
         } catch (Exception e) {
-            Histeria.log("§cFailed to connect to sync server");
+            Histeria.log("§cFailed to connect to sync server", LogType.ERROR);
         }
         return null;
     }
@@ -57,7 +58,7 @@ public class PacketReceiver {
             byte[] id = new byte[1];
             input.read(id);
             if (id[0] == (byte) 254) {
-                Histeria.log("§e" + player.getName() + " is a new player. Nothing to do.");
+                Histeria.log("§e" + player.getName() + " is a new player. Nothing to do.",LogType.INFO);
                 socket.close();
                 this.isNew = true;
                 return;
@@ -106,7 +107,7 @@ public class PacketReceiver {
             input.read(potionEffect);
             playerDat.setEffects(potionArrayFromBase64(potionEffect));
 
-            Histeria.log("§e" + player.getName() + " inventory's has been synchronised.");
+            Histeria.log("§e" + player.getName() + " inventory's has been synchronised.",LogType.INFO);
             this.isLoaded = true;
             socket.close();
         } catch (Exception e) {

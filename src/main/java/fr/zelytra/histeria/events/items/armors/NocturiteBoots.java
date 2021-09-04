@@ -4,6 +4,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorEquipEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -48,7 +49,7 @@ public class NocturiteBoots implements Listener {
             long time = System.currentTimeMillis();
             while (!Bukkit.getPlayer(jumper).isOnGround()) {
                 if (System.currentTimeMillis() - time >= 10000) {
-                    Histeria.log("§cNocturiteBoot double jump task time out.");
+                    Histeria.log("§cNocturiteBoot double jump task time out.", LogType.WARN);
                     return;
                 }
             }

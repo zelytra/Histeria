@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
@@ -37,7 +38,7 @@ public class SwitchServer {
                 }
             }
 
-            Histeria.log("§a" + player.getName() + " switch to -> " + serverName + " server");
+            Histeria.log("§a" + player.getName() + " switch to -> " + serverName + " server", LogType.INFO);
             sendPluginMessage("Connect", player, args);
         });
     }

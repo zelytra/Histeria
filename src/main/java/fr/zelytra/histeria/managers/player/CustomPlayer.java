@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.player;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.economy.Bank;
+import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
@@ -92,7 +93,7 @@ public class CustomPlayer {
             if (resultSet.next()) {
                 this.bank.setMoney(resultSet.getInt("money"));
             } else {
-                Histeria.log("§cFailed to load bank account of " + this.name);
+                Histeria.log("§cFailed to load bank account of " + this.name, LogType.ERROR);
                 Objects.requireNonNull(getPlayer()).sendMessage(Message.getPlayerPrefixe() + "§cFailed to load bank account please try to reconnect to the server or contact an admin if the problem persist.");
             }
 
