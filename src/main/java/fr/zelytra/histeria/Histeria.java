@@ -31,7 +31,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     private static LuckPerms luckPerms;
 

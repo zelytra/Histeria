@@ -61,7 +61,7 @@ public class Logs {
 
         String currentDir = Histeria.getInstance().getDataFolder().getPath();
         File folder = new File(currentDir + File.separator + "logs");
-
+        System.out.println(folder.getPath());
         if (!folder.exists())
             folder.mkdir();
         File file = new File(folder.getPath() + File.separator + date + ".txt");

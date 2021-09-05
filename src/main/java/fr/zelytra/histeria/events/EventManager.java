@@ -90,6 +90,7 @@ public class EventManager {
         pm.registerEvents(new AnvilListener(), pl);
         pm.registerEvents(new HGuardListener(), pl);
         pm.registerEvents(new PortalListener(), pl);
+        pm.registerEvents(new ServerPingListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
