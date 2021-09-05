@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.player;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.economy.Bank;
+import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.utils.Message;
@@ -28,6 +29,7 @@ public class CustomPlayer {
     private long lastConnection;
     private String ip;
     private String primConnection;
+    private Lang lang;
 
     private final Bank bank;
     private int id;
@@ -57,15 +59,17 @@ public class CustomPlayer {
 
     private void initData() {
         MySQL mySQL = Histeria.mySQL;
+        this.lang = Lang.EN;
         lastConnection = System.currentTimeMillis();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
 
-        mySQL.update("INSERT INTO `Player` (`uuid`,`name`,`ip`,`primconnection`) VALUES ('"
+        mySQL.update("INSERT INTO `Player` (`uuid`,`name`,`ip`,`primconnection`,`lang`) VALUES ('"
                 + Objects.requireNonNull(getPlayer()).getUniqueId() + "','"
                 + getPlayer().getName() + "','"
                 + Objects.requireNonNull(getPlayer().getAddress()).toString().replace("/", "").split(":")[0] + "','"
-                + formatter.format(date) + "');");
+                + formatter.format(date) + "','"
+                + lang.name() + ");");
 
     }
 
@@ -105,6 +109,7 @@ public class CustomPlayer {
                 this.timePlayed = resultSet.getInt("playTime");
                 this.ip = resultSet.getString("ip");
                 this.primConnection = resultSet.getString("primconnection");
+                this.lang = Lang.valueOf(resultSet.getString("lang"));
 
             }
 
@@ -205,5 +210,9 @@ public class CustomPlayer {
 
     public String getPrimConnection() {
         return primConnection;
+    }
+
+    public Lang getLang() {
+        return lang;
     }
 }

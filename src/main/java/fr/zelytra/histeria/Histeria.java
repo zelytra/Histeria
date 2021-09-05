@@ -6,6 +6,7 @@ import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.emote.EmoteCommand;
+import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.miscellaneous.*;
@@ -104,6 +105,8 @@ public final class Histeria extends JavaPlugin {
 
         /* Miscellaneous */
         getCommand("speed").setExecutor(new Speed());
+        getCommand("freeze").setExecutor(new Freeze());
+        getCommand("unfreeze").setExecutor(new Freeze());
         getCommand("nightvision").setExecutor(new NightVision());
         getCommand("feed").setExecutor(new Feed());
         getCommand("enderchest").setExecutor(new EnderChest());

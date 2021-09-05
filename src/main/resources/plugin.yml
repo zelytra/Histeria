@@ -120,3 +120,11 @@ commands:
       - web
       - link
 
+  freeze:
+    description: To freeze a player
+    permission: histeria.freeze
+
+  unfreeze:
+    description: To unfreeze a player
+    permission: histeria.freeze
+
