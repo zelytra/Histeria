@@ -3,6 +3,7 @@ package fr.zelytra.histeria;
 import fr.zelytra.histeria.commands.Test;
 import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
+import fr.zelytra.histeria.commands.compress.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.emote.EmoteCommand;
@@ -105,6 +106,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("bank").setExecutor(new BankCommands());
         getCommand("bank").setTabCompleter(new BankTab());
 
+        /* Lang */
+        getCommand("lang").setExecutor(new LangCommand());
+        getCommand("lang").setTabCompleter(new LangTabCommand());
+
         /* Miscellaneous */
         getCommand("speed").setExecutor(new Speed());
         getCommand("freeze").setExecutor(new Freeze());
@@ -125,9 +130,8 @@ public final class Histeria extends JavaPlugin {
         getCommand("emote").setExecutor(new EmoteCommand());
         getCommand("bug").setExecutor(new Bug());
         getCommand("social").setExecutor(new Social());
+        getCommand("compress").setExecutor(new Compress());
 
-        getCommand("lang").setExecutor(new LangCommand());
-        getCommand("lang").setTabCompleter(new LangTabCommand());
 
     }
 

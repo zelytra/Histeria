@@ -132,3 +132,6 @@ commands:
     description: change lang of a player
     permission: histeria.lang
 
+  compress:
+    description: Compress all your cobble blocks
+    permission: histeria.compress
