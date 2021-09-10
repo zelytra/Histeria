@@ -128,3 +128,7 @@ commands:
     description: To unfreeze a player
     permission: histeria.freeze
 
+  lang:
+    description: change lang of a player
+    permission: histeria.lang
+

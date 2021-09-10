@@ -9,6 +9,8 @@ import fr.zelytra.histeria.commands.emote.EmoteCommand;
 import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
+import fr.zelytra.histeria.commands.lang.LangCommand;
+import fr.zelytra.histeria.commands.lang.LangTabCommand;
 import fr.zelytra.histeria.commands.miscellaneous.*;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
@@ -123,6 +125,9 @@ public final class Histeria extends JavaPlugin {
         getCommand("emote").setExecutor(new EmoteCommand());
         getCommand("bug").setExecutor(new Bug());
         getCommand("social").setExecutor(new Social());
+
+        getCommand("lang").setExecutor(new LangCommand());
+        getCommand("lang").setTabCompleter(new LangTabCommand());
 
     }
 

@@ -172,7 +172,7 @@ public class CustomPlayer {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
             MySQL mySQL = Histeria.mySQL;
-            mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ";");
+            mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "';");
             timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
             mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + ";");
 
@@ -214,5 +214,9 @@ public class CustomPlayer {
 
     public Lang getLang() {
         return lang;
+    }
+
+    public void setLang(Lang lang) {
+        this.lang = lang;
     }
 }
