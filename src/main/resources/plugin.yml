@@ -135,3 +135,7 @@ commands:
   compress:
     description: Compress all your cobble blocks
     permission: histeria.compress
+
+  near:
+    description: Display nearest player
+    permission: histeria.near
