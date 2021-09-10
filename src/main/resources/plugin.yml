@@ -139,3 +139,7 @@ commands:
   near:
     description: Display nearest player
     permission: histeria.near
+
+  slot:
+    description: Change slot number of the current server
+    permission: histeria.slot

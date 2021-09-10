@@ -15,6 +15,7 @@ import fr.zelytra.histeria.commands.lang.LangTabCommand;
 import fr.zelytra.histeria.commands.miscellaneous.*;
 import fr.zelytra.histeria.commands.near.Near;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
+import fr.zelytra.histeria.commands.slot.Slot;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
@@ -133,6 +134,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("social").setExecutor(new Social());
         getCommand("compress").setExecutor(new Compress());
         getCommand("near").setExecutor(new Near());
+        getCommand("slot").setExecutor(new Slot());
 
 
     }
