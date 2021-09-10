@@ -21,13 +21,13 @@ public class ServerPingListener implements Listener {
             exception.printStackTrace();
         }
 
-        e.setMotd("§6| §2Maze-Game §6ᒥ §8<< §6Daedalus §8>> §6ᒧ §§amc-daedalus.com        §6| §7Game Status §6: §fMaze Generation in progress...");
+        e.setMotd(" &6PvP&e-&6Faction  &3«&b« &a♦ &bHISTERIA &a♦ &b»&3»  &6Vanilla-Modded  &9*&b*&9*&b*&9*&b*&9*&b*&9*&b*&9*&b*&9*&b*&9*&b*&9*  &adiscord.histeria.fr  &9*&b*&9*&b*&9*&b*&9*&b*&c1.16&b*&9*&b*&9*&b*&9*&b*&9*");
 
     }
 
     private File getServerIcon() {
         try {
-            URL url = new URL("https://raw.githubusercontent.com/zelytra/Daedalus/master/img/server-icon.png");
+            URL url = new URL("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/server-icon.png");
             BufferedImage img = ImageIO.read(url);
             File file = new File("server-icon.png");
             if (!file.exists())
