@@ -27,7 +27,7 @@ public class Stats implements CommandExecutor {
             if (args.length > 0) {
 
                 if (Bukkit.getPlayer(args[0]) == null) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cThis player is not connected on the server");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected on the server");
                     return false;
                 }
                 target = CustomPlayer.getCustomPlayer(args[0]);

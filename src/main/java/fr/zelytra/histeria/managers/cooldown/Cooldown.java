@@ -86,7 +86,7 @@ public class Cooldown {
             if (entry.getKey().getTag().equalsIgnoreCase(tag) && entry.getValue().getUniqueId() == player.getUniqueId()) {
                 toRemove = entry.getKey();
                 if (!toRemove.isFinished()) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§6You need to wait " + toRemove);
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6You need to wait " + toRemove);
                     return false;
                 }
 

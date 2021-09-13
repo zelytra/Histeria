@@ -33,7 +33,7 @@ public class SwitchServer {
             long time = System.currentTimeMillis();
             while (!packetSender.isReceived()) {
                 if (System.currentTimeMillis() - time >= 2000) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cFailed to sync inventory please retry later.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to sync inventory please retry later.");
                     return;
                 }
             }

@@ -37,10 +37,10 @@ public class CompressCobblestone implements Listener {
                         if (random < loots.getLuck()) {
                             player.getInventory().addItem(loots.getItem());
                             if (CustomItemStack.hasTag(loots.getItem())) {
-                                player.sendMessage(Message.getPlayerPrefixe() + "§aWell done you found some §l" + loots.getItem().getItemMeta().getDisplayName() + " x" + loots.getItem().getAmount());
+                                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aWell done you found some §l" + loots.getItem().getItemMeta().getDisplayName() + " x" + loots.getItem().getAmount());
                             }
                             else {
-                                player.sendMessage(Message.getPlayerPrefixe() + "§aWell done you found some §l" + loots.getItem().getType().toString().toLowerCase().replace("_"," ") + " x" + loots.getItem().getAmount());
+                                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aWell done you found some §l" + loots.getItem().getType().toString().toLowerCase().replace("_"," ") + " x" + loots.getItem().getAmount());
                             }
                             break;
                         }

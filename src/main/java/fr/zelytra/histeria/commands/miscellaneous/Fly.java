@@ -21,16 +21,16 @@ public class Fly implements CommandExecutor {
                 if (player.getAllowFlight()) {
                     player.setFlying(false);
                     player.setAllowFlight(false);
-                    player.sendMessage(Message.getPlayerPrefixe() + "§aFly disabled.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aFly disabled.");
                     return true;
                 }
 
                 player.setAllowFlight(true);
                 player.setFlying(true);
-                player.sendMessage(Message.getPlayerPrefixe() + "§aFly enabled.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aFly enabled.");
                 return true;
             }else {
-                player.sendMessage(Message.getPlayerPrefixe()+"§cYou cannot change fly mode on this gamemode.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg()+"§cYou cannot change fly mode on this gamemode.");
             }
 
         }

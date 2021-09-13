@@ -25,18 +25,18 @@ public class BankCommands implements CommandExecutor {
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
 
                 if (!Utils.isNumeric(args[2])) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a number");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease enter a number");
                     return false;
                 }
                 if (Bukkit.getPlayer(args[1]) == null) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cThis player is not connected on the server");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected on the server");
                     return false;
                 }
 
                 int amount = Integer.parseInt(args[2]);
 
                 if (amount < 1) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou cannot send less than 1$");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot send less than 1$");
                     return false;
                 }
 
@@ -46,11 +46,11 @@ public class BankCommands implements CommandExecutor {
                     customPlayer.getBankAccount().takeMoney(amount);
                     Objects.requireNonNull(CustomPlayer.getCustomPlayer(args[1])).getBankAccount().addMoney(amount);
 
-                    player.sendMessage(Message.getPlayerPrefixe() + "§aYou sent §6" + amount + "$§a to " + args[1]);
-                    Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Message.getPlayerPrefixe() + "§aYou received §6" + amount + " §afrom " + player.getName());
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou sent §6" + amount + "$§a to " + args[1]);
+                    Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou received §6" + amount + " §afrom " + player.getName());
 
                 } else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have enough money");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough money");
                     return false;
                 }
 
@@ -58,7 +58,7 @@ public class BankCommands implements CommandExecutor {
 
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
                 assert customPlayer != null;
-                player.sendMessage(Message.getPlayerPrefixe() + "§aYou currently have §6" + customPlayer.getBankAccount().getMoney() + "$§a in your bank account.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou currently have §6" + customPlayer.getBankAccount().getMoney() + "$§a in your bank account.");
 
             } else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
 

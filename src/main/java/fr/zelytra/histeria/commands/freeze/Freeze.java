@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.commands.freeze;
 
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,7 +40,7 @@ public class Freeze implements CommandExecutor {
                     return false;
                 }
                 frozenPlayer.add(target.getName());
-                LangMessage.sendMessage((Player) sender, "§a" + target.getName() + " ", "command.freezePlayer", "");
+                LangMessage.sendMessage((Player) sender, Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " ", "command.freezePlayer", "");
                 break;
 
             case "unfreeze":
@@ -48,7 +49,7 @@ public class Freeze implements CommandExecutor {
                     return false;
                 }
                 frozenPlayer.remove(target.getName());
-                LangMessage.sendMessage((Player) sender, "§a" + target.getName() + " ", "command.unfreezePlayer", "");
+                LangMessage.sendMessage((Player) sender, Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " ", "command.unfreezePlayer", "");
                 LangMessage.sendMessage(target, "command.unfreezePlayerByAdmin");
 
                 break;

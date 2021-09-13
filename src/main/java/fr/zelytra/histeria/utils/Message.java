@@ -1,25 +1,32 @@
 package fr.zelytra.histeria.utils;
 
-import fr.zelytra.histeria.Histeria;
+public enum Message {
+    PLAYER_PREFIX("§9[§bHisteria§9]§r "),
+    CONSOLE_PREFIX("§9[§bHisteria§9]§r "),
+    HISTALERT("§9[§bHist§cAlert§9]§r "),
+    CONSOLE_STRATUP("\n" +
+            "§6  _    _ _____  _____ _______ ______ _____  _____          \n" +
+            "§6 | |  | |_   _|/ ____|__   __|  ____|  __ \\|_   _|   /\\    \n" +
+            "§6 | |__| | | | | (___    | |  | |__  | |__) | | |    /  \\   \n" +
+            "§6 |  __  | | |  \\___ \\   | |  |  __| |  _  /  | |   / /\\ \\  \n" +
+            "§6 | |  | |_| |_ ____) |  | |  | |____| | \\ \\ _| |_ / ____ \\ \n" +
+            "§6 |_|  |_|_____|_____/   |_|  |______|_|  \\_\\_____/_/    \\_\\\n" +
+            "                                                           \n" +
+            "                                                           \n");
 
-public class Message {
-    public static String getPlayerPrefixe() {
-        return "§9[§bHisteria§9]§r ";
+    private final String message;
+
+    Message(String message) {
+        this.message = message;
     }
 
-    public static String getConsolePrefixe() {
-        return "§9[§bHisteria§9]§r ";
+    public String getMsg() {
+        return message;
     }
 
     public static String getHelp(String command) {
         return "§9[§bHisteria§9]§r §cWrong command syntax. Please refer to /" + command + " help.";
     }
 
-    public static void startup() {
-        Histeria.getInstance().getServer().getConsoleSender().sendMessage("");
-        Histeria.getInstance().getServer().getConsoleSender().sendMessage("§b               Histeria   V2.0§r");
-        Histeria.getInstance().getServer().getConsoleSender().sendMessage("§b                  by Zelytra§r");
-        Histeria.getInstance().getServer().getConsoleSender().sendMessage("");
 
-    }
 }

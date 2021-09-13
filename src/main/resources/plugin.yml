@@ -143,3 +143,9 @@ commands:
   slot:
     description: Change slot number of the current server
     permission: histeria.slot
+
+  broadcast:
+    description: Broadcast messages
+    permission: histeria.broadcast
+    aliases:
+      - bc

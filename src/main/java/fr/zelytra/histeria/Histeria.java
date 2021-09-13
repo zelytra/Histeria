@@ -3,6 +3,8 @@ package fr.zelytra.histeria;
 import fr.zelytra.histeria.commands.Test;
 import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
+import fr.zelytra.histeria.commands.broadcast.Broadcast;
+import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.compress.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
@@ -59,7 +61,7 @@ public final class Histeria extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Message.startup();
+        this.getServer().getConsoleSender().sendMessage(Message.CONSOLE_STRATUP.getMsg());
         regCommands();
         loadAPI();
         regRepeatingTask();
@@ -111,6 +113,10 @@ public final class Histeria extends JavaPlugin {
         /* Lang */
         getCommand("lang").setExecutor(new LangCommand());
         getCommand("lang").setTabCompleter(new LangTabCommand());
+
+        /* Broadcast */
+        getCommand("broadcast").setExecutor(new Broadcast());
+        getCommand("broadcast").setTabCompleter(new BroadcastTab());
 
         /* Miscellaneous */
         getCommand("speed").setExecutor(new Speed());
@@ -170,7 +176,7 @@ public final class Histeria extends JavaPlugin {
 
     public static void log(String msg, LogType type) {
         if (log) {
-            Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.getConsolePrefixe() + msg);
+            Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.CONSOLE_PREFIX.getMsg() + msg);
         }
         logs.log(msg,type);
 

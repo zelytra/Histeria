@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.commands.slot;
 
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -32,13 +33,12 @@ public class Slot implements CommandExecutor {
                     | IllegalArgumentException | InvocationTargetException e) {
                 return false;
             }
-            LangMessage.sendMessage(player,"","command.slotSet",String.valueOf(Bukkit.getServer().getMaxPlayers()));
+            LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "command.slotSet", String.valueOf(Bukkit.getServer().getMaxPlayers()));
             return true;
-        }
-        else if (args.length == 0) {
-            LangMessage.sendMessage(player,"","command.slot",String.valueOf(Bukkit.getServer().getMaxPlayers()));
+        } else if (args.length == 0) {
+            LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "command.slot", String.valueOf(Bukkit.getServer().getMaxPlayers()));
             return true;
-        }else {
+        } else {
             LangMessage.sendMessage(player, "command.wrongSyntax");
             return false;
         }

@@ -18,7 +18,7 @@ public class Bug implements CommandExecutor {
 
         if (sender instanceof Player) {
             TextComponent processMessage = Component.text()
-                    .content(Message.getPlayerPrefixe()+"§6If you find a bug please contact us on Discord by creating a ticket. §e[CLICK THE MESSAGE]")
+                    .content(Message.PLAYER_PREFIX.getMsg()+"§6If you find a bug please contact us on Discord by creating a ticket. §e[CLICK THE MESSAGE]")
                     .clickEvent(ClickEvent.clickEvent(ClickEvent.Action.OPEN_URL,"https://discord.gg/9AQKPVB87r"))
                     .hoverEvent(HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,Component.text().content("Click here to access to the support channel").build()))
                     .build();

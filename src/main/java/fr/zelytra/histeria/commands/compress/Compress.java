@@ -3,6 +3,7 @@ package fr.zelytra.histeria.commands.compress;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -39,7 +40,7 @@ public class Compress implements CommandExecutor {
         inv.addItem(new ItemStack(Material.COBBLESTONE, cobble));
         inv.addItem(new CustomItemStack(CustomMaterial.COMPRESS_COBBLESTONE, compress).getItem());
 
-        LangMessage.sendMessage(player, "§a" + compress * 9, "command.compress", "");
+        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg() + "§a" + compress * 9, "command.compress", "");
         return true;
     }
 }

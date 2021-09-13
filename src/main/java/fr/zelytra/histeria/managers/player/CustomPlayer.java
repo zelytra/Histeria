@@ -98,7 +98,7 @@ public class CustomPlayer {
                 this.bank.setMoney(resultSet.getInt("money"));
             } else {
                 Histeria.log("§cFailed to load bank account of " + this.name, LogType.ERROR);
-                Objects.requireNonNull(getPlayer()).sendMessage(Message.getPlayerPrefixe() + "§cFailed to load bank account please try to reconnect to the server or contact an admin if the problem persist.");
+                Objects.requireNonNull(getPlayer()).sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to load bank account please try to reconnect to the server or contact an admin if the problem persist.");
             }
 
             resultSet = mySQL.query("SELECT * FROM `Player` WHERE `id` =" + this.id + "; ");

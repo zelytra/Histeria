@@ -21,7 +21,7 @@ public class Hat implements CommandExecutor {
             ItemStack onHead = player.getInventory().getHelmet();
 
             if (inHand.getType() == Material.AIR) {
-                player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't hold any item to put on your head.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't hold any item to put on your head.");
                 return false;
             }
 
@@ -33,7 +33,7 @@ public class Hat implements CommandExecutor {
                 player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
             }
 
-            player.sendMessage(Message.getPlayerPrefixe() + "§aItem has been correctly set on your head !");
+            player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aItem has been correctly set on your head !");
             return true;
 
         }

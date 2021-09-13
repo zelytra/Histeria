@@ -17,15 +17,15 @@ public class Speed implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0 || !Utils.isNumeric(args[0])) {
-                player.sendMessage(Message.getPlayerPrefixe() + "§cWrong argument please enter a number.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong argument please enter a number.");
                 return false;
             } else if (Float.parseFloat(args[0]) > 0 && Float.parseFloat(args[0]) <= 10) {
                 speed = (Float.parseFloat(args[0])) / 10;
                 player.setFlySpeed(speed);
-                player.sendMessage(Message.getPlayerPrefixe() + "§6Fly speed set to §a" + Float.valueOf(args[0]) + "§6 !");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6Fly speed set to §a" + Float.valueOf(args[0]) + "§6 !");
                 return true;
             } else {
-                player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a number between 1 and 10.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease enter a number between 1 and 10.");
                 return false;
             }
 

@@ -18,7 +18,7 @@ public class GameMode implements CommandExecutor {
             boolean isOtherPlayer = false;
             if (args.length == 1) {
                 if (Bukkit.getPlayer(args[0]) == null) {
-                    sender.sendMessage(Message.getPlayerPrefixe() + "§cThis player is not connected to the server.");
+                    sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected to the server.");
                     return false;
                 }
                 target = Bukkit.getPlayer(args[0]);
@@ -30,21 +30,21 @@ public class GameMode implements CommandExecutor {
             switch (command.getName()) {
                 case "gmc":
                     target.setGameMode(org.bukkit.GameMode.CREATIVE);
-                    target.sendMessage(Message.getPlayerPrefixe() + "§aYour gamemode has been set to CREATIVE.");
+                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to CREATIVE.");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.getPlayerPrefixe() + "§a" + target.getName() + " gamemode set to CREATIVE.");
+                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to CREATIVE.");
                     break;
                 case "gms":
                     target.setGameMode(org.bukkit.GameMode.SURVIVAL);
-                    target.sendMessage(Message.getPlayerPrefixe() + "§aYour gamemode has been set to SURVIVAL.");
+                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to SURVIVAL.");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.getPlayerPrefixe() + "§a" + target.getName() + " gamemode set to SURVIVAL.");
+                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to SURVIVAL.");
                     break;
                 case "gmsc":
                     target.setGameMode(org.bukkit.GameMode.SPECTATOR);
-                    target.sendMessage(Message.getPlayerPrefixe() + "§aYour gamemode has been set to SPECTATOR.");
+                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to SPECTATOR.");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.getPlayerPrefixe() + "§a" + target.getName() + " gamemode set to SPECTATOR.");
+                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to SPECTATOR.");
                     break;
                 default:
                     return false;

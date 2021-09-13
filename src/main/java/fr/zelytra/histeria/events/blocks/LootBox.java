@@ -29,25 +29,25 @@ public class LootBox implements Listener {
                 Player player = e.getPlayer();
                 ItemStack item;
                 if (Utils.getEmptySlots(player) < 2) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have enough place in your inventory to claim the reward.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough place in your inventory to claim the reward.");
                     return;
                 }
                 switch (material) {
                     case VOTE_KEY:
                         item = drawKey(Histeria.lootTableManager.getVoteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.getPlayerPrefixe() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §lVOTE KEY");
+                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §lVOTE KEY");
                         break;
                     case DIAMOND_KEY:
                         item = drawKey(Histeria.lootTableManager.getDiamondKey().getLoots());
-                        Bukkit.broadcastMessage(Message.getPlayerPrefixe() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §b§lDIAMOND KEY");
+                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §b§lDIAMOND KEY");
                         break;
                     case HISTERITE_KEY:
                         item = drawKey(Histeria.lootTableManager.getHisteriteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.getPlayerPrefixe() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §c§lHISTERITE KEY");
+                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §c§lHISTERITE KEY");
                         break;
                     case NOCTURITE_KEY:
                         item = drawKey(Histeria.lootTableManager.getNocturiteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.getPlayerPrefixe() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §5§lNOCTURITE KEY");
+                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §5§lNOCTURITE KEY");
                         break;
                     default:
                         return;

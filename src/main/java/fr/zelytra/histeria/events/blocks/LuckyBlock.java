@@ -49,7 +49,7 @@ public class LuckyBlock implements Listener {
     public void placeLucky(BlockPlaceEvent e){
         if(e.getBlock().getType()==CustomMaterial.LUCKY_BLOCK.getVanillaMaterial()){
             if(e.getBlock().getLocation().getY()<=15){
-                e.getPlayer().sendMessage(Message.getPlayerPrefixe()+"§cYou cannot place LuckyBlock under layer 15");
+                e.getPlayer().sendMessage(Message.PLAYER_PREFIX.getMsg()+"§cYou cannot place LuckyBlock under layer 15");
                 e.setCancelled(true);
             }
         }

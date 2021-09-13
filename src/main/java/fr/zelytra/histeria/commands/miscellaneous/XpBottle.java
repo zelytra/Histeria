@@ -31,7 +31,7 @@ public class XpBottle implements CommandExecutor {
                 int xp = player.getLevel();
 
                 if (xp <= 10) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have enough experience to convert it (10lvl required)");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough experience to convert it (10lvl required)");
                     return false;
                 }
 
@@ -43,7 +43,7 @@ public class XpBottle implements CommandExecutor {
 
                     return true;
                 }else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have enough spaces in your inventory");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough spaces in your inventory");
                     return false;
                 }
             }

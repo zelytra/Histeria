@@ -82,7 +82,7 @@ public class NocturiteGenerator implements Listener {
             NamespacedKey blockKey = keyBuilder(e.getClickedBlock().getLocation());
             long time = e.getClickedBlock().getChunk().getPersistentDataContainer().get(blockKey, PersistentDataType.LONG);
             if (noctInventorywatcher.containsKey(blockKey)) {
-                player.sendMessage(Message.getPlayerPrefixe() + "§cYou cannot access this block at the same time as another player.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot access this block at the same time as another player.");
                 return;
             }
             noctInventorywatcher.put(blockKey, player);

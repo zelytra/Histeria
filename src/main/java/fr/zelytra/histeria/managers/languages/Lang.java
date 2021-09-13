@@ -27,9 +27,11 @@ public enum Lang {
     }
 
     public String get(String tag) {
-        if (text.containsKey(tag)) {
+        if (tag.isEmpty() || tag == "")
+            return "";
+        else if (text.containsKey(tag))
             return text.get(tag);
-        } else
+        else
             return "§c404 text not found";
     }
 }

@@ -10,20 +10,20 @@ public abstract class LangMessage {
     public static void sendMessage(Player player, String messageTag) {
         CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
         assert customPlayer != null;
-        player.sendMessage(Message.getPlayerPrefixe() + customPlayer.getLang().get(messageTag));
+        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + customPlayer.getLang().get(messageTag));
     }
 
     public static void sendMessage(Player player, String prefix, String messageTag, String suffix) {
         CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
         assert customPlayer != null;
-        player.sendMessage(Message.getPlayerPrefixe() + prefix + customPlayer.getLang().get(messageTag) + suffix);
+        player.sendMessage(prefix + customPlayer.getLang().get(messageTag) + suffix);
     }
 
     public static void broadcast(String messageTag) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             assert customPlayer != null;
-            player.sendMessage(Message.getPlayerPrefixe() + customPlayer.getLang().get(messageTag));
+            player.sendMessage(Message.PLAYER_PREFIX.getMsg() + customPlayer.getLang().get(messageTag));
         }
     }
 
@@ -31,7 +31,7 @@ public abstract class LangMessage {
         for (Player player : Bukkit.getOnlinePlayers()) {
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             assert customPlayer != null;
-            player.sendMessage(Message.getPlayerPrefixe() + prefix + customPlayer.getLang().get(messageTag) + suffix);
+            player.sendMessage(prefix + customPlayer.getLang().get(messageTag) + suffix);
         }
     }
 

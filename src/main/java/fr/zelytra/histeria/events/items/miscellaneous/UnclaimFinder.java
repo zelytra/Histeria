@@ -58,7 +58,7 @@ public class UnclaimFinder implements Listener {
                     }
 
                 }
-                player.sendMessage(Message.getPlayerPrefixe() + "§eThere is " + count + " containers around you.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§eThere is " + count + " containers around you.");
                 for (Player pl : Bukkit.getOnlinePlayers()) {
                     pl.playSound(e.getPlayer().getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
                 }

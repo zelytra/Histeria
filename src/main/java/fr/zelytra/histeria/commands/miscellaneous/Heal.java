@@ -30,7 +30,7 @@ public class Heal implements CommandExecutor {
                     new Cooldown(player, 300, "healCommand");
 
                 player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
-                player.sendMessage(Message.getPlayerPrefixe() + "§aYou have been healed.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been healed.");
                 return true;
             } else {
                 if (Bukkit.getPlayer(args[0]) != null && Utils.canByPass(player)) {
@@ -38,14 +38,14 @@ public class Heal implements CommandExecutor {
                     assert target != null;
                     target.setHealth(Objects.requireNonNull(target.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
 
-                    player.sendMessage(Message.getPlayerPrefixe() + "§aYou heal " + target.getName() + ".");
-                    target.sendMessage(Message.getPlayerPrefixe() + "§aYou have been healed.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou heal " + target.getName() + ".");
+                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been healed.");
                     return true;
                 } else if (!Utils.canByPass(player)) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou cannot heal another player.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot heal another player.");
                     return false;
                 } else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have permission to perform this command.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have permission to perform this command.");
                     return false;
                 }
             }

@@ -36,11 +36,11 @@ public class HGuardCreator implements CommandExecutor {
                             , new BoundingBox(selection.getMinimumPoint().getBlockX(), selection.getMinimumPoint().getBlockY(), selection.getMinimumPoint().getBlockZ(), selection.getMaximumPoint().getBlockX(), selection.getMaximumPoint().getBlockY(), selection.getMaximumPoint().getBlockZ())
                             , Shape.CUBE
                             , player.getWorld());
-                    player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[1] + " has been created");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[1] + " has been created");
                     return true;
 
                 } else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cPlease make a selection");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease make a selection");
                     return false;
                 }
 
@@ -51,7 +51,7 @@ public class HGuardCreator implements CommandExecutor {
                         , Shape.CYLINDER
                         , player.getWorld()
                         , Integer.parseInt(args[3]));
-                player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[1] + " has been created");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[1] + " has been created");
                 return true;
 
             } else {
@@ -67,7 +67,7 @@ public class HGuardCreator implements CommandExecutor {
             if (HGuard.getByName(args[1]) != null) {
                 hGuard = HGuard.getByName(args[1]);
             } else {
-                player.sendMessage(Message.getPlayerPrefixe() + "§cThis area doesn't exist");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis area doesn't exist");
                 return false;
             }
 
@@ -77,14 +77,14 @@ public class HGuardCreator implements CommandExecutor {
 
                     if (args[3].equalsIgnoreCase("true")) {
                         hGuard.setPvp(true);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aPVP parameter set to TRUE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPVP parameter set to TRUE");
                         return true;
                     } else if (args[3].equalsIgnoreCase("false")) {
                         hGuard.setPvp(false);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aPVP parameter set to §cFALSE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPVP parameter set to §cFALSE");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
 
@@ -92,14 +92,14 @@ public class HGuardCreator implements CommandExecutor {
                     if (Utils.isNumeric(args[3])) {
                         int value = Integer.parseInt(args[3]);
                         if (value < 0) {
-                            player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a positive value");
+                            player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease enter a positive value");
                             return false;
                         }
                         hGuard.setPriorityLevel(value);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aPriorityLevel parameter set to " + value);
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPriorityLevel parameter set to " + value);
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cPlease enter a number");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease enter a number");
                         return false;
                     }
 
@@ -107,74 +107,74 @@ public class HGuardCreator implements CommandExecutor {
                 } else if (args[2].equalsIgnoreCase("breakBlock")) {
                     if (args[3].equalsIgnoreCase("true")) {
                         hGuard.setBreakBlock(true);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aBreakBlock parameter set to TRUE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aBreakBlock parameter set to TRUE");
                         return true;
                     } else if (args[3].equalsIgnoreCase("false")) {
                         hGuard.setBreakBlock(false);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aBreakBlock parameter set to §cFALSE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aBreakBlock parameter set to §cFALSE");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
 
                 } else if (args[2].equalsIgnoreCase("placeBlock")) {
                     if (args[3].equalsIgnoreCase("true")) {
                         hGuard.setPlaceBlock(true);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aPlaceBlock parameter set to TRUE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPlaceBlock parameter set to TRUE");
                         return true;
                     } else if (args[3].equalsIgnoreCase("false")) {
                         hGuard.setPlaceBlock(false);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§aPlaceBlock parameter set to §cFALSE");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPlaceBlock parameter set to §cFALSE");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
 
                 } else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                     return false;
                 }
             } else if (args.length == 5) {
                 if (args[2].equalsIgnoreCase("group")) {
                     if (args[3].equalsIgnoreCase("add")) {
                         hGuard.addGroupe(args[4]);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group added to the  whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " group added to the  whitelist ");
                         return true;
                     } else if (args[2].equalsIgnoreCase("remove")) {
                         hGuard.removeGroupe(args[4]);
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " group removed from the  whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " group removed from the  whitelist ");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
                 } else if (args[2].equalsIgnoreCase("customItem")) {
                     if (args[3].equalsIgnoreCase("add")) {
                         hGuard.addCustomItem(CustomMaterial.getByName(args[4]));
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " custom item added to the whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " custom item added to the whitelist ");
                         return true;
                     } else if (args[3].equalsIgnoreCase("remove")) {
                         hGuard.removeCustomItem(CustomMaterial.getByName(args[4]));
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " custom item removed from the  whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " custom item removed from the  whitelist ");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
 
                 } else if (args[2].equalsIgnoreCase("interact")) {
                     if (args[3].equalsIgnoreCase("add")) {
                         hGuard.addInteract(Material.getMaterial(args[4]));
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " material added to the whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " material added to the whitelist ");
                         return true;
                     } else if (args[3].equalsIgnoreCase("remove")) {
                         hGuard.removeInteract(Material.getMaterial(args[4]));
-                        player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[4] + " material removed from the  whitelist ");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " material removed from the  whitelist ");
                         return true;
                     } else {
-                        player.sendMessage(Message.getPlayerPrefixe() + "§cWrong parameter");
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cWrong parameter");
                         return false;
                     }
                 }
@@ -185,9 +185,9 @@ public class HGuardCreator implements CommandExecutor {
 
             if (HGuard.getByName(args[1]) != null) {
                 HGuard.getByName(args[1]).delete();
-                player.sendMessage(Message.getPlayerPrefixe() + "§a" + args[1] + " has been deleted");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[1] + " has been deleted");
             } else
-                player.sendMessage(Message.getPlayerPrefixe() + "§cThis area doesn't exist");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis area doesn't exist");
 
             return true;
         } else if (args.length == 2 && args[0].equalsIgnoreCase("info")) {

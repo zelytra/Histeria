@@ -27,7 +27,7 @@ public class Feed implements CommandExecutor {
 
                 player.setFoodLevel(20);
                 player.setSaturation(20f);
-                player.sendMessage(Message.getPlayerPrefixe() + "§aYou have been fed.");
+                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been fed.");
                 return true;
             } else {
                 if (Bukkit.getPlayer(args[0]) != null && Utils.canByPass(player)) {
@@ -35,14 +35,14 @@ public class Feed implements CommandExecutor {
                     assert target != null;
                     target.setFoodLevel(20);
                     target.setSaturation(20f);
-                    player.sendMessage(Message.getPlayerPrefixe() + "§aYou feed " + target.getName() + ".");
-                    target.sendMessage(Message.getPlayerPrefixe() + "§aYou have been fed.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou feed " + target.getName() + ".");
+                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been fed.");
                     return true;
                 } else if (!Utils.canByPass(player)) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou cannot feed another player.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot feed another player.");
                     return false;
                 } else {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cYou don't have permission to perform this command.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have permission to perform this command.");
                     return false;
                 }
             }

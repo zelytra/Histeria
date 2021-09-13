@@ -48,7 +48,7 @@ public class BubbleWand implements Listener {
                 }
 
                 if (nbr == 0) {
-                    player.sendMessage(Message.getPlayerPrefixe() + "§cNo liquid found around you.");
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cNo liquid found around you.");
                     return;
                 }
                 for (Player pl : Bukkit.getOnlinePlayers()) {

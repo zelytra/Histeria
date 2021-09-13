@@ -16,7 +16,7 @@ public class Ping implements CommandExecutor {
         if (sender instanceof Player) {
 
             CraftPlayer player = (CraftPlayer) sender;
-            player.sendMessage(Message.getPlayerPrefixe() + "§aPong ! §6[" + player.getHandle().ping + "ms]");
+            player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aPong ! §6[" + player.getHandle().ping + "ms]");
             return true;
 
         }
