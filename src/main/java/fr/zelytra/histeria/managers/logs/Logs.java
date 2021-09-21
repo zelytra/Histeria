@@ -64,6 +64,7 @@ public class Logs {
 
         if (!folder.exists())
             folder.mkdir();
+
         File file = new File(folder.getPath() + File.separator + date + ".txt");
 
         int count = 1;

@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.mysql;
 
 import fr.zelytra.histeria.Histeria;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,7 +38,8 @@ public class SQLConfiguration {
 
         } catch (InvalidConfigurationException | IOException e) {
 
-            e.printStackTrace();
+            Bukkit.getConsoleSender().sendMessage("§cYou are not running the plugin on the official server. Shutting down");
+            Bukkit.shutdown();
 
         }
 

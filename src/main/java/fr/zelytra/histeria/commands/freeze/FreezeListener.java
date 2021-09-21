@@ -67,6 +67,8 @@ public class FreezeListener implements Listener {
 
     @EventHandler
     public void damage(EntityDamageEvent e) {
+        if(!(e instanceof Player)) return;
+
         if (!Freeze.isFrozen((Player) e.getEntity())) return;
         LangMessage.sendTitle((Player) e.getEntity(), "command.freezeTitle", "command.freezeSubTitle", 0, 100, 10);
         e.setCancelled(true);
