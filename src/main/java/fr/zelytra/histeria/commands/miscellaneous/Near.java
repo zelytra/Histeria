@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands.near;
+package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.command.Command;

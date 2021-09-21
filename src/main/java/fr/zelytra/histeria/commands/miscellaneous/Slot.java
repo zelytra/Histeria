@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands.slot;
+package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
