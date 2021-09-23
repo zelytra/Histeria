@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands.compress;
+package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;

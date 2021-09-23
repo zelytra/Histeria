@@ -5,10 +5,11 @@ import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.broadcast.Broadcast;
 import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
-import fr.zelytra.histeria.commands.compress.Compress;
+import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
+import fr.zelytra.histeria.commands.miscellaneous.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
-import fr.zelytra.histeria.commands.emote.EmoteCommand;
+import fr.zelytra.histeria.commands.miscellaneous.EmoteCommand;
 import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
@@ -141,6 +142,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("compress").setExecutor(new Compress());
         getCommand("near").setExecutor(new Near());
         getCommand("slot").setExecutor(new Slot());
+        getCommand("inventorysee").setExecutor(new InventoryLooker());
 
 
     }

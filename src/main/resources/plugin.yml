@@ -149,3 +149,9 @@ commands:
     permission: histeria.broadcast
     aliases:
       - bc
+
+  inventorysee:
+    description: Look and modify the inventory of another player
+    permission: histeria.inventorysee
+    aliases:
+      - invsee

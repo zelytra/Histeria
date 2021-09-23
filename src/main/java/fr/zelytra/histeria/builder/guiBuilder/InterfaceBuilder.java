@@ -32,5 +32,7 @@ public class InterfaceBuilder {
         player.openInventory(this.inventory);
     }
 
-
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

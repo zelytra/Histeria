@@ -1,4 +1,4 @@
-package fr.zelytra.histeria.commands.emote;
+package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.managers.visual.chat.EmoteType;

@@ -2,6 +2,7 @@ package fr.zelytra.histeria.events;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.freeze.FreezeListener;
+import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.events.blocks.Elevator;
@@ -44,6 +45,7 @@ public class EventManager {
         pm.registerEvents(new PlayerJoinVisual(), pl);
         pm.registerEvents(new PlayerLeftVisual(), pl);
         pm.registerEvents(new FreezeListener(), pl);
+        pm.registerEvents(new InventoryListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
