@@ -37,7 +37,7 @@ public class HKick implements CommandExecutor {
 
         StringBuilder reason = new StringBuilder();
         for (int x = 1; x < args.length; x++) {
-            reason.append(args[x]);
+            reason.append(args[x]+" ");
         }
 
         target.kick(Component.text().content(Message.HISTBAN.getMsg()

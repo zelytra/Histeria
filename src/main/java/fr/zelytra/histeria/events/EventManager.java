@@ -24,6 +24,9 @@ import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.*;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
+import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
+import fr.zelytra.histeria.managers.logs.listener.OreLogger;
 import fr.zelytra.histeria.managers.visual.chat.ChatListener;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.user.UserDataRecalculateEvent;
@@ -97,6 +100,9 @@ public class EventManager {
         pm.registerEvents(new HGuardListener(), pl);
         pm.registerEvents(new PortalListener(), pl);
         pm.registerEvents(new ServerPingListener(), pl);
+        pm.registerEvents(new OreLogger(), pl);
+        pm.registerEvents(new ErrorLogger(), pl);
+        pm.registerEvents(new CommandLogger(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
