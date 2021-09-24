@@ -11,6 +11,7 @@ import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.broadcast.Broadcast;
 import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
+import fr.zelytra.histeria.commands.kickBan.HKick;
 import fr.zelytra.histeria.commands.miscellaneous.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
@@ -150,6 +151,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("near").setExecutor(new Near());
         getCommand("slot").setExecutor(new Slot());
         getCommand("inventorysee").setExecutor(new InventoryLooker());
+        getCommand("hkick").setExecutor(new HKick());
 
 
     }

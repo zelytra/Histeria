@@ -155,3 +155,7 @@ commands:
     permission: histeria.inventorysee
     aliases:
       - invsee
+
+  hkick:
+    description: Kick a player with a reason message
+    permission: histeria.hkick
