@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2021. Zelytra
+ * All right reserved
+ */
+
 package fr.zelytra.histeria;
 
 import fr.zelytra.histeria.commands.Test;
@@ -35,6 +40,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+
 
 public final class Histeria extends JavaPlugin {
 
