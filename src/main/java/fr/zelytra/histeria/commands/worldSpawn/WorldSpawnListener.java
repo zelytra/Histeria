@@ -19,7 +19,6 @@ public class WorldSpawnListener implements Listener {
 
     @EventHandler
     public void onRespawn (PlayerRespawnEvent e){
-        System.out.println("trigger");
         e.setRespawnLocation(WorldSpawn.worldSpawn.getSpawn());
     }
 }
