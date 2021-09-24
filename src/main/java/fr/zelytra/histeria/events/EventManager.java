@@ -5,6 +5,7 @@ import fr.zelytra.histeria.commands.freeze.FreezeListener;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
+import fr.zelytra.histeria.commands.worldSpawn.WorldSpawnListener;
 import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
@@ -46,6 +47,7 @@ public class EventManager {
         pm.registerEvents(new PlayerLeftVisual(), pl);
         pm.registerEvents(new FreezeListener(), pl);
         pm.registerEvents(new InventoryListener(), pl);
+        pm.registerEvents(new WorldSpawnListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

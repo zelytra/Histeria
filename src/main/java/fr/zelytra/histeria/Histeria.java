@@ -26,6 +26,7 @@ import fr.zelytra.histeria.commands.miscellaneous.Near;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.miscellaneous.Slot;
 import fr.zelytra.histeria.commands.wiki.Wiki;
+import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
@@ -152,6 +153,8 @@ public final class Histeria extends JavaPlugin {
         getCommand("slot").setExecutor(new Slot());
         getCommand("inventorysee").setExecutor(new InventoryLooker());
         getCommand("hkick").setExecutor(new HKick());
+        getCommand("setspawn").setExecutor(new WorldSpawn());
+        getCommand("spawn").setExecutor(new WorldSpawn());
 
 
     }

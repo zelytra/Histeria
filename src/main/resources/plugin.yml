@@ -159,3 +159,11 @@ commands:
   hkick:
     description: Kick a player with a reason message
     permission: histeria.hkick
+
+  spawn:
+    description: Teleport the layer to spawn of the server
+    permission: histeria.spawn
+
+  setspawn:
+    description: Set the world spawn of the server
+    permission: histeria.setspawn
