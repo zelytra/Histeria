@@ -69,7 +69,7 @@ public class CustomPlayer {
                 + getPlayer().getName() + "','"
                 + Objects.requireNonNull(getPlayer().getAddress()).toString().replace("/", "").split(":")[0] + "','"
                 + formatter.format(date) + "','"
-                + lang.name() + ");");
+                + lang.name() + "');");
 
     }
 
@@ -172,9 +172,9 @@ public class CustomPlayer {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
             MySQL mySQL = Histeria.mySQL;
-            mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "';");
+            mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "' WHERE `id` = " + this.id + " ;");
             timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
-            mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + ";");
+            mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + " WHERE `id` = " + this.id + ";");
 
         });
         this.bank.save();

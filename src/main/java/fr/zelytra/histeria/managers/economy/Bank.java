@@ -53,7 +53,7 @@ public class Bank {
     public void save() {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             MySQL mySQL = Histeria.mySQL;
-            mySQL.update("UPDATE `Bank` SET `money` = " + this.money + ";");
+            mySQL.update("UPDATE `Bank` SET `money` = " + this.money + " WHERE `id` = " + player.getID() + ";");
         });
     }
 }
