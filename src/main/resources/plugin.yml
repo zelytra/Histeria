@@ -167,3 +167,7 @@ commands:
   setspawn:
     description: Set the world spawn of the server
     permission: histeria.setspawn
+
+  mute:
+    description: Mute a player
+    permission: histeria.mute

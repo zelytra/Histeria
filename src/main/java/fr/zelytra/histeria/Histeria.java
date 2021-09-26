@@ -11,7 +11,7 @@ import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.broadcast.Broadcast;
 import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
-import fr.zelytra.histeria.commands.kickBan.HKick;
+import fr.zelytra.histeria.commands.staffModeration.HKick;
 import fr.zelytra.histeria.commands.miscellaneous.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
@@ -25,6 +25,7 @@ import fr.zelytra.histeria.commands.miscellaneous.*;
 import fr.zelytra.histeria.commands.miscellaneous.Near;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.miscellaneous.Slot;
+import fr.zelytra.histeria.commands.staffModeration.Mute.MuteCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -155,6 +156,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("hkick").setExecutor(new HKick());
         getCommand("setspawn").setExecutor(new WorldSpawn());
         getCommand("spawn").setExecutor(new WorldSpawn());
+        getCommand("mute").setExecutor(new MuteCommand());
 
 
     }

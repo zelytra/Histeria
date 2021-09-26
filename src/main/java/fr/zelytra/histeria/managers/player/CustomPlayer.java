@@ -1,6 +1,7 @@
 package fr.zelytra.histeria.managers.player;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.commands.staffModeration.Mute.Mute;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -8,6 +9,7 @@ import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.sql.ResultSet;
@@ -30,6 +32,8 @@ public class CustomPlayer {
     private String ip;
     private String primConnection;
     private Lang lang;
+    private Mute mute;
+    private final String uuid;
 
     private final Bank bank;
     private int id;
@@ -38,6 +42,7 @@ public class CustomPlayer {
     public CustomPlayer(Player player) {
         this.name = player.getName();
         this.bank = new Bank(this);
+        this.uuid = player.getUniqueId().toString();
 
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
@@ -114,6 +119,18 @@ public class CustomPlayer {
             }
 
             resultSet.close();
+
+            //Get mute
+            resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + getPlayer().getUniqueId() + "' ;");
+            if (resultSet.next()) {
+                this.mute = new Mute(resultSet.getLong("startTime"),
+                        resultSet.getLong("time"),
+                        resultSet.getString("reason"),
+                        resultSet.getString("staff"));
+            }
+            resultSet.close();
+
+
             //TODO Load home
 
         } catch (SQLException exception) {
@@ -142,6 +159,18 @@ public class CustomPlayer {
 
     public Bank getBankAccount() {
         return bank;
+    }
+
+    public boolean isMute() {
+        return this.mute != null && this.mute.isMute();
+    }
+
+    public void mute(int time, String reason, @NotNull Player staff) {
+        this.mute = new Mute(System.currentTimeMillis(), time, reason, staff.getName());
+    }
+
+    public Mute getMute() {
+        return mute;
     }
 
     @Nullable
@@ -175,6 +204,25 @@ public class CustomPlayer {
             mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "' WHERE `id` = " + this.id + " ;");
             timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
             mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + " WHERE `id` = " + this.id + ";");
+
+            //Mute save data
+            if (this.mute != null) {
+                try {
+                    ResultSet resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + this.uuid + "';");
+
+                    if (!resultSet.next()) {
+                        mySQL.update("UPDATE `Mute` SET `uuid` = '" + this.uuid +
+                                "' ,`name` = '" + this.name +
+                                "' ,`startTime` = " + this.mute.getStartTime() +
+                                " ,`time` = " + this.mute.getTime() +
+                                " ,`reason` = '" + this.mute.getReason() +
+                                "' ,`staff` = '" + this.mute.getStaffName() + "' ;");
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
 
         });
         this.bank.save();
