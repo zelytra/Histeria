@@ -25,7 +25,7 @@ public class ChatListener implements Listener {
 
         if (CustomPlayer.getCustomPlayer(e.getPlayer().getName()).isMute()) {
             Mute mute = CustomPlayer.getCustomPlayer(e.getPlayer().getName()).getMute();
-            LangMessage.sendMessage(e.getPlayer(), Message.HISTBAN + "§c", "command.playerMute", "§c " + mute.getReason());
+            LangMessage.sendMessage(e.getPlayer(), Message.HISTBAN.getMsg() + "§c", "command.playerMute", "§c " + mute.getReason());
             return;
         }
 

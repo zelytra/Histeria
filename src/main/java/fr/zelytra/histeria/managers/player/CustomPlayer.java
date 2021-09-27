@@ -207,16 +207,25 @@ public class CustomPlayer {
 
             //Mute save data
             if (this.mute != null) {
+
                 try {
                     ResultSet resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + this.uuid + "';");
 
                     if (!resultSet.next()) {
+                        mySQL.update("INSERT INTO `Mute` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
+                                + this.uuid + "','"
+                                + this.name + "',"
+                                + this.mute.getStartTime() + ","
+                                + this.mute.getTime() + ",'"
+                                + this.mute.getReason() + "','"
+                                + this.mute.getStaffName() + "');");
+                    } else if (isMute()) {
                         mySQL.update("UPDATE `Mute` SET `uuid` = '" + this.uuid +
                                 "' ,`name` = '" + this.name +
                                 "' ,`startTime` = " + this.mute.getStartTime() +
                                 " ,`time` = " + this.mute.getTime() +
                                 " ,`reason` = '" + this.mute.getReason() +
-                                "' ,`staff` = '" + this.mute.getStaffName() + "' ;");
+                                "' ,`staff` = '" + this.mute.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
                     }
 
                 } catch (SQLException e) {

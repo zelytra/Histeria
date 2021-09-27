@@ -20,7 +20,7 @@ public class Mute {
     }
 
     public boolean isMute() {
-        return (System.currentTimeMillis() - this.startTime) / 1000 >= time;
+        return ((System.currentTimeMillis() - this.startTime) / 1000) <= time;
     }
 
     public String getReason() {
