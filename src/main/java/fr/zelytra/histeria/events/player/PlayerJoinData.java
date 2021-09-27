@@ -10,8 +10,6 @@ public class PlayerJoinData implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent e) {
-
         new CustomPlayer(e.getPlayer());
-
     }
 }

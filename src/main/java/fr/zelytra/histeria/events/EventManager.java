@@ -3,6 +3,7 @@ package fr.zelytra.histeria.events;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.freeze.FreezeListener;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
+import fr.zelytra.histeria.commands.moderation.Ban.BanListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawnListener;
@@ -43,6 +44,7 @@ public class EventManager {
             pm.registerEvents(new PlayerLeftSync(), pl);
         }
         pm.registerEvents(new PlayerJoinData(), pl);
+        pm.registerEvents(new BanListener(), pl);
         pm.registerEvents(new PlayerLeftData(), pl);
         pm.registerEvents(new PlayerDeathListener(), pl);
         pm.registerEvents(new ChatListener(), pl);

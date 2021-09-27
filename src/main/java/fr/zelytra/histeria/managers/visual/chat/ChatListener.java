@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.managers.visual.chat;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.commands.staffModeration.Mute.Mute;
+import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.discord.DiscordLog;

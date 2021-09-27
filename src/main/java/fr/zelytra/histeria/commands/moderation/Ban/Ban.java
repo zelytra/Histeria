@@ -3,23 +3,23 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.staffModeration.Mute;
+package fr.zelytra.histeria.commands.moderation.Ban;
 
-public class Mute {
+public class Ban {
 
     private final long startTime;
     private final long time;
     private final String reason;
     private final String staffName;
 
-    public Mute(long startTime, long time, String reason, String staffName) {
+    public Ban(long startTime, long time, String reason, String staffName) {
         this.startTime = startTime;
         this.time = time;
         this.reason = reason;
         this.staffName = staffName;
     }
 
-    public boolean isMute() {
+    public boolean isBan() {
         return ((System.currentTimeMillis() - this.startTime) / 1000) <= time;
     }
 
