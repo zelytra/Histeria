@@ -7,7 +7,7 @@ depend:
 api-version: 1.16
 authors: [ Zelytra ]
 description: Histeria server core
-website: http://zelytra.fr
+website: https://zelytra.fr
 
 commands:
   test:
