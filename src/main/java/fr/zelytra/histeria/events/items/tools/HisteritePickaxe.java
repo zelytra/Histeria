@@ -4,7 +4,6 @@ import com.massivecraft.factions.*;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
-import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;

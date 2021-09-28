@@ -1,6 +1,5 @@
 package fr.zelytra.histeria.events.items.tools;
 
-import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;

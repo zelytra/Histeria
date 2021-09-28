@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.managers.hguard;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
+import fr.zelytra.histeria.events.items.itemHandler.CustomItemUseEvent;
 import net.luckperms.api.model.user.User;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -17,6 +17,8 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
 
 public class HGuardListener implements Listener {
+
+    //TODO Clean the code
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlaceBlock(BlockPlaceEvent e) {
@@ -150,7 +152,7 @@ public class HGuardListener implements Listener {
     }
 
     @EventHandler
-    public void onCustomItemUse(CustomItemEvent e) {
+    public void onCustomItemUse(CustomItemUseEvent e) {
         if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
             return;
         }
@@ -161,7 +163,7 @@ public class HGuardListener implements Listener {
                 return;
         }
 
-        if (hguard.getCustomItemWhiteList().contains(e.getCustomMaterial()))
+        if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
             return;
 
         e.setCancelled(true);
