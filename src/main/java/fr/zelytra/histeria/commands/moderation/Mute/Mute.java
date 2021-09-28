@@ -8,7 +8,7 @@ package fr.zelytra.histeria.commands.moderation.Mute;
 public class Mute {
 
     private final long startTime;
-    private final long time;
+    private long time;
     private final String reason;
     private final String staffName;
 
@@ -17,6 +17,10 @@ public class Mute {
         this.time = time;
         this.reason = reason;
         this.staffName = staffName;
+    }
+
+    public void unMute() {
+        this.time = 0;
     }
 
     public boolean isMute() {

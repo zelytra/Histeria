@@ -10,6 +10,9 @@ public class MySQL {
     private Statement statement;
     private Object synchroObject = new Object();
 
+    /**
+     * MySQL api
+     */
     public MySQL() {
 
         try {
@@ -30,11 +33,11 @@ public class MySQL {
 
     }
 
-    public void update(String query) {
+    public void update(String sql) {
 
         try {
             synchronized (synchroObject) {
-                statement.executeUpdate(query);
+                statement.executeUpdate(sql);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,11 +45,11 @@ public class MySQL {
 
     }
 
-    public ResultSet query(String query) {
+    public ResultSet query(String sql) {
 
         try {
             synchronized (synchroObject) {
-                return statement.executeQuery(query);
+                return statement.executeQuery(sql);
             }
         } catch (SQLException e) {
             e.printStackTrace();

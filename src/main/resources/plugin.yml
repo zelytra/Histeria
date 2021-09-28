@@ -175,3 +175,8 @@ commands:
   hban:
     description: Ban a player
     permission: histeria.ban
+
+  unban:
+    description: Unban a player
+    permission: histeria.ban
+

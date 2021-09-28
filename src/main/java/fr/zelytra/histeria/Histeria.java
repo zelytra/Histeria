@@ -12,6 +12,8 @@ import fr.zelytra.histeria.commands.broadcast.Broadcast;
 import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
 import fr.zelytra.histeria.commands.moderation.Ban.BanCommand;
+import fr.zelytra.histeria.commands.moderation.Ban.UnBanCommand;
+import fr.zelytra.histeria.commands.moderation.Ban.UnBanTab;
 import fr.zelytra.histeria.commands.moderation.HKick;
 import fr.zelytra.histeria.commands.miscellaneous.Compress;
 import fr.zelytra.histeria.commands.customItems.HGive;
@@ -158,7 +160,11 @@ public final class Histeria extends JavaPlugin {
         getCommand("setspawn").setExecutor(new WorldSpawn());
         getCommand("spawn").setExecutor(new WorldSpawn());
         getCommand("mute").setExecutor(new MuteCommand());
+
+        /* Ban */
         getCommand("hban").setExecutor(new BanCommand());
+        getCommand("unban").setExecutor(new UnBanCommand());
+        getCommand("unban").setTabCompleter(new UnBanTab());
 
 
     }

@@ -66,6 +66,8 @@ public class CustomPlayer {
 
     }
 
+
+
     private void initData() {
         synchronized (syncObject) {
             MySQL mySQL = Histeria.mySQL;
