@@ -2,16 +2,14 @@ package fr.zelytra.histeria.events.items.tools;
 
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
-import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,72 +20,68 @@ public class HisteriteHoe implements Listener {
     private final int range = 2;
 
     @EventHandler
-    public void onRightClick(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer()) && isDirtBlock(e.getClickedBlock().getType())) {
+    public void onRightClick(CustomItemUseEvent e) {
 
-            Player player = e.getPlayer();
-            CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
-            Bukkit.getPluginManager().callEvent(customItemEvent);
+        if (e.getMaterial() != customMaterial) return;
+        if (e.isCancelled()) return;
 
-            if(customItemEvent.isCancelled()){
-                return;
+        if (e.getEvent().getAction() != Action.RIGHT_CLICK_BLOCK) return;
+
+        Player player = e.getPlayer();
+
+
+        Location BLocation = e.getEvent().getClickedBlock().getLocation();
+        DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
+
+        if (player.isSneaking()) {
+            for (int x = -range; x <= range; x++) {
+                for (int z = -range; z <= range; z++) {
+                    BLocation.setX(e.getEvent().getClickedBlock().getX() + x);
+                    BLocation.setZ(e.getEvent().getClickedBlock().getZ() + z);
+                    if (isDirtBlock(BLocation.getBlock().getType())) {
+                        BLocation.getBlock().setType(Material.FARMLAND);
+                        durabilityHandler.iterate();
+                    }
+                }
+
             }
-
-            Location BLocation = e.getClickedBlock().getLocation();
-            DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
-
-            if (player.isSneaking()) {
-                for (int x = -range; x <= range; x++) {
-                    for (int z = -range; z <= range; z++) {
-                        BLocation.setX(e.getClickedBlock().getX() + x);
-                        BLocation.setZ(e.getClickedBlock().getZ() + z);
+        } else {
+            switch (getCardinalDirection(player)) {
+                case "North":
+                    for (int z = 0; z <= 10; z++) {
+                        BLocation.setZ(e.getEvent().getClickedBlock().getZ() + z);
                         if (isDirtBlock(BLocation.getBlock().getType())) {
                             BLocation.getBlock().setType(Material.FARMLAND);
-                            durabilityHandler.iterate();
+                        }
+                    }
+                    break;
+                case "South":
+                    for (int z = 0; z <= 10; z++) {
+                        BLocation.setZ(e.getEvent().getClickedBlock().getZ() - z);
+                        if (isDirtBlock(BLocation.getBlock().getType())) {
+                            BLocation.getBlock().setType(Material.FARMLAND);
+                        }
+                    }
+                    break;
+                case "East":
+                    for (int x = 0; x <= 10; x++) {
+                        BLocation.setX(e.getEvent().getClickedBlock().getX() - x);
+                        if (isDirtBlock(BLocation.getBlock().getType())) {
+                            BLocation.getBlock().setType(Material.FARMLAND);
+                        }
+                    }
+                    break;
+                case "West":
+                    for (int x = 0; x <= 10; x++) {
+                        BLocation.setX(e.getEvent().getClickedBlock().getX() + x);
+                        if (isDirtBlock(BLocation.getBlock().getType())) {
+                            BLocation.getBlock().setType(Material.FARMLAND);
                         }
                     }
 
-                }
-            } else {
-                switch (getCardinalDirection(player)) {
-                    case "North":
-                        for (int z = 0; z <= 10; z++) {
-                            BLocation.setZ(e.getClickedBlock().getZ() + z);
-                            if (isDirtBlock(BLocation.getBlock().getType())) {
-                                BLocation.getBlock().setType(Material.FARMLAND);
-                            }
-                        }
-                        break;
-                    case "South":
-                        for (int z = 0; z <= 10; z++) {
-                            BLocation.setZ(e.getClickedBlock().getZ() - z);
-                            if (isDirtBlock(BLocation.getBlock().getType())) {
-                                BLocation.getBlock().setType(Material.FARMLAND);
-                            }
-                        }
-                        break;
-                    case "East":
-                        for (int x = 0; x <= 10; x++) {
-                            BLocation.setX(e.getClickedBlock().getX() - x);
-                            if (isDirtBlock(BLocation.getBlock().getType())) {
-                                BLocation.getBlock().setType(Material.FARMLAND);
-                            }
-                        }
-                        break;
-                    case "West":
-                        for (int x = 0; x <= 10; x++) {
-                            BLocation.setX(e.getClickedBlock().getX() + x);
-                            if (isDirtBlock(BLocation.getBlock().getType())) {
-                                BLocation.getBlock().setType(Material.FARMLAND);
-                            }
-                        }
-
-                        break;
-                }
-                durabilityHandler.iterate();
+                    break;
             }
-
-
+            durabilityHandler.iterate();
         }
     }
 

@@ -1,13 +1,12 @@
 package fr.zelytra.histeria.events.items.projectile;
 
-import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemLaunchEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class Dynamite implements Listener {
@@ -15,18 +14,13 @@ public class Dynamite implements Listener {
     private final double range = 3.8;
 
     @EventHandler
-    public void launch(ProjectileLaunchEvent e) {
-        if (e.getEntity().getShooter() instanceof Player) {
-            if (CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), (Player) e.getEntity().getShooter()) || CustomItemStack.hasCustomItemInOffHand(customMaterial.getName(), (Player) e.getEntity().getShooter())) {
-                CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial, (Player) e.getEntity().getShooter());
-                Bukkit.getPluginManager().callEvent(customItemEvent);
+    public void launch(CustomItemLaunchEvent e) {
 
-                if(customItemEvent.isCancelled()){
-                    e.setCancelled(true);
-                }
-                e.getEntity().setCustomName(customMaterial.getName());
-            }
-        }
+        if(e.isCancelled()) return;
+
+        if (e.getMaterial() == customMaterial)
+            e.getEvent().getEntity().setCustomName(customMaterial.getName());
+
     }
 
     @EventHandler
@@ -40,15 +34,13 @@ public class Dynamite implements Listener {
             for (Player pl : Bukkit.getOnlinePlayers()) {
                 pl.playSound(e.getHitEntity().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 2, 1);
             }
-        }else{
+        } else {
             explode(e.getHitBlock().getLocation());
             e.getHitBlock().getWorld().spawnParticle(Particle.EXPLOSION_LARGE, e.getHitBlock().getLocation(), 10);
             for (Player pl : Bukkit.getOnlinePlayers()) {
                 pl.playSound(e.getHitBlock().getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 2, 1);
             }
         }
-
-
 
 
     }
@@ -71,6 +63,7 @@ public class Dynamite implements Listener {
             }
         }
     }
+
     private static boolean canExplode(Location BLocation) {
         if (BLocation.getBlock().getType() == Material.WATER || BLocation.getBlock().getType() == Material.LAVA
                 || BLocation.getBlock().getType() == Material.LODESTONE

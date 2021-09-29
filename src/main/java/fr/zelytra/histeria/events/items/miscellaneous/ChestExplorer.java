@@ -1,6 +1,6 @@
 package fr.zelytra.histeria.events.items.miscellaneous;
 
-import fr.zelytra.histeria.events.items.itemHandler.CustomItemUseEvent;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;
@@ -18,7 +18,10 @@ public class ChestExplorer implements Listener {
 
     @EventHandler
     public void onInteract(CustomItemUseEvent e) {
+
         if (e.getMaterial() != customMaterial) return;
+        if(e.isCancelled()) return;
+
         Player player = e.getPlayer();
 
         if (e.getEvent().getClickedBlock().getType() == Material.CHEST || e.getEvent().getClickedBlock().getType() == Material.TRAPPED_CHEST) {

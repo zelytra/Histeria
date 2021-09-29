@@ -2,16 +2,14 @@ package fr.zelytra.histeria.events.items.tools;
 
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
-import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,34 +20,29 @@ public class HisteriteShovel implements Listener {
     private final int range = 2;
 
     @EventHandler
-    public void breakBlock(BlockBreakEvent e) {
-        if (CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) {
+    public void breakBlock(CustomItemBreakBlockEvent e) {
 
-            Player player = e.getPlayer();
+        if (e.getMaterial() != customMaterial) return;
+        if (e.isCancelled()) return;
 
-            CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
-            Bukkit.getPluginManager().callEvent(customItemEvent);
+        Player player = e.getPlayer();
 
-            if(customItemEvent.isCancelled()){
-                return;
-            }
+        DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
 
-            DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
-
-            Location BLocation = e.getBlock().getLocation();
-            for (int x = -range; x <= range; x++) {
-                for (int z = -range; z <= range; z++) {
-                    BLocation.setX(e.getBlock().getX() + x);
-                    BLocation.setZ(e.getBlock().getZ() + z);
-                    if (isDirtBlock(BLocation.getBlock().getType())) {
-                        BLocation.getBlock().breakNaturally();
-                        durabilityHandler.iterate();
-                        player.playSound(player.getLocation(), Sound.BLOCK_GRAVEL_BREAK, 5, 1);
-                    }
+        Location BLocation = e.getEvent().getBlock().getLocation();
+        for (int x = -range; x <= range; x++) {
+            for (int z = -range; z <= range; z++) {
+                BLocation.setX(e.getEvent().getBlock().getX() + x);
+                BLocation.setZ(e.getEvent().getBlock().getZ() + z);
+                if (isDirtBlock(BLocation.getBlock().getType())) {
+                    BLocation.getBlock().breakNaturally();
+                    durabilityHandler.iterate();
+                    player.playSound(player.getLocation(), Sound.BLOCK_GRAVEL_BREAK, 5, 1);
                 }
             }
         }
     }
+
 
     private boolean isDirtBlock(Material block) {
         for (Material material : dirt) {

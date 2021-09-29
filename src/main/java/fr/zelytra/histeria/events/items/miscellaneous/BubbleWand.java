@@ -1,6 +1,6 @@
 package fr.zelytra.histeria.events.items.miscellaneous;
 
-import fr.zelytra.histeria.events.items.itemHandler.CustomItemUseEvent;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;
@@ -17,6 +17,7 @@ public class BubbleWand implements Listener {
     public void onInteract(CustomItemUseEvent e) {
 
         if (e.getMaterial() != customMaterial) return;
+        if(e.isCancelled()) return;
 
         Player player = e.getPlayer();
 

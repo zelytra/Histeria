@@ -1,23 +1,32 @@
-package fr.zelytra.histeria.events.items.itemHandler;
+/*
+ * Copyright (c) 2021.
+ * Made by Zelytra :
+ *  - Website : https://zelytra.fr
+ *  - GitHub : http://github.zelytra.fr
+ *
+ * All right reserved
+ */
+
+package fr.zelytra.histeria.events.items.itemHandler.events;
 
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomItemUseEvent extends Event implements Cancellable {
+public class CustomItemBreakBlockEvent extends Event implements Cancellable {
 
     private static final HandlerList HANDLERS_LIST = new HandlerList();
     private boolean isCancelled;
     private CustomMaterial material;
     private final Player player;
     private final ItemStack item;
-    private final PlayerInteractEvent event;
+    private final BlockBreakEvent event;
 
-    public CustomItemUseEvent(Player player, CustomMaterial material, ItemStack item, PlayerInteractEvent event) {
+    public CustomItemBreakBlockEvent(Player player, CustomMaterial material, ItemStack item, BlockBreakEvent event) {
 
         this.material = material;
         this.player = player;
@@ -57,7 +66,7 @@ public class CustomItemUseEvent extends Event implements Cancellable {
         return item;
     }
 
-    public PlayerInteractEvent getEvent() {
+    public BlockBreakEvent getEvent() {
         return event;
     }
 }

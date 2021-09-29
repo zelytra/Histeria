@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.events.items.miscellaneous;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.events.items.itemHandler.CustomItemUseEvent;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
@@ -21,6 +21,7 @@ public class CompressCobblestone implements Listener {
     public void onInteract(CustomItemUseEvent e) {
 
         if (e.getMaterial() != customMaterial) return;
+        if(e.isCancelled()) return;
 
         if (e.getEvent().getAction() == Action.RIGHT_CLICK_BLOCK) {
             Player player = e.getPlayer();

@@ -18,7 +18,7 @@ import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.items.armors.NocturiteBoots;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorListener;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorsHandler;
-import fr.zelytra.histeria.events.items.itemHandler.CustomItemUseHandler;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemHandler;
 import fr.zelytra.histeria.events.items.miscellaneous.*;
 import fr.zelytra.histeria.events.items.projectile.Dynamite;
 import fr.zelytra.histeria.events.items.projectile.Shuriken;
@@ -61,13 +61,13 @@ public class EventManager {
         pm.registerEvents(new Wiki(), pl);
 
         /* Items */
-        pm.registerEvents(new CustomItemUseHandler(), pl);
+        pm.registerEvents(new CustomItemHandler(), pl);
         pm.registerEvents(new HealStick(), pl);
         pm.registerEvents(new JumpStick(), pl);
         pm.registerEvents(new SpeedStick(), pl);
         pm.registerEvents(new BubbleWand(), pl);
         pm.registerEvents(new ObsidianBreaker(), pl);
-        pm.registerEvents(new AlpinHook(), pl);
+        pm.registerEvents(new AlpineHook(), pl);
         pm.registerEvents(new UnclaimFinder(), pl);
         pm.registerEvents(new ChestExplorer(), pl);
         pm.registerEvents(new Dynamite(), pl);

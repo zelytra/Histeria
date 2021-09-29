@@ -2,16 +2,14 @@ package fr.zelytra.histeria.events.items.tools;
 
 import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
-import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,25 +20,23 @@ public class HisteriteAxe implements Listener {
 
 
     @EventHandler
-    public void breakBlock(BlockBreakEvent e) {
-        if (CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) {
-            Player player = e.getPlayer();
-            CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
-            Bukkit.getPluginManager().callEvent(customItemEvent);
+    public void breakBlock(CustomItemBreakBlockEvent e) {
 
-            if(customItemEvent.isCancelled()){
-                return;
-            }
+        if (e.getMaterial() != customMaterial) return;
+        if (e.isCancelled()) return;
 
-            Location BLocation = e.getBlock().getLocation();
-            DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
-            while (isLogBlock(BLocation.getBlock().getType())) {
-                BLocation.getBlock().breakNaturally();
-                BLocation.setY(BLocation.getY() + 1);
-                durabilityHandler.iterate();
-                player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);
-            }
+        Player player = e.getPlayer();
+
+
+        Location BLocation = e.getEvent().getBlock().getLocation();
+        DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
+        while (isLogBlock(BLocation.getBlock().getType())) {
+            BLocation.getBlock().breakNaturally();
+            BLocation.setY(BLocation.getY() + 1);
+            durabilityHandler.iterate();
+            player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);
         }
+
     }
 
     private boolean isLogBlock(Material block) {
