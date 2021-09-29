@@ -10,7 +10,8 @@
 package fr.zelytra.histeria.managers.hguard;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemLaunchEvent;
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import net.luckperms.api.model.user.User;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -26,6 +27,8 @@ import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
 
 public class HGuardListener implements Listener {
+
+    //TODO Clean the code
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlaceBlock(BlockPlaceEvent e) {
@@ -158,11 +161,12 @@ public class HGuardListener implements Listener {
         e.setCancelled(true);
     }
 
-    @EventHandler
-    public void onCustomItemUse(CustomItemEvent e) {
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onCustomItemUse(CustomItemUseEvent e) {
         if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
             return;
         }
+
         HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
         if (Histeria.getLuckPerms() != null) {
             User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
@@ -170,10 +174,25 @@ public class HGuardListener implements Listener {
                 return;
         }
 
-        if (hguard.getCustomItemWhiteList().contains(e.getCustomMaterial()))
+        if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
             return;
 
         e.setCancelled(true);
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onProjectileLaunch(CustomItemLaunchEvent e) {
+        if (HGuard.getByLocation(e.getEvent().getLocation()) == null) {
+            return;
+        }
+        HGuard hguard = HGuard.getByLocation(e.getEvent().getLocation());
+
+        if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
+            return;
+
+        if (!hguard.isPvp())
+            e.setCancelled(true);
+
     }
 
     @EventHandler
@@ -213,6 +232,7 @@ public class HGuardListener implements Listener {
             return;
         }
         HGuard hguard = HGuard.getByLocation(e.getLocation());
+
         if (!hguard.isPvp())
             e.setCancelled(true);
 

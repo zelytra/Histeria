@@ -88,6 +88,7 @@ public class Ban {
                             " ,`reason` = '" + this.getReason() +
                             "' ,`staff` = '" + this.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
                 resultSet.close();
+                //test
             } catch (SQLException e) {
                 e.printStackTrace();
             }

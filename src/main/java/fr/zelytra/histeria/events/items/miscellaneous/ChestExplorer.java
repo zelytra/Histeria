@@ -9,9 +9,8 @@
 
 package fr.zelytra.histeria.events.items.miscellaneous;
 
+import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
-import fr.zelytra.histeria.managers.event.customItem.CustomItemEvent;
-import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,39 +20,36 @@ import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 
 public class ChestExplorer implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.CHEST_EXPLORER;
 
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent e) {
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if ((e.getHand() == EquipmentSlot.HAND && CustomItemStack.hasCustomItemInMainHand(customMaterial.getName(), e.getPlayer())) || (e.getHand() == EquipmentSlot.OFF_HAND && CustomItemStack.hasCustomItemInOffHand(customMaterial.getName(), e.getPlayer()))) {
-                Player player = e.getPlayer();
-                CustomItemEvent customItemEvent = new CustomItemEvent(customMaterial,e.getPlayer());
-                Bukkit.getPluginManager().callEvent(customItemEvent);
+    public void onInteract(CustomItemUseEvent e) {
 
-                if(customItemEvent.isCancelled()){
-                    return;
-                }
-                if (e.getClickedBlock().getType() == Material.CHEST || e.getClickedBlock().getType() == Material.TRAPPED_CHEST) {
-                    Chest chest = (Chest) e.getClickedBlock().getState();
-                    player.openInventory(chest.getInventory());
-                }
-                else if(e.getClickedBlock().getType() == Material.BARREL) {
-                    Barrel barrel = (Barrel) e.getClickedBlock().getState();
-                    player.openInventory(barrel.getInventory());
-                }
-                for (Player pl : Bukkit.getOnlinePlayers()) {
-                    pl.playSound(e.getPlayer().getLocation(), Sound.ITEM_SHIELD_BREAK, 1, 1);
-                }
+        if (e.getMaterial() != customMaterial) return;
+        if(e.isCancelled()) return;
 
-                ItemFunction.removeHeldItem(player, customMaterial);
-            }
+        Player player = e.getPlayer();
+
+        if (e.getEvent().getClickedBlock().getType() == Material.CHEST || e.getEvent().getClickedBlock().getType() == Material.TRAPPED_CHEST) {
+
+            Chest chest = (Chest) e.getEvent().getClickedBlock().getState();
+            player.openInventory(chest.getInventory());
+
+        } else if (e.getEvent().getClickedBlock().getType() == Material.BARREL) {
+
+            Barrel barrel = (Barrel) e.getEvent().getClickedBlock().getState();
+            player.openInventory(barrel.getInventory());
+
         }
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            pl.playSound(e.getPlayer().getLocation(), Sound.ITEM_SHIELD_BREAK, 1, 1);
+        }
+
+        ItemFunction.removeHeldItem(player, customMaterial);
     }
+
+
 }
