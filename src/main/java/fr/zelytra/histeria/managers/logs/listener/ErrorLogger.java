@@ -1,5 +1,9 @@
 /*
- * Copyright (c) 2021-2021. Zelytra
+ * Copyright (c) 2021-2021.
+ * Made by Zelytra :
+ *  - Website : https://zelytra.fr
+ *  - GitHub : http://github.zelytra.fr
+ *
  * All right reserved
  */
 
