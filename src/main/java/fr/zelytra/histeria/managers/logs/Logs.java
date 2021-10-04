@@ -51,11 +51,9 @@ public class Logs {
         synchronized (syncObject) {
             if (!Bukkit.isStopping()) {
                 Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-                    System.out.println("not stoping");
                     rightTask();
                 });
             } else {
-                System.out.println("stoping");
                 rightTask();
             }
         }
