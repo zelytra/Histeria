@@ -11,7 +11,7 @@ package fr.zelytra.histeria.utils;
 
 public abstract class TimeString {
 
-    public static int getTime(String arg) {
+    public static int getTime(String arg) throws Exception {
 
         int val = Integer.parseInt(arg.substring(0, arg.length() - 1));
 
@@ -36,6 +36,6 @@ public abstract class TimeString {
                 return val * 3600 * 24;
 
         }
-        return 0;
+        throw new Exception("Invalid Arg: " + arg);
     }
 }

@@ -36,7 +36,14 @@ public class BanCommand implements CommandExecutor {
         }
 
         Player target = Bukkit.getPlayer(args[0]);
-        int time = TimeString.getTime(args[1]);
+
+        int time = 0;
+        try {
+            time = TimeString.getTime(args[1]);
+        } catch (Exception e) {
+            LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
+            return false;
+        }
 
         StringBuilder reason = new StringBuilder();
 
