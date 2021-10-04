@@ -49,26 +49,38 @@ public class Logs {
 
     private void right() {
         synchronized (syncObject) {
-            Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-                FileWriter fileWriter = null;
-                try {
-                    fileWriter = new FileWriter(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                for (String log : logs)
-                    printWriter.println(log);
-
-                printWriter.close();
-            });
+            if (!Bukkit.isStopping()) {
+                Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
+                    System.out.println("not stoping");
+                    rightTask();
+                });
+            } else {
+                System.out.println("stoping");
+                rightTask();
+            }
         }
+    }
+
+    private void rightTask() {
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+        for (String log : logs)
+            printWriter.println(log);
+
+        printWriter.close();
     }
 
     private void initLogsFile(String date) {
 
         String currentDir = Histeria.getInstance().getDataFolder().getPath();
+        Histeria.getInstance().getDataFolder().mkdir();
+
         File folder = new File(currentDir + File.separator + "logs");
 
         if (!folder.exists())
