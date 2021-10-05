@@ -14,25 +14,21 @@ import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.broadcast.Broadcast;
 import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
+import fr.zelytra.histeria.commands.customItems.HGive;
+import fr.zelytra.histeria.commands.customItems.HGiveTab;
+import fr.zelytra.histeria.commands.freeze.Freeze;
+import fr.zelytra.histeria.commands.hguard.HGuardCreator;
+import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
+import fr.zelytra.histeria.commands.lang.LangCommand;
+import fr.zelytra.histeria.commands.lang.LangTabCommand;
+import fr.zelytra.histeria.commands.miscellaneous.*;
 import fr.zelytra.histeria.commands.moderation.Ban.BanCommand;
 import fr.zelytra.histeria.commands.moderation.Ban.UnBanCommand;
 import fr.zelytra.histeria.commands.moderation.Ban.UnBanTab;
 import fr.zelytra.histeria.commands.moderation.HKick;
-import fr.zelytra.histeria.commands.miscellaneous.Compress;
-import fr.zelytra.histeria.commands.customItems.HGive;
-import fr.zelytra.histeria.commands.customItems.HGiveTab;
-import fr.zelytra.histeria.commands.miscellaneous.EmoteCommand;
-import fr.zelytra.histeria.commands.freeze.Freeze;
-import fr.zelytra.histeria.commands.hguard.HGuardCreator;
-import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
-import fr.zelytra.histeria.commands.lang.LangCommand;
-import fr.zelytra.histeria.commands.lang.LangTabCommand;
-import fr.zelytra.histeria.commands.miscellaneous.*;
-import fr.zelytra.histeria.commands.miscellaneous.Near;
-import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
-import fr.zelytra.histeria.commands.miscellaneous.Slot;
 import fr.zelytra.histeria.commands.moderation.Mute.MuteCommand;
+import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -43,6 +39,7 @@ import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
@@ -52,13 +49,13 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
-
 public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
+    public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
     public static MySQL mySQL;
@@ -80,6 +77,7 @@ public final class Histeria extends JavaPlugin {
     @Override
     public void onEnable() {
         this.getServer().getConsoleSender().sendMessage(Message.CONSOLE_STRATUP.getMsg());
+        isReloading = false;
         regCommands();
         loadAPI();
         regRepeatingTask();
@@ -95,14 +93,16 @@ public final class Histeria extends JavaPlugin {
         configurationManager.load();
 
         visualTeamManager = new VisualTeamManager();
-        logs.log("Histeria successfully start",LogType.INFO);
+        logs.log("Histeria successfully start", LogType.INFO);
+        CustomPlayer.forceLoadAll();
     }
-
 
 
     @Override
     public void onDisable() {
         configurationManager.unload();
+        CustomPlayer.forceSaveAll();
+
         //TODO Save all data of players in case of shutting down server
 
 
@@ -183,7 +183,7 @@ public final class Histeria extends JavaPlugin {
         }
     }
 
-    private void regPluginMessage(){
+    private void regPluginMessage() {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PluginMessage());
     }
@@ -192,7 +192,7 @@ public final class Histeria extends JavaPlugin {
 
     }
 
-    private void loadAPI(){
+    private void loadAPI() {
         if (!(getServer().getPluginManager().getPlugin("Factions") == null)) {
             saberFaction = true;
         }
@@ -207,7 +207,7 @@ public final class Histeria extends JavaPlugin {
         if (log) {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.CONSOLE_PREFIX.getMsg() + msg);
         }
-        logs.log(msg,type);
+        logs.log(msg, type);
 
     }
 
@@ -215,7 +215,7 @@ public final class Histeria extends JavaPlugin {
         return saberFaction;
     }
 
-    public static LuckPerms getLuckPerms(){
+    public static LuckPerms getLuckPerms() {
         return luckPerms;
     }
 }

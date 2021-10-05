@@ -16,6 +16,7 @@ import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -74,7 +75,6 @@ public class CustomPlayer {
         });
 
     }
-
 
 
     private void initData() {
@@ -220,15 +220,16 @@ public class CustomPlayer {
 
     private boolean hasPlayedBefore() {
         synchronized (syncObject) {
-        MySQL mySQL = Histeria.mySQL;
-        ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + Objects.requireNonNull(this.getPlayer()).getUniqueId() + "';");
-        try {
-            final boolean finalResult = result.next();
-            result.close();
-            return finalResult;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }}
+            MySQL mySQL = Histeria.mySQL;
+            ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + Objects.requireNonNull(this.getPlayer()).getUniqueId() + "';");
+            try {
+                final boolean finalResult = result.next();
+                result.close();
+                return finalResult;
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
         return false;
 
     }
@@ -239,70 +240,83 @@ public class CustomPlayer {
 
     public void saveData() {
         synchronized (syncObject) {
-            Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-                MySQL mySQL = Histeria.mySQL;
-                mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "' WHERE `id` = " + this.id + " ;");
-                timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
-                mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + " WHERE `id` = " + this.id + ";");
+            if (!Histeria.isReloading) {
 
-                //Mute save data
-                if (this.mute != null) {
+                Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
+                    saveDataTask();
+                    this.bank.save();
+                });
 
-                    try {
-                        ResultSet resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + this.uuid + "';");
+            } else {
 
-                        if (!resultSet.next()) {
-                            mySQL.update("INSERT INTO `Mute` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
-                                    + this.uuid + "','"
-                                    + this.name + "',"
-                                    + this.mute.getStartTime() + ","
-                                    + this.mute.getTime() + ",'"
-                                    + this.mute.getReason() + "','"
-                                    + this.mute.getStaffName() + "');");
-                        } else if (isMute()) {
-                            mySQL.update("UPDATE `Mute` SET `uuid` = '" + this.uuid +
-                                    "' ,`name` = '" + this.name +
-                                    "' ,`startTime` = " + this.mute.getStartTime() +
-                                    " ,`time` = " + this.mute.getTime() +
-                                    " ,`reason` = '" + this.mute.getReason() +
-                                    "' ,`staff` = '" + this.mute.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
-                        }
+                saveDataTask();
+                this.bank.save();
 
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+            }
+
+        }
+    }
+
+    private void saveDataTask() {
+        MySQL mySQL = Histeria.mySQL;
+        mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "' WHERE `id` = " + this.id + " ;");
+        timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
+        mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + " WHERE `id` = " + this.id + ";");
+
+        //Mute save data
+        if (this.mute != null) {
+
+            try {
+                ResultSet resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + this.uuid + "';");
+
+                if (!resultSet.next()) {
+                    mySQL.update("INSERT INTO `Mute` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
+                            + this.uuid + "','"
+                            + this.name + "',"
+                            + this.mute.getStartTime() + ","
+                            + this.mute.getTime() + ",'"
+                            + this.mute.getReason() + "','"
+                            + this.mute.getStaffName() + "');");
+                } else if (isMute()) {
+                    mySQL.update("UPDATE `Mute` SET `uuid` = '" + this.uuid +
+                            "' ,`name` = '" + this.name +
+                            "' ,`startTime` = " + this.mute.getStartTime() +
+                            " ,`time` = " + this.mute.getTime() +
+                            " ,`reason` = '" + this.mute.getReason() +
+                            "' ,`staff` = '" + this.mute.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
                 }
 
-                //Ban save data
-                if (this.ban != null) {
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
-                    try {
-                        ResultSet resultSet = mySQL.query("SELECT * FROM `Ban` WHERE `uuid` = '" + this.uuid + "';");
+        //Ban save data
+        if (this.ban != null) {
 
-                        if (!resultSet.next()) {
-                            mySQL.update("INSERT INTO `Ban` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
-                                    + this.uuid + "','"
-                                    + this.name + "',"
-                                    + this.ban.getStartTime() + ","
-                                    + this.ban.getTime() + ",'"
-                                    + this.ban.getReason() + "','"
-                                    + this.ban.getStaffName() + "');");
-                        } else if (isBan()) {
-                            mySQL.update("UPDATE `Ban` SET `uuid` = '" + this.uuid +
-                                    "' ,`name` = '" + this.name +
-                                    "' ,`startTime` = " + this.ban.getStartTime() +
-                                    " ,`time` = " + this.ban.getTime() +
-                                    " ,`reason` = '" + this.ban.getReason() +
-                                    "' ,`staff` = '" + this.ban.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
-                        }
+            try {
+                ResultSet resultSet = mySQL.query("SELECT * FROM `Ban` WHERE `uuid` = '" + this.uuid + "';");
 
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+                if (!resultSet.next()) {
+                    mySQL.update("INSERT INTO `Ban` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
+                            + this.uuid + "','"
+                            + this.name + "',"
+                            + this.ban.getStartTime() + ","
+                            + this.ban.getTime() + ",'"
+                            + this.ban.getReason() + "','"
+                            + this.ban.getStaffName() + "');");
+                } else if (isBan()) {
+                    mySQL.update("UPDATE `Ban` SET `uuid` = '" + this.uuid +
+                            "' ,`name` = '" + this.name +
+                            "' ,`startTime` = " + this.ban.getStartTime() +
+                            " ,`time` = " + this.ban.getTime() +
+                            " ,`reason` = '" + this.ban.getReason() +
+                            "' ,`staff` = '" + this.ban.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
                 }
 
-            });
-            this.bank.save();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -344,5 +358,24 @@ public class CustomPlayer {
 
     public void setLang(Lang lang) {
         this.lang = lang;
+    }
+
+    public static void forceSaveAll() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            CustomPlayer.getCustomPlayer(player.getName()).saveData();
+            if (Histeria.synchro)
+                new PacketSender(player).save();
+        }
+
+    }
+
+    public static void forceLoadAll() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            new CustomPlayer(player);
+        }
+
     }
 }

@@ -63,6 +63,7 @@ public class EventManager {
         pm.registerEvents(new FreezeListener(), pl);
         pm.registerEvents(new InventoryListener(), pl);
         pm.registerEvents(new WorldSpawnListener(), pl);
+        pm.registerEvents(new ReloadingServer(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

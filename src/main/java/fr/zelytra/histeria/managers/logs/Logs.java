@@ -49,7 +49,8 @@ public class Logs {
 
     private void right() {
         synchronized (syncObject) {
-            if (!Bukkit.isStopping()) {
+            System.out.println(Histeria.isReloading);
+            if (!Histeria.isReloading) {
                 Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
                     rightTask();
                 });
