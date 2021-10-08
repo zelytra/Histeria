@@ -155,6 +155,15 @@ public class CustomItemStack {
         return CustomMaterial.getByName(item.getItemMeta().getPersistentDataContainer().get(CustomItemStack.getItemKey(), PersistentDataType.STRING));
     }
 
+    public static CustomMaterial getCustomMaterial(String name) {
+
+        for (CustomMaterial material : CustomMaterial.values())
+            if (material.getName().equalsIgnoreCase(name))
+                return material;
+
+        return null;
+    }
+
     public static NamespacedKey getDescriptionKey() {
         return descriptionKey;
     }

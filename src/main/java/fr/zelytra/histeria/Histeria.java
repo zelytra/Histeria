@@ -38,6 +38,7 @@ import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
+import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
@@ -53,12 +54,13 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
     public static MySQL mySQL;
+    public static Shop shop;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
     public static VisualTeamManager visualTeamManager;
@@ -89,6 +91,7 @@ public final class Histeria extends JavaPlugin {
         lootTableManager = new LootTableManager();
         logs = new Logs();
         mySQL = new MySQL();
+        shop = new Shop();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
 

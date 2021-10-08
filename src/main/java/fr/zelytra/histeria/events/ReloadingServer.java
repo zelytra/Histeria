@@ -19,7 +19,6 @@ public class ReloadingServer implements Listener {
 
     @EventHandler
     public void onReload(PlayerCommandPreprocessEvent e) {
-        System.out.println(e.getMessage());
         if (e.getMessage().contains("/reload") || e.getMessage().contains("/rl")) {
             Histeria.isReloading = true;
         }
@@ -27,7 +26,6 @@ public class ReloadingServer implements Listener {
 
     @EventHandler
     public void onReload(ServerCommandEvent e) {
-        System.out.println(e.getCommand());
         if (e.getCommand().contains("reload") || e.getCommand().contains("rl")) {
             Histeria.isReloading = true;
         }

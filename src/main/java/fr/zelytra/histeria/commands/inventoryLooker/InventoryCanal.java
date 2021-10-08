@@ -53,7 +53,6 @@ public class InventoryCanal {
             if (!isViewerWatching) {
                 this.task.cancel();
                 inventoryCanals.remove(this);
-                System.out.println("Stoping task");
             }
         }, 0, 5);
 
