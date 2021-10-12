@@ -36,4 +36,8 @@ public enum VisualType {
     public ItemStack getItem() {
         return item.getItem();
     }
+
+    public Material getType(){
+        return this.item.getItem().getType();
+    }
 }

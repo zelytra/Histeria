@@ -15,8 +15,8 @@ public enum ShopFilter {
 
     BLOCK("block", Material.GRASS_BLOCK),
     ORE("ore", Material.DIAMOND_ORE),
-    CUSTOM_ITEM("customItem", Material.GRASS_BLOCK),
-    ITEM("item", Material.STICK),
+    CUSTOM_ITEM("customItem", Material.INFESTED_COBBLESTONE),
+    ITEM("item", Material.DEAD_BUSH),
     NONE("", Material.AIR);
 
     private String dbName;
