@@ -12,6 +12,8 @@ package fr.zelytra.histeria.managers.market.shop;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
+import fr.zelytra.histeria.managers.items.CustomItemStack;
+import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import org.bukkit.Material;
@@ -132,6 +134,41 @@ public class Shop {
         return content;
     }
 
+    public ItemStack[] getItemPage(ShopItem item) {
+        ItemStack[] content = new ItemStack[45];
+
+        for (int x = 0; x <= 8; x++) {
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        }
+        for (int x = 36; x <= 44; x++) {
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        }
+        //content[4] = getHead(player);
+        content[40] = new VisualItemStack(Material.BARRIER, "§cBack", false, "§6Come back to previous page").getItem();
+
+        content[9] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[18] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[27] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[17] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[26] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[35] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+
+        if (item.getItem().getMaxStackSize() == 1) {
+            content[22] = item.buildSellItem(1);
+        } else {
+
+            content[20] = item.buildSellItem(1);
+            content[21] = item.buildSellItem(8);
+            content[22] = item.buildSellItem(16);
+            content[23] = item.buildSellItem(32);
+            content[24] = item.buildSellItem(64);
+
+        }
+
+        return content;
+    }
+
     private List<ShopItem> getItemListByFilter(ShopFilter filter) {
         switch (filter) {
             case ORE:
@@ -149,10 +186,6 @@ public class Shop {
             case NONE:
                 return shopItemList;
         }
-        return null;
-    }
-
-    public ItemStack[] getItemPage(ShopItem item) {
         return null;
     }
 
@@ -174,6 +207,20 @@ public class Shop {
                 return shopItemList.size() / 24;
         }
         return 0;
+    }
+
+    public ShopItem getItemShop(ItemStack item) {
+        CustomMaterial material = CustomItemStack.getCustomMaterial(item);
+        if (material != null) {
+            for (ShopItem items : Histeria.shop.shopItemList)
+                if (material == CustomItemStack.getCustomMaterial(items.getItem()))
+                    return items;
+        } else {
+            for (ShopItem items : Histeria.shop.shopItemList)
+                if (items.getItem().getType() == item.getType())
+                    return items;
+        }
+        return null;
     }
 
 

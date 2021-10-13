@@ -23,47 +23,67 @@ public class ShopListener implements Listener {
 
         if (playerShop == null) return;
 
-        if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals(playerShop.getShopName())) {
+        if (e.getInventory().getHolder() instanceof CustomGUI) {
+            if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.LIST)) {
+                if (e.getCurrentItem() != null) {
+                    e.setCancelled(true);
 
-            if (e.getCurrentItem() != null) {
-                e.setCancelled(true);
+                    switch (e.getCurrentItem().getType()) {
+                        case BAKED_POTATO:
+                            playerShop.previousPage();
+                            break;
+                        case POTATO:
+                            playerShop.nextPage();
+                            break;
+                        case GRASS_BLOCK:
+                            playerShop.setFilter(ShopFilter.BLOCK);
+                            playerShop.setPageNumber(0);
+                            playerShop.refresh();
+                            break;
+                        case DEAD_BUSH:
+                            playerShop.setFilter(ShopFilter.ITEM);
+                            playerShop.setPageNumber(0);
+                            playerShop.refresh();
+                            break;
+                        case DIAMOND_ORE:
+                            playerShop.setFilter(ShopFilter.ORE);
+                            playerShop.setPageNumber(0);
+                            playerShop.refresh();
+                            break;
+                        case INFESTED_COBBLESTONE:
+                            playerShop.setFilter(ShopFilter.CUSTOM_ITEM);
+                            playerShop.setPageNumber(0);
+                            playerShop.refresh();
+                            break;
+                        case SPRUCE_SIGN:
+                            playerShop.setFilter(ShopFilter.NONE);
+                            playerShop.setPageNumber(0);
+                            playerShop.refresh();
+                            break;
+                        case BARRIER:
+                            break;
+                        default:
+                            playerShop.openItemBuyPage(e.getCurrentItem());
+                            break;
 
-                switch (e.getCurrentItem().getType()) {
-                    case BAKED_POTATO:
-                        playerShop.previousPage();
-                        break;
-                    case POTATO:
-                        playerShop.nextPage();
-                        break;
-                    case GRASS_BLOCK:
-                        playerShop.setFilter(ShopFilter.BLOCK);
-                        playerShop.setPageNumber(0);
-                        playerShop.refresh();
-                        break;
-                    case DEAD_BUSH:
-                        playerShop.setFilter(ShopFilter.ITEM);
-                        playerShop.setPageNumber(0);
-                        playerShop.refresh();
-                        break;
-                    case DIAMOND_ORE:
-                        playerShop.setFilter(ShopFilter.ORE);
-                        playerShop.setPageNumber(0);
-                        playerShop.refresh();
-                        break;
-                    case INFESTED_COBBLESTONE:
-                        playerShop.setFilter(ShopFilter.CUSTOM_ITEM);
-                        playerShop.setPageNumber(0);
-                        playerShop.refresh();
-                        break;
-                    case SPRUCE_SIGN:
-                        playerShop.setFilter(ShopFilter.NONE);
-                        playerShop.setPageNumber(0);
-                        playerShop.refresh();
-                        break;
+                    }
+                }
+            } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.SELL)) {
+                if (e.getCurrentItem() != null) {
+                    e.setCancelled(true);
 
+                    switch (e.getCurrentItem().getType()) {
+                        case BARRIER:
+                            playerShop.openListShop();
+                            break;
+                        default:
+
+                            break;
+
+
+                    }
                 }
             }
-
         }
     }
 

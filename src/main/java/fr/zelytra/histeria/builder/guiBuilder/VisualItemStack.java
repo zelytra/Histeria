@@ -27,45 +27,45 @@ public class VisualItemStack {
         ItemMeta meta = this.item.getItemMeta();
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(subMessage));
-        if (isEnchanted) {
-            item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
+        if (isEnchanted)
+            item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     }
 
     public VisualItemStack(CustomMaterial material, String name, boolean isEnchanted, String... subMessage) {
-        this.item = new CustomItemStack(material,1).getItem();
+        this.item = new CustomItemStack(material, 1).getItem();
         ItemMeta meta = this.item.getItemMeta();
         meta.setDisplayName(name);
         meta.setLore(Arrays.asList(subMessage));
-        if (isEnchanted) {
-            item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
+        if (isEnchanted)
+            item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     }
 
     public VisualItemStack(Material material, String name, boolean isEnchanted) {
         this.item = new ItemStack(material);
         ItemMeta meta = this.item.getItemMeta();
         meta.setDisplayName(name);
-        if (isEnchanted) {
-            item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
+        if (isEnchanted)
+            item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     }
 
     public VisualItemStack(CustomMaterial material, String name, boolean isEnchanted) {
-        this.item = new CustomItemStack(material,1).getItem();
+        this.item = new CustomItemStack(material, 1).getItem();
         ItemMeta meta = this.item.getItemMeta();
         meta.setDisplayName(name);
-        if (isEnchanted) {
-            item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 1);
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        }
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
+        if (isEnchanted)
+            item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
     }
 
     public ItemStack getItem() {

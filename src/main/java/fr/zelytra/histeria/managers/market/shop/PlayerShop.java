@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ import java.util.List;
 public class PlayerShop implements Listener {
     private static List<PlayerShop> openShop = new ArrayList<>();
 
-    private String shopName = "§6Shop";
-
+    private String shopName = "§6Shop : ";
+    private String interfaceTag;
     private Player player;
     private int pageNumber = 0;
     private ShopFilter filter = ShopFilter.NONE;
@@ -29,8 +30,8 @@ public class PlayerShop implements Listener {
 
     public PlayerShop(Player player) {
         this.player = player;
-        this.shopName.concat(" " + player.getName());
-        interfaceBuilder = new InterfaceBuilder(54, shopName);
+        this.interfaceTag = ShopPage.LIST.toString();
+        interfaceBuilder = new InterfaceBuilder(54, shopName + interfaceTag);
         interfaceBuilder.setContent(Histeria.shop.getPage(pageNumber, filter));
         interfaceBuilder.open(this.player);
         openShop.add(this);
@@ -62,7 +63,11 @@ public class PlayerShop implements Listener {
         }
     }
 
-    public void openItemBuyPage() {
+    public void openItemBuyPage(ItemStack item) {
+        this.interfaceTag = ShopPage.SELL.toString();
+        interfaceBuilder = new InterfaceBuilder(45, shopName + interfaceTag);
+        interfaceBuilder.open(player);
+        interfaceBuilder.setContent(Histeria.shop.getItemPage(Histeria.shop.getItemShop(item)));
     }
 
     public void destroy() {
@@ -73,6 +78,13 @@ public class PlayerShop implements Listener {
         interfaceBuilder.setContent(Histeria.shop.getPage(pageNumber, filter));
     }
 
+    public void openListShop(){
+        this.interfaceTag = ShopPage.LIST.toString();
+        interfaceBuilder = new InterfaceBuilder(54, shopName + interfaceTag);
+        interfaceBuilder.open(player);
+        interfaceBuilder.setContent(Histeria.shop.getPage(pageNumber, filter));
+    }
+
     public void setFilter(ShopFilter filter) {
         this.filter = filter;
     }
@@ -80,4 +92,5 @@ public class PlayerShop implements Listener {
     public void setPageNumber(int pageNumber) {
         this.pageNumber = pageNumber;
     }
+
 }

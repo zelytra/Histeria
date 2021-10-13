@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.market.shop;
 
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -51,11 +52,25 @@ public class ShopItem {
         List<String> lore = new ArrayList<>();
         lore.add("§6=====§b[§6Data§b]§6=====");
         lore.add("");
-        lore.add("§bSell price -> §6" + sellPrice);
+        lore.add("§bSell price -> §6" + sellPrice + "§f " + Emote.GOLD);
         lore.add("");
-        lore.add("§bBuy price -> §6" + buyPrice);
+        lore.add("§bBuy price -> §6" + buyPrice + "§f " + Emote.GOLD);
 
         return lore;
+    }
+
+    public ItemStack buildSellItem(int amount) {
+        ItemStack item = this.item.clone();
+        ItemMeta meta = item.getItemMeta();
+
+        List<String> lore = new ArrayList<>();
+        lore.add("");
+        lore.add("§bPrice -> §6" + sellPrice * amount + "§f " + Emote.GOLD);
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        item.setAmount(amount);
+        return item;
+
     }
 
 
