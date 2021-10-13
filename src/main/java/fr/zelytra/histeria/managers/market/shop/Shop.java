@@ -169,6 +169,26 @@ public class Shop {
         return content;
     }
 
+    public ItemStack[] getMenuPage() {
+        ItemStack[] content = new ItemStack[27];
+        for (int x = 0; x <= 3; x++)
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        //content[4] = getHead(player);
+        for (int x = 5; x <= 8; x++)
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        content[11] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[12] = VisualType.BUY.getItem();
+        content[14] = VisualType.SELL.getItem();
+        content[15] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        for (int x = 18; x <= 26; x++)
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        return content;
+    }
+
     private List<ShopItem> getItemListByFilter(ShopFilter filter) {
         switch (filter) {
             case ORE:

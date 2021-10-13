@@ -61,6 +61,7 @@ public class ShopListener implements Listener {
                             playerShop.refresh();
                             break;
                         case BARRIER:
+                            playerShop.openMenuPage();
                             break;
                         default:
                             playerShop.openItemBuyPage(e.getCurrentItem());
@@ -77,10 +78,23 @@ public class ShopListener implements Listener {
                             playerShop.openListShop();
                             break;
                         default:
-
+                            playerShop.buyItems(e.getCurrentItem());
                             break;
 
 
+                    }
+                }
+            }else if(e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.MENU)){
+                if (e.getCurrentItem() != null) {
+                    e.setCancelled(true);
+
+                    switch (e.getCurrentItem().getType()) {
+                        case MUTTON:
+                            playerShop.openListShop();
+                            break;
+                        case COOKED_MUTTON:
+                            //TODO Sell page
+                            break;
                     }
                 }
             }
@@ -93,8 +107,9 @@ public class ShopListener implements Listener {
 
         if (playerShop == null) return;
 
-        if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals(playerShop.getShopName())) {
-            playerShop.destroy();
+        if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().contains(playerShop.getShopName())) {
+            //playerShop.destroy();
+
         }
     }
 }

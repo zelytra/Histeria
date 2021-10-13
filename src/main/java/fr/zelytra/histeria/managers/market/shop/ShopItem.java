@@ -23,12 +23,14 @@ public class ShopItem {
     private int id;
 
     private String displayName;
+    private String itemName;
 
     public ShopItem(int id, String itemName, String displayName, int sellPrice, int buyPrice, String filterName) {
         this.id = id;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
         this.displayName = displayName;
+        this.itemName = itemName;
 
         this.filter = ShopFilter.getByName(filterName);
         itemBuilder(itemName, displayName);
@@ -52,9 +54,9 @@ public class ShopItem {
         List<String> lore = new ArrayList<>();
         lore.add("§6=====§b[§6Data§b]§6=====");
         lore.add("");
-        lore.add("§bSell price -> §6" + sellPrice + "§f " + Emote.GOLD);
+        lore.add("§bBuy for: §6" + buyPrice + "§f " + Emote.GOLD);
         lore.add("");
-        lore.add("§bBuy price -> §6" + buyPrice + "§f " + Emote.GOLD);
+        lore.add("§bSell for: §6" + sellPrice + "§f " + Emote.GOLD);
 
         return lore;
     }
@@ -65,7 +67,7 @@ public class ShopItem {
 
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§bPrice -> §6" + sellPrice * amount + "§f " + Emote.GOLD);
+        lore.add("§bPrice -> §6" + buyPrice * amount + "§f " + Emote.GOLD);
         meta.setLore(lore);
         item.setItemMeta(meta);
         item.setAmount(amount);
@@ -101,5 +103,15 @@ public class ShopItem {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    public ItemStack getFinalItemStack(int amount) {
+        CustomMaterial customMaterial = CustomItemStack.getCustomMaterial(itemName);
+
+        if (customMaterial != null)
+            return new CustomItemStack(customMaterial, amount).getItem();
+        else
+            return new ItemStack(Material.getMaterial(itemName.toUpperCase(Locale.ROOT)),amount);
+
     }
 }

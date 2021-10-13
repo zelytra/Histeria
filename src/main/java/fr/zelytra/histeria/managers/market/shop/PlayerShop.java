@@ -11,6 +11,10 @@ package fr.zelytra.histeria.managers.market.shop;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
+import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -24,18 +28,17 @@ public class PlayerShop implements Listener {
     private String shopName = "§6Shop : ";
     private String interfaceTag;
     private Player player;
+    private CustomPlayer customPlayer;
     private int pageNumber = 0;
     private ShopFilter filter = ShopFilter.NONE;
     private InterfaceBuilder interfaceBuilder;
+    private ShopItem shopItem;
 
     public PlayerShop(Player player) {
         this.player = player;
-        this.interfaceTag = ShopPage.LIST.toString();
-        interfaceBuilder = new InterfaceBuilder(54, shopName + interfaceTag);
-        interfaceBuilder.setContent(Histeria.shop.getPage(pageNumber, filter));
-        interfaceBuilder.open(this.player);
+        this.customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+        openMenuPage();
         openShop.add(this);
-
     }
 
     public static PlayerShop getShopOf(String name) {
@@ -67,7 +70,16 @@ public class PlayerShop implements Listener {
         this.interfaceTag = ShopPage.SELL.toString();
         interfaceBuilder = new InterfaceBuilder(45, shopName + interfaceTag);
         interfaceBuilder.open(player);
-        interfaceBuilder.setContent(Histeria.shop.getItemPage(Histeria.shop.getItemShop(item)));
+
+        this.shopItem = Histeria.shop.getItemShop(item);
+        interfaceBuilder.setContent(Histeria.shop.getItemPage(shopItem));
+    }
+
+    public void openMenuPage() {
+        this.interfaceTag = ShopPage.MENU.toString();
+        interfaceBuilder = new InterfaceBuilder(27, shopName + interfaceTag);
+        interfaceBuilder.open(player);
+        interfaceBuilder.setContent(Histeria.shop.getMenuPage());
     }
 
     public void destroy() {
@@ -78,7 +90,7 @@ public class PlayerShop implements Listener {
         interfaceBuilder.setContent(Histeria.shop.getPage(pageNumber, filter));
     }
 
-    public void openListShop(){
+    public void openListShop() {
         this.interfaceTag = ShopPage.LIST.toString();
         interfaceBuilder = new InterfaceBuilder(54, shopName + interfaceTag);
         interfaceBuilder.open(player);
@@ -93,4 +105,17 @@ public class PlayerShop implements Listener {
         this.pageNumber = pageNumber;
     }
 
+    public void buyItems(ItemStack currentItem) {
+        if (this.shopItem != null) {
+            int finalPrice = this.shopItem.getBuyPrice() * currentItem.getAmount();
+
+            if (customPlayer.getBankAccount().getMoney() < finalPrice) {
+                LangMessage.sendMessage(player, "shop.notEnoughMoney");
+            } else {
+                customPlayer.getBankAccount().takeMoney(finalPrice);
+                player.getInventory().addItem(shopItem.getFinalItemStack(currentItem.getAmount()));
+                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.buyItem", "§6" + shopItem.getDisplayName() + " x" + currentItem.getAmount() + " §a-> §6" + finalPrice + " §f" + Emote.GOLD);
+            }
+        }
+    }
 }
