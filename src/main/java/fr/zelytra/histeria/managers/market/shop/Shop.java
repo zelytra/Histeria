@@ -76,13 +76,13 @@ public class Shop {
             }
     }
 
-    public ItemStack[] getPage(int pageNumber, ShopFilter filter) {
+    public ItemStack[] getPage(int pageNumber, ShopFilter filter,PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[54];
 
         for (int x = 0; x <= 3; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
 
-        //content[4] = getHead(player);
+        content[4] = playerShop.getHead();
 
         for (int x = 5; x <= 8; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
@@ -134,7 +134,7 @@ public class Shop {
         return content;
     }
 
-    public ItemStack[] getItemPage(ShopItem item) {
+    public ItemStack[] getItemPage(ShopItem item,PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[45];
 
         for (int x = 0; x <= 8; x++) {
@@ -143,7 +143,7 @@ public class Shop {
         for (int x = 36; x <= 44; x++) {
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
         }
-        //content[4] = getHead(player);
+        content[4] = playerShop.getHead();
         content[40] = new VisualItemStack(Material.BARRIER, "§cBack", false, "§6Come back to previous page").getItem();
 
         content[9] = VisualType.BLANK_BLUE_GLASSE.getItem();
@@ -169,12 +169,12 @@ public class Shop {
         return content;
     }
 
-    public ItemStack[] getMenuPage() {
+    public ItemStack[] getMenuPage(PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[27];
         for (int x = 0; x <= 3; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
 
-        //content[4] = getHead(player);
+        content[4] = playerShop.getHead();
         for (int x = 5; x <= 8; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
 
@@ -189,12 +189,12 @@ public class Shop {
         return content;
     }
 
-    public ItemStack[] getSellPage(){
+    public ItemStack[] getSellPage(PlayerShop playerShop){
         ItemStack[] content = new ItemStack[54];
         for (int x = 0; x <= 8; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
 
-        //content[4] = getHead(player);
+        content[4] = playerShop.getHead();
         for (int x = 45; x <= 53; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
 

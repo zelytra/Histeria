@@ -1,23 +1,20 @@
-/*
- * Copyright (c) 2021.
- * Made by Zelytra :
- *  - Website : https://zelytra.fr
- *  - GitHub : http://github.zelytra.fr
- *
- * All right reserved
- */
+package fr.zelytra.histeria.commands.shop;
 
-package fr.zelytra.histeria.commands;
-
+import fr.zelytra.histeria.managers.market.shop.PlayerShop;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class Test implements CommandExecutor {
+public class ShopCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        //new PlayerShop((Player) sender);
+        if (!(sender instanceof Player)) return false;
+
+        new PlayerShop((Player) sender);
+
         return true;
     }
 }

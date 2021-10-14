@@ -9,11 +9,18 @@
 
 package fr.zelytra.histeria.managers.market.shop;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
+import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopListener implements Listener {
 
@@ -79,6 +86,7 @@ public class ShopListener implements Listener {
                             break;
                         default:
                             playerShop.buyItems(e.getCurrentItem());
+                            playerShop.refreshHead();
                             break;
 
 
@@ -104,6 +112,41 @@ public class ShopListener implements Listener {
                             e.setCancelled(true);
                             playerShop.openMenuPage();
                             break;
+                        case SPRUCE_SIGN:
+                        case PLAYER_HEAD:
+                            e.setCancelled(true);
+                            break;
+                        case SLIME_BALL:
+                            playerShop.sellItems(e.getInventory(),getSellPrice(e.getInventory(), playerShop));
+                            playerShop.refreshHead();
+                            break;
+                        default:
+                            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
+                            break;
+
+                    }
+                    return;
+                }
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
+
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCloseSellPage(InventoryCloseEvent e) {
+        PlayerShop playerShop = PlayerShop.getShopOf(e.getPlayer().getName());
+
+        if (playerShop == null) return;
+
+        if (e.getInventory().getHolder() instanceof CustomGUI) {
+            if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.SELL)) {
+                for (int x = 0; x < 4; x++) {
+                    for (int id = 10; id <= 16; id++) {
+                        if (e.getInventory().getContents()[id + x * 9] == null)
+                            continue;
+                        else
+                            e.getPlayer().getInventory().addItem(e.getInventory().getContents()[id + x * 9]);
 
                     }
                 }
@@ -111,15 +154,17 @@ public class ShopListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onShopClose(InventoryCloseEvent e) {
-        PlayerShop playerShop = PlayerShop.getShopOf(e.getPlayer().getName());
+    private int getSellPrice(Inventory inventory, PlayerShop playerShop) {
+        List<ItemStack> sellItems = new ArrayList<>();
+        for (int x = 0; x < 4; x++) {
+            for (int id = 10; id <= 16; id++) {
+                if (inventory.getContents()[id + x * 9] == null)
+                    continue;
+                else
+                    sellItems.add(inventory.getContents()[id + x * 9]);
 
-        if (playerShop == null) return;
-
-        if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().contains(playerShop.getShopName())) {
-            //playerShop.destroy();
-
+            }
         }
+        return playerShop.getSellPrice(sellItems);
     }
 }

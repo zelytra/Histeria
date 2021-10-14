@@ -29,6 +29,7 @@ import fr.zelytra.histeria.commands.moderation.Ban.UnBanTab;
 import fr.zelytra.histeria.commands.moderation.HKick;
 import fr.zelytra.histeria.commands.moderation.Mute.MuteCommand;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
+import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -168,6 +169,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("setspawn").setExecutor(new WorldSpawn());
         getCommand("spawn").setExecutor(new WorldSpawn());
         getCommand("mute").setExecutor(new MuteCommand());
+        getCommand("shop").setExecutor(new ShopCommand());
 
         /* Ban */
         getCommand("hban").setExecutor(new BanCommand());

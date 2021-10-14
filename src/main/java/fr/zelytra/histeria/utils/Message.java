@@ -34,6 +34,11 @@ public enum Message {
         return message;
     }
 
+    @Override
+    public String toString(){
+        return message;
+    }
+
     public static String getHelp(String command) {
         return "§9[§bHisteria§9]§r §cWrong command syntax. Please refer to /" + command + " help.";
     }
