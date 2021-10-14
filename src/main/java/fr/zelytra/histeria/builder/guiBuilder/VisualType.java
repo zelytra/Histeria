@@ -27,6 +27,7 @@ public enum VisualType {
     PREVIOUS_ARROW(new VisualItemStack(CustomMaterial.PREVIOUS_ARROW, "§bPrevious", false)),
     BUY(new VisualItemStack(CustomMaterial.BUY_BUTTON, "§bBuy", false)),
     SELL(new VisualItemStack(CustomMaterial.SELL_BUTTON, "§bSell", false)),
+    VALIDAY(new VisualItemStack(CustomMaterial.VALIDAY, "§bValide sell", false)),
     RETURN(new VisualItemStack(Material.BARRIER, "§cBack", false,"Back to main page"));
 
     private final VisualItemStack item;

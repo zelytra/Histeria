@@ -69,7 +69,7 @@ public class ShopListener implements Listener {
 
                     }
                 }
-            } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.SELL)) {
+            } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.BUY)) {
                 if (e.getCurrentItem() != null) {
                     e.setCancelled(true);
 
@@ -84,7 +84,7 @@ public class ShopListener implements Listener {
 
                     }
                 }
-            }else if(e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.MENU)){
+            } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.MENU)) {
                 if (e.getCurrentItem() != null) {
                     e.setCancelled(true);
 
@@ -93,8 +93,18 @@ public class ShopListener implements Listener {
                             playerShop.openListShop();
                             break;
                         case COOKED_MUTTON:
-                            //TODO Sell page
+                            playerShop.openSellPage();
                             break;
+                    }
+                }
+            } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.SELL)) {
+                if (e.getCurrentItem() != null) {
+                    switch (e.getCurrentItem().getType()) {
+                        case BARRIER:
+                            e.setCancelled(true);
+                            playerShop.openMenuPage();
+                            break;
+
                     }
                 }
             }

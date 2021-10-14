@@ -189,6 +189,31 @@ public class Shop {
         return content;
     }
 
+    public ItemStack[] getSellPage(){
+        ItemStack[] content = new ItemStack[54];
+        for (int x = 0; x <= 8; x++)
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        //content[4] = getHead(player);
+        for (int x = 45; x <= 53; x++)
+            content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        content[9] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[18] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[27] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[36] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[17] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[26] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[35] = VisualType.BLANK_BLUE_GLASSE.getItem();
+        content[44] = VisualType.BLANK_BLUE_GLASSE.getItem();
+
+        content[48] = new VisualItemStack(Material.BARRIER, "§cBack", false, "§6Come back to previous page").getItem();
+        content[49] = new VisualItemStack(Material.SPRUCE_SIGN, "§6Total : §b" + 0, false).getItem();
+        content[50] = VisualType.VALIDAY.getItem();
+
+        return content;
+    }
+
     private List<ShopItem> getItemListByFilter(ShopFilter filter) {
         switch (filter) {
             case ORE:

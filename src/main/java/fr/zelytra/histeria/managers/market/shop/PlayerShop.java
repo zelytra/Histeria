@@ -67,7 +67,7 @@ public class PlayerShop implements Listener {
     }
 
     public void openItemBuyPage(ItemStack item) {
-        this.interfaceTag = ShopPage.SELL.toString();
+        this.interfaceTag = ShopPage.BUY.toString();
         interfaceBuilder = new InterfaceBuilder(45, shopName + interfaceTag);
         interfaceBuilder.open(player);
 
@@ -80,6 +80,13 @@ public class PlayerShop implements Listener {
         interfaceBuilder = new InterfaceBuilder(27, shopName + interfaceTag);
         interfaceBuilder.open(player);
         interfaceBuilder.setContent(Histeria.shop.getMenuPage());
+    }
+
+    public void openSellPage() {
+        this.interfaceTag = ShopPage.SELL.toString();
+        interfaceBuilder = new InterfaceBuilder(54, shopName + interfaceTag);
+        interfaceBuilder.open(player);
+        interfaceBuilder.setContent(Histeria.shop.getSellPage());
     }
 
     public void destroy() {
