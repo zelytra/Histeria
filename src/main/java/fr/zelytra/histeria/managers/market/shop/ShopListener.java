@@ -70,6 +70,8 @@ public class ShopListener implements Listener {
                         case BARRIER:
                             playerShop.openMenuPage();
                             break;
+                        case BLUE_STAINED_GLASS_PANE:
+                            break;
                         default:
                             playerShop.openItemBuyPage(e.getCurrentItem());
                             break;
@@ -117,7 +119,7 @@ public class ShopListener implements Listener {
                             e.setCancelled(true);
                             break;
                         case SLIME_BALL:
-                            playerShop.sellItems(e.getInventory(),getSellPrice(e.getInventory(), playerShop));
+                            playerShop.sellItems(e.getInventory(), getSellPrice(e.getInventory(), playerShop));
                             playerShop.refreshHead();
                             break;
                         default:
