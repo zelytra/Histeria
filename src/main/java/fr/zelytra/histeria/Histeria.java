@@ -30,6 +30,8 @@ import fr.zelytra.histeria.commands.moderation.HKick;
 import fr.zelytra.histeria.commands.moderation.Mute.MuteCommand;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
+import fr.zelytra.histeria.commands.shop.StandCommand;
+import fr.zelytra.histeria.commands.shop.StandTab;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -140,6 +142,10 @@ public final class Histeria extends JavaPlugin {
         /* Broadcast */
         getCommand("broadcast").setExecutor(new Broadcast());
         getCommand("broadcast").setTabCompleter(new BroadcastTab());
+
+        /* Stand */
+        getCommand("stand").setExecutor(new StandCommand());
+        getCommand("stand").setTabCompleter(new StandTab());
 
         /* Miscellaneous */
         getCommand("speed").setExecutor(new Speed());

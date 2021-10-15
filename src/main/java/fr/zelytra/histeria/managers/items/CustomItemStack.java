@@ -40,7 +40,7 @@ public class CustomItemStack {
         this.customMaterial = material;
 
         if (material.getItemType() == ItemType.BLOCK) {
-            this.item = new ItemStack(material.getVanillaMaterial());
+            this.item = new ItemStack(material.getVanillaMaterial(),amount);
             return;
         }
 

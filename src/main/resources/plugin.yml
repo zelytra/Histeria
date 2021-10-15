@@ -184,3 +184,7 @@ commands:
     description: Open shop page
     permission: histeria.shop
 
+  stand:
+    description: Stand
+    permission: histeria.stand
+

@@ -39,6 +39,7 @@ import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
 import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
 import fr.zelytra.histeria.managers.logs.listener.OreLogger;
 import fr.zelytra.histeria.managers.market.shop.ShopListener;
+import fr.zelytra.histeria.managers.market.stand.StandListener;
 import fr.zelytra.histeria.managers.visual.chat.ChatListener;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.user.UserDataRecalculateEvent;
@@ -71,6 +72,7 @@ public class EventManager {
         pm.registerEvents(new ServerSelector(), pl);
         pm.registerEvents(new Wiki(), pl);
         pm.registerEvents(new ShopListener(), pl);
+        pm.registerEvents(new StandListener(), pl);
 
         /* Items */
         pm.registerEvents(new CustomItemHandler(), pl);

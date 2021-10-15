@@ -91,7 +91,6 @@ public class ShopListener implements Listener {
                             playerShop.refreshHead();
                             break;
 
-
                     }
                 }
             } else if (e.getView().getTitle().equals(playerShop.getShopName() + ShopPage.MENU)) {
