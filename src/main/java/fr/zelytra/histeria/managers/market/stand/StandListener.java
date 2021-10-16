@@ -18,6 +18,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ItemDespawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -37,6 +38,12 @@ public class StandListener implements Listener {
 
             }
         }
+    }
+
+    @EventHandler
+    public void onItemDispawn(ItemDespawnEvent e) {
+        if (e.getEntity().getPersistentDataContainer().has(Stand.shopKey, PersistentDataType.STRING))
+            e.setCancelled(true);
     }
 
     @EventHandler

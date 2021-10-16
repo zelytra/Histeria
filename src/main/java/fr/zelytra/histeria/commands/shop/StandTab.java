@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.commands.shop;
 
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.market.stand.Stand;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -27,13 +28,21 @@ public class StandTab implements TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         List<String> commandsList = new ArrayList<>();
         if (args.length == 1) {
-
+            commandsList.add("list");
+            commandsList.add("delete");
             for (Material material : Material.values())
                 commandsList.add(material.name());
             for (CustomMaterial material : CustomMaterial.values())
                 commandsList.add(material.getName());
 
             commandsList = Utils.dynamicTab(commandsList, args[0]);
+
+        } else if (args.length == 2 && args[0].equalsIgnoreCase("delete")) {
+
+            for (Stand stand : Stand.serverStands)
+                commandsList.add(stand.getUUID());
+
+            commandsList = Utils.dynamicTab(commandsList, args[1]);
         }
         return commandsList;
     }

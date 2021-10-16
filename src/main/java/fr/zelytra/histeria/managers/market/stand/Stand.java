@@ -6,33 +6,42 @@ import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class Stand {
+public class Stand implements Serializable {
 
-    private static List<Stand> serverStands = new ArrayList<>();
+    public static NamespacedKey shopKey = new NamespacedKey(Histeria.getInstance(), "stand");
+    public static List<Stand> serverStands = new ArrayList<>();
     public static String shopName = "§6Stand";
 
-    private ItemStack item;
+    private String base64Item;
     private int price;
-    private Location location;
-    public static NamespacedKey shopKey = new NamespacedKey(Histeria.getInstance(), "stand");
+
+    private int x, y, z;
+    private String world;
+
     private final String uuid = UUID.randomUUID().toString();
 
     public Stand(Location location, int price, ItemStack item) {
@@ -41,11 +50,16 @@ public class Stand {
         location.setPitch(0);
         location.setYaw(0);
 
-        this.location = location;
+        this.x = (int) location.getX();
+        this.y = (int) location.getY();
+        this.z = (int) location.getZ();
+        this.world = location.getWorld().getName();
+
+        this.base64Item = itemStackToBase64(item);
         this.price = price;
-        this.item = item;
-        spawnStand();
+        spawnStand(location);
         serverStands.add(this);
+        StandSerializer.saveAll();
     }
 
     public static Stand getStand(String uuid) {
@@ -65,14 +79,14 @@ public class Stand {
         return null;
     }
 
-    private String getUUID() {
+    public String getUUID() {
         return this.uuid;
     }
 
-    private void spawnStand() {
+    private void spawnStand(Location location) {
 
         // Spawning Item
-        Item i = location.getWorld().dropItem(location, item);
+        Item i = location.getWorld().dropItem(location, getItem());
         i.setGravity(false);
         i.setVelocity(new Vector(0, 0, 0));
         i.setCustomNameVisible(true);
@@ -96,10 +110,10 @@ public class Stand {
         standPos.setY(standPos.getY() + 0.58);
         as = location.getWorld().spawn(standPos, ArmorStand.class);
 
-        if (CustomItemStack.getCustomMaterial(item) != null)
-            as.setCustomName("§b" + CustomItemStack.getCustomMaterial(item).getDisplayName());
+        if (CustomItemStack.getCustomMaterial(getItem()) != null)
+            as.setCustomName("§b" + CustomItemStack.getCustomMaterial(getItem()).getDisplayName());
         else
-            as.setCustomName("§b" + item.getType().name().replace("_", " "));
+            as.setCustomName("§b" + getItem().getType().name().replace("_", " "));
 
         as.setCustomNameVisible(true);
         configStand(as);
@@ -150,8 +164,10 @@ public class Stand {
 
         content[15] = new VisualItemStack(Material.BARRIER, "§cClose", false).getItem();
         content[11] = VisualType.VALIDAY.getItem();
+
+        ItemStack item = getItem().clone();
         ItemMeta meta = item.getItemMeta();
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§6" + price + " §f" + Emote.GOLD);
         meta.setLore(lore);
         meta.getPersistentDataContainer().set(shopKey, PersistentDataType.STRING, uuid);
@@ -161,18 +177,59 @@ public class Stand {
     }
 
     public ItemStack getItem() {
-        return item;
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(this.base64Item));
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+
+            ItemStack item = (ItemStack) dataInput.readObject();
+
+            dataInput.close();
+            return item;
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getItemName() {
-        if (CustomItemStack.getCustomMaterial(item) != null)
-            return "§b" + CustomItemStack.getCustomMaterial(item).getDisplayName();
+        if (CustomItemStack.getCustomMaterial(getItem()) != null)
+            return "§b" + CustomItemStack.getCustomMaterial(getItem()).getDisplayName();
         else
-            return "§b" + item.getType().name().replace("_", " ");
+            return "§b" + getItem().getType().name().replace("_", " ");
 
     }
 
     public int getPrice() {
         return price;
+    }
+
+    private String itemStackToBase64(ItemStack item) {
+        try {
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+
+            dataOutput.writeObject(item);
+            dataOutput.close();
+            return Base64Coder.encodeLines(outputStream.toByteArray());
+
+        } catch (Exception e) {
+            throw new IllegalStateException("Unable to save item stacks.", e);
+        }
+    }
+
+    public void destroy() {
+        serverStands.remove(this);
+        StandSerializer.remove(this);
+
+        /* Entity killer */
+        Location location = new Location(Bukkit.getWorld(world), x, y, z);
+        Collection<Entity> entities = location.getNearbyEntities(1,1,1);
+
+        for(Entity entity : entities){
+            if (entity instanceof ArmorStand || entity instanceof Item)
+                entity.remove();
+        }
+
     }
 }

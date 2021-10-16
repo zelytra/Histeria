@@ -28,33 +28,53 @@ public class StandCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length != 2) {
-            LangMessage.sendMessage(player, "command.wrongSyntax");
-            return false;
-        }
-
         int price;
         ItemStack item;
 
-        try {
-            price = Integer.parseInt(args[1]);
+        if (args[0].equalsIgnoreCase("list")) {
+            player.sendMessage("§8---------------§6 [ Stands ] §8---------------");
 
-            CustomMaterial customMaterial = CustomMaterial.getByName(args[0]);
+            for (Stand stand : Stand.serverStands) {
+                player.sendMessage("§bUUID : §6" + stand.getUUID() + "§b " + stand.getItemName());
+            }
+            return true;
 
-            if (customMaterial != null)
-                item = new CustomItemStack(customMaterial, 1).getItem();
-            else
-                item = new ItemStack(Material.getMaterial(args[0]));
+        } else if (args[0].equalsIgnoreCase("delete") && args.length == 2) {
+            Stand stand = Stand.getStand(args[1]);
 
-        } catch (Exception e) {
-            LangMessage.sendMessage(player, "command.wrongSyntax");
-            return false;
+            if (stand == null) {
+                LangMessage.sendMessage(player, "command.standNotFound");
+                return false;
+            }
+            stand.destroy();
+            return true;
+
+        } else {
+
+            if (args.length != 2) {
+                LangMessage.sendMessage(player, "command.wrongSyntax");
+                return false;
+            }
+
+            try {
+                price = Integer.parseInt(args[1]);
+
+                CustomMaterial customMaterial = CustomMaterial.getByName(args[0]);
+
+                if (customMaterial != null)
+                    item = new CustomItemStack(customMaterial, 1).getItem();
+                else
+                    item = new ItemStack(Material.getMaterial(args[0]));
+
+            } catch (Exception e) {
+                LangMessage.sendMessage(player, "command.wrongSyntax");
+                return false;
+            }
+
+            LangMessage.sendMessage(player, "command.standCreate");
+            new Stand(player.getLocation(), price, item);
+            return true;
         }
-
-
-        LangMessage.sendMessage(player, "command.standCreate");
-        new Stand(player.getLocation(), price, item);
-        return true;
 
     }
 }

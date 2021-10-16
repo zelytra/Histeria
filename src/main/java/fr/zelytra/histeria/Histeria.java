@@ -42,6 +42,7 @@ import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.market.shop.Shop;
+import fr.zelytra.histeria.managers.market.stand.StandSerializer;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
@@ -97,6 +98,7 @@ public final class Histeria extends JavaPlugin {
         shop = new Shop();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
+        StandSerializer.loadAll();
 
         visualTeamManager = new VisualTeamManager();
         logs.log("Histeria successfully start", LogType.INFO);
