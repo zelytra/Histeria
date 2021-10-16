@@ -40,6 +40,8 @@ public abstract class StandSerializer {
     public static void loadAll() {
         String currentDir = Histeria.getInstance().getDataFolder().getPath();
         File folder = new File(currentDir + File.separator + "stands");
+        folder.mkdir();
+
         Histeria.log("§aLoading stands...", LogType.INFO);
         for (File file : folder.listFiles()) {
             try {
@@ -50,7 +52,7 @@ public abstract class StandSerializer {
                 e.printStackTrace();
             }
         }
-        Histeria.log("§a"+Stand.serverStands.size()+" stands loaded !", LogType.INFO);
+        Histeria.log("§a" + Stand.serverStands.size() + " stands loaded !", LogType.INFO);
     }
 
     public static void remove(Stand stand) {
@@ -58,7 +60,7 @@ public abstract class StandSerializer {
         File folder = new File(currentDir + File.separator + "stands");
         File file = new File(folder.getPath() + File.separator + stand.getUUID() + ".stand");
 
-        if(file.exists())
+        if (file.exists())
             file.delete();
 
     }
