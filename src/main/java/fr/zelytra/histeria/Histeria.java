@@ -36,6 +36,7 @@ import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
+import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -58,7 +59,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -110,10 +111,6 @@ public final class Histeria extends JavaPlugin {
     public void onDisable() {
         configurationManager.unload();
         CustomPlayer.forceSaveAll();
-
-        //TODO Save all data of players in case of shutting down server
-
-
     }
 
     private void regCommands() {
@@ -202,7 +199,7 @@ public final class Histeria extends JavaPlugin {
     }
 
     private void regRepeatingTask() {
-
+        Afk.startAfkListener();
     }
 
     private void loadAPI() {

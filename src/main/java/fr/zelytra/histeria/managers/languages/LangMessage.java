@@ -34,6 +34,7 @@ public abstract class LangMessage {
             assert customPlayer != null;
             player.sendMessage(Message.PLAYER_PREFIX.getMsg() + customPlayer.getLang().get(messageTag));
         }
+        Bukkit.getConsoleSender().sendMessage(Message.PLAYER_PREFIX.getMsg() + Lang.EN.get(messageTag));
     }
 
     public static void broadcast(String prefix, String messageTag, String suffix) {
@@ -42,6 +43,7 @@ public abstract class LangMessage {
             assert customPlayer != null;
             player.sendMessage(prefix + customPlayer.getLang().get(messageTag) + suffix);
         }
+        Bukkit.getConsoleSender().sendMessage(Message.PLAYER_PREFIX.getMsg() + Lang.EN.get(messageTag));
     }
 
     public static void sendTitle(Player player, String titleMessageTag, String subtitleMessageTag, int fadeIn, int stay, int fadeOut) {

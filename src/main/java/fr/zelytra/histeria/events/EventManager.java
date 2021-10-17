@@ -34,6 +34,7 @@ import fr.zelytra.histeria.events.items.projectile.Shuriken;
 import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.*;
+import fr.zelytra.histeria.managers.afk.AfkListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
 import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
@@ -66,6 +67,7 @@ public class EventManager {
         pm.registerEvents(new InventoryListener(), pl);
         pm.registerEvents(new WorldSpawnListener(), pl);
         pm.registerEvents(new ReloadingServer(), pl);
+        pm.registerEvents(new AfkListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

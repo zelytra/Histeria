@@ -50,7 +50,6 @@ public class PlayerJoinVisual implements Listener {
         Histeria.visualTeamManager.getTeamOf(player).removeEntry(player.getName());
         GroupFX groupFX = GroupFX.getByName(Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player).getPrimaryGroup());
         Histeria.visualTeamManager.getTeamOf(groupFX).addEntry(player.getName());
-
         player.playerListName(Component.text()
                 .content(" " + groupFX.getBadge().toString())
                 .append(Component.text().content(" " + player.getName()).color(groupFX.getNameColor()))

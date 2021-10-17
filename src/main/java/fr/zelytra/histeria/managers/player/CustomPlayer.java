@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.player;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.moderation.Ban.Ban;
 import fr.zelytra.histeria.commands.moderation.Mute.Mute;
+import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -50,6 +51,7 @@ public class CustomPlayer {
     private final Bank bank;
     private Mute mute;
     private Ban ban;
+    private Afk afk;
 
     //TODO Home
 
@@ -57,6 +59,7 @@ public class CustomPlayer {
         this.name = player.getName();
         this.bank = new Bank(this);
         this.uuid = player.getUniqueId().toString();
+        this.afk = new Afk(player);
 
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
@@ -74,6 +77,10 @@ public class CustomPlayer {
 
         });
 
+    }
+
+    public static List<CustomPlayer> getList() {
+        return customPlayerList;
     }
 
 
@@ -211,6 +218,10 @@ public class CustomPlayer {
 
     public void ban(int time, String reason, @NotNull Player staff) {
         this.ban = new Ban(System.currentTimeMillis(), time, reason, staff.getName());
+    }
+
+    public boolean isAFK() {
+        return afk.isAFK();
     }
 
     @Nullable
@@ -360,6 +371,14 @@ public class CustomPlayer {
         this.lang = lang;
     }
 
+    public Afk getAfk() {
+        return this.afk;
+    }
+
+    public boolean wasAFK() {
+        return this.afk.wasAFK(getPlayer());
+    }
+
     public static void forceSaveAll() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -378,4 +397,6 @@ public class CustomPlayer {
         }
 
     }
+
+
 }
