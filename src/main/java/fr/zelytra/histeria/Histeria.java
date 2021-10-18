@@ -175,6 +175,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("spawn").setExecutor(new WorldSpawn());
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("shop").setExecutor(new ShopCommand());
+        getCommand("afk").setExecutor(new AfkCommand());
 
         /* Ban */
         getCommand("hban").setExecutor(new BanCommand());

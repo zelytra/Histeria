@@ -26,7 +26,7 @@ public class Afk {
     private long lastSeenTime;
     private boolean afk;
 
-    private final static int afkTime = 300; //AFK limit in seconds
+    private final static int afkTime = 10; //AFK limit in seconds
     private final static int kickTime = 600; //AFK Kick limit in seconds
     private final static int maxPlayer = 50; //AFK kick player limit
 
@@ -53,6 +53,10 @@ public class Afk {
 
     public void setAfk(boolean afk) {
         this.afk = afk;
+    }
+
+    public long getLastSeenTime() {
+        return lastSeenTime;
     }
 
     public static void startAfkListener() {

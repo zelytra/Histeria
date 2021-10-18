@@ -188,3 +188,7 @@ commands:
     description: Stand
     permission: histeria.stand
 
+  afk:
+    description: Show player afk time
+    permission : histeria.afk
+
