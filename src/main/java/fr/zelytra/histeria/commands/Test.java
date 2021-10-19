@@ -9,9 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.managers.items.CustomItemStack;
-import fr.zelytra.histeria.managers.items.CustomMaterial;
-import fr.zelytra.histeria.managers.market.stand.Stand;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +20,7 @@ public class Test implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;
-        new Stand(player.getLocation(),1000000,new CustomItemStack(CustomMaterial.NOCTURITE_CORE,1).getItem());
+        player.sendTitle(Emote.FIGHT.toString(), "", 0, 10000, 0);
         return true;
     }
 }
