@@ -32,6 +32,7 @@ public class VisualTeamManager {
             newTeam.prefix(Component.text().content(team.getBadge().toString() + " ").build());
 
             newTeam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
+            newTeam.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
 
         }
 

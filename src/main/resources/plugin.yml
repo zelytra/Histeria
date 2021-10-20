@@ -192,3 +192,11 @@ commands:
     description: Show player afk time
     permission : histeria.afk
 
+  vanish:
+    description: Vanish player on the server
+    permission: histeria.vanish
+
+  unvanish:
+    description: Unvanish player on the server
+    permission: histeria.vanish
+

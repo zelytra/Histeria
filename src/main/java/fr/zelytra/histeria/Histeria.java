@@ -32,6 +32,7 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
+import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -59,7 +60,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -176,6 +177,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("afk").setExecutor(new AfkCommand());
+
+        /* Vanish */
+        getCommand("vanish").setExecutor(new Vanish());
+        getCommand("unvanish").setExecutor(new Vanish());
 
         /* Ban */
         getCommand("hban").setExecutor(new BanCommand());

@@ -14,6 +14,7 @@ import fr.zelytra.histeria.commands.freeze.FreezeListener;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
 import fr.zelytra.histeria.commands.moderation.Ban.BanListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
+import fr.zelytra.histeria.commands.vanish.VanishListener;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawnListener;
 import fr.zelytra.histeria.events.blocks.Elevator;
@@ -68,6 +69,7 @@ public class EventManager {
         pm.registerEvents(new WorldSpawnListener(), pl);
         pm.registerEvents(new ReloadingServer(), pl);
         pm.registerEvents(new AfkListener(), pl);
+        pm.registerEvents(new VanishListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
