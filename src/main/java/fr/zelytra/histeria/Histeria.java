@@ -32,6 +32,7 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
+import fr.zelytra.histeria.commands.tpa.Tpa;
 import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
@@ -178,6 +179,11 @@ public final class Histeria extends JavaPlugin {
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("afk").setExecutor(new AfkCommand());
         getCommand("randomtp").setExecutor(new RandomTp());
+
+        /* TPA */
+        getCommand("tpa").setExecutor(new Tpa());
+        getCommand("tpaccept").setExecutor(new Tpa());
+        getCommand("tpdeny").setExecutor(new Tpa());
 
         /* Vanish */
         getCommand("vanish").setExecutor(new Vanish());

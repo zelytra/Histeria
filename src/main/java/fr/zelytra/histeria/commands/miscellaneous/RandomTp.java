@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class RandomTp implements CommandExecutor {
 
-    private final int cd = 900; // time in seconds
+    private final int cd = 1800; // time in seconds
     private final String cdTag = "randomTP";
     private List<Material> blackListMaterial = new ArrayList<>();
 

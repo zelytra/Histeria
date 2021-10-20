@@ -206,4 +206,15 @@ commands:
     aliases:
       - rtp
 
+  tpa:
+    description: Teleport a player to another player
+    permission: histeria.tpa
+
+  tpaccept:
+    description: Accept the teleportation of player to an other
+    permission: histeria.tpa
+
+  tpdeny:
+    description: Deny the teleportation of player to an other
+    permission: histeria.tpa
 
