@@ -9,7 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.Histeria;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,7 +21,8 @@ public class Test implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         Player player = (Player) sender;
-        player.sendTitle(Emote.FIGHT.toString(), "", 0, 10000, 0);
+        //player.sendTitle(Emote.FIGHT.toString(), "", 0, 10000, 0);
+        Histeria.clearLag.run();
         return true;
 
     }

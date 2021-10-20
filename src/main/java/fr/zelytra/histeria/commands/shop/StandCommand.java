@@ -31,6 +31,11 @@ public class StandCommand implements CommandExecutor {
         int price;
         ItemStack item;
 
+        if(args.length==0){
+            LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
+            return false;
+        }
+
         if (args[0].equalsIgnoreCase("list")) {
             player.sendMessage("§8---------------§6 [ Stands ] §8---------------");
 

@@ -39,6 +39,7 @@ import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.afk.Afk;
+import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -61,13 +62,14 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
     public static MySQL mySQL;
     public static Shop shop;
+    public static ClearLag clearLag;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
     public static VisualTeamManager visualTeamManager;
@@ -99,6 +101,7 @@ public final class Histeria extends JavaPlugin {
         logs = new Logs();
         mySQL = new MySQL();
         shop = new Shop();
+        clearLag = new ClearLag();
         configurationManager = new ConfigurationManager();
         configurationManager.load();
         StandSerializer.loadAll();
