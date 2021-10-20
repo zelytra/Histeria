@@ -200,3 +200,10 @@ commands:
     description: Unvanish player on the server
     permission: histeria.vanish
 
+  randomtp:
+    description: Teleport the player in a random place of the world
+    permission: histeria.randomtp
+    aliases:
+      - rtp
+
+
