@@ -70,11 +70,10 @@ public class PacketSender {
 
     private Socket connexion() {
         try {
-            final String server = "localhost";
-            final int port = 6999;
+            SynchroConfig synchroConfig = new SynchroConfig();
 
-            InetAddress serveur = InetAddress.getByName(server);
-            return new Socket(serveur, port);
+            InetAddress serveur = InetAddress.getByName(synchroConfig.getHost());
+            return new Socket(serveur, synchroConfig.getPort());
         } catch (Exception e) {
             Histeria.log("§cFailed to connect to sync server",LogType.ERROR);
         }

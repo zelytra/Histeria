@@ -19,8 +19,10 @@ import org.jetbrains.annotations.NotNull;
 public class Test implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
         Player player = (Player) sender;
         player.sendTitle(Emote.FIGHT.toString(), "", 0, 10000, 0);
         return true;
+
     }
 }
