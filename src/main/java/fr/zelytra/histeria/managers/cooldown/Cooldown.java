@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.cooldown;
 
 import fr.zelytra.histeria.utils.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -17,9 +18,10 @@ import java.util.Map;
 
 
 public class Cooldown {
-    private static final HashMap<Cooldown, Player> cooldownsList = new HashMap<>();
 
-    private final Player player;
+    private static final HashMap<Cooldown, String> cooldownsList = new HashMap<>();
+
+    private final String playerName;
     private final long checkTime;
 
     private final String tag;
@@ -33,14 +35,14 @@ public class Cooldown {
      */
 
     public Cooldown(Player p, long timeSeconds, String tag) {
-        this.player = p;
+        this.playerName = p.getName();
         this.checkTime = System.currentTimeMillis() + timeSeconds * 1000;
         this.tag = tag;
-        cooldownsList.put(this, p);
+        cooldownsList.put(this, playerName);
     }
 
     public Player getPlayer() {
-        return this.player;
+        return Bukkit.getPlayer(this.playerName);
     }
 
     public String getTag() {
@@ -90,9 +92,10 @@ public class Cooldown {
      */
 
     public static boolean cooldownCheck(Player player, String tag) {
+
         Cooldown toRemove = null;
-        for (Map.Entry<Cooldown, Player> entry : cooldownsList.entrySet()) {
-            if (entry.getKey().getTag().equalsIgnoreCase(tag) && entry.getValue().getUniqueId() == player.getUniqueId()) {
+        for (Map.Entry<Cooldown, String> entry : cooldownsList.entrySet()) {
+            if (entry.getKey().getTag().equalsIgnoreCase(tag) && entry.getValue().equalsIgnoreCase(player.getName())) {
                 toRemove = entry.getKey();
                 if (!toRemove.isFinished()) {
                     player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6You need to wait " + toRemove);
