@@ -93,6 +93,9 @@ public class Stand implements Serializable {
         i.setCanPlayerPickup(false);
         i.setCanMobPickup(false);
         i.getPersistentDataContainer().set(shopKey, PersistentDataType.STRING, uuid);
+        ItemMeta meta = i.getItemStack().getItemMeta();
+        meta.getPersistentDataContainer().set(shopKey, PersistentDataType.STRING, uuid);
+        i.getItemStack().setItemMeta(meta);
 
         // Glasse armorstant
         Location standPos = location;

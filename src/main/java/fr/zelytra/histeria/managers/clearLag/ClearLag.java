@@ -37,7 +37,6 @@ public class ClearLag {
         for (World world : Bukkit.getWorlds()) {
             for (Entity entity : world.getEntities()) {
                 if (entity.getType() == EntityType.DROPPED_ITEM) {
-                    System.out.println(((Item) entity).getItemStack());
                     if (Stand.getStand(((Item) entity).getItemStack()) != null)
                         continue;
                     entity.remove();
