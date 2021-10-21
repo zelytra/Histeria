@@ -16,6 +16,7 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public enum LootsEnum {
+
     /* Cobble stone crusher */
     CC_OBSIDIAN(new ItemStack(Material.OBSIDIAN), 20),
     CC_DIAMOND(new ItemStack(Material.DIAMOND), 10),
