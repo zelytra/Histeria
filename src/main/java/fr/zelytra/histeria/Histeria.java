@@ -28,6 +28,8 @@ import fr.zelytra.histeria.commands.moderation.Ban.UnBanCommand;
 import fr.zelytra.histeria.commands.moderation.Ban.UnBanTab;
 import fr.zelytra.histeria.commands.moderation.HKick;
 import fr.zelytra.histeria.commands.moderation.Mute.MuteCommand;
+import fr.zelytra.histeria.commands.moderation.Mute.UnMuteCommand;
+import fr.zelytra.histeria.commands.moderation.Mute.UnMuteTab;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
@@ -179,7 +181,6 @@ public final class Histeria extends JavaPlugin {
         getCommand("hkick").setExecutor(new HKick());
         getCommand("setspawn").setExecutor(new WorldSpawn());
         getCommand("spawn").setExecutor(new WorldSpawn());
-        getCommand("mute").setExecutor(new MuteCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("afk").setExecutor(new AfkCommand());
         getCommand("randomtp").setExecutor(new RandomTp());
@@ -199,6 +200,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("unban").setExecutor(new UnBanCommand());
         getCommand("unban").setTabCompleter(new UnBanTab());
 
+        /* Mute */
+        getCommand("mute").setExecutor(new MuteCommand());
+        getCommand("unmute").setExecutor(new UnMuteCommand());
+        getCommand("unmute").setTabCompleter(new UnMuteTab());
 
     }
 

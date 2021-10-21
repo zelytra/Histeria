@@ -172,6 +172,10 @@ commands:
     description: Mute a player
     permission: histeria.mute
 
+  unmute:
+    description: Unmute a player
+    permission: histeria.mute
+
   hban:
     description: Ban a player
     permission: histeria.ban

@@ -25,7 +25,7 @@ public class AfkListener implements Listener {
     public void onPlayerLeaveAFK(PlayerMoveEvent e) {
         if (Math.abs(e.getTo().getX() - e.getFrom().getX()) >= 0.15 || Math.abs(e.getTo().getZ() - e.getFrom().getZ()) >= 0.15) {
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
-            if (customPlayer.wasAFK()) {
+            if (customPlayer != null && customPlayer.wasAFK()) {
                 LangMessage.broadcast("§7" + e.getPlayer().getName() + " ", "afk.noLonger", "");
                 customPlayer.getAfk().setAfk(false);
                 customPlayer.getAfk().setCurrentLocation(customPlayer.getPlayer().getLocation());
