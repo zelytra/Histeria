@@ -218,3 +218,7 @@ commands:
     description: Deny the teleportation of player to an other
     permission: histeria.tpa
 
+  clearlag:
+    description: Run clearlag execution
+    permission: histeria.clearlag
+

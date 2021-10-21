@@ -182,6 +182,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("afk").setExecutor(new AfkCommand());
         getCommand("randomtp").setExecutor(new RandomTp());
+        getCommand("clearlag").setExecutor(new ClearLagCommand());
 
         /* TPA */
         getCommand("tpa").setExecutor(new Tpa());
