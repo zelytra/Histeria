@@ -41,6 +41,7 @@ import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
+import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
@@ -217,6 +218,7 @@ public final class Histeria extends JavaPlugin {
 
     private void regRepeatingTask() {
         Afk.startAfkListener();
+        HGuardListener.startEntityKiller();
     }
 
     private void loadAPI() {

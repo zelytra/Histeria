@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.events.items.projectile;
 
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemLaunchEvent;
+import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -25,7 +26,7 @@ public class Dynamite implements Listener {
     @EventHandler
     public void launch(CustomItemLaunchEvent e) {
 
-        if(e.isCancelled()) return;
+        if (e.isCancelled()) return;
 
         if (e.getMaterial() == customMaterial)
             e.getEvent().getEntity().setCustomName(customMaterial.getName());
@@ -37,6 +38,9 @@ public class Dynamite implements Listener {
         if (e.getEntity().getCustomName() == null || !(e.getEntity().getCustomName().equals(customMaterial.getName()))) {
             return;
         }
+
+        if (HGuard.getByLocation(e.getEntity().getLocation()) != null) return;
+
         if (e.getHitEntity() != null) {
             explode(e.getHitEntity().getLocation());
             e.getHitEntity().getWorld().spawnParticle(Particle.EXPLOSION_LARGE, e.getHitEntity().getLocation(), 10);
@@ -80,6 +84,7 @@ public class Dynamite implements Listener {
                 || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME) {
             return false;
         }
+        if (HGuard.getByLocation(BLocation) != null) return false;
         int proba;
         switch (BLocation.getBlock().getType()) {
             case OBSIDIAN:

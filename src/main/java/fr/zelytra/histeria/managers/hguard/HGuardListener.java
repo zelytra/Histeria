@@ -13,7 +13,10 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemLaunchEvent;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
 import net.luckperms.api.model.user.User;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,7 +29,36 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HGuardListener implements Listener {
+    private final static List<EntityType> whitelist = new ArrayList<>();
+
+    {
+        whitelist.add(EntityType.ITEM_FRAME);
+        whitelist.add(EntityType.ARMOR_STAND);
+        whitelist.add(EntityType.DROPPED_ITEM);
+        whitelist.add(EntityType.FIREWORK);
+        whitelist.add(EntityType.SNOWBALL);
+        whitelist.add(EntityType.ARROW);
+    }
+
+    public static void startEntityKiller() {
+        Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
+
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                for (Entity entity : player.getLocation().getNearbyEntities(64, 64, 64)) {
+                    if (HGuard.getByLocation(entity.getLocation()) == null)
+                        continue;
+
+                    if (!(entity instanceof Player) && !whitelist.contains(entity.getType()))
+                        entity.remove();
+
+                }
+            }
+        }, 0L, 10L);
+    }
 
     //TODO Clean the code
 
@@ -263,6 +295,18 @@ public class HGuardListener implements Listener {
             return;
         }
         HGuard hguard = HGuard.getByLocation(e.getEntity().getLocation());
+
+        if (e instanceof EntityDamageByEntityEvent) {
+            EntityDamageByEntityEvent damageByEntityEvent = (EntityDamageByEntityEvent) e;
+            if (damageByEntityEvent.getDamager() instanceof Player) {
+                if (Histeria.getLuckPerms() != null) {
+                    User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser((Player) damageByEntityEvent.getDamager());
+                    if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
+                        return;
+                }
+            }
+        }
+
         if (!hguard.isPvp())
             e.setCancelled(true);
         else if (e.getCause() == EntityDamageEvent.DamageCause.FALL)
