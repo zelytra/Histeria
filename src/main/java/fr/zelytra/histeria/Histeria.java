@@ -37,6 +37,7 @@ import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
 import fr.zelytra.histeria.commands.tpa.Tpa;
 import fr.zelytra.histeria.commands.vanish.Vanish;
+import fr.zelytra.histeria.commands.vote.Vote;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -99,8 +100,9 @@ public final class Histeria extends JavaPlugin {
         regPluginMessage();
         setupServer();
         EventManager.regEvents(this);
-        new CraftManager();
 
+        new CraftManager();
+        new Vote();
         lootTableManager = new LootTableManager();
         logs = new Logs();
         mySQL = new MySQL();
