@@ -136,10 +136,12 @@ public class KitCommand implements CommandExecutor, Listener {
 
         List<ItemStack> items = kit.getItemList();
 
-        content[10] = items.get(0);
-        content[19] = items.get(1);
-        content[28] = items.get(2);
-        content[37] = items.get(3);
+        if (items.size() >= 4) {
+            content[10] = items.get(0);
+            content[19] = items.get(1);
+            content[28] = items.get(2);
+            content[37] = items.get(3);
+        }
 
         int count = 4;
         for (int x = 12; x <= 16; x++) {

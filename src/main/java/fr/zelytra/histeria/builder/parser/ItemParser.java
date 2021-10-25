@@ -9,8 +9,10 @@
 
 package fr.zelytra.histeria.builder.parser;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.logs.LogType;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -69,9 +71,14 @@ public class ItemParser {
     public List<ItemStack> getListOf(String tag) {
         List<ItemStack> items = new ArrayList<>();
 
+        if (config.getConfigurationSection(tag) == null) {
+            Histeria.log("LootParser problem with : " + tag, LogType.ERROR);
+            return items;
+        }
+
         for (String loot : config.getConfigurationSection(tag).getKeys(false)) {
 
-            if (config.getString(tag + "." + loot + ".material") == null){
+            if (config.getString(tag + "." + loot + ".material") == null) {
                 items.add(new ItemStack(Material.AIR));
                 continue;
             }
@@ -86,8 +93,8 @@ public class ItemParser {
 
                 customMaterial = CustomMaterial.getByName(config.getString(tag + "." + loot + ".material"));
 
-                if(customMaterial == null){
-                    System.out.println("LootParser problem with : " + config.getString(tag + "." + loot + ".material").toUpperCase());
+                if (customMaterial == null) {
+                    Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".material").toUpperCase(), LogType.ERROR);
                     continue;
                 }
 
@@ -99,7 +106,7 @@ public class ItemParser {
             /* Enchant reader */
             if (config.getString(tag + "." + loot + ".enchant.type") != null) {
                 if (Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()) == null) {
-                    System.out.println("LootParser problem with : " + config.getString(tag + "." + loot + ".enchant.type").toUpperCase());
+                    Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".enchant.type").toUpperCase(), LogType.ERROR);
                     continue;
                 }
                 if (material != Material.ENCHANTED_BOOK) {
@@ -114,7 +121,7 @@ public class ItemParser {
             /* Potion reader */
             if (config.getString(tag + "." + loot + ".effect.type") != null) {
                 if (PotionEffectType.getByName(config.getString(tag + "." + loot + ".effect.type").toUpperCase()) == null) {
-                    System.out.println("LootParser problem with : " + config.getString(tag + "." + loot + ".effect.type").toUpperCase());
+                    Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".effect.type").toUpperCase(), LogType.ERROR);
                     continue;
                 }
                 if (material == Material.POTION || material == Material.SPLASH_POTION) {
@@ -132,7 +139,7 @@ public class ItemParser {
                     item.setItemMeta(meta);
 
                 } else {
-                    System.out.println("LootParser problem : Cannot add potion effect on " + config.getString(tag + "." + loot) + " item type");
+                    Histeria.log("LootParser problem : Cannot add potion effect on " + config.getString(tag + "." + loot) + " item type", LogType.ERROR);
                 }
 
             }
