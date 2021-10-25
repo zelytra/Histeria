@@ -29,9 +29,11 @@ public class ChestExplorer implements Listener {
     public void onInteract(CustomItemUseEvent e) {
 
         if (e.getMaterial() != customMaterial) return;
-        if(e.isCancelled()) return;
+        if (e.isCancelled()) return;
 
         Player player = e.getPlayer();
+
+        if (e.getEvent().getClickedBlock() == null) return;
 
         if (e.getEvent().getClickedBlock().getType() == Material.CHEST || e.getEvent().getClickedBlock().getType() == Material.TRAPPED_CHEST) {
 
