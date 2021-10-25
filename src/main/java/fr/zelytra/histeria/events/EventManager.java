@@ -12,6 +12,7 @@ package fr.zelytra.histeria.events;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.freeze.FreezeListener;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
+import fr.zelytra.histeria.commands.kit.KitCommand;
 import fr.zelytra.histeria.commands.moderation.Ban.BanListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.vanish.VanishListener;
@@ -78,6 +79,7 @@ public class EventManager {
         pm.registerEvents(new Wiki(), pl);
         pm.registerEvents(new ShopListener(), pl);
         pm.registerEvents(new StandListener(), pl);
+        pm.registerEvents(new KitCommand(), pl);
 
         /* Items */
         pm.registerEvents(new CustomItemHandler(), pl);

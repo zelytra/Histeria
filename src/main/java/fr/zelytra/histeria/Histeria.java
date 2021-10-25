@@ -20,6 +20,7 @@ import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.hguard.HGuardCreator;
 import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
+import fr.zelytra.histeria.commands.kit.KitCommand;
 import fr.zelytra.histeria.commands.lang.LangCommand;
 import fr.zelytra.histeria.commands.lang.LangTabCommand;
 import fr.zelytra.histeria.commands.miscellaneous.*;
@@ -185,6 +186,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("afk").setExecutor(new AfkCommand());
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
+        getCommand("kit").setExecutor(new KitCommand());
 
         /* TPA */
         getCommand("tpa").setExecutor(new Tpa());

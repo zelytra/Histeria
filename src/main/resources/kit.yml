@@ -1,10 +1,30 @@
 Histerien:
   item1:
-    material:
-    amount:
+    material: CARVED_PUMPKIN
+    amount: 1
   item2:
     material:
-    amount:
+  item3:
+    material:
+  item4:
+    material:
+  item5:
+    material: STONE_SWORD
+    amount: 1
+  item6:
+    material: STONE_AXE
+    amount: 1
+  item7:
+    material: STONE_PICKAXE
+    amount: 1
+  item8:
+    material: COOKED_BEEF
+    amount: 16
+  item9:
+    material: TORCH
+    amount: 32
+Vote:
+
 Lord:
 
 Monarch:
