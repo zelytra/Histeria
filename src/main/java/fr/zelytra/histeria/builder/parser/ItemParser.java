@@ -104,19 +104,40 @@ public class ItemParser {
             }
 
             /* Enchant reader */
-            if (config.getString(tag + "." + loot + ".enchant.type") != null) {
-                if (Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()) == null) {
-                    Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".enchant.type").toUpperCase(), LogType.ERROR);
-                    continue;
-                }
-                if (material != Material.ENCHANTED_BOOK) {
-                    ItemMeta meta = item.getItemMeta();
-                    meta.addEnchant(Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()), config.getInt(config.getString(tag + "." + loot + ".enchant.level")), true);
-                    item.setItemMeta(meta);
+            if (config.getConfigurationSection(tag + "." + loot + ".enchant") != null) {
+                if (config.getConfigurationSection(tag + "." + loot + ".enchant").getKeys(true).size() == 2) {
+
+                    if (Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()) == null) {
+                        Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".enchant.type").toUpperCase(), LogType.ERROR);
+                        continue;
+                    }
+
+                    if (material != Material.ENCHANTED_BOOK) {
+                        ItemMeta meta = item.getItemMeta();
+                        meta.addEnchant(Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()), config.getInt(tag + "." + loot + ".enchant.level"), true);
+                        item.setItemMeta(meta);
+                    } else {
+                        item = bookEnchantedItemStack(material, Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()), config.getInt(tag + "." + loot + ".enchant.level"));
+                    }
                 } else {
-                    item = bookEnchantedItemStack(material, Enchantment.getByName(config.getString(tag + "." + loot + ".enchant.type").toUpperCase()), config.getInt(tag + "." + loot + ".enchant.level"));
+                    for (String enchantTag : config.getConfigurationSection(tag + "." + loot + ".enchant").getKeys(false)) {
+
+                        if (Enchantment.getByName(config.getString(tag + "." + loot + ".enchant." + enchantTag + ".type").toUpperCase()) == null) {
+                            Histeria.log("LootParser problem with : " + config.getString(tag + "." + loot + ".enchant." + enchantTag + ".type").toUpperCase(), LogType.ERROR);
+                            continue;
+                        }
+
+                        if (material != Material.ENCHANTED_BOOK) {
+                            ItemMeta meta = item.getItemMeta();
+                            meta.addEnchant(Enchantment.getByName(config.getString(tag + "." + loot + ".enchant." + enchantTag + ".type").toUpperCase()), config.getInt(tag + "." + loot + ".enchant." + enchantTag + ".level"), true);
+                            item.setItemMeta(meta);
+                        } else {
+                            item = bookEnchantedItemStack(material, Enchantment.getByName(config.getString(tag + "." + loot + ".enchant." + enchantTag + ".type").toUpperCase()), config.getInt(tag + "." + loot + ".enchant." + enchantTag + ".level"));
+                        }
+                    }
                 }
             }
+
 
             /* Potion reader */
             if (config.getString(tag + "." + loot + ".effect.type") != null) {

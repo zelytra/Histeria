@@ -199,13 +199,13 @@ public class KitCommand implements CommandExecutor, Listener {
             }
 
             int time = getClaimDelta(player, kitEnum);
-            if (time < kitEnum.getCoolDown()) {
+            if (!Utils.canByPass(player) && time < kitEnum.getCoolDown()) {
                 LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "kit.coolDown", TimeFormater.display(kitEnum.getCoolDown() - time));
                 return;
             }
 
             Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
-                LangMessage.sendMessage(player,"kit.claimKitText");
+                LangMessage.sendMessage(player, "kit.claimKitText");
                 for (ItemStack item : new Kit(kitEnum).getItemList()) {
                     player.getInventory().addItem(item);
                 }
