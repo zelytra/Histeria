@@ -20,8 +20,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.Objects;
-
 public class PlayerJoinVisual implements Listener {
 
 
@@ -37,10 +35,12 @@ public class PlayerJoinVisual implements Listener {
 
 
     public static void onParentChange(UserDataRecalculateEvent e) {
-        Player player = Bukkit.getPlayer(Objects.requireNonNull(e.getUser().getUsername()));
+        if (e.getUser() != null && e.getUser().getUsername() != null) {
+            Player player = Bukkit.getPlayer(e.getUser().getUsername());
 
-        if (player != null)
-            updateFX(player);
+            if (player != null)
+                updateFX(player);
+        }
 
     }
 

@@ -1,4 +1,4 @@
-Histerien:
+default:
   item1:
     material: CARVED_PUMPKIN
     amount: 1
@@ -23,43 +23,13 @@ Histerien:
   item9:
     material: TORCH
     amount: 32
-  item10:
-    material: COBBLESTONE
+vote:
+  item6:
+    material: STONE_AXE
     amount: 1
-  item11:
-    material: COBBLESTONE
-    amount: 2
-  item12:
-    material: COBBLESTONE
-    amount: 3
-  item13:
-    material: COBBLESTONE
-    amount: 4
-  item14:
-    material: COBBLESTONE
-    amount: 5
-  item15:
-    material: COBBLESTONE
-    amount: 6
-  item16:
-    material: COBBLESTONE
-    amount: 7
-  item17:
-    material: COBBLESTONE
-    amount: 8
-  item18:
-    material: COBBLESTONE
-    amount: 9
-  item19:
-    material: COBBLESTONE
-    amount: 10
-  item20:
-    material: COBBLESTONE
-    amount: 11
-Vote:
 
-Lord:
+lord:
 
-Monarch:
+monarch:
 
-DemiGod:
+demigod:

@@ -9,13 +9,20 @@
 
 package fr.zelytra.histeria.commands.kit;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
 import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.kit.Kit;
 import fr.zelytra.histeria.managers.kit.KitEnum;
+import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.TimeFormater;
+import fr.zelytra.histeria.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,6 +35,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class KitCommand implements CommandExecutor, Listener {
@@ -55,22 +64,32 @@ public class KitCommand implements CommandExecutor, Listener {
                         case IRON_BLOCK:
                             if (e.getClick() == ClickType.RIGHT)
                                 openKitDisplay((Player) e.getWhoClicked(), KitEnum.DEFAULT);
+                            else
+                                giveKit((Player) e.getWhoClicked(), KitEnum.DEFAULT);
                             break;
                         case GOLD_BLOCK:
                             if (e.getClick() == ClickType.RIGHT)
                                 openKitDisplay((Player) e.getWhoClicked(), KitEnum.VOTE);
+                            else
+                                giveKit((Player) e.getWhoClicked(), KitEnum.VOTE);
                             break;
                         case DIAMOND_BLOCK:
                             if (e.getClick() == ClickType.RIGHT)
                                 openKitDisplay((Player) e.getWhoClicked(), KitEnum.LORD);
+                            else
+                                giveKit((Player) e.getWhoClicked(), KitEnum.LORD);
                             break;
                         case PURPUR_BLOCK:
                             if (e.getClick() == ClickType.RIGHT)
                                 openKitDisplay((Player) e.getWhoClicked(), KitEnum.MONARCH);
+                            else
+                                giveKit((Player) e.getWhoClicked(), KitEnum.MONARCH);
                             break;
                         case PURPUR_PILLAR:
                             if (e.getClick() == ClickType.RIGHT)
                                 openKitDisplay((Player) e.getWhoClicked(), KitEnum.DEMIGOD);
+                            else
+                                giveKit((Player) e.getWhoClicked(), KitEnum.DEMIGOD);
                             break;
                         case BARRIER:
                             openMenu((Player) e.getWhoClicked());
@@ -171,7 +190,50 @@ public class KitCommand implements CommandExecutor, Listener {
 
     }
 
-    private void giveKit(Player player) {
+    private void giveKit(Player player, KitEnum kitEnum) {
+        Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
+            if (!(Utils.canByPass(player) || player.hasPermission("group." + kitEnum.getGroupName()))) {
+                LangMessage.sendMessage(player, "kit.noPermission");
+                return;
+            }
+
+            int time = getClaimDelta(player, kitEnum);
+            if (time < kitEnum.getCoolDown()) {
+                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "kit.coolDown", TimeFormater.display(kitEnum.getCoolDown() - time));
+                return;
+            }
+
+            Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+                LangMessage.sendMessage(player,"kit.claimKitText");
+                for (ItemStack item : new Kit(kitEnum).getItemList()) {
+                    player.getInventory().addItem(item);
+                }
+            });
+        });
+
+    }
+
+    private int getClaimDelta(Player player, KitEnum kitEnum) {
+        MySQL mySQL = Histeria.mySQL;
+        ResultSet result = mySQL.query("SELECT * FROM `Kit` WHERE `uuid` = '" + player.getUniqueId() + "' AND `kit` = '" + kitEnum.getGroupName() + "';");
+        try {
+            if (!result.next()) {
+                mySQL.update("INSERT INTO `Kit` (`uuid`,`kit`,`cooldown`) VALUE ('" + player.getUniqueId() + "','" + kitEnum.getGroupName() + "'," + System.currentTimeMillis() + ");");
+                result.close();
+                return kitEnum.getCoolDown() + 1;
+            } else {
+                long time = result.getLong("cooldown");
+                if (((System.currentTimeMillis() - time) / 1000) >= kitEnum.getCoolDown()) {
+                    mySQL.update("UPDATE `Kit` SET `cooldown` = " + System.currentTimeMillis() + " WHERE `uuid` = '" + player.getUniqueId() + "' AND `kit` = '" + kitEnum.getGroupName() + "';");
+                }
+
+                result.close();
+                return (int) ((System.currentTimeMillis() - time) / 1000);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
