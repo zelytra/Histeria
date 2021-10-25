@@ -230,3 +230,11 @@ commands:
     description: Open kit menu
     permission: histeria.kit
 
+  vote:
+    description: Show vote link
+    permission: histeria.vote
+
+  forcevote:
+    description: Force vote a player
+    permission: histeria.forcevote
+

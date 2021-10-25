@@ -69,14 +69,9 @@ public class Vote {
                     }
 
                     //Player has vote
-                    if (sb.toString().equalsIgnoreCase("1")) {
+                    if (sb.toString().equalsIgnoreCase("1"))
+                        vote(player);
 
-                        User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
-                        user.data().add(Node.builder("group.vote").expiry(Duration.ofHours(24)).build());
-                        Histeria.getLuckPerms().getUserManager().saveUser(user);
-                        LangMessage.sendMessage(player,"vote.voteSuccess");
-
-                    }
 
                 } catch (IOException e) {
                     Histeria.log("Failed to connect to website", LogType.WARN);
@@ -84,5 +79,12 @@ public class Vote {
 
             }
         }, timer * 20, timer * 20);
+    }
+
+    public void vote(Player player) {
+        User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
+        user.data().add(Node.builder("group.vote").expiry(Duration.ofHours(24)).build());
+        Histeria.getLuckPerms().getUserManager().saveUser(user);
+        LangMessage.sendMessage(player, "vote.voteSuccess");
     }
 }

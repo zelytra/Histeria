@@ -38,6 +38,7 @@ import fr.zelytra.histeria.commands.shop.StandTab;
 import fr.zelytra.histeria.commands.tpa.Tpa;
 import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.commands.vote.Vote;
+import fr.zelytra.histeria.commands.vote.VoteCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
@@ -74,6 +75,7 @@ public final class Histeria extends JavaPlugin {
 
     public static MySQL mySQL;
     public static Shop shop;
+    public static Vote vote;
     public static ClearLag clearLag;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
@@ -102,7 +104,7 @@ public final class Histeria extends JavaPlugin {
         EventManager.regEvents(this);
 
         new CraftManager();
-        new Vote();
+        vote = new Vote();
         lootTableManager = new LootTableManager();
         logs = new Logs();
         mySQL = new MySQL();
@@ -198,6 +200,10 @@ public final class Histeria extends JavaPlugin {
         /* Vanish */
         getCommand("vanish").setExecutor(new Vanish());
         getCommand("unvanish").setExecutor(new Vanish());
+
+        /* Vote */
+        getCommand("vote").setExecutor(new VoteCommand());
+        getCommand("forcevote").setExecutor(new VoteCommand());
 
         /* Ban */
         getCommand("hban").setExecutor(new BanCommand());
