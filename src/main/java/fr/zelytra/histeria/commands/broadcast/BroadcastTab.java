@@ -24,7 +24,6 @@ public class BroadcastTab implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, @NotNull Command cmd, String msg, String[] arg) {
         List<String> commandsList = new ArrayList<>();
 
-
             if (arg.length == 1) {
                 commandsList.add("all");
                 commandsList.add("msg");
@@ -34,7 +33,6 @@ public class BroadcastTab implements TabCompleter {
 
                 return commandsList;
             }
-
 
         return commandsList;
 

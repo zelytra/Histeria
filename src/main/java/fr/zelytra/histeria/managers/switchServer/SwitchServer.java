@@ -32,7 +32,7 @@ public class SwitchServer {
 
     public void switchTo(String serverName) {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-            String args[] = {"rien"};
+            String args[] = new String[1];
             args[0] = serverName;
 
             PacketSender packetSender = new PacketSender(player);

@@ -35,6 +35,8 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
+import fr.zelytra.histeria.commands.switchServer.SwitchServerCommand;
+import fr.zelytra.histeria.commands.switchServer.SwitchServerTab;
 import fr.zelytra.histeria.commands.tpa.Tpa;
 import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.commands.vote.Vote;
@@ -194,6 +196,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+
+        /* SwitchServer */
+        getCommand("switchserver").setExecutor(new SwitchServerCommand());
+        getCommand("switchserver").setTabCompleter(new SwitchServerTab());
 
         /* TPA */
         getCommand("tpa").setExecutor(new Tpa());

@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public class PluginMessage implements PluginMessageListener {
 
     @Override
@@ -38,7 +40,7 @@ public class PluginMessage implements PluginMessageListener {
                 Tab.updateFooterForAll();
                 break;
             case SERVERS_NAME:
-                Histeria.server.setServersList(in.readUTF().split(", "));
+                Histeria.server.setServersList(Arrays.asList(in.readUTF().split(", ")));
                 break;
         }
 

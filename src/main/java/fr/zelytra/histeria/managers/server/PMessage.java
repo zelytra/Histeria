@@ -37,7 +37,6 @@ public class PMessage {
         if (player == null) {
             task = Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
                 Player p = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
-                System.out.println(channel);
                 if (p != null) {
                     p.sendPluginMessage(Histeria.getInstance(), "BungeeCord", out.toByteArray());
                     Histeria.log("§aPMessage send on : "+channel, LogType.INFO);

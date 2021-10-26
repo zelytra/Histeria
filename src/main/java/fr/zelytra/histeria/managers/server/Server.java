@@ -9,10 +9,12 @@
 
 package fr.zelytra.histeria.managers.server;
 
+import java.util.List;
+
 public class Server {
 
     private String serverName = "§cNA";
-    private String[] serversList;
+    private List<String> serversList;
     private int playerCount = 0;
 
     public Server() {
@@ -29,7 +31,7 @@ public class Server {
         this.playerCount = playerCount;
     }
 
-    public void setServersList(String[] serversList) {
+    public void setServersList(List<String> serversList) {
         this.serversList = serversList;
     }
 
@@ -41,7 +43,7 @@ public class Server {
         return playerCount;
     }
 
-    public String[] getServersList() {
+    public List<String> getServersList() {
         return serversList;
     }
 

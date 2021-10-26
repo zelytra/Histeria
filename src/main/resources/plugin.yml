@@ -238,3 +238,7 @@ commands:
     description: Force vote a player
     permission: histeria.forcevote
 
+  switchserver:
+    description: Switch player(s) to other server
+    permission: histeria.switchserver
+
