@@ -11,22 +11,12 @@ default:
   item5:
     material: STONE_SWORD
     amount: 1
-    enchant:
-      type: DAMAGE_ALL
-      level: 3
   item6:
     material: STONE_AXE
     amount: 1
   item7:
     material: STONE_PICKAXE
     amount: 1
-    enchant:
-      enchant1:
-        type: DIG_SPEED
-        level: 4
-      enchant2:
-        type: SILK_TOUCH
-        level: 1
   item8:
     material: COOKED_BEEF
     amount: 16

@@ -9,11 +9,10 @@
 
 package fr.zelytra.histeria.managers.switchServer;
 
-import com.google.common.collect.Iterables;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.server.PMessage;
+import fr.zelytra.histeria.managers.server.SubChannel;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
@@ -39,7 +38,9 @@ public class SwitchServer {
             PacketSender packetSender = new PacketSender(player);
             packetSender.save();
             playerSwitching.add(player);
+
             long time = System.currentTimeMillis();
+
             while (!packetSender.isReceived()) {
                 if (System.currentTimeMillis() - time >= 2000) {
                     player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to sync inventory please retry later.");
@@ -48,30 +49,11 @@ public class SwitchServer {
             }
 
             Histeria.log("§a" + player.getName() + " switch to -> " + serverName + " server", LogType.INFO);
-            sendPluginMessage("Connect", player, args);
+            new PMessage(SubChannel.CONNECT, player, args);
         });
     }
 
-    private void sendPluginMessage(String sub, Player player, String args[]) {
-        final ByteArrayDataOutput out = ByteStreams.newDataOutput();
-        out.writeUTF(sub);
-        if (!(args == null)) {
-            for (String arg : args) {
-                out.writeUTF(arg);
-            }
-        }
-        if (player == null) {
-            task = Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
-                Player p = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
-                if (p != null) {
-                    p.sendPluginMessage(Histeria.getInstance(), "BungeeCord", out.toByteArray());
-                }
 
-            }, 0L, 60L);
-        } else {
-            player.sendPluginMessage(Histeria.getInstance(), "BungeeCord", out.toByteArray());
-        }
-    }
 
     public static ArrayList<Player> getPlayerSwitching() {
         return playerSwitching;

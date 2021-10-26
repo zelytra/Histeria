@@ -42,7 +42,7 @@ import fr.zelytra.histeria.commands.vote.VoteCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
-import fr.zelytra.histeria.events.pluginMessage.PluginMessage;
+import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
@@ -55,6 +55,7 @@ import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.market.stand.StandSerializer;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.server.Server;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
@@ -68,7 +69,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -76,6 +77,7 @@ public final class Histeria extends JavaPlugin {
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
+    public static Server server;
     public static ClearLag clearLag;
     public static LootTableManager lootTableManager;
     public static ConfigurationManager configurationManager;
@@ -105,6 +107,7 @@ public final class Histeria extends JavaPlugin {
 
         new CraftManager();
         vote = new Vote();
+        server = new Server();
         lootTableManager = new LootTableManager();
         logs = new Logs();
         mySQL = new MySQL();

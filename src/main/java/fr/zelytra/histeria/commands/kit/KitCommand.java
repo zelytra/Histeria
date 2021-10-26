@@ -38,6 +38,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 public class KitCommand implements CommandExecutor, Listener {
 
@@ -54,7 +55,7 @@ public class KitCommand implements CommandExecutor, Listener {
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent e) {
+    public void onClick(@NotNull InventoryClickEvent e) {
         if (e.getInventory().getHolder() instanceof CustomGUI) {
             if (e.getView().getTitle().equals(guiName)) {
                 if (e.getCurrentItem() != null) {
@@ -100,9 +101,9 @@ public class KitCommand implements CommandExecutor, Listener {
         }
     }
 
-    private void openMenu(Player player) {
+    private void openMenu(@NotNull Player player) {
         InterfaceBuilder interfaceBuilder = new InterfaceBuilder(9, guiName);
-        interfaceBuilder.setContent(getMenu(CustomPlayer.getCustomPlayer(player.getName())));
+        interfaceBuilder.setContent(getMenu(Objects.requireNonNull(CustomPlayer.getCustomPlayer(player.getName()))));
         interfaceBuilder.open(player);
     }
 
@@ -112,7 +113,7 @@ public class KitCommand implements CommandExecutor, Listener {
         interfaceBuilder.open(player);
     }
 
-    private ItemStack[] getMenu(CustomPlayer player) {
+    private ItemStack @NotNull [] getMenu(@NotNull CustomPlayer player) {
         ItemStack[] content = new ItemStack[9];
         content[0] = VisualType.BLANK_BLUE_GLASSE.getItem();
         content[1] = VisualType.BLANK_BLUE_GLASSE.getItem();
@@ -128,7 +129,7 @@ public class KitCommand implements CommandExecutor, Listener {
         return content;
     }
 
-    private ItemStack[] getKitDisplay(Kit kit) {
+    private ItemStack @NotNull [] getKitDisplay(Kit kit) {
 
         ItemStack[] content = new ItemStack[54];
 
@@ -214,7 +215,7 @@ public class KitCommand implements CommandExecutor, Listener {
 
     }
 
-    private int getClaimDelta(Player player, KitEnum kitEnum) {
+    private int getClaimDelta(@NotNull Player player, @NotNull KitEnum kitEnum) {
         MySQL mySQL = Histeria.mySQL;
         ResultSet result = mySQL.query("SELECT * FROM `Kit` WHERE `uuid` = '" + player.getUniqueId() + "' AND `kit` = '" + kitEnum.getGroupName() + "';");
         try {
