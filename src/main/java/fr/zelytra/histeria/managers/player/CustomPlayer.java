@@ -17,6 +17,7 @@ import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.pvp.PvP;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
@@ -52,6 +53,7 @@ public class CustomPlayer {
     private Mute mute;
     private Ban ban;
     private Afk afk;
+    private PvP pvp;
 
     //TODO Home
 
@@ -60,6 +62,7 @@ public class CustomPlayer {
         this.bank = new Bank(this);
         this.uuid = player.getUniqueId().toString();
         this.afk = new Afk(player);
+        this.pvp = new PvP(this);
 
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
@@ -222,6 +225,10 @@ public class CustomPlayer {
 
     public boolean isAFK() {
         return afk.isAFK();
+    }
+
+    public PvP getPvp() {
+        return pvp;
     }
 
     @Nullable

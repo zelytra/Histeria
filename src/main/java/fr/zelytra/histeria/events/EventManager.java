@@ -44,6 +44,7 @@ import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
 import fr.zelytra.histeria.managers.logs.listener.OreLogger;
 import fr.zelytra.histeria.managers.market.shop.ShopListener;
 import fr.zelytra.histeria.managers.market.stand.StandListener;
+import fr.zelytra.histeria.managers.pvp.PvPLogger;
 import fr.zelytra.histeria.managers.visual.chat.ChatListener;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.user.UserDataRecalculateEvent;
@@ -72,6 +73,7 @@ public class EventManager {
         pm.registerEvents(new ReloadingServer(), pl);
         pm.registerEvents(new AfkListener(), pl);
         pm.registerEvents(new VanishListener(), pl);
+        pm.registerEvents(new PvPLogger(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
