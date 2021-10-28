@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -26,6 +27,7 @@ public class PlayerDat {
     private double health;
     private int food;
     private int xp;
+    private Location teleportTask = null;
 
     public PlayerDat(Player player) {
         this.player = player;
@@ -54,6 +56,10 @@ public class PlayerDat {
 
     public void setXp(int xp) {
         this.xp = xp;
+    }
+
+    public void setTeleportTask(Location teleportTask) {
+        this.teleportTask = teleportTask;
     }
 
     public void buildPlayer() {
@@ -85,6 +91,10 @@ public class PlayerDat {
         } else {
             player.setHealth(this.health);
         }
+
+        //Home task
+        if (teleportTask != null)
+            player.teleport(teleportTask);
 
 
     }

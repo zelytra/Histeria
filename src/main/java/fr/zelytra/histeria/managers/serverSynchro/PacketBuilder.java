@@ -10,7 +10,9 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -24,7 +26,7 @@ import java.util.Collection;
 public class PacketBuilder {
     private Player player;
 
-    public  PacketBuilder(Player player) {
+    public PacketBuilder(Player player) {
         this.player = player;
     }
 
@@ -46,14 +48,46 @@ public class PacketBuilder {
             byte[] playerEffect = potionArrayToBase64(player.getActivePotionEffects());
             byte[] effectLength = ByteBuffer.allocate(4).putInt(playerInventory.length).array();
 
-            byte[] packetID = new byte[] { 1 };
-            byte[] playerNameLenght = new byte[] { (byte) (player.getUniqueId().toString().length() & 0xff) };
+            /* Home part*/
+            CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+            Home home = null;
+            int homePacketSize = 0;
+
+            byte[] homeX = new byte[0], homeY = new byte[0], homeZ = new byte[0], homeWorldSize = new byte[0], homeWorld = new byte[0];
+
+            for (Home h : customPlayer.getHomes()) {
+                if (h.hasTpServerRequest())
+                    home = h;
+            }
+
+            if (home != null) {
+                System.out.println("home task detected");
+                homeX = ByteBuffer.allocate(4).putInt((int) home.getLocation().getX()).array();
+                homeY = ByteBuffer.allocate(4).putInt((int) home.getLocation().getY()).array();
+                homeZ = ByteBuffer.allocate(4).putInt((int) home.getLocation().getZ()).array();
+                homeWorldSize = ByteBuffer.allocate(4).putInt(home.getServerName().getBytes().length).array();
+                homeWorld = ByteBuffer.allocate(home.getServerName().getBytes().length).put(home.getServerName().getBytes()).array();
+                homePacketSize = homeZ.length * 4 + homeWorld.length;
+            }
+
+            byte[] packetID = new byte[]{1};
+            byte[] playerNameLenght = new byte[]{(byte) (player.getUniqueId().toString().length() & 0xff)};
             byte[] playerUUID = player.getUniqueId().toString().getBytes();
-            outputStream.write(ByteBuffer.allocate(4)
-                    .putInt(Integer.reverseBytes(packetID.length + playerNameLenght.length + playerUUID.length
-                            + invLength.length + playerInventory.length + enderLength.length + playerEnderChest.length
-                            + playerHealth.length + playerFood.length + playerXP.length + playerEffect.length
-                            + effectLength.length)).array());
+
+            outputStream.write(ByteBuffer.allocate(4).putInt(Integer.reverseBytes(packetID.length +
+                    playerNameLenght.length +
+                    playerUUID.length +
+                    invLength.length +
+                    playerInventory.length +
+                    enderLength.length +
+                    playerEnderChest.length +
+                    playerHealth.length +
+                    playerFood.length +
+                    playerXP.length +
+                    playerEffect.length +
+                    effectLength.length +
+                    homePacketSize)).array());
+
             // Packet construction
             outputStream.write(packetID);
             outputStream.write(playerNameLenght);
@@ -67,6 +101,14 @@ public class PacketBuilder {
             outputStream.write(playerXP);
             outputStream.write(effectLength);
             outputStream.write(playerEffect);
+
+            if (home != null) {
+                outputStream.write(homeX);
+                outputStream.write(homeY);
+                outputStream.write(homeZ);
+                outputStream.write(homeWorldSize);
+                outputStream.write(homeWorld);
+            }
 
         } catch (IOException e) {
             Histeria.log("§cFailed to build the byte message", LogType.ERROR);
@@ -92,7 +134,7 @@ public class PacketBuilder {
         }
     }
 
-    private  byte[] potionArrayToBase64(Collection<PotionEffect> potion) throws IllegalStateException {
+    private byte[] potionArrayToBase64(Collection<PotionEffect> potion) throws IllegalStateException {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);

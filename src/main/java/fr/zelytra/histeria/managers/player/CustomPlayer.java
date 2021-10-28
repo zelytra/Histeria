@@ -14,6 +14,7 @@ import fr.zelytra.histeria.commands.moderation.Ban.Ban;
 import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
+import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
@@ -21,6 +22,7 @@ import fr.zelytra.histeria.managers.pvp.PvP;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -54,8 +56,7 @@ public class CustomPlayer {
     private Ban ban;
     private Afk afk;
     private PvP pvp;
-
-    //TODO Home
+    private List<Home> homes;
 
     public CustomPlayer(Player player) {
         this.name = player.getName();
@@ -63,6 +64,7 @@ public class CustomPlayer {
         this.uuid = player.getUniqueId().toString();
         this.afk = new Afk(player);
         this.pvp = new PvP(this);
+        this.homes = new ArrayList<>();
 
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
@@ -81,6 +83,7 @@ public class CustomPlayer {
         });
 
     }
+
 
     public static List<CustomPlayer> getList() {
         return customPlayerList;
@@ -169,7 +172,14 @@ public class CustomPlayer {
                 }
                 resultSet.close();
 
-                //TODO Load home
+                //Load homes
+                resultSet = mySQL.query("SELECT * FROM `Home` WHERE `uuid` = '" + getPlayer().getUniqueId() + "' ;");
+                while (resultSet.next()) {
+                    Location location = new Location(Bukkit.getWorld(resultSet.getString("world")), resultSet.getInt("x"), resultSet.getInt("y"), resultSet.getInt("z"));
+                    this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name")));
+                }
+                resultSet.close();
+
 
             } catch (SQLException exception) {
                 exception.printStackTrace();
@@ -336,6 +346,18 @@ public class CustomPlayer {
                 e.printStackTrace();
             }
         }
+
+        //Home save data
+        mySQL.update("DELETE FROM `Home` WHERE `uuid` = '" + this.uuid + "';");
+        for (Home home : homes) {
+            mySQL.update("INSERT IGNORE INTO `Home` SET `uuid` = '" + this.uuid +
+                    "' ,`name` = '" + home.getName() +
+                    "' ,`x` = " + home.getLocation().getX() +
+                    " ,`y` = " + home.getLocation().getY() +
+                    " ,`z` = " + home.getLocation().getZ() +
+                    " ,`world` = '" + home.getLocation().getWorld().getName() +
+                    "' ,`server` = '" + home.getServerName() + "' ;");
+        }
     }
 
     public int getKill() {
@@ -376,6 +398,10 @@ public class CustomPlayer {
 
     public void setLang(Lang lang) {
         this.lang = lang;
+    }
+
+    public List<Home> getHomes() {
+        return homes;
     }
 
     public Afk getAfk() {

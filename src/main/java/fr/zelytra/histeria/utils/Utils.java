@@ -96,4 +96,17 @@ public class Utils {
         }
 
     }
+
+    public static boolean canByPass(String group) {
+        switch (group) {
+            case "fondateur":
+            case "moderator":
+            case "administrator":
+                return true;
+
+            default:
+                return false;
+        }
+
+    }
 }

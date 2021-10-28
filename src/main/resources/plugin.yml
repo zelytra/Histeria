@@ -242,3 +242,22 @@ commands:
     description: Switch player(s) to other server
     permission: histeria.switchserver
 
+  home:
+    description: Teleport to the home
+    permission: histeria.home
+
+  delhome:
+    description: Remove a home
+    permission: histeria.home
+
+  sethome:
+    description: Set a home
+    permission: histeria.home
+
+  listhome:
+    description: Show home list
+    permission: histeria.home
+
+  adminhome:
+    description: Show all player home
+    permission: histeria.adminhome
