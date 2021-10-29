@@ -261,3 +261,7 @@ commands:
   adminhome:
     description: Show all player home
     permission: histeria.adminhome
+
+  adminbank:
+    description: Change player bank account
+    permission: histeria.adminbank

@@ -10,6 +10,8 @@
 package fr.zelytra.histeria;
 
 import fr.zelytra.histeria.commands.Test;
+import fr.zelytra.histeria.commands.bank.AdminBank;
+import fr.zelytra.histeria.commands.bank.AdminBankTab;
 import fr.zelytra.histeria.commands.bank.BankCommands;
 import fr.zelytra.histeria.commands.bank.BankTab;
 import fr.zelytra.histeria.commands.broadcast.Broadcast;
@@ -44,13 +46,12 @@ import fr.zelytra.histeria.commands.vote.VoteCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
-import fr.zelytra.histeria.managers.home.HomeCommand;
-import fr.zelytra.histeria.managers.home.HomeTab;
-import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.home.HomeCommand;
+import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
@@ -59,6 +60,7 @@ import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.market.stand.StandSerializer;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.server.Server;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
@@ -154,6 +156,8 @@ public final class Histeria extends JavaPlugin {
         /* Bank */
         getCommand("bank").setExecutor(new BankCommands());
         getCommand("bank").setTabCompleter(new BankTab());
+        getCommand("adminbank").setExecutor(new AdminBank());
+        getCommand("adminbank").setTabCompleter(new AdminBankTab());
 
         /* Lang */
         getCommand("lang").setExecutor(new LangCommand());
