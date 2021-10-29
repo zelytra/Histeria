@@ -64,6 +64,8 @@ public class Afk {
             for (CustomPlayer customPlayer : CustomPlayer.getList()) {
                 Afk playerAFK = customPlayer.getAfk();
 
+                if (customPlayer.getPlayer() == null) return;
+
                 if ((System.currentTimeMillis() - playerAFK.lastSeenTime) > afkTime * 1000 && !playerAFK.afk) {
                     playerAFK.setAfk(true);
                     LangMessage.broadcast("§7" + customPlayer.getPlayer().getName() + " ", "afk.isAfk", "");

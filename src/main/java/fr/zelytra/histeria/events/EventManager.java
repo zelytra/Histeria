@@ -61,6 +61,7 @@ public class EventManager {
             pm.registerEvents(new PlayerLeftSync(), pl);
         }
         pm.registerEvents(new PlayerJoinData(), pl);
+        pm.registerEvents(new PlayerLeftData(), pl);
         pm.registerEvents(new BanListener(), pl);
         pm.registerEvents(new PlayerDeathListener(), pl);
         pm.registerEvents(new ChatListener(), pl);

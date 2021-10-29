@@ -45,6 +45,7 @@ import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.managers.home.HomeCommand;
+import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
@@ -72,7 +73,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -205,8 +206,10 @@ public final class Histeria extends JavaPlugin {
 
         /* Home */
         getCommand("home").setExecutor(new HomeCommand());
+        getCommand("home").setTabCompleter(new HomeTab());
         getCommand("sethome").setExecutor(new HomeCommand());
         getCommand("delhome").setExecutor(new HomeCommand());
+        getCommand("delhome").setTabCompleter(new HomeTab());
         getCommand("listhome").setExecutor(new HomeCommand());
 
 
