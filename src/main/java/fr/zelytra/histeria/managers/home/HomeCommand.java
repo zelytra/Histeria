@@ -50,7 +50,7 @@ public class HomeCommand implements CommandExecutor {
 
                     } else {
                         home.setServerRequest();
-                        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.serverTeleport", home.getName());
+                        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.serverTeleport", "");
                         new SwitchServer(player).switchTo(home.getServerName());
                         return true;
                     }
@@ -110,7 +110,7 @@ public class HomeCommand implements CommandExecutor {
             LangMessage.sendMessage(player, "", "home.list", "");
 
             for (Home home : customPlayer.getHomes())
-                player.sendMessage("§8● §6" + home.getName() + " §e| x:§6" + home.getLocation().getBlockX() + " §ey:§6" + home.getLocation().getBlockY() + " §ez:§6" + home.getLocation().getBlockZ());
+                player.sendMessage("§8● §6" + home.getName() + " §e| x:§6" + home.getLocation().getBlockX() + " §ey:§6" + home.getLocation().getBlockY() + " §ez:§6" + home.getLocation().getBlockZ() + " §e| Server: §6" + home.getServerName());
 
             return true;
         }

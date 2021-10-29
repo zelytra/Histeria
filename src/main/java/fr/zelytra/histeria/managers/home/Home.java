@@ -50,4 +50,9 @@ public class Home {
     public boolean hasTpServerRequest() {
         return tpServerRequest;
     }
+
+    @Override
+    public String toString() {
+        return "Player: " + customPlayer.getName() + " | Name: " + name + "| Location: x:" + location.getBlockX() + " y:" + location.getBlockY() + " z:" + location.getBlockZ() + " | Server: " + serverName;
+    }
 }

@@ -21,6 +21,7 @@ import org.bukkit.util.io.BukkitObjectOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 public class PacketBuilder {
@@ -36,6 +37,7 @@ public class PacketBuilder {
             byte[] playerInventory = itemStackArrayToBase64(player.getInventory().getContents());
             byte[] invLength = ByteBuffer.allocate(4).putInt(playerInventory.length).array();
 
+
             byte[] playerEnderChest = itemStackArrayToBase64(player.getEnderChest().getContents());
             byte[] enderLength = ByteBuffer.allocate(4).putInt(playerEnderChest.length).array();
 
@@ -46,14 +48,14 @@ public class PacketBuilder {
             byte[] playerXP = ByteBuffer.allocate(4).putInt(player.getLevel()).array();
 
             byte[] playerEffect = potionArrayToBase64(player.getActivePotionEffects());
-            byte[] effectLength = ByteBuffer.allocate(4).putInt(playerInventory.length).array();
+            byte[] effectLength = ByteBuffer.allocate(4).putInt(playerEffect.length).array();
 
             /* Home part*/
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             Home home = null;
             int homePacketSize = 0;
 
-            byte[] homeX = new byte[0], homeY = new byte[0], homeZ = new byte[0], homeWorldSize = new byte[0], homeWorld = new byte[0];
+            byte[] homeX = new byte[4], homeY = new byte[4], homeZ = new byte[4], homeWorldSize = new byte[4], homeWorld = new byte[0];
 
             for (Home h : customPlayer.getHomes()) {
                 if (h.hasTpServerRequest())
@@ -61,12 +63,11 @@ public class PacketBuilder {
             }
 
             if (home != null) {
-                System.out.println("home task detected");
                 homeX = ByteBuffer.allocate(4).putInt((int) home.getLocation().getX()).array();
                 homeY = ByteBuffer.allocate(4).putInt((int) home.getLocation().getY()).array();
                 homeZ = ByteBuffer.allocate(4).putInt((int) home.getLocation().getZ()).array();
-                homeWorldSize = ByteBuffer.allocate(4).putInt(home.getServerName().getBytes().length).array();
-                homeWorld = ByteBuffer.allocate(home.getServerName().getBytes().length).put(home.getServerName().getBytes()).array();
+                homeWorld = home.getLocation().getWorld().getName().getBytes(StandardCharsets.UTF_8);
+                homeWorldSize = ByteBuffer.allocate(4).putInt(homeWorld.length).array();
                 homePacketSize = homeZ.length * 4 + homeWorld.length;
             }
 
@@ -102,7 +103,7 @@ public class PacketBuilder {
             outputStream.write(effectLength);
             outputStream.write(playerEffect);
 
-            if (home != null) {
+            if (homePacketSize != 0) {
                 outputStream.write(homeX);
                 outputStream.write(homeY);
                 outputStream.write(homeZ);

@@ -68,6 +68,7 @@ public class PacketReceiver {
             input.read(Rbyte);
             byte[] id = new byte[1];
             input.read(id);
+
             if (id[0] == (byte) 254) {
                 Histeria.log("§e" + player.getName() + " is a new player. Nothing to do.", LogType.INFO);
                 socket.close();
@@ -119,10 +120,10 @@ public class PacketReceiver {
             playerDat.setEffects(potionArrayFromBase64(potionEffect));
 
             // Home
-            System.out.println(input.available());
-            if (input.available() > 0) {
-                byte[] coordinateSize = new byte[4];
-                input.read(coordinateSize);
+            byte[] coordinateSize = new byte[4];
+            int homeResponse = input.read(coordinateSize);
+
+            if (homeResponse != -1) {
                 int x = ByteBuffer.wrap(coordinateSize).getInt();
                 input.read(coordinateSize);
                 int y = ByteBuffer.wrap(coordinateSize).getInt();
@@ -130,16 +131,22 @@ public class PacketReceiver {
                 int z = ByteBuffer.wrap(coordinateSize).getInt();
 
                 input.read(coordinateSize);
-                byte[] worldName = new byte[ByteBuffer.wrap(coordinateSize).getInt()];
-                playerDat.setTeleportTask(new Location(Bukkit.getWorld(new String(worldName, StandardCharsets.UTF_8)), x, y, z));
+                byte[] worldNameSize = new byte[ByteBuffer.wrap(coordinateSize).getInt()];
+
+                input.read(worldNameSize);
+                String worldName = new String(worldNameSize, StandardCharsets.UTF_8);
+                playerDat.setTeleportTask(new Location(Bukkit.getWorld(worldName), x, y, z));
             }
+
 
             Histeria.log("§e" + player.getName() + " inventory's has been synchronised.", LogType.INFO);
             this.isLoaded = true;
             socket.close();
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public boolean receiveFinish() {

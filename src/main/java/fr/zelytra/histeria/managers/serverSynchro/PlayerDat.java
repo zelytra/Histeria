@@ -94,7 +94,7 @@ public class PlayerDat {
 
         //Home task
         if (teleportTask != null)
-            player.teleport(teleportTask);
+            Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> player.teleport(teleportTask));
 
 
     }
