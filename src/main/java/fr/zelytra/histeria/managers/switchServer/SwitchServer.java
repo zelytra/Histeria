@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.switchServer;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.server.PMessage;
@@ -32,6 +33,12 @@ public class SwitchServer {
     }
 
     public void switchTo(String serverName) {
+
+        if(Histeria.server.getServerName().equalsIgnoreCase(serverName)){
+            LangMessage.sendMessage(player,"server.alreadyOnTheServer");
+            return;
+        }
+        
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             String args[] = new String[1];
             args[0] = serverName;
@@ -42,7 +49,6 @@ public class SwitchServer {
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             customPlayer.saveData();
-            customPlayer.destroy();
 
             long time = System.currentTimeMillis();
 

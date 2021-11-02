@@ -93,8 +93,10 @@ public class PlayerDat {
         }
 
         //Home task
-        if (teleportTask != null)
+        if (teleportTask != null) {
+            System.out.println("Home trigger");
             Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> player.teleport(teleportTask));
+        }
 
 
     }

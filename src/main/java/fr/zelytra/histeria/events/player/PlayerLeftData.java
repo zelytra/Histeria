@@ -11,7 +11,6 @@ public class PlayerLeftData implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void OnPlayerLEft(PlayerQuitEvent e) {
-
         if (!SwitchServer.getPlayerSwitching().contains(e.getPlayer())) {
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
             customPlayer.saveData();
