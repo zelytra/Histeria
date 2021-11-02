@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.pvp;
 
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,9 @@ public class PvPLogger implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onDisconnection(PlayerQuitEvent e) {
+
+        if (SwitchServer.getPlayerSwitching().contains(e.getPlayer())) return;
+
         PvP pvpStatus = CustomPlayer.getCustomPlayer(e.getPlayer().getName()).getPvp();
 
         if (pvpStatus.isPvP()) {
@@ -42,7 +46,7 @@ public class PvPLogger implements Listener {
 
         if (pvpStatus.isPvP()) {
             e.setCancelled(true);
-            LangMessage.sendMessage(e.getPlayer(),"pvp.commandExec");
+            LangMessage.sendMessage(e.getPlayer(), "pvp.commandExec");
         }
     }
 
