@@ -3,6 +3,7 @@ package fr.zelytra.histeria.managers.home;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,10 +28,8 @@ public class AdminHomeCommand implements CommandExecutor {
                 CustomPlayer customTarget = new CustomPlayer(args[0]);
                 if (!customTarget.hasPlayedBefore()) {
                     LangMessage.sendMessage(player, "command.playerNotExist");
-                    return;
                 } else {
                     Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> teleportPlayer(customTarget, player, args[1]));
-                    return;
                 }
 
             });
@@ -52,7 +51,10 @@ public class AdminHomeCommand implements CommandExecutor {
 
         for (Home home : target.getHomes()) {
             if (home.getName().equalsIgnoreCase(homeName)) {
-                home.teleport(executor);
+                if (home.getServerName().equalsIgnoreCase(Histeria.server.getServerName()))
+                    home.teleport(executor);
+                else
+                    LangMessage.sendMessage(executor, Message.PLAYER_PREFIX.getMsg(), "home.onAnotherServer", home.getServerName());
                 return;
             }
         }

@@ -65,11 +65,12 @@ vote:
     material: TORCH
     amount: 64
   item9:
+    material:
   item10:
     material: HONEYCOMB_BLOCK
     amount: 1
   item11:
-    materiel: GOLDEN_APPLE
+    material: GOLDEN_APPLE
     amount: 1
   item12:
     material: VOTE_KEY
