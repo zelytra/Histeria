@@ -29,6 +29,7 @@ public class AdminBank implements CommandExecutor {
         Player target = Bukkit.getPlayer(args[1]);
 
         if (target == null) {
+            //TODO Handle offline transaction
             LangMessage.sendMessage(player, "command.playerOffLine");
             return false;
         }

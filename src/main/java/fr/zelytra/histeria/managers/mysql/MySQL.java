@@ -22,6 +22,8 @@ public class MySQL {
     /**
      * MySQL api
      */
+
+    //TODO Handle small connection time
     public MySQL() {
 
         try {

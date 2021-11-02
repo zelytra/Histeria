@@ -9,8 +9,14 @@
 
 package fr.zelytra.histeria.managers.home;
 
+import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.switchServer.SwitchServer;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class Home {
 
@@ -45,6 +51,25 @@ public class Home {
 
     public void setServerRequest() {
         this.tpServerRequest = true;
+    }
+
+    public void teleport(Player player) {
+
+        if (Histeria.server.getServerName().equalsIgnoreCase(this.getServerName())) {
+
+            LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.teleport", this.getName());
+            player.teleport(this.getLocation());
+
+        } else {
+
+            this.setServerRequest();
+            LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.serverTeleport", "");
+            new SwitchServer(player).switchTo(this.getServerName());
+
+        }
+        Histeria.log("§6" + player.getName() + " §ehas been teleported to §6" + this, LogType.INFO);
+        return;
+
     }
 
     public boolean hasTpServerRequest() {

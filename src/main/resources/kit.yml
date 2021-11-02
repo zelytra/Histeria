@@ -23,9 +23,56 @@ default:
   item9:
     material: TORCH
     amount: 32
+
 vote:
+  item1:
+    material: IRON_HELMET
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item2:
+    material: DIAMOND_CHESTPLATE
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 1
+  item3:
+    material: IRON_LEGGINGS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item4:
+    material: IRON_BOOTS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item5:
+    material: IRON_SWORD
+    amount: 1
+    enchant:
+      type: DAMAGE_ALL
+      level: 2
   item6:
-    material: STONE_AXE
+    material: DIAMOND_PICKAXE
+    amount: 1
+  item7:
+    material: COOKED_BEEF
+    amount: 32
+  item8:
+    material: TORCH
+    amount: 64
+  item9:
+  item10:
+    material: HONEYCOMB_BLOCK
+    amount: 1
+  item11:
+    materiel: GOLDEN_APPLE
+    amount: 1
+  item12:
+    material: VOTE_KEY
     amount: 1
 
 lord:

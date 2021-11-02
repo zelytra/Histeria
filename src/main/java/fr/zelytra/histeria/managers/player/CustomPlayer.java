@@ -50,6 +50,7 @@ public class CustomPlayer {
     private Lang lang;
     private final String uuid;
     private int id;
+    private boolean playedBefore = false;
 
     private final Bank bank;
     private Mute mute;
@@ -65,11 +66,12 @@ public class CustomPlayer {
         this.afk = new Afk(player);
         this.pvp = new PvP(this);
         this.homes = new ArrayList<>();
+        this.playedBefore = playedBeforeTask();
 
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             /* Init first time */
-            if (!hasPlayedBefore()) {
+            if (!playedBefore) {
                 initData();
                 this.id = getBaseID();
                 this.bank.initNewAccount();
@@ -81,6 +83,35 @@ public class CustomPlayer {
             customPlayerList.add(this);
 
         });
+
+    }
+
+    /**
+     * OffLine customPlayer loading SYNC
+     *
+     * @param name OfflinePlayerName
+     */
+    public CustomPlayer(String name) {
+        this.name = name;
+        this.bank = new Bank(this);
+        this.uuid = Bukkit.getOfflinePlayer(name).getUniqueId().toString();
+
+        if(this.uuid==null) {
+            playedBefore = false;
+            return;
+        }
+
+        this.playedBefore = playedBeforeTask();
+        this.homes = new ArrayList<>();
+
+        if (playedBefore) {
+
+            this.id = getBaseID();
+            this.loadData();
+
+            customPlayerList.add(this);
+        }
+
 
     }
 
@@ -99,7 +130,7 @@ public class CustomPlayer {
             Date date = new Date();
 
             mySQL.update("INSERT INTO `Player` (`uuid`,`name`,`ip`,`primconnection`,`lang`) VALUES ('"
-                    + Objects.requireNonNull(getPlayer()).getUniqueId() + "','"
+                    + this.uuid + "','"
                     + getPlayer().getName() + "','"
                     + Objects.requireNonNull(getPlayer().getAddress()).toString().replace("/", "").split(":")[0] + "','"
                     + formatter.format(date) + "','"
@@ -112,7 +143,7 @@ public class CustomPlayer {
         synchronized (syncObject) {
             try {
                 MySQL mySQL = Histeria.mySQL;
-                ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + Objects.requireNonNull(getPlayer()).getUniqueId() + "';");
+                ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + this.uuid + "';");
                 result.next();
                 int id = result.getInt("id");
                 result.close();
@@ -153,7 +184,7 @@ public class CustomPlayer {
                 resultSet.close();
 
                 //Get mute
-                resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + getPlayer().getUniqueId() + "' ;");
+                resultSet = mySQL.query("SELECT * FROM `Mute` WHERE `uuid` = '" + this.uuid + "' ;");
                 if (resultSet.next()) {
                     this.mute = new Mute(resultSet.getLong("startTime"),
                             resultSet.getLong("time"),
@@ -163,7 +194,7 @@ public class CustomPlayer {
                 resultSet.close();
 
                 //Get ban
-                resultSet = mySQL.query("SELECT * FROM `Ban` WHERE `uuid` = '" + getPlayer().getUniqueId() + "' ;");
+                resultSet = mySQL.query("SELECT * FROM `Ban` WHERE `uuid` = '" + this.uuid + "' ;");
                 if (resultSet.next()) {
                     this.ban = new Ban(resultSet.getLong("startTime"),
                             resultSet.getLong("time"),
@@ -173,7 +204,7 @@ public class CustomPlayer {
                 resultSet.close();
 
                 //Load homes
-                resultSet = mySQL.query("SELECT * FROM `Home` WHERE `uuid` = '" + getPlayer().getUniqueId() + "' ;");
+                resultSet = mySQL.query("SELECT * FROM `Home` WHERE `uuid` = '" + this.uuid + "' ;");
                 while (resultSet.next()) {
                     Location location = new Location(Bukkit.getWorld(resultSet.getString("world")), resultSet.getInt("x"), resultSet.getInt("y"), resultSet.getInt("z"));
                     this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name")));
@@ -246,10 +277,14 @@ public class CustomPlayer {
         return Bukkit.getPlayer(this.name);
     }
 
-    private boolean hasPlayedBefore() {
+    public boolean hasPlayedBefore(){
+        return playedBefore;
+    }
+
+    private boolean playedBeforeTask() {
         synchronized (syncObject) {
             MySQL mySQL = Histeria.mySQL;
-            ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + Objects.requireNonNull(this.getPlayer()).getUniqueId() + "';");
+            ResultSet result = mySQL.query("SELECT `id` FROM `Player` WHERE `uuid` = '" + this.uuid + "';");
             try {
                 final boolean finalResult = result.next();
                 result.close();

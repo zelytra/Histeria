@@ -32,11 +32,6 @@ public class Bank {
         });
     }
 
-    public Bank(CustomPlayer player, int money) {
-        this.player = player;
-        this.money = money;
-    }
-
     public void setMoney(int money) {
         this.money = money;
     }

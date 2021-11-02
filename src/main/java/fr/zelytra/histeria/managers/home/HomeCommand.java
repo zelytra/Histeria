@@ -13,7 +13,6 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
-import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.model.user.User;
 import org.bukkit.command.Command;
@@ -41,21 +40,12 @@ public class HomeCommand implements CommandExecutor {
 
             for (Home home : customPlayer.getHomes()) {
                 if (home.getName().equalsIgnoreCase(args[0])) {
-
-                    if (Histeria.server.getServerName().equalsIgnoreCase(home.getServerName())) {
-
-                        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.teleport", home.getName());
-                        player.teleport(home.getLocation());
-                        return true;
-
-                    } else {
-                        home.setServerRequest();
-                        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "home.serverTeleport", "");
-                        new SwitchServer(player).switchTo(home.getServerName());
-                        return true;
-                    }
+                    home.teleport(player);
+                    return true;
                 }
             }
+
+
             LangMessage.sendMessage(player, "home.notFound");
             return true;
 
@@ -85,6 +75,7 @@ public class HomeCommand implements CommandExecutor {
 
             User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
             HomeLimit playerHomeLimit = HomeLimit.getHomeLimit(user.getPrimaryGroup());
+
             if (customPlayer.getHomes().size() >= playerHomeLimit.getHomeLimit()) {
                 LangMessage.sendMessage(player, "home.reachLimit");
                 return true;
