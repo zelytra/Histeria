@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.switchServer;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.server.PMessage;
 import fr.zelytra.histeria.managers.server.SubChannel;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
@@ -38,6 +39,10 @@ public class SwitchServer {
             PacketSender packetSender = new PacketSender(player);
             packetSender.save();
             playerSwitching.add(player);
+
+            CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+            customPlayer.saveData();
+            customPlayer.destroy();
 
             long time = System.currentTimeMillis();
 

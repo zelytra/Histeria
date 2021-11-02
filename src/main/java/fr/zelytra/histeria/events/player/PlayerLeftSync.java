@@ -21,8 +21,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerLeftSync implements Listener {
 
-    @EventHandler(priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.HIGH)
     public void OnPlayerLeft(PlayerQuitEvent e) {
+
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             if (SwitchServer.getPlayerSwitching().contains(e.getPlayer())) {
                 SwitchServer.getPlayerSwitching().remove(e.getPlayer());
