@@ -38,7 +38,7 @@ public class SwitchServer {
             LangMessage.sendMessage(player,"server.alreadyOnTheServer");
             return;
         }
-        
+
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             String args[] = new String[1];
             args[0] = serverName;
@@ -49,6 +49,7 @@ public class SwitchServer {
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             customPlayer.saveData();
+            customPlayer.destroy();
 
             long time = System.currentTimeMillis();
 

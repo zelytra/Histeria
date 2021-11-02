@@ -51,6 +51,7 @@ import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.home.AdminHomeCommand;
+import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
 import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
@@ -217,6 +218,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("delhome").setTabCompleter(new HomeTab());
         getCommand("listhome").setExecutor(new HomeCommand());
         getCommand("adminhome").setExecutor(new AdminHomeCommand());
+        getCommand("adminhome").setTabCompleter(new AdminHomeTab());
 
 
         /* TPA */
