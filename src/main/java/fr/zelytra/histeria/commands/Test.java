@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
+import fr.zelytra.histeria.managers.npc.NPC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,9 +21,21 @@ public class Test implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         Player player = (Player) sender;
-        //player.sendTitle(Emote.FIGHT.toString(), "", 0, 10000, 0);
-        //Histeria.clearLag.run();
-        return true;
+
+
+        if (args.length > 1){
+            player.sendMessage("destroying");
+
+            for(NPC pc : NPC.npcList){
+                pc.destroy();
+            }
+
+        }else {
+            NPC npc = new NPC(player.getLocation(), "§6Oskour");
+            npc.showNPC(player);
+        }
+
+            return true;
 
     }
 }

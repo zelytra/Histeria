@@ -44,6 +44,7 @@ import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
 import fr.zelytra.histeria.managers.logs.listener.OreLogger;
 import fr.zelytra.histeria.managers.market.shop.ShopListener;
 import fr.zelytra.histeria.managers.market.stand.StandListener;
+import fr.zelytra.histeria.managers.npc.NPCListener;
 import fr.zelytra.histeria.managers.pvp.PvPLogger;
 import fr.zelytra.histeria.managers.visual.chat.ChatListener;
 import net.luckperms.api.event.EventBus;
@@ -130,6 +131,7 @@ public class EventManager {
         pm.registerEvents(new ErrorLogger(), pl);
         pm.registerEvents(new CommandLogger(), pl);
         pm.registerEvents(new PluginList(), pl);
+        pm.registerEvents(new NPCListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();

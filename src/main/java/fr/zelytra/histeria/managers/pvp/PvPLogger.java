@@ -30,6 +30,7 @@ public class PvPLogger implements Listener {
     public void onDisconnection(PlayerQuitEvent e) {
 
         if (SwitchServer.getPlayerSwitching().contains(e.getPlayer())) return;
+        if (CustomPlayer.getCustomPlayer(e.getPlayer().getName()) == null) return;
 
         PvP pvpStatus = CustomPlayer.getCustomPlayer(e.getPlayer().getName()).getPvp();
 
