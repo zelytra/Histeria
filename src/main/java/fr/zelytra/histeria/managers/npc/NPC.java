@@ -10,6 +10,8 @@
 package fr.zelytra.histeria.managers.npc;
 
 import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import fr.zelytra.histeria.Histeria;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -29,10 +31,18 @@ public class NPC {
     private String name;
     private EntityPlayer npc;
 
+    /**
+     * Minecraft API for create a custom NPC with different parameter
+     *
+     * @param location Location of NPC
+     * @param npcName  NPC's name
+     */
+
     public NPC(Location location, String npcName) {
 
         this.location = location;
         this.name = npcName;
+
 
         MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer nmsWorld = ((CraftWorld) location.getWorld()).getHandle();
@@ -52,17 +62,101 @@ public class NPC {
         npcList.remove(this);
     }
 
+    /**
+     * Send NPC display packet for all connected player
+     */
+    public void showNPC() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            addNPCPacket(player);
+
+        }
+
+    }
+
     public void showNPC(Player player) {
+
+        addNPCPacket(player);
+
+    }
+
+    public void move(Location location) {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+
+            PlayerConnection connection = getPlayerConnection(player);
+            npc.setLocation(location.getBlockX() + 0.5, location.getBlockY(), location.getBlockZ() + 0.5, location.getYaw(), location.getPitch());
+            connection.sendPacket(new PacketPlayOutEntityTeleport(npc));
+
+        }
+    }
+
+    public void setSkin(String url) {
+
+        Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
+
+            Skin skin = new Skin(url);
+            GameProfile gameProfile = npc.getProfile();
+            gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
+            System.out.println("propertie applied");
+
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                removeNPCPacket(player);
+
+                System.out.println("Sending packet to player " + player.getName());
+                DataWatcher watcher = npc.getDataWatcher();
+                watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
+                PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(npc.getId(), watcher, true);
+                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+
+                addNPCPacket(player);
+
+            }
+
+        });
+
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static NPC getNPC(String name) {
+
+        for (NPC npc : npcList)
+            if (npc.getName().equalsIgnoreCase(name))
+                return npc;
+
+        return null;
+    }
+
+    private PlayerConnection getPlayerConnection(Player player) {
+
+        return ((CraftPlayer) player).getHandle().playerConnection;
+
+    }
+
+    private void removeNPCPacket(Player player) {
+
+        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+        connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
+
+    }
+
+    private void addNPCPacket(Player player) {
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
         connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
         connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360)));
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)), 1);
 
     }
 
-    public void setSkin() {
-
-    }
 
 }

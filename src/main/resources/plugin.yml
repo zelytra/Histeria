@@ -265,3 +265,7 @@ commands:
   adminbank:
     description: Change player bank account
     permission: histeria.adminbank
+
+  npc:
+    description: NPC command
+    permission: histeria.npc

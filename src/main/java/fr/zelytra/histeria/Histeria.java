@@ -61,6 +61,7 @@ import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.market.stand.StandSerializer;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.npc.NPCCommand;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.server.Server;
@@ -205,6 +206,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+        getCommand("npc").setExecutor(new NPCCommand());
 
         /* SwitchServer */
         getCommand("switchserver").setExecutor(new SwitchServerCommand());
