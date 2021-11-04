@@ -19,12 +19,11 @@ import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 
 public class SwitchServer {
-    private static BukkitTask task;
+
     private Player player;
     private static ArrayList<Player> playerSwitching = new ArrayList<>();
 
@@ -34,8 +33,8 @@ public class SwitchServer {
 
     public void switchTo(String serverName) {
 
-        if(Histeria.server.getServerName().equalsIgnoreCase(serverName)){
-            LangMessage.sendMessage(player,"server.alreadyOnTheServer");
+        if (Histeria.server.getServerName().equalsIgnoreCase(serverName)) {
+            LangMessage.sendMessage(player, "server.alreadyOnTheServer");
             return;
         }
 
@@ -51,6 +50,7 @@ public class SwitchServer {
             customPlayer.saveData();
             customPlayer.destroy();
 
+
             long time = System.currentTimeMillis();
 
             while (!packetSender.isReceived()) {
@@ -64,7 +64,6 @@ public class SwitchServer {
             new PMessage(SubChannel.CONNECT, player, args);
         });
     }
-
 
 
     public static ArrayList<Player> getPlayerSwitching() {
