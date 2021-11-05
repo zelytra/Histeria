@@ -27,9 +27,9 @@ import java.util.UUID;
 public class NPC {
     public static List<NPC> npcList = new ArrayList<>();
 
-    private Location location;
-    private String name;
-    private EntityPlayer npc;
+    private final String name;
+    private final EntityPlayer npc;
+    private NPCAction action = NPCAction.DEFAULT;
 
     /**
      * Minecraft API for create a custom NPC with different parameter
@@ -40,7 +40,6 @@ public class NPC {
 
     public NPC(Location location, String npcName) {
 
-        this.location = location;
         this.name = npcName;
 
 
@@ -98,12 +97,12 @@ public class NPC {
 
             Skin skin = new Skin(url);
             GameProfile gameProfile = npc.getProfile();
+            gameProfile.getProperties().removeAll("textures");
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
             System.out.println("propertie applied");
 
             for (Player player : Bukkit.getOnlinePlayers()) {
                 removeNPCPacket(player);
-
                 System.out.println("Sending packet to player " + player.getName());
                 DataWatcher watcher = npc.getDataWatcher();
                 watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
@@ -119,11 +118,15 @@ public class NPC {
     }
 
     public Location getLocation() {
-        return location;
+        return npc.getBukkitEntity().getLocation();
     }
 
     public String getName() {
         return name;
+    }
+
+    public int getEntityID(){
+        return this.npc.getId();
     }
 
     public static NPC getNPC(String name) {
@@ -139,6 +142,14 @@ public class NPC {
 
         return ((CraftPlayer) player).getHandle().playerConnection;
 
+    }
+
+    public NPCAction getAction() {
+        return action;
+    }
+
+    public void setAction(NPCAction action) {
+        this.action = action;
     }
 
     private void removeNPCPacket(Player player) {
