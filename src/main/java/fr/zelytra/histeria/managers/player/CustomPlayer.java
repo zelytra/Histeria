@@ -303,7 +303,7 @@ public class CustomPlayer {
 
     public void saveData() {
         synchronized (syncObject) {
-            if (!Histeria.isReloading) {
+            if (!Histeria.isReloading && !Bukkit.getServer().isStopping()) {
 
                 Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
                     saveDataTask();

@@ -79,11 +79,11 @@ public abstract class HGuardPersistent {
             configFile.set("BreakBlock", hGuard.canBreakBlock());
             configFile.set("PVP", hGuard.isPvp());
             configFile.save(hguardFile);
-            Histeria.log("[HGuard] " + hGuard.getName() + " area has been saved", LogType.INFO);
+            Histeria.log("§a" + hGuard.getName() + " area has been saved", LogType.INFO);
 
         } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
-            Histeria.log("[HGuard] Failed to save area : " + hGuard.getName(), LogType.ERROR);
+            Histeria.log("§cFailed to save area : " + hGuard.getName(), LogType.ERROR);
         }
 
     }

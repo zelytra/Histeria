@@ -66,11 +66,13 @@ import fr.zelytra.histeria.managers.npc.command.NPCTab;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.server.Server;
+import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -135,8 +137,19 @@ public final class Histeria extends JavaPlugin {
 
     @Override
     public void onDisable() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (synchro) {
+                PacketSender packetSender = new PacketSender(player);
+                packetSender.save();
+            }
+
+            CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+            customPlayer.saveData();
+            log("§a" + player.getName() + " has been saved in data lake", LogType.INFO);
+        }
+
         configurationManager.unload();
-        CustomPlayer.forceSaveAll();
         mySQL.closeConnection();
     }
 
