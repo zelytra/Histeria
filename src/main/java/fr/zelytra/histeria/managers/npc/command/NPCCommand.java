@@ -1,5 +1,6 @@
 package fr.zelytra.histeria.managers.npc.command;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.npc.NPCAction;
@@ -39,7 +40,7 @@ public class NPCCommand implements CommandExecutor {
             return true;
 
         } else if (args[0].equalsIgnoreCase("action")) {
-            if (args.length != 3) {
+            if (args.length < 3) {
                 LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
                 return false;
             }
@@ -56,6 +57,22 @@ public class NPCCommand implements CommandExecutor {
             if (action == null){
                 LangMessage.sendMessage(player,"npc.actionNotExist");
                 return true;
+            }
+
+            switch (action){
+                case SERVER:
+
+                    if(!Histeria.server.getServersList().contains(args[3])){
+                        LangMessage.sendMessage(player,"server.serverNotFound");
+                        return false;
+                    }else if(Histeria.server.getServerName().equalsIgnoreCase(args[3])){
+                        LangMessage.sendMessage(player,"server.alreadyOnTheServer");
+                        return false;
+                    }
+
+                    npc.setServerName(args[3]);
+
+                    break;
             }
 
             npc.setAction(action);

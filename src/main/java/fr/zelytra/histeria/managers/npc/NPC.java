@@ -30,6 +30,7 @@ public class NPC {
     private final String name;
     private final EntityPlayer npc;
     private NPCAction action = NPCAction.DEFAULT;
+    private String serverName;
 
     /**
      * Minecraft API for create a custom NPC with different parameter
@@ -170,4 +171,11 @@ public class NPC {
     }
 
 
+    public String getServer() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
+    }
 }

@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.npc.listener;
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent;
 import fr.zelytra.histeria.managers.market.shop.PlayerShop;
 import fr.zelytra.histeria.managers.npc.NPC;
+import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,13 +35,15 @@ public class NPCListener implements Listener {
                 break;
             case SHOP:
                 new PlayerShop(e.getPlayer());
+            case SERVER:
+                new SwitchServer(e.getPlayer()).switchTo(e.getNpc().getServer());
                 break;
         }
     }
 
     @EventHandler
     public void onNPCClickEvent(PlayerUseUnknownEntityEvent e) {
-        //if(e.getRightClicked() instanceof Player)return;
+
 
         for (NPC npc : NPC.npcList) {
             if (e.getEntityId() == npc.getEntityID()) {

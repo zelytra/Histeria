@@ -9,12 +9,13 @@
 
 package fr.zelytra.histeria.managers.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
 
     private String serverName = "§cNA";
-    private List<String> serversList;
+    private List<String> serversList = new ArrayList<>();
     private int playerCount = 0;
 
     public Server() {

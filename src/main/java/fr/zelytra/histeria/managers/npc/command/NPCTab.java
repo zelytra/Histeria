@@ -1,5 +1,6 @@
 package fr.zelytra.histeria.managers.npc.command;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.npc.NPCAction;
 import fr.zelytra.histeria.utils.Utils;
@@ -47,19 +48,28 @@ public class NPCTab implements TabCompleter {
 
             commandsList = Utils.dynamicTab(commandsList, args[1]);
 
-        }else if (args.length >= 3) {
-            if(args[0].equalsIgnoreCase("skin")){
+        } else if (args.length >= 3) {
+            if (args[0].equalsIgnoreCase("skin")) {
                 commandsList.add("<skin url>");
                 commandsList = Utils.dynamicTab(commandsList, args[2]);
 
-            }else if(args[0].equalsIgnoreCase("action")){
+            } else if (args[0].equalsIgnoreCase("action")) {
 
-                for (NPCAction action : NPCAction.values())
-                    commandsList.add(action.name().toLowerCase());
+                if (args.length == 3) {
 
-                commandsList = Utils.dynamicTab(commandsList, args[2]);
+                    for (NPCAction action : NPCAction.values())
+                        commandsList.add(action.name().toLowerCase());
 
-            }else if(args[0].equalsIgnoreCase("modify")){
+                    commandsList = Utils.dynamicTab(commandsList, args[2]);
+
+                } else if (args.length == 4 && args[2].equalsIgnoreCase("server")) {
+
+                    for (String server : Histeria.server.getServersList())
+                        commandsList.add(server);
+                    commandsList = Utils.dynamicTab(commandsList, args[3]);
+                }
+
+            } else if (args[0].equalsIgnoreCase("modify")) {
 
             }
         }
