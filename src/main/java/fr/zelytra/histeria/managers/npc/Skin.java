@@ -9,11 +9,12 @@ import org.json.simple.parser.JSONParser;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class Skin {
+public class Skin implements Serializable {
 
     private String texture;
     private String signature;
@@ -36,6 +37,8 @@ public class Skin {
             out.close();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+            if (con.getResponseCode() != 200) return;
 
             JSONObject output = (JSONObject) (new JSONParser()).parse(reader);
             JSONObject data = (JSONObject) output.get("data");

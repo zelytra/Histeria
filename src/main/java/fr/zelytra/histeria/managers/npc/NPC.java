@@ -12,6 +12,8 @@ package fr.zelytra.histeria.managers.npc;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.utils.CLocation;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,17 +22,22 @@ import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class NPC {
+public class NPC implements Serializable {
     public static List<NPC> npcList = new ArrayList<>();
 
     private final String name;
-    private final EntityPlayer npc;
+    private final transient EntityPlayer npc;
+    private final transient Location location;
     private NPCAction action = NPCAction.DEFAULT;
     private String serverName;
+
+    private CLocation Clocation;
+    private Skin skin;
 
     /**
      * Minecraft API for create a custom NPC with different parameter
@@ -42,16 +49,41 @@ public class NPC {
     public NPC(Location location, String npcName) {
 
         this.name = npcName;
+        this.Clocation = new CLocation(location);
+        this.location = location;
 
+        this.npc = summonNPC();
 
+    }
+
+    public NPC(Location location, String npcName, NPCAction action, String serverName) {
+
+        this.action = action;
+        this.name = npcName;
+        this.Clocation = new CLocation(location);
+        this.location = location;
+
+        this.npc = summonNPC();
+        this.serverName = serverName;
+
+    }
+
+    private EntityPlayer summonNPC() {
         MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer nmsWorld = ((CraftWorld) location.getWorld()).getHandle();
 
-        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), npcName);
-        this.npc = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
-        npc.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), name.replace("&", "§"));
+
+        if (this.skin != null && skin.getTexture() != null) {
+            gameProfile.getProperties().removeAll("textures");
+            gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
+        }
+
+        EntityPlayer entity = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
+        entity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
 
         npcList.add(this);
+        return entity;
     }
 
     public void destroy() {
@@ -86,7 +118,7 @@ public class NPC {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             PlayerConnection connection = getPlayerConnection(player);
-            npc.setLocation(location.getBlockX() + 0.5, location.getBlockY(), location.getBlockZ() + 0.5, location.getYaw(), location.getPitch());
+            npc.setLocation(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5, location.getYaw(), location.getPitch());
             connection.sendPacket(new PacketPlayOutEntityTeleport(npc));
 
         }
@@ -97,14 +129,21 @@ public class NPC {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
             Skin skin = new Skin(url);
+
+            if (skin.getTexture() == null) {
+                Histeria.log("§cFailed to download the skin", LogType.ERROR);
+                return;
+            }
+
+            this.skin = skin;
             GameProfile gameProfile = npc.getProfile();
             gameProfile.getProperties().removeAll("textures");
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
-            System.out.println("propertie applied");
+
 
             for (Player player : Bukkit.getOnlinePlayers()) {
                 removeNPCPacket(player);
-                System.out.println("Sending packet to player " + player.getName());
+
                 DataWatcher watcher = npc.getDataWatcher();
                 watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
                 PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(npc.getId(), watcher, true);
@@ -122,11 +161,15 @@ public class NPC {
         return npc.getBukkitEntity().getLocation();
     }
 
+    public CLocation getCLocation() {
+        return Clocation;
+    }
+
     public String getName() {
         return name;
     }
 
-    public int getEntityID(){
+    public int getEntityID() {
         return this.npc.getId();
     }
 
@@ -166,6 +209,10 @@ public class NPC {
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
         connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
         connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360)));
+
+        DataWatcher watcher = npc.getDataWatcher();
+        watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
+        connection.sendPacket(new PacketPlayOutEntityMetadata(npc.getId(), watcher, true));
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)), 1);
 
     }
@@ -177,5 +224,57 @@ public class NPC {
 
     public void setServerName(String serverName) {
         this.serverName = serverName;
+    }
+
+
+    public static void saveAll() {
+        String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "NPC";
+        File folder = new File(folderPath);
+
+        if (!folder.exists())
+            folder.mkdir();
+
+        for (NPC npc : npcList) {
+
+            try {
+
+                File file = new File(folderPath + File.separator + npc.getName() + ".npc");
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+                oos.writeObject(npc);
+                oos.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        Histeria.log("§6" + npcList.size() + "§a npc has been saved", LogType.INFO);
+    }
+
+    public static void loadAll() {
+        String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "NPC";
+        File folder = new File(folderPath);
+
+        if (!folder.exists()) {
+            folder.mkdir();
+            return;
+        }
+
+        for (File file : folder.listFiles()) {
+
+            try {
+                ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
+                NPC npcUnserialize = (NPC) oos.readObject();
+                new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.serverName);
+                oos.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        Histeria.log("§6" + npcList.size() + "§a npc has been loaded", LogType.INFO);
     }
 }

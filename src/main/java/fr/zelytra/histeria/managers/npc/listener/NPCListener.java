@@ -10,15 +10,21 @@
 package fr.zelytra.histeria.managers.npc.listener;
 
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent;
+import fr.zelytra.histeria.managers.cooldown.Cooldown;
 import fr.zelytra.histeria.managers.market.shop.PlayerShop;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NPCListener implements Listener {
+    private static List<Player> npcClickList = new ArrayList<>();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
@@ -35,6 +41,7 @@ public class NPCListener implements Listener {
                 break;
             case SHOP:
                 new PlayerShop(e.getPlayer());
+                break;
             case SERVER:
                 new SwitchServer(e.getPlayer()).switchTo(e.getNpc().getServer());
                 break;
@@ -43,12 +50,16 @@ public class NPCListener implements Listener {
 
     @EventHandler
     public void onNPCClickEvent(PlayerUseUnknownEntityEvent e) {
-
+        if (!Cooldown.cooldownCheck(e.getPlayer(), e.getEventName(),false)) {
+            return;
+        }
+        new Cooldown(e.getPlayer(), 1, e.getEventName());
 
         for (NPC npc : NPC.npcList) {
             if (e.getEntityId() == npc.getEntityID()) {
                 NPCClickEvent npcClickEvent = new NPCClickEvent(e.getPlayer(), npc);
                 Bukkit.getPluginManager().callEvent(npcClickEvent);
+                return;
             }
         }
 

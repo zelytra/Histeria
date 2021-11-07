@@ -61,6 +61,7 @@ import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.market.stand.StandSerializer;
 import fr.zelytra.histeria.managers.mysql.MySQL;
+import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.npc.command.NPCCommand;
 import fr.zelytra.histeria.managers.npc.command.NPCTab;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
@@ -81,7 +82,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -128,6 +129,7 @@ public final class Histeria extends JavaPlugin {
         configurationManager = new ConfigurationManager();
         configurationManager.load();
         StandSerializer.loadAll();
+        NPC.loadAll();
 
         visualTeamManager = new VisualTeamManager();
         logs.log("Histeria successfully start", LogType.INFO);
@@ -148,7 +150,7 @@ public final class Histeria extends JavaPlugin {
             customPlayer.saveData();
             log("§a" + player.getName() + " has been saved in data lake", LogType.INFO);
         }
-
+        NPC.saveAll();
         configurationManager.unload();
         mySQL.closeConnection();
     }

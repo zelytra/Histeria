@@ -39,7 +39,7 @@ public class RandomTp implements CommandExecutor {
         Player player = (Player) sender;
 
         if (!Utils.canByPass(player)) {
-            if (!Cooldown.cooldownCheck(player, cdTag))
+            if (!Cooldown.cooldownCheck(player, cdTag,true))
                 return true;
 
             new Cooldown(player, cd, cdTag);

@@ -49,7 +49,7 @@ public class NocturiteSword implements Listener {
         Player player = e.getPlayer();
 
 
-        if (!Cooldown.cooldownCheck(player, customMaterial.getName())) {
+        if (!Cooldown.cooldownCheck(player, customMaterial.getName(),true)) {
             return;
         }
 

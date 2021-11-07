@@ -91,14 +91,15 @@ public class Cooldown {
      * if return is false, it will print the time remaining to the player
      */
 
-    public static boolean cooldownCheck(Player player, String tag) {
+    public static boolean cooldownCheck(Player player, String tag, boolean display) {
 
         Cooldown toRemove = null;
         for (Map.Entry<Cooldown, String> entry : cooldownsList.entrySet()) {
             if (entry.getKey().getTag().equalsIgnoreCase(tag) && entry.getValue().equalsIgnoreCase(player.getName())) {
                 toRemove = entry.getKey();
                 if (!toRemove.isFinished()) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6You need to wait " + toRemove);
+                    if (display)
+                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6You need to wait " + toRemove);
                     return false;
                 }
 

@@ -30,7 +30,7 @@ public class XpBottle implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!Cooldown.cooldownCheck(player, "XpBottleCommand")) {
+                if (!Cooldown.cooldownCheck(player, "XpBottleCommand",true)) {
                     return false;
                 }
 

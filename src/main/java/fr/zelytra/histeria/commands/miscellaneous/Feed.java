@@ -27,7 +27,7 @@ public class Feed implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!Cooldown.cooldownCheck(player, "feedCommand")) {
+                if (!Cooldown.cooldownCheck(player, "feedCommand",true)) {
                     return false;
                 }
 

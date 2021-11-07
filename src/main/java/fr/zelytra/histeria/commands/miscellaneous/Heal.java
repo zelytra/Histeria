@@ -31,7 +31,7 @@ public class Heal implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!Cooldown.cooldownCheck(player, "healCommand")) {
+                if (!Cooldown.cooldownCheck(player, "healCommand",true)) {
                     return false;
                 }
 

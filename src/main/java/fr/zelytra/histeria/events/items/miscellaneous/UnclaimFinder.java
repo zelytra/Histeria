@@ -36,7 +36,7 @@ public class UnclaimFinder implements Listener {
         Player player = e.getPlayer();
 
         //Cooldown check
-        if (!Cooldown.cooldownCheck(player, customMaterial.getName())) {
+        if (!Cooldown.cooldownCheck(player, customMaterial.getName(),true)) {
             return;
         }
         new Cooldown(player, itemCooldown, customMaterial.getName());

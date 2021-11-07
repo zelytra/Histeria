@@ -38,7 +38,7 @@ public class HealStick implements Listener {
             player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6Your health is already full.");
             return;
         }
-        if (!Cooldown.cooldownCheck(player, customMaterial.getName())) {
+        if (!Cooldown.cooldownCheck(player, customMaterial.getName(),true)) {
             return;
         }
         new Cooldown(player, itemCooldown, customMaterial.getName());
