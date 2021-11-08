@@ -22,10 +22,7 @@ import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
 import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
-import fr.zelytra.histeria.events.environement.PluginList;
-import fr.zelytra.histeria.events.environement.PortalListener;
-import fr.zelytra.histeria.events.environement.ShulkerStorage;
-import fr.zelytra.histeria.events.environement.SilverFish;
+import fr.zelytra.histeria.events.environement.*;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.items.armors.NocturiteBoots;
 import fr.zelytra.histeria.events.items.armors.handler.ArmorListener;
@@ -132,6 +129,7 @@ public class EventManager {
         pm.registerEvents(new CommandLogger(), pl);
         pm.registerEvents(new PluginList(), pl);
         pm.registerEvents(new NPCListener(), pl);
+        pm.registerEvents(new ClaimChecker(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
