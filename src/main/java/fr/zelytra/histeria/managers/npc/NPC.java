@@ -37,6 +37,7 @@ public class NPC implements Serializable {
     private String serverName;
 
     private CLocation Clocation;
+    private CLocation teleportLocation;
     private Skin skin;
 
     /**
@@ -276,5 +277,13 @@ public class NPC implements Serializable {
         }
 
         Histeria.log("§6" + npcList.size() + "§a npc has been loaded", LogType.INFO);
+    }
+
+    public Location getTeleportLocation() {
+        return teleportLocation.getLocation();
+    }
+
+    public void setTeleportLocation(Location location) {
+        this.teleportLocation = new CLocation(location);
     }
 }

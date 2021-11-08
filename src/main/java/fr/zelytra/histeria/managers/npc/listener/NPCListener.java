@@ -42,6 +42,9 @@ public class NPCListener implements Listener {
             case SHOP:
                 new PlayerShop(e.getPlayer());
                 break;
+            case TELEPORT:
+                e.getPlayer().teleport(e.getNpc().getTeleportLocation());
+                break;
             case SERVER:
                 new SwitchServer(e.getPlayer()).switchTo(e.getNpc().getServer());
                 break;
