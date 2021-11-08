@@ -33,7 +33,7 @@ public class NPCCommand implements CommandExecutor {
                 return false;
             }
 
-            if(args[1].length()>=16){
+            if (args[1].length() >= 16) {
                 LangMessage.sendMessage((Player) sender, "npc.exceedNameSpace");
                 return false;
             }
@@ -69,6 +69,11 @@ public class NPCCommand implements CommandExecutor {
             switch (action) {
                 case SERVER:
 
+                    if (args.length != 4) {
+                        LangMessage.sendMessage(player, "command.wrongSyntax");
+                        return false;
+                    }
+
                     if (!Histeria.server.getServersList().contains(args[3])) {
                         LangMessage.sendMessage(player, "server.serverNotFound");
                         return false;
@@ -81,6 +86,7 @@ public class NPCCommand implements CommandExecutor {
 
                     break;
                 case TELEPORT:
+                    
                     if (args.length != 7) {
                         LangMessage.sendMessage(player, "command.wrongSyntax");
                         return false;

@@ -52,7 +52,6 @@ public class ShopItem {
 
     private List<String> loreBuilder() {
         List<String> lore = new ArrayList<>();
-        lore.add("§6=====§b[§6Data§b]§6=====");
         lore.add("");
         lore.add("§bBuy for: §6" + buyPrice + "§f " + Emote.GOLD);
         lore.add("");
