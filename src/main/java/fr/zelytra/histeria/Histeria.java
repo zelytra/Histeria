@@ -47,6 +47,7 @@ import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.managers.afk.Afk;
+import fr.zelytra.histeria.managers.arena.ArenaChest;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
@@ -127,9 +128,12 @@ public final class Histeria extends JavaPlugin {
         shop = new Shop();
         clearLag = new ClearLag();
         configurationManager = new ConfigurationManager();
+
         configurationManager.load();
         StandSerializer.loadAll();
         NPC.loadAll();
+        ArenaChest.loadAll();
+
 
         visualTeamManager = new VisualTeamManager();
         logs.log("Histeria successfully start", LogType.INFO);
@@ -141,6 +145,7 @@ public final class Histeria extends JavaPlugin {
     public void onDisable() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
+
             if (synchro) {
                 PacketSender packetSender = new PacketSender(player);
                 packetSender.save();
@@ -151,6 +156,7 @@ public final class Histeria extends JavaPlugin {
             log("§a" + player.getName() + " has been saved in data lake", LogType.INFO);
         }
         NPC.saveAll();
+        ArenaChest.saveAll();
         configurationManager.unload();
         mySQL.closeConnection();
     }
@@ -284,6 +290,7 @@ public final class Histeria extends JavaPlugin {
     private void regRepeatingTask() {
         Afk.startAfkListener();
         HGuardListener.startEntityKiller();
+        ArenaChest.startTask();
     }
 
     private void loadAPI() {
