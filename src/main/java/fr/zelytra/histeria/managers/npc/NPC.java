@@ -57,13 +57,14 @@ public class NPC implements Serializable {
 
     }
 
-    public NPC(Location location, String npcName, NPCAction action, String serverName, CLocation teleportLocation) {
+    public NPC(Location location, String npcName, NPCAction action, Skin skin, String serverName, CLocation teleportLocation) {
 
         this.action = action;
         this.name = npcName;
         this.Clocation = new CLocation(location);
         this.location = location;
         this.teleportLocation = teleportLocation;
+        this.skin = skin;
 
         this.npc = summonNPC();
         this.serverName = serverName;
@@ -77,7 +78,7 @@ public class NPC implements Serializable {
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), name.replace("&", "§"));
 
         if (this.skin != null && skin.getTexture() != null) {
-            gameProfile.getProperties().removeAll("textures");
+            //gameProfile.getProperties().removeAll("textures");
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
         }
 
@@ -102,9 +103,7 @@ public class NPC implements Serializable {
     public void showNPC() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-
             addNPCPacket(player);
-
         }
 
     }
@@ -130,14 +129,13 @@ public class NPC implements Serializable {
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
-            Skin skin = new Skin(url);
+            this.skin = new Skin(url);
 
             if (skin.getTexture() == null) {
                 Histeria.log("§cFailed to download the skin", LogType.ERROR);
                 return;
             }
 
-            this.skin = skin;
             GameProfile gameProfile = npc.getProfile();
             gameProfile.getProperties().removeAll("textures");
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
@@ -207,15 +205,17 @@ public class NPC implements Serializable {
 
     private void addNPCPacket(Player player) {
 
-        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-        connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360)));
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
+            PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
+            connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+            connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+            connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360)));
 
-        DataWatcher watcher = npc.getDataWatcher();
-        watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
-        connection.sendPacket(new PacketPlayOutEntityMetadata(npc.getId(), watcher, true));
-        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)), 1);
+            DataWatcher watcher = npc.getDataWatcher();
+            watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
+            connection.sendPacket(new PacketPlayOutEntityMetadata(npc.getId(), watcher, true));
+            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)), 1);
+        }, 20);
 
     }
 
@@ -268,7 +268,7 @@ public class NPC implements Serializable {
             try {
                 ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
                 NPC npcUnserialize = (NPC) oos.readObject();
-                new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.serverName, npcUnserialize.teleportLocation);
+                new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.skin, npcUnserialize.serverName, npcUnserialize.teleportLocation);
                 oos.close();
 
             } catch (Exception e) {
