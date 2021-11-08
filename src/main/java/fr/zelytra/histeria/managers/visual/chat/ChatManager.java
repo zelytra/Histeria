@@ -9,6 +9,8 @@
 
 package fr.zelytra.histeria.managers.visual.chat;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.utils.Utils;
 import net.kyori.adventure.text.Component;
@@ -44,35 +46,41 @@ public class ChatManager {
 
     }
 
+    private TextComponent.Builder processEmote(TextComponent.Builder component) {
+        GroupFX groupFX = GroupFX.getByName(this.group);
+        for (String word : message.split(" ")) {
+            if (word.contains(":")) {
+                component.append(Component.text().content(Emote.getByName(word) + " ").color(NamedTextColor.WHITE));
+            } else {
+                component.append(Component.text().content(word + " ").color(groupFX.getMessageColor()));
+            }
+        }
+        return component;
+    }
+
     public TextComponent getProcessMessage() {
 
         GroupFX groupFX = GroupFX.getByName(this.group);
         TextComponent.Builder processMessage;
-        if (canUseEmote) {
-            processMessage = Component.text()
-                    .content(groupFX.getBadge().toString()+" ")
-                    .color(NamedTextColor.WHITE)
-                    .append(Component.text().content(player.getName()).color(groupFX.getNameColor()))
-                    .append(Component.text().content(groupFX.getSplitter()).color(groupFX.getSplittercolor()));
 
-            for (String word : message.split(" ")) {
-                if (word.contains(":")) {
-                    processMessage.append(Component.text().content(Emote.getByName(word) + " ").color(NamedTextColor.WHITE));
-                } else {
-                    processMessage.append(Component.text().content(word + " ").color(groupFX.getMessageColor()));
-                }
-            }
+        processMessage = Component.text()
+                .content(groupFX.getBadge().toString() + " ")
+                .color(NamedTextColor.WHITE);
 
-        } else {
-            processMessage = Component.text()
-                    .content(groupFX.getBadge().toString()+" ")
-                    .color(NamedTextColor.WHITE)
-                    .append(Component.text().content(player.getName()).color(groupFX.getNameColor()))
-                    .append(Component.text().content(groupFX.getSplitter()).color(groupFX.getSplittercolor()))
-                    .append(Component.text().content(rawMessage()).color(groupFX.getMessageColor()));
+        if (Histeria.isSaberFaction()) {
+            FPlayer fplayer = FPlayers.getInstance().getByPlayer(player);
 
-
+            processMessage.append(Component.text().content("§7[" +
+                    (fplayer.getFaction().getTag().equalsIgnoreCase("§2wilderness") ? "" : fplayer.getFaction().getTag())
+                    + "] "));
         }
+
+        processMessage.append(Component.text().content(player.getName()).color(groupFX.getNameColor()))
+                .append(Component.text().content(groupFX.getSplitter()).color(groupFX.getSplittercolor()));
+
+        if (canUseEmote)
+            processMessage = processEmote(processMessage);
+
         return processMessage.build();
 
     }

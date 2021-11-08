@@ -4,6 +4,7 @@ main: fr.zelytra.histeria.Histeria
 depend:
   - WorldEdit
   - LuckPerms
+  - Factions
 api-version: 1.16
 authors: [ Zelytra ]
 description: Histeria server core

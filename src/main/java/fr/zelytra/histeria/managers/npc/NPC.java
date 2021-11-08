@@ -266,6 +266,7 @@ public class NPC implements Serializable {
         for (File file : folder.listFiles()) {
 
             try {
+
                 ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
                 NPC npcUnserialize = (NPC) oos.readObject();
                 new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.skin, npcUnserialize.serverName, npcUnserialize.teleportLocation);

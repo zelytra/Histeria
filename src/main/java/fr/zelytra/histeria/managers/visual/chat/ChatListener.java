@@ -9,6 +9,9 @@
 
 package fr.zelytra.histeria.managers.visual.chat;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import com.massivecraft.factions.struct.ChatMode;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.languages.LangMessage;
@@ -45,6 +48,11 @@ public class ChatListener implements Listener {
 
             Histeria.log("§6[§eSTAFF§6] §e" + e.getPlayer().getName() + "§6 > §f" + PlainComponentSerializer.plain().serialize(e.message()).substring(1), LogType.INFO);
             return;
+        }
+
+        if (Histeria.isSaberFaction()) {
+            FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
+            if (fplayer.getChatMode() == ChatMode.ALLIANCE || fplayer.getChatMode() == ChatMode.FACTION) return;
         }
 
 
