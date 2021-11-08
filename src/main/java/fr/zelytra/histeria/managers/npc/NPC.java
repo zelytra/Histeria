@@ -272,7 +272,8 @@ public class NPC implements Serializable {
                 oos.close();
 
             } catch (Exception e) {
-                e.printStackTrace();
+                Histeria.log("§cWrong NPC file format for : " + file.getName(), LogType.ERROR);
+                file.delete();
             }
 
         }
