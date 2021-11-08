@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.npc.listener;
 
 import com.destroystokyo.paper.event.player.PlayerUseUnknownEntityEvent;
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.market.shop.PlayerShop;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
@@ -44,9 +45,11 @@ public class NPCListener implements Listener {
                 break;
             case TELEPORT:
                 e.getPlayer().teleport(e.getNpc().getTeleportLocation());
+                LangMessage.sendMessage(e.getPlayer(),"npc.teleportAction");
                 break;
             case SERVER:
                 new SwitchServer(e.getPlayer()).switchTo(e.getNpc().getServer());
+                LangMessage.sendMessage(e.getPlayer(),"npc.switchServer");
                 break;
         }
     }

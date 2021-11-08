@@ -57,12 +57,13 @@ public class NPC implements Serializable {
 
     }
 
-    public NPC(Location location, String npcName, NPCAction action, String serverName) {
+    public NPC(Location location, String npcName, NPCAction action, String serverName, CLocation teleportLocation) {
 
         this.action = action;
         this.name = npcName;
         this.Clocation = new CLocation(location);
         this.location = location;
+        this.teleportLocation = teleportLocation;
 
         this.npc = summonNPC();
         this.serverName = serverName;
@@ -267,7 +268,7 @@ public class NPC implements Serializable {
             try {
                 ObjectInputStream oos = new ObjectInputStream(new FileInputStream(file));
                 NPC npcUnserialize = (NPC) oos.readObject();
-                new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.serverName);
+                new NPC(npcUnserialize.getCLocation().getLocation(), npcUnserialize.name, npcUnserialize.action, npcUnserialize.serverName, npcUnserialize.teleportLocation);
                 oos.close();
 
             } catch (Exception e) {

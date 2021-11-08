@@ -4,6 +4,8 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.npc.NPCAction;
 import fr.zelytra.histeria.utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -67,6 +69,9 @@ public class NPCTab implements TabCompleter {
                     for (String server : Histeria.server.getServersList())
                         commandsList.add(server);
                     commandsList = Utils.dynamicTab(commandsList, args[3]);
+                } else if (args.length == 7 && args[2].equalsIgnoreCase("teleport")) {
+                    for (World world : Bukkit.getWorlds())
+                        commandsList.add(world.getName());
                 }
 
             } else if (args[0].equalsIgnoreCase("modify")) {

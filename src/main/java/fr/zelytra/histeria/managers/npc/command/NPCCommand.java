@@ -33,6 +33,11 @@ public class NPCCommand implements CommandExecutor {
                 return false;
             }
 
+            if(args[1].length()>=16){
+                LangMessage.sendMessage((Player) sender, "npc.exceedNameSpace");
+                return false;
+            }
+
             new NPC(player.getLocation(), args[1]).showNPC();
             LangMessage.sendMessage(player, "npc.createNPC");
             return true;
@@ -96,7 +101,6 @@ public class NPCCommand implements CommandExecutor {
                     }
 
                     npc.setTeleportLocation(new Location(Bukkit.getWorld(args[6]), x, y, z));
-                    LangMessage.sendMessage(player, "npc.actionSet");
                     break;
 
             }
