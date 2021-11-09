@@ -49,6 +49,7 @@ import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.arena.ArenaChest;
 import fr.zelytra.histeria.managers.arena.ArenaCommand;
+import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
@@ -229,7 +230,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+
+        /* ArenaChest */
         getCommand("arenachest").setExecutor(new ArenaCommand());
+        getCommand("arenachest").setTabCompleter(new ArenaTab());
 
         /* NPC */
         getCommand("npc").setExecutor(new NPCCommand());

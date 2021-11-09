@@ -19,12 +19,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class ArenaCommand implements CommandExecutor {
-    /*
-    /arenachest
-    /arenachest create
-    /arenachest delete
-    /arenachest refill
-     */
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(sender instanceof Player)) return false;
@@ -53,9 +48,6 @@ public class ArenaCommand implements CommandExecutor {
                     LangMessage.sendMessage(player, "arena.badTarget");
                     return false;
                 }
-
-            } else if (args[0].equalsIgnoreCase("delete")) {
-                return true;
 
             } else if (args[0].equalsIgnoreCase("refill")) {
 
