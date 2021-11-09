@@ -19,6 +19,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
@@ -29,6 +30,13 @@ public class NPCListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
+        for (NPC npc : NPC.npcList) {
+            npc.showNPC(e.getPlayer());
+        }
+    }
+
+    @EventHandler
+    public void onWorldChange(PlayerChangedWorldEvent e){
         for (NPC npc : NPC.npcList) {
             npc.showNPC(e.getPlayer());
         }
