@@ -95,6 +95,11 @@ public class NPC implements Serializable {
             connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
         }
         npcList.remove(this);
+        String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "NPC";
+        File file = new File(folderPath + File.separator + name + ".npc");
+
+        if(file.exists())
+            file.delete();
     }
 
     /**

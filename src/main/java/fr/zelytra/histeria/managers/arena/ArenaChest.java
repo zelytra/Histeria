@@ -14,6 +14,8 @@ import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Chest;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -23,8 +25,8 @@ import java.util.UUID;
 public class ArenaChest implements Serializable {
 
     public static List<ArenaChest> chestList = new ArrayList<>();
-    private CLocation location;
-    private UUID uuid = UUID.randomUUID();
+    private final CLocation location;
+    private final UUID uuid = UUID.randomUUID();
 
     public ArenaChest(Location location) {
 
@@ -35,13 +37,24 @@ public class ArenaChest implements Serializable {
 
     public void destroy() {
         chestList.remove(this);
+        String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "ArenaChest";
+        File file = new File(folderPath + File.separator + uuid + ".ac");
+
+        if(file.exists())
+            file.delete();
+
     }
 
     public void draw() {
 
+        Chest chest = (Chest) getLocation().getBlock().getState();
+        ItemStack[] content = chest.getInventory().getContents();
+        content[0] = new ItemStack(Material.DIRT);
+        chest.getInventory().setContents(content);
+
     }
 
-    public Location getLocation(){
+    public Location getLocation() {
         return this.location.getLocation();
     }
 

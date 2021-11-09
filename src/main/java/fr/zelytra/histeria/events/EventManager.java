@@ -35,6 +35,7 @@ import fr.zelytra.histeria.events.items.repair.AnvilListener;
 import fr.zelytra.histeria.events.items.tools.*;
 import fr.zelytra.histeria.events.player.*;
 import fr.zelytra.histeria.managers.afk.AfkListener;
+import fr.zelytra.histeria.managers.arena.ArenaListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
 import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
@@ -130,6 +131,7 @@ public class EventManager {
         pm.registerEvents(new PluginList(), pl);
         pm.registerEvents(new NPCListener(), pl);
         pm.registerEvents(new ClaimChecker(), pl);
+        pm.registerEvents(new ArenaListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
