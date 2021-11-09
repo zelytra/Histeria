@@ -270,3 +270,9 @@ commands:
   npc:
     description: NPC command
     permission: histeria.npc
+
+  arenachest:
+    description: ArenaChest command
+    permission: histeria.arenachest
+    aliases:
+      - ac

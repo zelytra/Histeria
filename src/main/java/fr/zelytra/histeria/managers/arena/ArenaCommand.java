@@ -36,21 +36,26 @@ public class ArenaCommand implements CommandExecutor {
             LangMessage.sendMessage(player, "", "arena.list", "");
 
             for (ArenaChest chest : ArenaChest.chestList)
-                LangMessage.sendMessage(player, "", "§8● x:§6" + chest.getLocation().getBlockX() + " §ey:§6" + chest.getLocation().getBlockY() + " §ez:§6" + chest.getLocation().getBlockZ(), "");
+                player.sendMessage("§8● x:§6" + chest.getLocation().getBlockX() + " §ey:§6" + chest.getLocation().getBlockY() + " §ez:§6" + chest.getLocation().getBlockZ());
 
             return true;
+
         } else if (args.length == 1) {
             if (args[0].equalsIgnoreCase("create")) {
 
                 Block targetBlock = player.getTargetBlock(10);
 
-                if (targetBlock != null && targetBlock.getType() != Material.CHEST) {
+                if (targetBlock != null && targetBlock.getType() == Material.CHEST) {
                     new ArenaChest(targetBlock.getLocation());
-                }else {
-
+                    LangMessage.sendMessage(player, "arena.create");
+                    return true;
+                } else {
+                    LangMessage.sendMessage(player, "arena.badTarget");
+                    return false;
                 }
 
             } else if (args[0].equalsIgnoreCase("delete")) {
+                return true;
 
             } else if (args[0].equalsIgnoreCase("refill")) {
 
@@ -61,6 +66,7 @@ public class ArenaCommand implements CommandExecutor {
                 return true;
 
             }
+            return true;
         } else {
             LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
             return false;

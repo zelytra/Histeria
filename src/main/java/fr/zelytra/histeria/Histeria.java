@@ -48,6 +48,7 @@ import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.arena.ArenaChest;
+import fr.zelytra.histeria.managers.arena.ArenaCommand;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
@@ -228,6 +229,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+        getCommand("arenachest").setExecutor(new ArenaCommand());
 
         /* NPC */
         getCommand("npc").setExecutor(new NPCCommand());

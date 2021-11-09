@@ -31,7 +31,12 @@ public class LangFile {
             String line = reader.readLine();
 
             while (line != null) {
-                text.put(line.split("=")[0], StringUtils.substringBetween(line.split("=")[1],"\"","\""));
+                if (line == null || line.isEmpty()) {
+                    line = reader.readLine();
+                    continue;
+                }
+
+                text.put(line.split("=")[0], StringUtils.substringBetween(line.split("=")[1], "\"", "\""));
                 line = reader.readLine();
             }
 
