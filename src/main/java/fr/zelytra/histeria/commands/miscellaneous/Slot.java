@@ -23,25 +23,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class Slot implements CommandExecutor {
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!(sender instanceof Player)) return false;
         Player player = (Player) sender;
 
         if (args.length == 1) {
-            Method serverGetHandle;
-            try {
-                serverGetHandle = Bukkit.getServer().getClass().getDeclaredMethod("getHandle");
-                Object playerList = serverGetHandle.invoke(Bukkit.getServer());
 
-                Field maxPlayersField = playerList.getClass().getSuperclass().getDeclaredField("maxPlayers");
-                maxPlayersField.setAccessible(true);
-                maxPlayersField.set(playerList, Integer.parseInt(args[0]));
+            setSlot(Integer.parseInt(args[0]));
 
-            } catch (NoSuchMethodException | SecurityException | NoSuchFieldException | IllegalAccessException
-                    | IllegalArgumentException | InvocationTargetException e) {
-                return false;
-            }
             LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "command.slotSet", String.valueOf(Bukkit.getServer().getMaxPlayers()));
             return true;
         } else if (args.length == 0) {
@@ -52,5 +43,20 @@ public class Slot implements CommandExecutor {
             return false;
         }
 
+    }
+
+    public static void setSlot(int value) {
+        try {
+            Method serverGetHandle = Bukkit.getServer().getClass().getDeclaredMethod("getHandle");
+            Object playerList = serverGetHandle.invoke(Bukkit.getServer());
+
+            Field maxPlayersField = playerList.getClass().getSuperclass().getDeclaredField("maxPlayers");
+            maxPlayersField.setAccessible(true);
+            maxPlayersField.set(playerList, value);
+
+        } catch (NoSuchMethodException | SecurityException | NoSuchFieldException | IllegalAccessException
+                | IllegalArgumentException | InvocationTargetException e) {
+            return;
+        }
     }
 }

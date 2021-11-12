@@ -74,18 +74,23 @@ import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
+import net.minecraft.server.v1_16_R3.DedicatedServer;
+import net.minecraft.server.v1_16_R3.DedicatedServerProperties;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.Field;
 
 
 public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -279,14 +284,6 @@ public final class Histeria extends JavaPlugin {
 
     }
 
-    private void setupServer() {
-        for (World world : Bukkit.getWorlds()) {
-            world.setMonsterSpawnLimit(40);
-            world.setAnimalSpawnLimit(10);
-            world.setAmbientSpawnLimit(15);
-            world.setWaterAnimalSpawnLimit(5);
-        }
-    }
 
     private void regPluginMessage() {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -317,6 +314,31 @@ public final class Histeria extends JavaPlugin {
         logs.log(msg, type);
 
     }
+
+    private void setupServer() {
+        for (World world : Bukkit.getWorlds()) {
+            world.setTime(23250);
+            Slot.setSlot(100);
+            world.setMonsterSpawnLimit(60);
+            world.setAnimalSpawnLimit(10);
+            world.setAmbientSpawnLimit(15);
+            world.setWaterAnimalSpawnLimit(5);
+        }
+
+        try {
+            DedicatedServer server = ((CraftServer) Bukkit.getServer()).getServer();
+            DedicatedServerProperties properties = server.getDedicatedServerProperties();
+
+            Field spawnProtectionField = properties.getClass().getField("spawnProtection");
+            spawnProtectionField.setAccessible(true);
+            spawnProtectionField.set(properties, 0);
+
+        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        }
+
+    }
+
+
 
     public static boolean isSaberFaction() {
         return saberFaction;
