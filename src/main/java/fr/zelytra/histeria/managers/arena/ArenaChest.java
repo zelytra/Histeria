@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.arena;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -40,7 +41,7 @@ public class ArenaChest implements Serializable {
         String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "ArenaChest";
         File file = new File(folderPath + File.separator + uuid + ".ac");
 
-        if(file.exists())
+        if (file.exists())
             file.delete();
 
     }
@@ -63,7 +64,14 @@ public class ArenaChest implements Serializable {
     }
 
     public static void startTask() {
+        long remain = (3600 - ((System.currentTimeMillis() / 1000) % 3600)) * 20 + 30;
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () ->
+                Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
 
+            for (ArenaChest chest : ArenaChest.chestList)
+                chest.draw();
+
+        }, 0, 432000 * 20), remain);
 
     }
 
