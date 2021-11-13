@@ -72,15 +72,15 @@ public enum CustomMaterial {
     CRUSHING_TABLE("crushing_table", Material.FLETCHING_TABLE, ItemType.BLOCK),
 
 
-    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 4, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true)),
-    HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 1700, 10, 6, EquipmentSlot.CHEST),
-    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 6, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 0, false, false, true)),
-    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 26, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 5, 4, EquipmentSlot.FEET),
+    HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 2, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true)),
+    HISTERITE_CHESTPLATE("§cHisterite Chestplate", "histerite_chestplate", "Durabilité: 1800", 22, Material.LEATHER_CHESTPLATE, ItemType.ARMOR, 1700, 10, 3, EquipmentSlot.CHEST),
+    HISTERITE_LEGGINGS("§cHisterite Leggings", "histerite_leggings", "Durabilité: 1700#Effet: Speed I", 24, Material.LEATHER_LEGGINGS, ItemType.ARMOR, 1700, 8, 3, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 0, false, false, true)),
+    HISTERITE_BOOTS("§cHisterite Boots", "histerite_boots", "Durabilité: 1500", 26, Material.LEATHER_BOOTS, ItemType.ARMOR, 1500, 5, 2, EquipmentSlot.FEET),
 
-    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 5, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true), new PotionEffect(PotionEffectType.WATER_BREATHING, 999999, 1, false, false, true)),
-    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 13, 9, EquipmentSlot.CHEST, new PotionEffect(PotionEffectType.FAST_DIGGING, 999999, 0, false, false, true)),
-    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 11, 9, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
-    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 6, 5, EquipmentSlot.FEET),
+    NOCTURITE_HELMET("§5Nocturite Helmet", "nocturite_helmet", "Durabilité: 3000#Effet: Night Vision | Water Breathing", 21, Material.CHAINMAIL_HELMET, ItemType.ARMOR, 3000, 6, 4, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true), new PotionEffect(PotionEffectType.WATER_BREATHING, 999999, 1, false, false, true)),
+    NOCTURITE_CHESTPLATE("§5Nocturite Chestplate", "nocturite_chestplate", "Durabilité: 3200#Effet: Résistance", 23, Material.CHAINMAIL_CHESTPLATE, ItemType.ARMOR, 3100, 11, 6, EquipmentSlot.CHEST, new PotionEffect(PotionEffectType.FAST_DIGGING, 999999, 0, false, false, true)),
+    NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 9, 6, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
+    NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 5, 4, EquipmentSlot.FEET),
 
     NEXT_ARROW("§bNext", "next_arrow",42, Material.POTATO, ItemType.SPECIAL),
     PREVIOUS_ARROW("§bPrevious","previous_arrow",43, Material.BAKED_POTATO, ItemType.SPECIAL),
