@@ -12,7 +12,7 @@ package fr.zelytra.histeria.commands.miscellaneous;
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -40,7 +40,7 @@ public class XpBottle implements CommandExecutor {
                 int xp = player.getLevel();
 
                 if (xp <= 10) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough experience to convert it (10lvl required)");
+                    LangMessage.sendMessage(player,"miscellaneous.notEnoughExperience");
                     return false;
                 }
 
@@ -52,7 +52,7 @@ public class XpBottle implements CommandExecutor {
 
                     return true;
                 }else {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough spaces in your inventory");
+                    LangMessage.sendMessage(player,"miscellaneous.notEnoughSpace");
                     return false;
                 }
             }

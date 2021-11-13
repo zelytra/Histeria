@@ -9,7 +9,7 @@
 
 package fr.zelytra.histeria.commands.miscellaneous;
 
-import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,16 +30,16 @@ public class Fly implements CommandExecutor {
                 if (player.getAllowFlight()) {
                     player.setFlying(false);
                     player.setAllowFlight(false);
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aFly disabled.");
+                    LangMessage.sendMessage(player,"miscellaneous.flyDisable");
                     return true;
                 }
 
                 player.setAllowFlight(true);
                 player.setFlying(true);
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aFly enabled.");
+                LangMessage.sendMessage(player,"miscellaneous.flyEnable");
                 return true;
             }else {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg()+"§cYou cannot change fly mode on this gamemode.");
+                LangMessage.sendMessage(player,"miscellaneous.flyCancel");
             }
 
         }

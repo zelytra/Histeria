@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.managers.cooldown;
 
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -99,7 +100,7 @@ public class Cooldown {
                 toRemove = entry.getKey();
                 if (!toRemove.isFinished()) {
                     if (display)
-                        player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6You need to wait " + toRemove);
+                        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(),"command.coolDown",toRemove.toString());
                     return false;
                 }
 

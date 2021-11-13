@@ -15,6 +15,7 @@ import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.hguard.Shape;
 import fr.zelytra.histeria.managers.hguard.WorldEditHandler;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Material;
@@ -45,11 +46,11 @@ public class HGuardCreator implements CommandExecutor {
                             , new BoundingBox(selection.getMinimumPoint().getBlockX(), selection.getMinimumPoint().getBlockY(), selection.getMinimumPoint().getBlockZ(), selection.getMaximumPoint().getBlockX(), selection.getMaximumPoint().getBlockY(), selection.getMaximumPoint().getBlockZ())
                             , Shape.CUBE
                             , player.getWorld());
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[1] + " has been created");
+                    LangMessage.sendMessage(player,"hguard.create");
                     return true;
 
                 } else {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease make a selection");
+                    LangMessage.sendMessage(player,"hguard.selection");
                     return false;
                 }
 
@@ -60,7 +61,7 @@ public class HGuardCreator implements CommandExecutor {
                         , Shape.CYLINDER
                         , player.getWorld()
                         , Integer.parseInt(args[3]));
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[1] + " has been created");
+                LangMessage.sendMessage(player,"hguard.create");
                 return true;
 
             } else {
@@ -76,7 +77,7 @@ public class HGuardCreator implements CommandExecutor {
             if (HGuard.getByName(args[1]) != null) {
                 hGuard = HGuard.getByName(args[1]);
             } else {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis area doesn't exist");
+                LangMessage.sendMessage(player,"hguard.notExist");
                 return false;
             }
 

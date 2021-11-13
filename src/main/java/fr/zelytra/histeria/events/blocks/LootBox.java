@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.ItemFunction;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.loottable.LootsEnum;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
@@ -38,25 +39,25 @@ public class LootBox implements Listener {
                 Player player = e.getPlayer();
                 ItemStack item;
                 if (Utils.getEmptySlots(player) < 2) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough place in your inventory to claim the reward.");
+                    LangMessage.sendMessage(player,"miscellaneous.notEnoughSpace");
                     return;
                 }
                 switch (material) {
                     case VOTE_KEY:
                         item = drawKey(Histeria.lootTableManager.getVoteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §lVOTE KEY");
+                        LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg()+"§a§l" + player.getName(),"miscellaneous.lootBoxVote","");
                         break;
                     case DIAMOND_KEY:
                         item = drawKey(Histeria.lootTableManager.getDiamondKey().getLoots());
-                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §b§lDIAMOND KEY");
+                        LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg()+"§a§l" + player.getName(),"miscellaneous.lootBoxDiamond","");
                         break;
                     case HISTERITE_KEY:
                         item = drawKey(Histeria.lootTableManager.getHisteriteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §c§lHISTERITE KEY");
+                        LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg()+"§a§l" + player.getName(),"miscellaneous.lootBoxHisterite","");
                         break;
                     case NOCTURITE_KEY:
                         item = drawKey(Histeria.lootTableManager.getNocturiteKey().getLoots());
-                        Bukkit.broadcastMessage(Message.PLAYER_PREFIX.getMsg() + "§a§l" + player.getName() + "§r§a just opened a loot box with a §5§lNOCTURITE KEY");
+                        LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg()+"§a§l" + player.getName(),"miscellaneous.lootBoxNocturite","");
                         break;
                     default:
                         return;

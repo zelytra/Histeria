@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.commands.miscellaneous;
 
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -27,7 +28,7 @@ public class GameMode implements CommandExecutor {
             boolean isOtherPlayer = false;
             if (args.length == 1) {
                 if (Bukkit.getPlayer(args[0]) == null) {
-                    sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected to the server.");
+                    LangMessage.sendMessage((Player) sender, "command.playerOffLine");
                     return false;
                 }
                 target = Bukkit.getPlayer(args[0]);
@@ -39,21 +40,21 @@ public class GameMode implements CommandExecutor {
             switch (command.getName()) {
                 case "gmc":
                     target.setGameMode(org.bukkit.GameMode.CREATIVE);
-                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to CREATIVE.");
+                    LangMessage.sendMessage(target, "miscellaneous.gmc");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to CREATIVE.");
+                        LangMessage.sendMessage((Player) sender, Message.PLAYER_PREFIX + "§a" + target.getName(), "miscellaneous.gmcPlayer", "");
                     break;
                 case "gms":
                     target.setGameMode(org.bukkit.GameMode.SURVIVAL);
-                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to SURVIVAL.");
+                    LangMessage.sendMessage(target, "miscellaneous.gms");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to SURVIVAL.");
+                        LangMessage.sendMessage((Player) sender, Message.PLAYER_PREFIX + "§a" + target.getName(), "miscellaneous.gmsPlayer", "");
                     break;
                 case "gmsc":
                     target.setGameMode(org.bukkit.GameMode.SPECTATOR);
-                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYour gamemode has been set to SPECTATOR.");
+                    LangMessage.sendMessage(target, "miscellaneous.gmsc");
                     if (isOtherPlayer)
-                        sender.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + target.getName() + " gamemode set to SPECTATOR.");
+                        LangMessage.sendMessage((Player) sender, Message.PLAYER_PREFIX + "§a" + target.getName(), "miscellaneous.gmscPlayer", "");
                     break;
                 default:
                     return false;

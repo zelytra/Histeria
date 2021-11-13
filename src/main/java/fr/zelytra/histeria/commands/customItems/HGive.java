@@ -13,6 +13,7 @@ package fr.zelytra.histeria.commands.customItems;
 import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
@@ -45,7 +46,7 @@ public class HGive implements CommandExecutor {
                 playItemSound(player);
                 return true;
             } else {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis item doesn't exist.");
+                LangMessage.sendMessage(player,"miscellaneous.itemNotExist");
                 return false;
             }
 
@@ -57,12 +58,12 @@ public class HGive implements CommandExecutor {
                 playItemSound(player);
                 return true;
             } else {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis item doesn't exist.");
+                LangMessage.sendMessage(player,"miscellaneous.itemNotExist");
                 return false;
             }
         } else if (args.length == 3 && Utils.isNumeric(args[1])) {
             if (Bukkit.getPlayer(args[2]) == null) {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player doesn't exist.");
+                LangMessage.sendMessage(player,"command.playerNotExist");
                 return false;
             }
             Player target = Bukkit.getPlayer(args[2]);
@@ -73,7 +74,7 @@ public class HGive implements CommandExecutor {
                 player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aGave " + Integer.parseInt(args[1]) + " §6§l" + args[0] + "§r§a to " + target.getName());
                 return true;
             } else {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis item doesn't exist.");
+                LangMessage.sendMessage(player,"miscellaneous.itemNotExist");
                 return false;
             }
         } else {

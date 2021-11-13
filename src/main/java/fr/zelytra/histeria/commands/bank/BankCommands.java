@@ -10,7 +10,9 @@
 package fr.zelytra.histeria.commands.bank;
 
 import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
@@ -34,18 +36,18 @@ public class BankCommands implements CommandExecutor {
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
 
                 if (!Utils.isNumeric(args[2])) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cPlease enter a number");
+                    LangMessage.sendMessage(player, "bank.wrongNumberFormat");
                     return false;
                 }
                 if (Bukkit.getPlayer(args[1]) == null) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected on the server");
+                    LangMessage.sendMessage(player, "command.playerOffLine");
                     return false;
                 }
 
                 int amount = Integer.parseInt(args[2]);
 
                 if (amount < 1) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot send less than 1$");
+                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.notEnough", Emote.GOLD.toString());
                     return false;
                 }
 
@@ -55,11 +57,12 @@ public class BankCommands implements CommandExecutor {
                     customPlayer.getBankAccount().takeMoney(amount);
                     Objects.requireNonNull(CustomPlayer.getCustomPlayer(args[1])).getBankAccount().addMoney(amount);
 
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou sent §6" + amount + "$§a to " + args[1]);
-                    Objects.requireNonNull(Bukkit.getPlayer(args[1])).sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou received §6" + amount + " §afrom " + player.getName());
+
+                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.sendMoney", "§6" + Emote.GOLD + " §e-> §6" + args[1]);
+                    LangMessage.sendMessage(Bukkit.getPlayer(args[1]), Message.PLAYER_PREFIX + "§6" + player.getName(), "bank.receiveMoney", "§6" + amount + Emote.GOLD);
 
                 } else {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have enough money");
+                    LangMessage.sendMessage(player, "bank.notEnoughMoney");
                     return false;
                 }
 
@@ -67,12 +70,12 @@ public class BankCommands implements CommandExecutor {
 
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
                 assert customPlayer != null;
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou currently have §6" + customPlayer.getBankAccount().getMoney() + "$§a in your bank account.");
+                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.yourAccount", "§6" + customPlayer.getBankAccount().getMoney() + Emote.GOLD);
 
             } else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
 
                 HelpCommands help = new HelpCommands(command.getName());
-                help.addCommand("[send]", "[player]","[amount]");
+                help.addCommand("[send]", "[player]", "[amount]");
                 help.printPlayer(player);
 
             } else {

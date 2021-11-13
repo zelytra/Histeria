@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
@@ -31,7 +32,7 @@ public class Heal implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!Cooldown.cooldownCheck(player, "healCommand",true)) {
+                if (!Cooldown.cooldownCheck(player, "healCommand", true)) {
                     return false;
                 }
 
@@ -39,26 +40,24 @@ public class Heal implements CommandExecutor {
                     new Cooldown(player, 300, "healCommand");
 
                 player.setHealth(Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been healed.");
+                LangMessage.sendMessage(player, "miscellaneous.heal");
                 return true;
             } else {
                 if (Bukkit.getPlayer(args[0]) != null && Utils.canByPass(player)) {
                     Player target = Bukkit.getPlayer(args[0]);
                     assert target != null;
                     target.setHealth(Objects.requireNonNull(target.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue());
-
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou heal " + target.getName() + ".");
-                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been healed.");
+                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "miscellaneous.healOther", target.getName());
+                    LangMessage.sendMessage(target, "miscellaneous.heal");
                     return true;
                 } else if (!Utils.canByPass(player)) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot heal another player.");
+                    LangMessage.sendMessage(player, "miscellaneous.healNoOther");
                     return false;
                 } else {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have permission to perform this command.");
+                    LangMessage.sendMessage(player,"command.noPermission");
                     return false;
                 }
             }
-            //TODO Prendre en compte le statut de pvp dans l'exec de la commande
         }
         return false;
     }

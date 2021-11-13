@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
@@ -36,7 +37,7 @@ public class Feed implements CommandExecutor {
 
                 player.setFoodLevel(20);
                 player.setSaturation(20f);
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been fed.");
+                LangMessage.sendMessage(player,"miscellaneous.feed");
                 return true;
             } else {
                 if (Bukkit.getPlayer(args[0]) != null && Utils.canByPass(player)) {
@@ -44,18 +45,17 @@ public class Feed implements CommandExecutor {
                     assert target != null;
                     target.setFoodLevel(20);
                     target.setSaturation(20f);
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou feed " + target.getName() + ".");
-                    target.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou have been fed.");
+                    LangMessage.sendMessage(player,Message.PLAYER_PREFIX.getMsg(),"miscellaneous.feedPlayer",target.getName());
+                    LangMessage.sendMessage(target,"miscellaneous.feed");
                     return true;
                 } else if (!Utils.canByPass(player)) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot feed another player.");
+                    LangMessage.sendMessage(player,"miscellaneous.feedCancel");
                     return false;
                 } else {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou don't have permission to perform this command.");
+                    LangMessage.sendMessage(player,"command.noPermission");
                     return false;
                 }
             }
-            //TODO Prendre en compte le statut de pvp dans l'exec de la commande
         }
         return false;
     }

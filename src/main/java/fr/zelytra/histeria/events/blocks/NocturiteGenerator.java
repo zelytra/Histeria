@@ -15,7 +15,7 @@ import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -91,7 +91,7 @@ public class NocturiteGenerator implements Listener {
             NamespacedKey blockKey = keyBuilder(e.getClickedBlock().getLocation());
             long time = e.getClickedBlock().getChunk().getPersistentDataContainer().get(blockKey, PersistentDataType.LONG);
             if (noctInventorywatcher.containsKey(blockKey)) {
-                player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cYou cannot access this block at the same time as another player.");
+                LangMessage.sendMessage(player,"nocturiteGenerator.access");
                 return;
             }
             noctInventorywatcher.put(blockKey, player);
