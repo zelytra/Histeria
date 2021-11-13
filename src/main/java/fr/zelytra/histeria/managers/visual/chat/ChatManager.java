@@ -80,6 +80,10 @@ public class ChatManager {
 
         if (canUseEmote)
             processMessage = processEmote(processMessage);
+        else
+            for (String word : message.split(" "))
+                processMessage.append(Component.text().content(word + " ").color(groupFX.getMessageColor()));
+
 
         return processMessage.build();
 

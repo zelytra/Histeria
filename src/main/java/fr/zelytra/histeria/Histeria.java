@@ -90,7 +90,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -317,7 +317,6 @@ public final class Histeria extends JavaPlugin {
 
     private void setupServer() {
         for (World world : Bukkit.getWorlds()) {
-            world.setTime(23250);
             Slot.setSlot(100);
             world.setMonsterSpawnLimit(60);
             world.setAnimalSpawnLimit(10);
