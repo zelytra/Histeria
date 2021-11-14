@@ -58,6 +58,7 @@ import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
 import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
 import fr.zelytra.histeria.managers.loottable.LootTableManager;
@@ -84,6 +85,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public final class Histeria extends JavaPlugin {
@@ -135,14 +138,14 @@ public final class Histeria extends JavaPlugin {
         shop = new Shop();
         clearLag = new ClearLag();
         configurationManager = new ConfigurationManager();
+        visualTeamManager = new VisualTeamManager();
 
         configurationManager.load();
         StandSerializer.loadAll();
         NPC.loadAll();
         ArenaChest.loadAll();
+        autoReboot();
 
-
-        visualTeamManager = new VisualTeamManager();
         logs.log("Histeria successfully start", LogType.INFO);
         CustomPlayer.forceLoadAll();
     }
@@ -337,7 +340,29 @@ public final class Histeria extends JavaPlugin {
 
     }
 
+    private void autoReboot() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
 
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
+
+            String hour = sdfHour.format(cal.getTime());
+            if (isReloading == false && hour.contains("05:00")) {
+                LangMessage.broadcast(Message.HISTALERT.getMsg(), "server.restart", "");
+                isReloading = true;
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Bukkit.shutdown();
+            }
+
+        }, 0, 80);
+
+
+    }
 
     public static boolean isSaberFaction() {
         return saberFaction;

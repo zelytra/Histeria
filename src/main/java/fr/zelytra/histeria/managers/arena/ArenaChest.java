@@ -10,8 +10,10 @@
 package fr.zelytra.histeria.managers.arena;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -68,10 +70,13 @@ public class ArenaChest implements Serializable {
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () ->
                 Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
 
-            for (ArenaChest chest : ArenaChest.chestList)
-                chest.draw();
+                    for (ArenaChest chest : ArenaChest.chestList)
+                        chest.draw();
 
-        }, 0, 432000 * 20), remain);
+                    LangMessage.broadcast(Message.HISTALERT.getMsg(), "arena.refill", "");
+
+
+                }, 0, 432000 * 20), remain);
 
     }
 
