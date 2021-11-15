@@ -45,7 +45,6 @@ public class HKick implements CommandExecutor {
         }
 
         target.kick(Component.text().content(Message.HISTBAN.getMsg()
-                + "§c" + target.getName()
                 + customTarget.getLang().get("command.kickTarget")
                 + "§6 " + reason).build());
 
