@@ -37,6 +37,8 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
+import fr.zelytra.histeria.commands.stats.TopStats;
+import fr.zelytra.histeria.commands.stats.TopStatsTab;
 import fr.zelytra.histeria.commands.switchServer.SwitchServerCommand;
 import fr.zelytra.histeria.commands.switchServer.SwitchServerTab;
 import fr.zelytra.histeria.commands.tpa.Tpa;
@@ -93,7 +95,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -238,7 +240,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+
+        /* TopStats */
         getCommand("topstats").setExecutor(new TopStats());
+        getCommand("topstats").setTabCompleter(new TopStatsTab());
 
         /* ArenaChest */
         getCommand("arenachest").setExecutor(new ArenaCommand());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2021.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr
@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.miscellaneous;
+package fr.zelytra.histeria.commands.stats;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
