@@ -16,6 +16,7 @@ import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.languages.Lang;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.pvp.PvP;
@@ -96,7 +97,7 @@ public class CustomPlayer {
         this.bank = new Bank(this);
         this.uuid = Bukkit.getOfflinePlayer(name).getUniqueId().toString();
 
-        if(this.uuid==null) {
+        if (this.uuid == null) {
             playedBefore = false;
             return;
         }
@@ -135,6 +136,8 @@ public class CustomPlayer {
                     + Objects.requireNonNull(getPlayer().getAddress()).toString().replace("/", "").split(":")[0] + "','"
                     + formatter.format(date) + "','"
                     + lang.name() + "');");
+
+            LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg(), "server.newPlayer", name);
         }
 
     }
@@ -277,7 +280,7 @@ public class CustomPlayer {
         return Bukkit.getPlayer(this.name);
     }
 
-    public boolean hasPlayedBefore(){
+    public boolean hasPlayedBefore() {
         return playedBefore;
     }
 
