@@ -95,6 +95,7 @@ lord:
   item3:
     material: DIAMOND_LEGGINGS
     amount: 1
+    luck: 4.5
     enchant:
       type: PROTECTION_ENVIRONMENTAL
       level: 2

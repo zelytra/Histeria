@@ -23,6 +23,12 @@ public class Hologram {
     private CLocation location;
     private List<HoloLine> lineList = new ArrayList<>();
 
+    /**
+     *
+     * @param location
+     * @param content
+     */
+
     public Hologram(Location location, String content) {
         this.location = new CLocation(location);
 
@@ -34,18 +40,22 @@ public class Hologram {
             lineList.add(new HoloLine(x, lines[x], lineLoc));
         }
         holograms.add(this);
-        //TODO Message creation
     }
 
-    public void destroy(){
+    public void destroy() {
         for (HoloLine line : lineList)
             line.destroy();
 
         holograms.remove(this);
-        //TODO Message delete
     }
 
-    public void move(Location newLocation){
+    public void addLine(String content) {
+        Location lineLoc = location.getLocation().clone();
+        lineLoc.setY(lineLoc.getY() - (0.25f * (lineList.size() + 1)));
+        lineList.add(new HoloLine(lineList.size() + 1, content, lineLoc));
+    }
+
+    public void move(Location newLocation) {
 
     }
 

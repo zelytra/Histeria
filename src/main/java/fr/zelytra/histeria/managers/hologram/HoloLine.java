@@ -53,6 +53,7 @@ public class HoloLine implements Serializable {
         this.stand.addEquipmentLock(EquipmentSlot.LEGS, ArmorStand.LockType.ADDING_OR_CHANGING);
         this.stand.addEquipmentLock(EquipmentSlot.HEAD, ArmorStand.LockType.ADDING_OR_CHANGING);
         this.stand.addEquipmentLock(EquipmentSlot.OFF_HAND, ArmorStand.LockType.ADDING_OR_CHANGING);
+        this.stand.setCustomName(text);
         this.stand.setCustomNameVisible(!text.isEmpty());
 
     }

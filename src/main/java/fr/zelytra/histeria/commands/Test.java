@@ -9,7 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.managers.npc.NPC;
+import fr.zelytra.histeria.managers.hologram.Hologram;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,7 +22,7 @@ public class Test implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        NPC.saveAll();
+        new Hologram(player.getLocation(),"&6Bonsoir#je m'apelle fromage&coskour##peut être ?");
         return true;
 
     }
