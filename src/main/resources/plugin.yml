@@ -277,3 +277,7 @@ commands:
     permission: histeria.arenachest
     aliases:
       - ac
+
+  topstats:
+    description: Display top stats of player by criteria
+    permission: histeria.topstats

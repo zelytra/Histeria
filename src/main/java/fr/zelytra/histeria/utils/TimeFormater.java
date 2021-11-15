@@ -30,14 +30,12 @@ public abstract class TimeFormater {
             return "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
         }
         //Hours display
-        else if (timeInMilli <= 86400000) {
+        else {
             int remainingSec = (int) (timeInMilli / 1000);
             int timeInSec = (remainingSec % 60);
             int timeInMin = (remainingSec % 3600) / 60;
-            int TimeInHour = (remainingSec % 86400) / 3600;
+            int TimeInHour = remainingSec / 3600;
             return "§e" + TimeInHour + "§6h" + "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
-        } else {
-            return "§cNA";
         }
     }
 
@@ -56,14 +54,12 @@ public abstract class TimeFormater {
         }
 
         //Hours display
-        else if (timeInSec <= 86400) {
+        else {
             int time = (timeInSec);
             int timeInSecs = (timeInSec % 60);
             int timeInMin = (time % 3600) / 60;
-            int TimeInHour = (time % 86400) / 3600;
+            int TimeInHour = time / 3600;
             return "§e" + TimeInHour + "§6h" + "§e" + timeInMin + "§6m" + "§e" + timeInSecs + "§6s";
-        } else {
-            return "§cNA";
         }
     }
 
