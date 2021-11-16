@@ -281,3 +281,7 @@ commands:
   topstats:
     description: Display top stats of player by criteria
     permission: histeria.topstats
+
+  hologram:
+    description: Hologram command
+    permission: histeria.hologram

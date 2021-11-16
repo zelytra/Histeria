@@ -55,6 +55,9 @@ import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.hologram.HoloCommand;
+import fr.zelytra.histeria.managers.hologram.HoloTab;
+import fr.zelytra.histeria.managers.hologram.Hologram;
 import fr.zelytra.histeria.managers.home.AdminHomeCommand;
 import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
@@ -146,6 +149,7 @@ public final class Histeria extends JavaPlugin {
         StandSerializer.loadAll();
         NPC.loadAll();
         ArenaChest.loadAll();
+        Hologram.load();
         autoReboot();
 
         logs.log("Histeria successfully start", LogType.INFO);
@@ -169,6 +173,7 @@ public final class Histeria extends JavaPlugin {
         }
         NPC.saveAll();
         ArenaChest.saveAll();
+        Hologram.save();
         configurationManager.unload();
         mySQL.closeConnection();
     }
@@ -240,6 +245,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+
+        /* Hologram */
+        getCommand("hologram").setExecutor(new HoloCommand());
+        getCommand("hologram").setTabCompleter(new HoloTab());
 
         /* TopStats */
         getCommand("topstats").setExecutor(new TopStats());

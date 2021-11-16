@@ -63,11 +63,11 @@ public class HoloLine implements Serializable {
     }
 
     public void move(Location newLocation) {
-
+        this.stand.teleport(newLocation);
     }
 
     public void changeText(String text) {
-
+        this.stand.setCustomName(text);
     }
 
     public Location getLocation() {
