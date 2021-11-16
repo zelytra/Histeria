@@ -23,7 +23,7 @@ public class Hologram implements Serializable {
     public static final List<Hologram> holograms = new ArrayList<>();
 
     private String tag;
-    private final CLocation location;
+    private CLocation location;
     private final List<HoloLine> lineList = new ArrayList<>();
 
     /**
@@ -80,6 +80,8 @@ public class Hologram implements Serializable {
                     line.getLocation().getZ() + dz
             ));
         }
+
+        this.location = new CLocation(newLocation);
     }
 
     public boolean editLine(int lineNumber, String content) {
