@@ -257,9 +257,9 @@ public class LuckyBlock implements Listener {
             EntityZombie customDado = new EntityZombie(EntityTypes.ZOMBIE, world.getHandle());
             customDado.setPosition(e.getBlock().getLocation().getX(), e.getBlock().getLocation().getY(),
                     e.getBlock().getLocation().getZ());
-            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setBoots(new CustomItemStack(CustomMaterial.HISTERITE_BOOTS, 1).getItem());
-            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setLeggings(new CustomItemStack(CustomMaterial.HISTERITE_LEGGINGS, 1).getItem());
-            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setChestplate(new CustomItemStack(CustomMaterial.HISTERITE_CHESTPLATE, 1).getItem());
+            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setBoots(new CustomItemStack(CustomMaterial.NOCTURITE_BOOTS, 1).getItem());
+            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setLeggings(new CustomItemStack(CustomMaterial.NOCTURITE_LEGGINGS, 1).getItem());
+            ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setChestplate(new CustomItemStack(CustomMaterial.NOCTURITE_CHESTPLATE, 1).getItem());
             ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setHelmet(item);
             ((LivingEntity) customDado.getBukkitEntity()).setCustomName("§cdadodasyra");
             ((LivingEntity) customDado.getBukkitEntity()).setCustomNameVisible(true);
