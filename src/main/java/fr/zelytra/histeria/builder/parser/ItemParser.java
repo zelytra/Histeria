@@ -68,6 +68,104 @@ public class ItemParser {
 
     }
 
+    public List<ItemLuck> getList() {
+        List<ItemLuck> items = new ArrayList<>();
+
+        for (String loot : config.getKeys(false)) {
+            if (config.getString(loot + ".material") == null) {
+                items.add(new ItemLuck(0, new ItemStack(Material.AIR)));
+                continue;
+            }
+
+            double luck = config.getDouble(loot + ".luck");
+
+            Material material = Material.getMaterial(config.getString(loot + ".material").toUpperCase());
+            CustomMaterial customMaterial;
+            ItemStack item;
+            int amount = config.getInt(loot + ".amount");
+
+            /* Item builder */
+            if (material == null) {
+
+                customMaterial = CustomMaterial.getByName(config.getString(loot + ".material").toLowerCase());
+
+                if (customMaterial == null) {
+                    Histeria.log("LootParser problem with : " + config.getString(loot + ".material").toUpperCase(), LogType.ERROR);
+                    continue;
+                }
+
+                item = new CustomItemStack(customMaterial, amount).getItem();
+            } else {
+                item = new ItemStack(material, amount);
+            }
+
+            /* Enchant reader */
+            if (config.getConfigurationSection(loot + ".enchant") != null) {
+                if (config.getConfigurationSection(loot + ".enchant").getKeys(true).size() == 2) {
+
+                    if (Enchantment.getByName(config.getString(loot + ".enchant.type").toUpperCase()) == null) {
+                        Histeria.log("LootParser problem with : " + config.getString(loot + ".enchant.type").toUpperCase(), LogType.ERROR);
+                        continue;
+                    }
+
+                    if (material != Material.ENCHANTED_BOOK) {
+                        ItemMeta meta = item.getItemMeta();
+                        meta.addEnchant(Enchantment.getByName(config.getString(loot + ".enchant.type").toUpperCase()), config.getInt(loot + ".enchant.level"), true);
+                        item.setItemMeta(meta);
+                    } else {
+                        item = bookEnchantedItemStack(material, Enchantment.getByName(config.getString(loot + ".enchant.type").toUpperCase()), config.getInt(loot + ".enchant.level"));
+                    }
+                } else {
+                    for (String enchantTag : config.getConfigurationSection(loot + ".enchant").getKeys(false)) {
+
+                        if (Enchantment.getByName(config.getString(loot + ".enchant." + enchantTag + ".type").toUpperCase()) == null) {
+                            Histeria.log("LootParser problem with : " + config.getString(loot + ".enchant." + enchantTag + ".type").toUpperCase(), LogType.ERROR);
+                            continue;
+                        }
+
+                        if (material != Material.ENCHANTED_BOOK) {
+                            ItemMeta meta = item.getItemMeta();
+                            meta.addEnchant(Enchantment.getByName(config.getString(loot + ".enchant." + enchantTag + ".type").toUpperCase()), config.getInt(loot + ".enchant." + enchantTag + ".level"), true);
+                            item.setItemMeta(meta);
+                        } else {
+                            item = bookEnchantedItemStack(material, Enchantment.getByName(config.getString(loot + ".enchant." + enchantTag + ".type").toUpperCase()), config.getInt(loot + ".enchant." + enchantTag + ".level"));
+                        }
+                    }
+                }
+
+            }
+
+            /* Potion reader */
+            if (config.getString(loot + ".effect.type") != null) {
+                if (PotionEffectType.getByName(config.getString(loot + ".effect.type").toUpperCase()) == null) {
+                    Histeria.log("LootParser problem with : " + config.getString(loot + ".effect.type").toUpperCase(), LogType.ERROR);
+                    continue;
+                }
+                if (material == Material.POTION || material == Material.SPLASH_POTION) {
+                    PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
+
+                    PotionEffectType potionEffectType = PotionEffectType.getByName(config.getString(loot + ".effect.type").toUpperCase());
+                    int duration = config.getInt(loot + ".effect.duration") * 20;
+                    int amplifier = config.getInt(loot + ".effect.amplifier");
+
+                    potionMeta.setColor(Color.fromRGB(ThreadLocalRandom.current().nextInt(0, 255 + 1), ThreadLocalRandom.current().nextInt(0, 255 + 1), ThreadLocalRandom.current().nextInt(0, 255 + 1)));
+                    potionMeta.addCustomEffect(new PotionEffect(potionEffectType, duration, amplifier), true);
+                    item.setItemMeta(potionMeta);
+                    ItemMeta meta = item.getItemMeta();
+                    meta.displayName(Component.text().content("Potion of " + potionEffectType.getName().toLowerCase()).build());
+                    item.setItemMeta(meta);
+
+                } else {
+                    Histeria.log("LootParser problem : Cannot add potion effect on " + config.getString(loot) + " item type", LogType.ERROR);
+                }
+
+            }
+            items.add(new ItemLuck(luck, item));
+        }
+        return items;
+    }
+
+
     public List<ItemStack> getListOf(String tag) {
         List<ItemStack> items = new ArrayList<>();
 

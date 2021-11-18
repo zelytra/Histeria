@@ -3,7 +3,7 @@ item1:
   amount: 64
   luck: 6
 item2:
-  material: TURTLE_SHELL
+  material: TURTLE_HELMET
   amount: 1
   luck: 6
 item3:
@@ -23,14 +23,14 @@ item6:
   amount: 1
   luck: 5
   enchant:
-    type: UNBREAKING
+    type: DURABILITY
     level: 1
 item7:
   material: ENDER_PEARL
   amount: 8
   luck: 5
 item8:
-  material: COOCKED_BEEF
+  material: COOKED_BEEF
   amount: 16
   luck: 5
 item9:
@@ -42,23 +42,23 @@ item10:
   amount: 5
   luck: 4
 item11:
-  material: TOTEM
+  material: TOTEM_OF_UNDYING
   amount: 1
   luck: 4
 item12:
-  material: HEAL_STICK
+  material: HEALSTICK
   amount: 3
   luck: 4
 item13:
-  material: SPEED_STICK
+  material: SPEEDSTICK
   amount: 3
   luck: 4
 item14:
-  material: JUMP_STICK
+  material: JUMPSTICK
   amount: 3
   luck: 4
 item15:
-  material: BUBLE_WAND
+  material: BUBBLEWAND
   amount: 2
   luck: 4
 item16:
@@ -66,14 +66,14 @@ item16:
   amount: 1
   luck: 3.5
   enchant:
-    type: PROTECTION_ENVIRONEMENTAL
+    type: PROTECTION_ENVIRONMENTAL
     level: 2
 item17:
   material: DYNAMITE
   amount: 4
   luck: 3.5
 item18:
-  material: ENCHANTED_BOTTLE
+  material: EXPERIENCE_BOTTLE
   amount: 32
   luck: 3.5
 item19:
@@ -85,7 +85,7 @@ item20:
   amount: 64
   luck: 1.5
 item21:
-  material: HISTERITE_NUGGETS
+  material: HISTERITE_NUGGET
   amount: 9
   luck: 1.5
 item22:
@@ -97,7 +97,7 @@ item23:
   amount: 1
   luck: 1.5
   enchant:
-    type: PROTECTION_ENVIRONEMENTAL
+    type: PROTECTION_ENVIRONMENTAL
     level: 3
 item24:
   material: GOLDEN_APPLE
@@ -117,17 +117,17 @@ item27:
   luck: 1
   enchant:
     enchant1:
-      type: EFFICIENCY
-      level1: 3
+      type: DIG_SPEED
+      level: 3
     enchant2:
-      type: UNBREAKING
-      level2: 2
+      type: DURABILITY
+      level: 2
 item28:
   material: HISTERITE_SWORD
   amount: 1
   luck: 1
   enchant:
-    type: SHARPNESS
+    type: DAMAGE_ALL
     level: 2
 item29:
   material: NETHERITE_SCRAP
@@ -138,7 +138,7 @@ item30:
   amount: 3
   luck: 1
 item31:
-  material: KEY_VOTE
+  material: VOTE_KEY
   amount: 1
   luck: 1
 item32:
@@ -146,7 +146,7 @@ item32:
   amount: 1
   luck: 0.1
 item33:
-  material: NOCTURITE_NUGGETS
+  material: NOCTURITE_NUGGET
   amount: 1
   luck: 0.1
 item34:

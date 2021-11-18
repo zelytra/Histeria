@@ -10,6 +10,8 @@
 package fr.zelytra.histeria.managers.arena;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.builder.parser.ItemLuck;
+import fr.zelytra.histeria.builder.parser.ItemParser;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
@@ -23,6 +25,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class ArenaChest implements Serializable {
@@ -52,9 +55,29 @@ public class ArenaChest implements Serializable {
 
         Chest chest = (Chest) getLocation().getBlock().getState();
         ItemStack[] content = chest.getInventory().getContents();
-        content[0] = new ItemStack(Material.DIRT);
+        InputStream is = Histeria.getInstance().getResource("arenaChest.yml");
+        content = randomLoot(content, new ItemParser(is).getList());
         chest.getInventory().setContents(content);
 
+    }
+
+    private ItemStack[] randomLoot(ItemStack[] content, List<ItemLuck> lootTable) {
+        for (int i = 0; i <= 8; i++) {
+            int slotRandom = (int) (Math.random() * (content.length));
+            if (content[slotRandom] != null) {
+                continue;
+            }
+            double random = new Random().nextDouble();
+            for (ItemLuck loot : lootTable) {
+                if (loot.luck / 100.0 > random) {
+                    content[slotRandom] = loot.item;
+                    break;
+                }
+                random -= loot.luck / 100.0;
+            }
+
+        }
+        return content;
     }
 
     public Location getLocation() {
