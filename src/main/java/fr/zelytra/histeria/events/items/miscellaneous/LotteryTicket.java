@@ -22,7 +22,7 @@ import org.bukkit.event.Listener;
 
 public class LotteryTicket implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.LOTTERY_TICKET;
-    private final int MAX_GAIN = 1000000;
+    private final int MAX_GAIN = 250000;
 
     @EventHandler
     public void onInteract(CustomItemUseEvent e) {
