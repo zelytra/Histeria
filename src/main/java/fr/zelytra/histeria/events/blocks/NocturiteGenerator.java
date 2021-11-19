@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class NocturiteGenerator implements Listener {
-    private final int generationTime = 5;//1800;//temps de génération en secondes
+    private final int generationTime = 1800;//temps de génération en secondes
     private final String interfaceName = "§5Nocturite Generator Interface";
     private static final HashMap<NamespacedKey, Player> noctInventorywatcher = new HashMap<>();
 

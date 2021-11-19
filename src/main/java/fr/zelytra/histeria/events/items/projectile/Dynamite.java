@@ -69,6 +69,12 @@ public class Dynamite implements Listener {
                         BLocation.setY(origin.getY() + y);
                         BLocation.setZ(origin.getZ() + z);
                         if (canExplode(BLocation)) {
+
+                            if (BLocation.getBlock().getType() == CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()) {
+                                BLocation.getBlock().breakNaturally();
+                                continue;
+                            }
+
                             BLocation.getBlock().breakNaturally(new ItemStack(Material.AIR));
                         }
                     }

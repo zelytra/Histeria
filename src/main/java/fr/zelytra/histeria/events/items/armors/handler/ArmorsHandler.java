@@ -13,6 +13,7 @@ import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.items.ItemType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,17 +27,20 @@ public class ArmorsHandler implements Listener {
     public void armorMoveEvent(ArmorEquipEvent e) {
         Player player = e.getPlayer();
         CustomMaterial material;
+
         if (CustomItemStack.hasTag(e.getNewArmorPiece())) {
             material = CustomItemStack.getCustomMaterial(e.getNewArmorPiece());
-            for (PotionEffect potion : material.getPotions()) {
-                player.addPotionEffect(potion);
-            }
+            if (material.getItemType() == ItemType.ARMOR)
+                for (PotionEffect potion : material.getPotions()) {
+                    player.addPotionEffect(potion);
+                }
 
         } else if (CustomItemStack.hasTag(e.getOldArmorPiece())) {
             material = CustomItemStack.getCustomMaterial(e.getOldArmorPiece());
-            for (PotionEffect potion : material.getPotions()) {
-                player.removePotionEffect(potion.getType());
-            }
+            if (material.getItemType() == ItemType.ARMOR)
+                for (PotionEffect potion : material.getPotions()) {
+                    player.removePotionEffect(potion.getType());
+                }
         }
     }
 
