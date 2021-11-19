@@ -84,11 +84,14 @@ import net.minecraft.server.v1_16_R3.DedicatedServer;
 import net.minecraft.server.v1_16_R3.DedicatedServerProperties;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -335,6 +338,14 @@ public final class Histeria extends JavaPlugin {
     }
 
     private void setupServer() {
+
+        File configLegacy = new File(Bukkit.getPluginManager().getPlugin("WorldEdit").getDataFolder().getPath() + File.separator + "config.yml");
+        FileConfiguration yml = YamlConfiguration.loadConfiguration(configLegacy);
+
+        if (!yml.getString(("navigation-wand.item")).equals("minecraft:lead"))
+            yml.set("navigation-wand.item", "minecraft:lead");
+
+
         for (World world : Bukkit.getWorlds()) {
             Slot.setSlot(100);
             world.setMonsterSpawnLimit(60);
