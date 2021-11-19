@@ -62,11 +62,13 @@ public class ArenaChest implements Serializable {
     }
 
     private ItemStack[] randomLoot(ItemStack[] content, List<ItemLuck> lootTable) {
+
+        for (int x = 0; x < content.length; x++)
+            content[x] = new ItemStack(Material.AIR);
+
         for (int i = 0; i <= 8; i++) {
             int slotRandom = (int) (Math.random() * (content.length));
-            if (content[slotRandom] != null) {
-                continue;
-            }
+            
             double random = new Random().nextDouble();
             for (ItemLuck loot : lootTable) {
                 if (loot.luck / 100.0 > random) {
