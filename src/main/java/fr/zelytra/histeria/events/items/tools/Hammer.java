@@ -42,6 +42,7 @@ public class Hammer implements Listener {
                     BLocation.setX(e.getEvent().getBlock().getX() + x);
                     BLocation.setY(e.getEvent().getBlock().getY() + y);
                     BLocation.setZ(e.getEvent().getBlock().getZ() + z);
+
                     if (Histeria.isSaberFaction()) {
                         FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
                         FLocation fLoc = new FLocation(BLocation);
@@ -50,6 +51,7 @@ public class Hammer implements Listener {
                             continue;
                         }
                     }
+
                     if (block != Material.OBSIDIAN && BLocation.getBlock().getType() == Material.OBSIDIAN) {
                         continue;
                     }
@@ -58,9 +60,11 @@ public class Hammer implements Listener {
                             || BLocation.getBlock().getType().equals(Material.COMMAND_BLOCK)
                             || BLocation.getBlock().getType().equals(Material.LODESTONE)
                             || BLocation.getBlock().getType().equals(Material.INFESTED_COBBLESTONE)
-                            || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME) {
+                            || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME
+                            || BLocation.getBlock().getType() == Material.CRYING_OBSIDIAN) {
                         continue;
                     }
+
                     BLocation.getBlock().breakNaturally();
 
                 }
