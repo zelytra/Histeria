@@ -27,9 +27,9 @@ public class ObsidianBreaker implements Listener {
 
     @EventHandler
     public void onInteract(CustomItemUseEvent e) {
-
+        if (e.getEvent().getClickedBlock() == null) return;
         if (e.getMaterial() != customMaterial) return;
-        if(e.isCancelled()) return;
+        if (e.isCancelled()) return;
 
         switch (e.getEvent().getClickedBlock().getType()) {
             case OBSIDIAN:
