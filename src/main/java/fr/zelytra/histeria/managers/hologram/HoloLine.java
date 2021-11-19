@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class HoloLine implements Serializable {
 
-    private final CLocation location;
+    private CLocation location;
     private final int lineNumber;
     private final String text;
     private transient ArmorStand stand;
@@ -38,7 +38,8 @@ public class HoloLine implements Serializable {
     }
 
     public void destroy() {
-        Bukkit.getEntity(uuid).remove();
+        if (Bukkit.getEntity(uuid) != null)
+            Bukkit.getEntity(uuid).remove();
     }
 
     private void applyMetaData() {
@@ -63,6 +64,7 @@ public class HoloLine implements Serializable {
     }
 
     public void move(Location newLocation) {
+        this.location = new CLocation(newLocation);
         this.stand.teleport(newLocation);
     }
 
