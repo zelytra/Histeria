@@ -1,5 +1,6 @@
 package fr.zelytra.histeria.commands.miscellaneous;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.cooldown.Cooldown;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.utils.Utils;
@@ -38,6 +39,11 @@ public class RandomTp implements CommandExecutor {
 
         Player player = (Player) sender;
 
+        if(!Histeria.server.getServerName().equalsIgnoreCase("faction")){
+            LangMessage.sendMessage(player,"miscellaneous.randomTPCancel");
+            return false;
+        }
+
         if (!Utils.canByPass(player)) {
             if (!Cooldown.cooldownCheck(player, cdTag,true))
                 return true;
@@ -56,7 +62,8 @@ public class RandomTp implements CommandExecutor {
 
         player.teleport(new Location(player.getWorld(), x + 0.5, y + 2, z + 0.5));
         LangMessage.sendMessage(player, "command.randomTP");
-        //TODO Handle server command execution
+
+
         return true;
 
     }
