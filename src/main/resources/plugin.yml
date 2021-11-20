@@ -285,3 +285,6 @@ commands:
   hologram:
     description: Hologram command
     permission: histeria.hologram
+
+  status:
+    description: status

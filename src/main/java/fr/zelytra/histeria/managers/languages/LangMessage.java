@@ -40,7 +40,8 @@ public abstract class LangMessage {
     public static void broadcast(String prefix, String messageTag, String suffix) {
         for (Player player : Bukkit.getOnlinePlayers()) {
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
-            assert customPlayer != null;
+            if (customPlayer == null) continue;
+
             player.sendMessage(prefix + customPlayer.getLang().get(messageTag) + suffix);
         }
         Bukkit.getConsoleSender().sendMessage(prefix + Lang.EN.get(messageTag) + suffix);

@@ -339,16 +339,18 @@ public final class Histeria extends JavaPlugin {
 
     private void setupServer() {
 
-        File configLegacy = new File(Bukkit.getPluginManager().getPlugin("WorldEdit").getDataFolder().getPath() + File.separator + "config.yml");
-        FileConfiguration yml = YamlConfiguration.loadConfiguration(configLegacy);
+        if (Bukkit.getPluginManager().getPlugin("WorldEdit") != null) {
+            File configLegacy = new File(Bukkit.getPluginManager().getPlugin("WorldEdit").getDataFolder().getPath() + File.separator + "config.yml");
+            FileConfiguration yml = YamlConfiguration.loadConfiguration(configLegacy);
 
-        if (!yml.getString(("navigation-wand.item")).equals("minecraft:lead"))
-            yml.set("navigation-wand.item", "minecraft:lead");
+            if (yml.getString(("navigation-wand.item")) != null && !yml.getString(("navigation-wand.item")).equals("minecraft:lead"))
+                yml.set("navigation-wand.item", "minecraft:lead");
+        }
 
 
         for (World world : Bukkit.getWorlds()) {
             Slot.setSlot(100);
-            world.setMonsterSpawnLimit(60);
+            world.setMonsterSpawnLimit(30);
             world.setAnimalSpawnLimit(10);
             world.setAmbientSpawnLimit(15);
             world.setWaterAnimalSpawnLimit(5);

@@ -78,14 +78,18 @@ public class HGuardListener implements Listener {
             e.setCancelled(true);
         }
 
+
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreakBlock(BlockBreakEvent e) {
+
         if (HGuard.getByLocation(e.getBlock().getLocation()) == null) {
             return;
         }
+
         HGuard hguard = HGuard.getByLocation(e.getBlock().getLocation());
+
         if (Histeria.getLuckPerms() != null) {
             User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
             if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
@@ -214,9 +218,11 @@ public class HGuardListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onProjectileLaunch(CustomItemLaunchEvent e) {
+
         if (HGuard.getByLocation(e.getEvent().getLocation()) == null) {
             return;
         }
+
         HGuard hguard = HGuard.getByLocation(e.getEvent().getLocation());
 
         if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
@@ -232,7 +238,12 @@ public class HGuardListener implements Listener {
         if (HGuard.getByLocation(e.getEntity().getLocation()) == null) {
             return;
         }
-        e.setCancelled(true);
+
+        HGuard hguard = HGuard.getByLocation(e.getEntity().getLocation());
+
+        if (!hguard.isPvp())
+            e.setCancelled(true);
+
     }
 
 
@@ -258,11 +269,13 @@ public class HGuardListener implements Listener {
 
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
     public void onProjectileLaunch(ProjectileLaunchEvent e) {
+
         if (HGuard.getByLocation(e.getLocation()) == null) {
             return;
         }
+
         HGuard hguard = HGuard.getByLocation(e.getLocation());
 
         if (!hguard.isPvp())
@@ -345,13 +358,16 @@ public class HGuardListener implements Listener {
 
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent e) {
+
         if (HGuard.getByLocation(e.getEntity().getLocation()) == null) {
             return;
         }
 
-        if (e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.COMMAND) {
+        if (e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.COMMAND ||
+                e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM) {
             return;
         }
+
         e.setCancelled(true);
 
     }

@@ -76,6 +76,7 @@ public class CustomPlayer {
                 initData();
                 this.id = getBaseID();
                 this.bank.initNewAccount();
+                LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg(), "server.newPlayer", name);
 
             } else {
                 this.id = getBaseID();
@@ -137,7 +138,6 @@ public class CustomPlayer {
                     + formatter.format(date) + "','"
                     + lang.name() + "');");
 
-            LangMessage.broadcast(Message.PLAYER_PREFIX.getMsg(), "server.newPlayer", name);
         }
 
     }

@@ -1,5 +1,6 @@
 package fr.zelytra.histeria.managers.pvp;
 
+import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
@@ -20,6 +21,10 @@ public class PvPLogger implements Listener {
 
         Player player = (Player) e.getEntity();
         Player damager = (Player) e.getDamager();
+
+        if (HGuard.getByLocation(damager.getLocation()) != null)
+            if (!HGuard.getByLocation(damager.getLocation()).isPvp()) return;
+
 
         CustomPlayer.getCustomPlayer(player.getName()).getPvp().setPvP();
         CustomPlayer.getCustomPlayer(damager.getName()).getPvp().setPvP();

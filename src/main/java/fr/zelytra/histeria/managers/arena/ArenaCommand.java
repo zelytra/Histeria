@@ -30,8 +30,15 @@ public class ArenaCommand implements CommandExecutor {
 
             LangMessage.sendMessage(player, "", "arena.list", "");
 
-            for (ArenaChest chest : ArenaChest.chestList)
+            for (ArenaChest chest : ArenaChest.chestList) {
+                
+                if(!chest.isChest()){
+                    chest.destroy();
+                    continue;
+                }
+
                 player.sendMessage("§8● x:§6" + chest.getLocation().getBlockX() + " §ey:§6" + chest.getLocation().getBlockY() + " §ez:§6" + chest.getLocation().getBlockZ());
+            }
 
             return true;
 

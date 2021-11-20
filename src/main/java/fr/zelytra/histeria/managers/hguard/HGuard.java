@@ -90,15 +90,23 @@ public class HGuard {
         return null;
     }
 
+    /**
+     *
+     * @param location
+     * @return HGuard object with the highest priority (42 compare to 0 will return 42)
+     */
     @Nullable
     public static HGuard getByLocation(Location location) {
         HGuard highestPriorityArea = null;
         for (HGuard hguard : HGuardList) {
             if (hguard.contains(location) && location.getWorld().getName().equalsIgnoreCase(hguard.getWorld().getName())) {
+
                 if (highestPriorityArea != null) {
 
                     if (highestPriorityArea.getPriorityLevel() > hguard.getPriorityLevel())
                         continue;
+                    else
+                        highestPriorityArea = hguard;
 
                 } else
                     highestPriorityArea = hguard;

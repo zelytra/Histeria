@@ -105,7 +105,7 @@ public abstract class HGuardPersistent {
 
                 case "CYLINDER":
                     Location location = new Location(world, configFile.getInt("X"), configFile.getInt("Y"), configFile.getInt("Z"));
-                    int radius = configFile.getInt("Radius");
+                    int radius = configFile.getInt("radius");
                     hGuard = new HGuard(name, location, shape, world, radius);
                     break;
                 default:

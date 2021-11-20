@@ -53,6 +53,11 @@ public class ArenaChest implements Serializable {
 
     public void draw() {
 
+        if(!isChest()){
+            destroy();
+            return;
+        }
+
         Chest chest = (Chest) getLocation().getBlock().getState();
         ItemStack[] content = chest.getInventory().getContents();
         InputStream is = Histeria.getInstance().getResource("arenaChest.yml");
