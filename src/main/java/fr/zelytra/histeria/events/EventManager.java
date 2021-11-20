@@ -132,6 +132,7 @@ public class EventManager {
         pm.registerEvents(new NPCListener(), pl);
         pm.registerEvents(new ClaimChecker(), pl);
         pm.registerEvents(new ArenaListener(), pl);
+        pm.registerEvents(new TexturePack(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
