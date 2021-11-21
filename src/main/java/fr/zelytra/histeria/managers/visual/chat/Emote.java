@@ -39,9 +39,13 @@ public enum Emote {
     LORD_BADGE("\u9017", ":null", EmoteType.BADGE),
     VOTE("\u9018", ":null", EmoteType.BADGE),
 
+    NULL("",":null",EmoteType.ICON),
+
     WWW("\u9019", ":null", EmoteType.ICON),
     DISCORD("\u9020", ":null", EmoteType.ICON),
     SHOP("\u9021", ":null", EmoteType.ICON);
+
+
 
 
     private final String UTF8;

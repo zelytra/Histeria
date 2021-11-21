@@ -27,7 +27,7 @@ public enum GroupFX {
     LORD("lord", "Hlord", Emote.LORD_BADGE, TextColor.color(0x00cea3), TextColor.color(NamedTextColor.WHITE), " > ", TextColor.color(NamedTextColor.WHITE)),
     VOTE("vote", "Ivote", Emote.VOTE, TextColor.color(NamedTextColor.GRAY), TextColor.color(NamedTextColor.GRAY), " > ", TextColor.color(NamedTextColor.GRAY)),
 
-    DEFAULT("default", "Jdefault", Emote.ALIEN, TextColor.color(NamedTextColor.GRAY), TextColor.color(NamedTextColor.GRAY), " > ", TextColor.color(NamedTextColor.GRAY));
+    DEFAULT("default", "Jdefault", Emote.NULL, TextColor.color(NamedTextColor.GRAY), TextColor.color(NamedTextColor.GRAY), " > ", TextColor.color(NamedTextColor.GRAY));
 
     private final String group;
     private final String teamName;
