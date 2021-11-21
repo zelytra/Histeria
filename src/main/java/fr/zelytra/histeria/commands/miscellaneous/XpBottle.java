@@ -30,29 +30,30 @@ public class XpBottle implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!Cooldown.cooldownCheck(player, "XpBottleCommand",true)) {
+
+                int xp = player.getLevel();
+                if (xp <= 10) {
+                    LangMessage.sendMessage(player, "miscellaneous.notEnoughExperience");
+                    return false;
+                }
+
+                if (!Cooldown.cooldownCheck(player, "XpBottleCommand", true)) {
                     return false;
                 }
 
                 if (!Utils.canByPass(player))
                     new Cooldown(player, 600, "XpBottleCommand");
 
-                int xp = player.getLevel();
-
-                if (xp <= 10) {
-                    LangMessage.sendMessage(player,"miscellaneous.notEnoughExperience");
-                    return false;
-                }
 
                 if (Utils.getEmptySlots(player) > (xp / 64.0)) {
 
-                    player.getInventory().addItem(new CustomItemStack(CustomMaterial.XP_ORB,xp).getItem());
+                    player.getInventory().addItem(new CustomItemStack(CustomMaterial.XP_ORB, xp).getItem());
                     player.setLevel(0);
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
                     return true;
-                }else {
-                    LangMessage.sendMessage(player,"miscellaneous.notEnoughSpace");
+                } else {
+                    LangMessage.sendMessage(player, "miscellaneous.notEnoughSpace");
                     return false;
                 }
             }
