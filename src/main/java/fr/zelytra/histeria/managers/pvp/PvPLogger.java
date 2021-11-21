@@ -1,5 +1,8 @@
 package fr.zelytra.histeria.managers.pvp;
 
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.hguard.HGuard;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
@@ -25,6 +28,17 @@ public class PvPLogger implements Listener {
         if (HGuard.getByLocation(damager.getLocation()) != null)
             if (!HGuard.getByLocation(damager.getLocation()).isPvp()) return;
 
+        if (Histeria.isSaberFaction()) {
+            FPlayer fplayer = FPlayers.getInstance().getByPlayer(player);
+            FPlayer fdamager = FPlayers.getInstance().getByPlayer(damager);
+
+            if (fplayer.getTag().equalsIgnoreCase(fdamager.getTag())) {
+                if (!fplayer.getFaction().isWilderness()) {
+                    return;
+                }
+            }
+
+        }
 
         CustomPlayer.getCustomPlayer(player.getName()).getPvp().setPvP();
         CustomPlayer.getCustomPlayer(damager.getName()).getPvp().setPvP();
