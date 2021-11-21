@@ -15,18 +15,22 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Tab {
     HEADER("§6§m                                        \n", "§6§l<   §r§bHisteria   §6§l>\n"),
     FOOTER("\n", " §e[§642§e/§6100§e] | Server: §6Faction§e | §7v2.0 \n", "\n", "§bhisteria.fr\n", "§6§m                                        ");
 
     private String[] content;
+    private static List<Player> updateingPlayer = new ArrayList<>();
 
     Tab(String... content) {
         this.content = content;
     }
 
     public static void updateFooterForAll() {
-        for(Player player : Bukkit.getOnlinePlayers()){
+        for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendPlayerListFooter(Component.text().content(Tab.FOOTER.toString()).build());
         }
     }
@@ -55,6 +59,8 @@ public enum Tab {
     }
 
     public static void updateTab(Player player) {
+        if (updateingPlayer.contains(player)) return;
+        updateingPlayer.add(player);
         player.setScoreboard(Histeria.visualTeamManager.getScoreboard());
         player.sendPlayerListHeader(Component.text().content(Tab.HEADER.toString()).build());
         player.sendPlayerListFooter(Component.text().content(Tab.FOOTER.toString()).build());
@@ -65,6 +71,7 @@ public enum Tab {
                 .content(" " + groupFX.getBadge().toString())
                 .append(Component.text().content(" " + player.getName()).color(groupFX.getNameColor()))
                 .build());
+        updateingPlayer.remove(player);
     }
 
 }
