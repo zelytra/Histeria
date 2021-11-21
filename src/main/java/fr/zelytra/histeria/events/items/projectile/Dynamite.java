@@ -72,6 +72,7 @@ public class Dynamite implements Listener {
 
                             if (BLocation.getBlock().getType() == CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()) {
                                 BLocation.getBlock().breakNaturally();
+                                BLocation.getWorld().dropItem(BLocation,new ItemStack(CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()));
                                 continue;
                             }
 

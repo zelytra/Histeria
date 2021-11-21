@@ -61,7 +61,7 @@ public class RandomTp implements CommandExecutor {
         } while (blackListMaterial.contains(new Location(player.getWorld(), x + 0.5, y - 1, z + 0.5).getBlock().getType()));
 
         player.teleport(new Location(player.getWorld(), x + 0.5, y + 2, z + 0.5));
-        LangMessage.sendMessage(player, "command.randomTP");
+        LangMessage.sendMessage(player, "command.randomTPCancel");
 
 
         return true;

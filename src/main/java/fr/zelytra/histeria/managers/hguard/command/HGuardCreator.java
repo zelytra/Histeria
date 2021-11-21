@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.hguard;
+package fr.zelytra.histeria.managers.hguard.command;
 
 import com.sk89q.worldedit.regions.Region;
 import fr.zelytra.histeria.builder.commandsHandler.HelpCommands;
@@ -152,7 +152,7 @@ public class HGuardCreator implements CommandExecutor {
                         hGuard.addGroupe(args[4]);
                         player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " group added to the  whitelist ");
                         return true;
-                    } else if (args[2].equalsIgnoreCase("remove")) {
+                    } else if (args[3].equalsIgnoreCase("remove")) {
                         hGuard.removeGroupe(args[4]);
                         player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§a" + args[4] + " group removed from the  whitelist ");
                         return true;

@@ -19,8 +19,8 @@ import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
-import fr.zelytra.histeria.commands.hguard.HGuardCreator;
-import fr.zelytra.histeria.commands.hguard.HGuardTabCompleter;
+import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
+import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
 import fr.zelytra.histeria.commands.kit.KitCommand;
 import fr.zelytra.histeria.commands.lang.LangCommand;
@@ -101,7 +101,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;

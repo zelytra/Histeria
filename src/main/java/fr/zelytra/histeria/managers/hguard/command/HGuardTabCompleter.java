@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.hguard;
+package fr.zelytra.histeria.managers.hguard.command;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.hguard.HGuard;
