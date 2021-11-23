@@ -17,6 +17,7 @@ public class Server {
     private String serverName = "§cNA";
     private List<String> serversList = new ArrayList<>();
     private int playerCount = 0;
+    private final static String version = "v2.2";
 
     public Server() {
         new PMessage(SubChannel.SERVER_NAME, null, null);
@@ -46,6 +47,10 @@ public class Server {
 
     public List<String> getServersList() {
         return serversList;
+    }
+
+    public String getVersion(){
+        return version;
     }
 
 
