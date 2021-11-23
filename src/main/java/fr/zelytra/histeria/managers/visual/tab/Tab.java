@@ -20,7 +20,7 @@ import java.util.List;
 
 public enum Tab {
     HEADER("§6§m                                        \n", "§6§l<   §r§bHisteria   §6§l>\n"),
-    FOOTER("\n", " §e[§642§e/§6100§e] | Server: §6Faction§e | §7" + Histeria.server.getVersion() + " \n", "\n", "§bhisteria.fr\n", "§6§m                                        ");
+    FOOTER("\n", " §e[§642§e/§6100§e] | Server: §6Faction§e | §7" + Histeria.version + " \n", "\n", "§bhisteria.fr\n", "§6§m                                        ");
 
     private String[] content;
     private static List<Player> updateingPlayer = new ArrayList<>();

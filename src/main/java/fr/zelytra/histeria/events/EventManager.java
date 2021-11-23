@@ -72,6 +72,7 @@ public class EventManager {
         pm.registerEvents(new AfkListener(), pl);
         pm.registerEvents(new VanishListener(), pl);
         pm.registerEvents(new PvPLogger(), pl);
+        pm.registerEvents(new PVPJoin(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);

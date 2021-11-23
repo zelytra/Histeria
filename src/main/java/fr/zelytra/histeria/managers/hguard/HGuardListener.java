@@ -406,10 +406,4 @@ public class HGuardListener implements Listener {
 
     }
 
-    @EventHandler
-    public void inventory(PlayerItemConsumeEvent e) {
-        System.out.println(e.isCancelled());
-    }
-
-
 }

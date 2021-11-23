@@ -9,6 +9,8 @@
 
 package fr.zelytra.histeria.utils;
 
+import fr.zelytra.histeria.Histeria;
+
 public enum Message {
     PLAYER_PREFIX("§9[§bHisteria§9]§r "),
     CONSOLE_PREFIX("§9[§bHisteria§9]§r "),
@@ -23,7 +25,8 @@ public enum Message {
             "§6 | |  | |_| |_ ____) |  | |  | |____| | \\ \\ _| |_ / ____ \\ \n" +
             "§6 |_|  |_|_____|_____/   |_|  |______|_|  \\_\\_____/_/    \\_\\\n" +
             "                                                           \n" +
-            "                                                           \n");
+            "                                                           \n"+
+            "        -- by Zelytra -- "+ Histeria.version);
 
     private final String message;
 
