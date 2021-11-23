@@ -52,7 +52,10 @@ public class ChatListener implements Listener {
 
         if (Histeria.isSaberFaction()) {
             FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
-            if (fplayer.getChatMode() == ChatMode.ALLIANCE || fplayer.getChatMode() == ChatMode.FACTION) return;
+            if (fplayer.getChatMode() == ChatMode.ALLIANCE || fplayer.getChatMode() == ChatMode.FACTION) {
+                new DiscordLog(WebHookType.CHAT,fplayer.getChatMode().name() + " " + e.getPlayer().getName()+" > "+PlainComponentSerializer.plain().serialize(e.message()));
+                return;
+            }
         }
 
 
