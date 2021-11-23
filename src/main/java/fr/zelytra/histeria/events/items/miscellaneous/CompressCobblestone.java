@@ -30,9 +30,10 @@ public class CompressCobblestone implements Listener {
     public void onInteract(CustomItemUseEvent e) {
 
         if (e.getMaterial() != customMaterial) return;
-        if(e.isCancelled()) return;
+        if (e.isCancelled()) return;
 
         if (e.getEvent().getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getEvent().getClickedBlock().getType() != CustomMaterial.CRUSHING_TABLE.getVanillaMaterial()) return;
             Player player = e.getPlayer();
 
             int random = (int) (Math.random() * (100 - 1) + 1);
