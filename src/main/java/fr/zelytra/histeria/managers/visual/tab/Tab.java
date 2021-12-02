@@ -38,7 +38,7 @@ public enum Tab {
     private String[] footerBuilder() {
         String[] content = new String[5];
         content[0] = "\n";
-        content[1] = " §e[§6" + Histeria.server.getPlayerCount() + "§e/§6100§e] | Server: §6" + Histeria.server.getServerName() + "§e | §7v2.1 \n";
+        content[1] = " §e[§6" + Histeria.server.getPlayerCount() + "§e/§6100§e] | Server: §6" + Histeria.server.getServerName() + "§e | §7" + Histeria.version + " \n";
         content[2] = "\n";
         content[3] = "§bhisteria.fr\n";
         content[4] = "§6§m                                        ";
