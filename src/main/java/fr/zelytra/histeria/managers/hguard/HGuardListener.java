@@ -12,8 +12,10 @@ package fr.zelytra.histeria.managers.hguard;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemLaunchEvent;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemUseEvent;
+import fr.zelytra.histeria.utils.Utils;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -28,6 +30,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,7 @@ public class HGuardListener implements Listener {
         whitelist.add(EntityType.FIREWORK);
         whitelist.add(EntityType.SNOWBALL);
         whitelist.add(EntityType.ARROW);
+        whitelist.add(EntityType.ENDER_PEARL);
     }
 
     public static void startEntityKiller() {
@@ -60,19 +64,11 @@ public class HGuardListener implements Listener {
         }, 0L, 10L);
     }
 
-    //TODO Clean the code
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlaceBlock(BlockPlaceEvent e) {
-        if (HGuard.getByLocation(e.getBlock().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getBlock().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+        HGuard hguard = getHguard(e.getBlock().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         if (!hguard.canPlaceBlock()) {
             e.setCancelled(true);
@@ -81,20 +77,12 @@ public class HGuardListener implements Listener {
 
     }
 
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBreakBlock(BlockBreakEvent e) {
 
-        if (HGuard.getByLocation(e.getBlock().getLocation()) == null) {
-            return;
-        }
-
-        HGuard hguard = HGuard.getByLocation(e.getBlock().getLocation());
-
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+        HGuard hguard = getHguard(e.getBlock().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         if (!hguard.canBreakBlock()) {
             e.setCancelled(true);
@@ -104,37 +92,25 @@ public class HGuardListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBucketFill(PlayerBucketFillEvent e) {
-        if (HGuard.getByLocation(e.getBlock().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getBlock().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
-        if (!hguard.canPlaceBlock()) {
+        HGuard hguard = getHguard(e.getBlock().getLocation(), e.getPlayer());
+        if (hguard == null) return;
+
+        if (!hguard.canPlaceBlock())
             e.setCancelled(true);
-        }
-        e.setCancelled(true);
+
 
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBucketEmpty(PlayerBucketEmptyEvent e) {
-        if (HGuard.getByLocation(e.getBlock().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getBlock().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
-        if (!hguard.canPlaceBlock()) {
+
+        HGuard hguard = getHguard(e.getBlock().getLocation(), e.getPlayer());
+        if (hguard == null) return;
+
+        if (!hguard.canPlaceBlock())
             e.setCancelled(true);
-        }
-        e.setCancelled(true);
+
+
     }
 
     @EventHandler
@@ -146,13 +122,15 @@ public class HGuardListener implements Listener {
                 return;
             }
             hguard = HGuard.getByLocation(e.getClickedBlock().getLocation());
-            if (hguard.getInteractWhiteList().contains(e.getClickedBlock().getType()))
+            if (hguard.getInteractWhiteList().contains(e.getClickedBlock().getType()) || (hguard.getInteractWhiteList().contains(e.getMaterial())) || Utils.isFood(e.getMaterial()))
                 return;
         } else {
             if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
                 return;
             }
             hguard = HGuard.getByLocation(e.getPlayer().getLocation());
+            if (hguard.getInteractWhiteList().contains(e.getMaterial()) || Utils.isFood(e.getMaterial()))
+                return;
         }
         if (Histeria.getLuckPerms() != null) {
             User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
@@ -169,46 +147,27 @@ public class HGuardListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent e) {
-        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+
+        HGuard hguard = getHguard(e.getPlayer().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         e.setCancelled(true);
     }
 
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
-        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+
+        HGuard hguard = getHguard(e.getPlayer().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         e.setCancelled(true);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onCustomItemUse(CustomItemUseEvent e) {
-        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
-            return;
-        }
 
-        HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+        HGuard hguard = getHguard(e.getPlayer().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
             return;
@@ -216,14 +175,12 @@ public class HGuardListener implements Listener {
         e.setCancelled(true);
     }
 
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onProjectileLaunch(CustomItemLaunchEvent e) {
 
-        if (HGuard.getByLocation(e.getEvent().getLocation()) == null) {
-            return;
-        }
-
-        HGuard hguard = HGuard.getByLocation(e.getEvent().getLocation());
+        HGuard hguard = getHguard(e.getPlayer().getLocation(), e.getPlayer());
+        if (hguard == null) return;
 
         if (hguard.getCustomItemWhiteList().contains(e.getMaterial()))
             return;
@@ -231,15 +188,13 @@ public class HGuardListener implements Listener {
         if (!hguard.isPvp())
             e.setCancelled(true);
 
+
     }
 
     @EventHandler
     public void onFoodChange(FoodLevelChangeEvent e) {
-        if (HGuard.getByLocation(e.getEntity().getLocation()) == null) {
-            return;
-        }
-
-        HGuard hguard = HGuard.getByLocation(e.getEntity().getLocation());
+        HGuard hguard = getHguard(e.getEntity().getLocation());
+        if (hguard == null) return;
 
         if (!hguard.isPvp())
             e.setCancelled(true);
@@ -269,7 +224,8 @@ public class HGuardListener implements Listener {
 
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOWEST)
     public void onProjectileLaunch(ProjectileLaunchEvent e) {
 
         if (HGuard.getByLocation(e.getLocation()) == null) {
@@ -328,6 +284,7 @@ public class HGuardListener implements Listener {
 
     }
 
+
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
         if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
@@ -340,15 +297,8 @@ public class HGuardListener implements Listener {
 
     @EventHandler
     public void onHangingBreak(HangingBreakByEntityEvent e) {
-        if (HGuard.getByLocation(e.getEntity().getLocation()) == null) {
-            return;
-        }
-        HGuard hguard = HGuard.getByLocation(e.getEntity().getLocation());
-        if (Histeria.getLuckPerms() != null) {
-            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser((Player) e.getRemover());
-            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                return;
-        }
+        HGuard hguard = getHguard(e.getEntity().getLocation(), (Player) e.getRemover());
+        if (hguard == null) return;
         e.setCancelled(true);
 
     }
@@ -363,8 +313,11 @@ public class HGuardListener implements Listener {
             return;
         }
 
+        if (whitelist.contains(e.getEntity().getType())) return;
+
         if (e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.COMMAND ||
-                e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM) {
+                e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM ||
+                e.getEntity().getEntitySpawnReason() == CreatureSpawnEvent.SpawnReason.ENDER_PEARL) {
             return;
         }
 
@@ -404,6 +357,29 @@ public class HGuardListener implements Listener {
             }
         }
 
+    }
+
+    private @Nullable HGuard getHguard(Location location, Player player) {
+        HGuard hguard = null;
+        if (HGuard.getByLocation(location) != null) {
+            hguard = HGuard.getByLocation(location);
+            if (Histeria.getLuckPerms() != null) {
+                User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
+                if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
+                    return hguard;
+            }
+        }
+        return hguard;
+    }
+
+    private @Nullable HGuard getHguard(Location location) {
+
+        HGuard hguard = null;
+
+        if (HGuard.getByLocation(location) != null)
+            hguard = HGuard.getByLocation(location);
+
+        return hguard;
     }
 
 }

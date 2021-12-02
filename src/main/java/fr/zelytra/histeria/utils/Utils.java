@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Utils {
+public abstract class Utils {
 
     public static List<String> dynamicTab(List<String> list, String arg) {
         List<String> finalList = new ArrayList<>(list);
@@ -36,14 +36,35 @@ public class Utils {
         return finalList;
     }
 
+    public static boolean isFood(Material type) {
+        List<Material> food = new ArrayList<>();
+        food.add(Material.COOKED_BEEF);
+        food.add(Material.COOKED_CHICKEN);
+        food.add(Material.COOKED_COD);
+        food.add(Material.COOKED_MUTTON);
+        food.add(Material.COOKED_PORKCHOP);
+        food.add(Material.COOKED_RABBIT);
+        food.add(Material.COOKED_SALMON);
+        food.add(Material.BEEF);
+        food.add(Material.CHICKEN);
+        food.add(Material.COD);
+        food.add(Material.MUTTON);
+        food.add(Material.PORKCHOP);
+        food.add(Material.RABBIT);
+        food.add(Material.SALMON);
+
+        return food.contains(type);
+
+
+    }
+
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
         try {
-            @SuppressWarnings("unused")
-            double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
+            Double.parseDouble(strNum);
+        } catch (NumberFormatException ignored) {
             return false;
         }
         return true;
