@@ -56,7 +56,7 @@ public enum CustomRepair {
 
     public static CustomRepair getByCustomMaterial(CustomMaterial material) {
         for (CustomRepair repair : CustomRepair.values()) {
-            if(repair.getItem()==material){
+            if (repair.getItem() == material) {
                 return repair;
             }
         }

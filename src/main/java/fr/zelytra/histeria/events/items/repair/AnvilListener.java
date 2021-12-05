@@ -51,10 +51,10 @@ public class AnvilListener implements Listener {
             //Ingo amount handler
             ItemStack repairMaterial = e.getInventory().getItem(1);
             CustomRepair itemRepair = CustomRepair.getByCustomMaterial(CustomItemStack.getCustomMaterial(e.getInventory().getItem(0)));
-            if (repairMaterial.getAmount() > (itemRepair.getItem().getDurability() / itemRepair.getValue())) {
+
+            if (itemRepair != null && repairMaterial.getAmount() > (itemRepair.getItem().getDurability() / itemRepair.getValue())) {
                 repairMaterial.setAmount(repairMaterial.getAmount() - (itemRepair.getItem().getDurability() / itemRepair.getValue()));
-            }
-            else {
+            } else {
                 e.getInventory().setItem(1, new ItemStack(Material.AIR));
             }
 
