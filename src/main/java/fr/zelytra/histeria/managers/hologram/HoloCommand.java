@@ -89,12 +89,18 @@ public class HoloCommand implements CommandExecutor {
             }
 
             Hologram hologram = Hologram.get(args[1]);
+            try {
 
-            if(hologram.editLine(Integer.parseInt(args[2]), concatContent(3, args)))
-                LangMessage.sendMessage(player, "hologram.edit");
-            else
-                LangMessage.sendMessage(player, "hologram.failedEdition");
 
+                if (hologram.editLine(Integer.parseInt(args[2]), concatContent(3, args)))
+                    LangMessage.sendMessage(player, "hologram.edit");
+                else
+                    LangMessage.sendMessage(player, "hologram.failedEdition");
+
+            }catch (NumberFormatException ignored){
+                LangMessage.sendMessage(player, "command.wrongSyntax");
+                return false;
+            }
 
 
         } else if (args[0].equalsIgnoreCase("move")) {
