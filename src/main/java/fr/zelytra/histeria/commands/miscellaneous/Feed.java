@@ -33,7 +33,7 @@ public class Feed implements CommandExecutor {
                 }
 
                 if (!Utils.canByPass(player))
-                    new Cooldown(player, 300, "feedCommand");
+                    new Cooldown(player, 120, "feedCommand");
 
                 player.setFoodLevel(20);
                 player.setSaturation(20f);
