@@ -194,7 +194,10 @@ public class HGuardListener implements Listener {
     @EventHandler
     public void onFoodChange(FoodLevelChangeEvent e) {
         HGuard hguard = getHguard(e.getEntity().getLocation());
+
         if (hguard == null) return;
+
+        if (Utils.isFood(e.getItem().getType())) return;
 
         if (!hguard.isPvp())
             e.setCancelled(true);
