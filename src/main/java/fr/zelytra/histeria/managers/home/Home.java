@@ -24,6 +24,7 @@ public class Home {
     private Location location;
     private String serverName;
     private String name;
+    private String worldName;
     private boolean tpServerRequest = false;
 
     public Home(CustomPlayer customPlayer, Location location, String server, String homeName) {
@@ -31,6 +32,14 @@ public class Home {
         this.location = location;
         this.serverName = server;
         this.name = homeName;
+    }
+
+    public Home(CustomPlayer customPlayer, Location location, String server, String homeName,String worldName) {
+        this.customPlayer = customPlayer;
+        this.location = location;
+        this.serverName = server;
+        this.name = homeName;
+        this.worldName = worldName;
     }
 
     public CustomPlayer getCustomPlayer() {
@@ -47,6 +56,10 @@ public class Home {
 
     public String getName() {
         return name;
+    }
+
+    public String getWorldName() {
+        return worldName;
     }
 
     public void setServerRequest() {

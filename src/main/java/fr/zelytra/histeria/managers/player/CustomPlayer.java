@@ -209,8 +209,14 @@ public class CustomPlayer {
                 //Load homes
                 resultSet = mySQL.query("SELECT * FROM `Home` WHERE `uuid` = '" + this.uuid + "' ;");
                 while (resultSet.next()) {
-                    Location location = new Location(Bukkit.getWorld(resultSet.getString("world")), resultSet.getInt("x"), resultSet.getInt("y"), resultSet.getInt("z"));
-                    this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name")));
+                    if (Bukkit.getWorld(resultSet.getString("world")) == null) {
+                        Location location = new Location(Bukkit.getWorld(resultSet.getString("world")), resultSet.getInt("x"), resultSet.getInt("y"), resultSet.getInt("z"));
+                        this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name")));
+                    } else {
+                        Location location = new Location(Bukkit.getWorld(resultSet.getString("world")), resultSet.getInt("x"), resultSet.getInt("y"), resultSet.getInt("z"));
+                        this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name"), resultSet.getString("world")));
+                    }
+
                 }
                 resultSet.close();
 
