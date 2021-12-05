@@ -197,7 +197,7 @@ public class HGuardListener implements Listener {
 
         if (hguard == null) return;
 
-        if (Utils.isFood(e.getItem().getType())) return;
+        if (e.getItem() != null && Utils.isFood(e.getItem().getType())) return;
 
         if (!hguard.isPvp())
             e.setCancelled(true);
