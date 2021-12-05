@@ -366,7 +366,7 @@ public class HGuardListener implements Listener {
             if (Histeria.getLuckPerms() != null) {
                 User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
                 if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
-                    return hguard;
+                    return null;
             }
         }
         return hguard;
