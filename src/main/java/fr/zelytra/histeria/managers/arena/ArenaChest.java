@@ -53,12 +53,14 @@ public class ArenaChest implements Serializable {
 
     public void draw() {
 
-        if(!isChest()){
+        if (!isChest()) {
             destroy();
             return;
         }
 
         Chest chest = (Chest) getLocation().getBlock().getState();
+        chest.setCustomName("§6Arena Chest");
+        chest.update();
         ItemStack[] content = chest.getInventory().getContents();
         InputStream is = Histeria.getInstance().getResource("arenaChest.yml");
         content = randomLoot(content, new ItemParser(is).getList());
@@ -73,7 +75,7 @@ public class ArenaChest implements Serializable {
 
         for (int i = 0; i <= 8; i++) {
             int slotRandom = (int) (Math.random() * (content.length));
-            
+
             double random = new Random().nextDouble();
             for (ItemLuck loot : lootTable) {
                 if (loot.luck / 100.0 > random) {
@@ -99,8 +101,8 @@ public class ArenaChest implements Serializable {
         long remain = (3600 - ((System.currentTimeMillis() / 1000) % 3600)) * 20 + 30;
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () ->
                 Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
-
-                    for (ArenaChest chest : ArenaChest.chestList)
+                    System.out.println(chestList.size());
+                    for (ArenaChest chest : chestList)
                         chest.draw();
 
                     LangMessage.broadcast(Message.HISTALERT.getMsg(), "arena.refill", "");
