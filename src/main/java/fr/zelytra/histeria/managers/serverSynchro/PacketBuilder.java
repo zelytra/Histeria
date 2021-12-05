@@ -67,7 +67,7 @@ public class PacketBuilder {
                 homeY = ByteBuffer.allocate(4).putInt((int) home.getLocation().getY()).array();
                 homeZ = ByteBuffer.allocate(4).putInt((int) home.getLocation().getZ()).array();
 
-                if (home.getLocation().getWorld().getName() == null)
+                if (home.getLocation().getWorld() == null)
                     homeWorld = home.getWorldName().getBytes(StandardCharsets.UTF_8);
                 else
                     homeWorld = home.getLocation().getWorld().getName().getBytes(StandardCharsets.UTF_8);

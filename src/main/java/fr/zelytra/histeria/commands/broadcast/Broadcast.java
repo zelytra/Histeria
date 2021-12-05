@@ -45,7 +45,7 @@ public class Broadcast implements CommandExecutor {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.playSound(p.getLocation(), Sound.EVENT_RAID_HORN, 1000, 1);
                 p.sendActionBar(text);
-                player.sendTitle("", message, 5, 50, 5);
+                p.sendTitle("", message, 5, 50, 5);
             }
 
 
@@ -55,7 +55,7 @@ public class Broadcast implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("msg")) {
 
             for (Player p : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(Message.HISTALERT.getMsg() + message);
+                p.sendMessage(Message.HISTALERT.getMsg() + message);
                 p.playSound(p.getLocation(), Sound.EVENT_RAID_HORN, 1000, 1);
             }
 
@@ -63,7 +63,7 @@ public class Broadcast implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("title")) {
 
             for (Player p : Bukkit.getOnlinePlayers()) {
-                player.sendTitle("", message, 5, 50, 5);
+                p.sendTitle("", message, 5, 50, 5);
                 p.playSound(p.getLocation(), Sound.EVENT_RAID_HORN, 1000, 1);
             }
 

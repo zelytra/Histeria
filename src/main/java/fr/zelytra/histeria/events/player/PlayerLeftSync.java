@@ -34,6 +34,7 @@ public class PlayerLeftSync implements Listener {
             packetSender.save();
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
+            customPlayer.getAfk().setAfk(false);
             customPlayer.saveData();
             customPlayer.destroy();
         });

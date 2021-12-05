@@ -453,6 +453,9 @@ public class CustomPlayer {
     }
 
     public boolean wasAFK() {
+        if (this.getAfk() == null)
+            this.afk = new Afk(getPlayer());
+
         return this.afk.wasAFK(getPlayer());
     }
 
