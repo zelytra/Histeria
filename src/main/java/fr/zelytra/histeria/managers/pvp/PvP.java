@@ -40,6 +40,11 @@ public class PvP {
 
     }
 
+    public void removePvP() {
+        if (isPvP)
+            isPvP = false;
+    }
+
     public boolean isPvP() {
         return isPvP;
     }

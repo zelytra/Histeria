@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -43,6 +44,14 @@ public class PvPLogger implements Listener {
         CustomPlayer.getCustomPlayer(player.getName()).getPvp().setPvP();
         CustomPlayer.getCustomPlayer(damager.getName()).getPvp().setPvP();
 
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e){
+        Player player = e.getEntity();
+        if (CustomPlayer.getCustomPlayer(player.getName()).getPvp().isPvP()){
+            CustomPlayer.getCustomPlayer(player.getName()).getPvp().removePvP();
+        }
     }
 
     @EventHandler(priority = EventPriority.LOW)
