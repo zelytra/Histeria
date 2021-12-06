@@ -108,7 +108,7 @@ public class ArenaChest implements Serializable {
                     LangMessage.broadcast(Message.HISTALERT.getMsg(), "arena.refill", "");
 
 
-                }, 0, 432000 * 20), remain);
+                }, 0, 216000 * 20), remain);
 
     }
 
