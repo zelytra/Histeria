@@ -130,4 +130,19 @@ public abstract class Utils {
         }
 
     }
+
+    public static boolean isForbiddenArmorPiece(ItemStack armor) {
+        ArrayList<Material> materials = new ArrayList<>();
+        materials.add(Material.LEATHER_BOOTS);
+        materials.add(Material.LEATHER_CHESTPLATE);
+        materials.add(Material.LEATHER_LEGGINGS);
+        materials.add(Material.LEATHER_HELMET);
+        materials.add(Material.CHAINMAIL_BOOTS);
+        materials.add(Material.CHAINMAIL_CHESTPLATE);
+        materials.add(Material.CHAINMAIL_LEGGINGS);
+        materials.add(Material.CHAINMAIL_HELMET);
+
+        return materials.contains(armor.getType());
+
+    }
 }
