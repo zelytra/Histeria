@@ -54,7 +54,7 @@ public class ArmorsHandler implements Listener {
 
         for (ItemStack armor : armors) {
             if (armor == null || e.isCancelled() | !CustomItemStack.hasTag(armor)) {
-                return;
+                continue;
             }
 
             CustomMaterial material = CustomItemStack.getCustomMaterial(armor);
