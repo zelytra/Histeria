@@ -135,6 +135,7 @@ public class EventManager {
         pm.registerEvents(new ArenaListener(), pl);
         pm.registerEvents(new TexturePack(), pl);
         pm.registerEvents(new MobSpawnArmor(), pl);
+        pm.registerEvents(new VillagerTrade(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
