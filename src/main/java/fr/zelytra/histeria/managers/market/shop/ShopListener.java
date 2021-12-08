@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.market.shop;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
+import fr.zelytra.histeria.managers.items.CustomItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,7 +41,10 @@ public class ShopListener implements Listener {
                             playerShop.previousPage();
                             break;
                         case POTATO:
-                            playerShop.nextPage();
+                            if (CustomItemStack.hasTag(e.getCurrentItem()))
+                                playerShop.nextPage();
+                            else
+                                playerShop.openItemBuyPage(e.getCurrentItem());
                             break;
                         case GRASS_BLOCK:
                             playerShop.setFilter(ShopFilter.BLOCK);
