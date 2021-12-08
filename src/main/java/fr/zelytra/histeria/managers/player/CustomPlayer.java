@@ -168,7 +168,7 @@ public class CustomPlayer {
                 if (resultSet.next()) {
                     this.bank.setMoney(resultSet.getInt("money"));
                 } else {
-                    Histeria.log("§cFailed to load bank account of " + this.name, LogType.ERROR);
+                    Histeria.log("Failed to load bank account of " + this.name, LogType.ERROR);
                     Objects.requireNonNull(getPlayer()).sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to load bank account please try to reconnect to the server or contact an admin if the problem persist.");
                 }
 

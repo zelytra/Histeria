@@ -42,7 +42,7 @@ public abstract class StandSerializer {
         File folder = new File(currentDir + File.separator + "stands");
         folder.mkdir();
 
-        Histeria.log("§aLoading stands...", LogType.INFO);
+        Histeria.log("Loading stands...", LogType.INFO);
         for (File file : folder.listFiles()) {
             try {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
@@ -52,7 +52,7 @@ public abstract class StandSerializer {
                 e.printStackTrace();
             }
         }
-        Histeria.log("§a" + Stand.serverStands.size() + " stands loaded !", LogType.INFO);
+        Histeria.log(Stand.serverStands.size() + " stands loaded !", LogType.INFO);
     }
 
     public static void remove(Stand stand) {

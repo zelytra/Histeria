@@ -58,7 +58,7 @@ public class NocturiteBoots implements Listener {
             long time = System.currentTimeMillis();
             while (!Bukkit.getPlayer(jumper).isOnGround()) {
                 if (System.currentTimeMillis() - time >= 10000) {
-                    Histeria.log("§cNocturiteBoot double jump task time out.", LogType.WARN);
+                    Histeria.log("NocturiteBoot double jump task time out.", LogType.WARN);
                     return;
                 }
             }

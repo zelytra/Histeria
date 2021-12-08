@@ -60,7 +60,7 @@ public class SwitchServer {
                 }
             }
 
-            Histeria.log("§a" + player.getName() + " switch to -> " + serverName + " server", LogType.INFO);
+            Histeria.log(player.getName() + " switch to -> " + serverName + " server", LogType.INFO);
             new PMessage(SubChannel.CONNECT, player, args);
         });
     }

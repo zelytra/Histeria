@@ -13,7 +13,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.managers.logs.LogType;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
@@ -39,7 +38,7 @@ public class PMessage {
                 Player p = Iterables.getFirst(Bukkit.getOnlinePlayers(), null);
                 if (p != null) {
                     p.sendPluginMessage(Histeria.getInstance(), "BungeeCord", out.toByteArray());
-                    Histeria.log("§aPMessage send on : "+channel, LogType.INFO);
+                    //Histeria.log("PMessage send on : "+channel, LogType.INFO);
                     task.cancel();
                 }
 

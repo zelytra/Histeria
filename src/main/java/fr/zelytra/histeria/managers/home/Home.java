@@ -80,7 +80,7 @@ public class Home {
             new SwitchServer(player).switchTo(this.getServerName());
 
         }
-        Histeria.log("§6" + player.getName() + " §ehas been teleported to §6" + this, LogType.INFO);
+        Histeria.log(player.getName() + " §e has been teleported to " + this, LogType.INFO);
         return;
 
     }

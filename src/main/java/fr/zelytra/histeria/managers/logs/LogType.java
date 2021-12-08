@@ -9,17 +9,21 @@
 
 package fr.zelytra.histeria.managers.logs;
 
+import org.bukkit.ChatColor;
+
 public enum LogType {
-    INFO("\u001B[36m","INFO"),
-    WARN("\u001B[33m","WARN"),
-    ERROR("\u001B[31m","ERROR");
+    INFO("\u001B[36m", "INFO", ChatColor.AQUA),
+    WARN("\u001B[33m", "WARN", ChatColor.YELLOW),
+    ERROR("\u001B[31m", "ERROR", ChatColor.RED);
 
-    String consoleColor;
-    String name;
+    public String consoleColor;
+    public String name;
+    public ChatColor color;
 
-    LogType(String consoleColor, String name) {
+    LogType(String consoleColor, String name, ChatColor color) {
         this.consoleColor = consoleColor;
         this.name = name;
+        this.color = color;
     }
 
     public String getConsoleColor() {

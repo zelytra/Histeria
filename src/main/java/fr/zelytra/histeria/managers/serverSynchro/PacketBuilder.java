@@ -119,7 +119,7 @@ public class PacketBuilder {
             }
 
         } catch (IOException e) {
-            Histeria.log("§cFailed to build the byte message", LogType.ERROR);
+            Histeria.log("Failed to build the byte message", LogType.ERROR);
         }
         return outputStream.toByteArray();
     }

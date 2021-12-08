@@ -79,11 +79,11 @@ public abstract class HGuardPersistent {
             configFile.set("BreakBlock", hGuard.canBreakBlock());
             configFile.set("PVP", hGuard.isPvp());
             configFile.save(hguardFile);
-            Histeria.log("§a" + hGuard.getName() + " area has been saved", LogType.INFO);
+            Histeria.log(hGuard.getName() + " area has been saved", LogType.INFO);
 
         } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
-            Histeria.log("§cFailed to save area : " + hGuard.getName(), LogType.ERROR);
+            Histeria.log("Failed to save area : " + hGuard.getName(), LogType.ERROR);
         }
 
     }
@@ -127,12 +127,12 @@ public abstract class HGuardPersistent {
             for (String group : configFile.getStringList("Groups")) {
                 hGuard.addGroupe(group);
             }
-            Histeria.log("[HGuard] " + name + " area has been loaded", LogType.INFO);
-            Histeria.log("[HGuard] " + hGuard, LogType.INFO);
+            Histeria.log(name + " area has been loaded", LogType.INFO);
+            //Histeria.log(hGuard.toString(), LogType.INFO);
 
         } catch (IOException | InvalidConfigurationException exception) {
             exception.printStackTrace();
-            Histeria.log("[HGuard] Failed to load area : " + file.getName(), LogType.ERROR);
+            Histeria.log("Failed to load area : " + file.getName(), LogType.ERROR);
         }
 
     }

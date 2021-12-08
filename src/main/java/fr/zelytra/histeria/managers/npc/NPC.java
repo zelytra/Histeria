@@ -137,7 +137,7 @@ public class NPC implements Serializable {
             this.skin = new Skin(url);
 
             if (skin.getTexture() == null) {
-                Histeria.log("§cFailed to download the skin", LogType.ERROR);
+                Histeria.log("Failed to download the skin", LogType.ERROR);
                 return;
             }
 
@@ -256,7 +256,7 @@ public class NPC implements Serializable {
 
         }
 
-        Histeria.log("§6" + npcList.size() + "§a npc has been saved", LogType.INFO);
+        Histeria.log(npcList.size() + " npc has been saved", LogType.INFO);
     }
 
     public static void loadAll() {
@@ -278,13 +278,13 @@ public class NPC implements Serializable {
                 oos.close();
 
             } catch (Exception e) {
-                Histeria.log("§cWrong NPC file format for : " + file.getName(), LogType.ERROR);
+                Histeria.log("Wrong NPC file format for : " + file.getName(), LogType.ERROR);
                 file.delete();
             }
 
         }
 
-        Histeria.log("§6" + npcList.size() + "§a npc has been loaded", LogType.INFO);
+        Histeria.log(npcList.size() + " npc has been loaded", LogType.INFO);
     }
 
     public Location getTeleportLocation() {

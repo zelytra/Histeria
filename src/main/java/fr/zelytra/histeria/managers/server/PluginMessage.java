@@ -12,7 +12,6 @@ package fr.zelytra.histeria.managers.server;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.visual.tab.Tab;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -29,7 +28,7 @@ public class PluginMessage implements PluginMessageListener {
         }
         final ByteArrayDataInput in = ByteStreams.newDataInput(bytes);
         final SubChannel subChannel = SubChannel.get(in.readUTF());
-        Histeria.log("§aPMessage received of : "+channel, LogType.INFO);
+        //Histeria.log("PMessage received of : "+channel, LogType.INFO);
         switch (subChannel) {
             case SERVER_NAME:
                 Histeria.server.setServerName(in.readUTF());

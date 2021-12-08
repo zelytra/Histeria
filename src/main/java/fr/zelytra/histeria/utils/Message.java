@@ -10,23 +10,15 @@
 package fr.zelytra.histeria.utils;
 
 import fr.zelytra.histeria.Histeria;
+import org.bukkit.Bukkit;
 
 public enum Message {
     PLAYER_PREFIX("§9[§bHisteria§9]§r "),
     CONSOLE_PREFIX("§9[§bHisteria§9]§r "),
     HISTALERT("§9[§bHist§3Alert§9]§r "),
     HISTLOGGER("§9[§bHist§3Logger§9]§r "),
-    HISTBAN("§4[§cHistBan§4]§r "),
-    CONSOLE_STRATUP("\n" +
-            "§6  _    _ _____  _____ _______ ______ _____  _____          \n" +
-            "§6 | |  | |_   _|/ ____|__   __|  ____|  __ \\|_   _|   /\\    \n" +
-            "§6 | |__| | | | | (___    | |  | |__  | |__) | | |    /  \\   \n" +
-            "§6 |  __  | | |  \\___ \\   | |  |  __| |  _  /  | |   / /\\ \\  \n" +
-            "§6 | |  | |_| |_ ____) |  | |  | |____| | \\ \\ _| |_ / ____ \\ \n" +
-            "§6 |_|  |_|_____|_____/   |_|  |______|_|  \\_\\_____/_/    \\_\\\n" +
-            "                                                           \n" +
-            "                                                           \n"+
-            "        -- by Zelytra -- "+ Histeria.version);
+    HISTBAN("§4[§cHistBan§4]§r ");
+
 
     private final String message;
 
@@ -39,12 +31,25 @@ public enum Message {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return message;
     }
 
     public static String getHelp(String command) {
         return "§9[§bHisteria§9]§r §cWrong command syntax. Please refer to /" + command + " help.";
+    }
+
+    public static void startUpMessage() {
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + "  _   _ _     _            _       ");
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + " | | | (_)___| |_ ___ _ __(_) __ _ ");
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + " | |_| | / __| __/ _ \\ '__| |/ _` |");
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + " |  _  | \\__ \\ ||  __/ |  | | (_| |");
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + " |_| |_|_|___/\\__\\___|_|  |_|\\__,_|");
+        Bukkit.getConsoleSender().sendMessage("§8|   §b" + "                                   ");
+        Bukkit.getConsoleSender().sendMessage("§8|   §bby Zelytra");
+        Bukkit.getConsoleSender().sendMessage("§8|   " + Histeria.version);
+        Bukkit.getConsoleSender().sendMessage("§8|   ");
+
     }
 
 

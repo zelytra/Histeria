@@ -129,7 +129,7 @@ public class Hologram implements Serializable {
 
         }
 
-        Histeria.log("§6" + holograms.size() + "§a Holograms has been saved", LogType.INFO);
+        Histeria.log(holograms.size() + "§a Holograms has been saved", LogType.INFO);
     }
 
     public static void load() {
@@ -155,13 +155,13 @@ public class Hologram implements Serializable {
                 oos.close();
 
             } catch (Exception e) {
-                Histeria.log("§cWrong Holograms file format for : " + file.getName(), LogType.ERROR);
+                Histeria.log("Wrong Holograms file format for : " + file.getName(), LogType.ERROR);
                 file.delete();
             }
 
         }
 
-        Histeria.log("§6" + holograms.size() + "§a Holograms has been loaded", LogType.INFO);
+        Histeria.log(holograms.size() + " holograms has been loaded", LogType.INFO);
 
 
     }

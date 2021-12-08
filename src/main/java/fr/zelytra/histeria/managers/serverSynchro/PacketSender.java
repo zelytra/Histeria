@@ -39,7 +39,7 @@ public class PacketSender {
             OutputStream output = socket.getOutputStream();
             PacketBuilder playerPacket = new PacketBuilder(this.player);
             output.write(playerPacket.build());
-            Histeria.log("§e" + this.player.getName() + " inventory's send to the server...", LogType.INFO);
+            Histeria.log(this.player.getName() + " inventory's send to the server...", LogType.INFO);
 
             //Confirm
             InputStream input = socket.getInputStream();
@@ -49,11 +49,11 @@ public class PacketSender {
             byte[] Mbyte = new byte[messageLength];
             input.read(Mbyte);
             if (Integer.reverseBytes(ByteBuffer.wrap(Rbyte).getInt()) != 1) {
-                Histeria.log("§cInventory not received.",LogType.WARN);
+                Histeria.log("Inventory not received.",LogType.WARN);
                 socket.close();
                 return;
             }
-            Histeria.log("§eInventory received.",LogType.INFO);
+            Histeria.log("Inventory received.",LogType.INFO);
             this.isReceived =true;
             socket.close();
 
@@ -75,7 +75,7 @@ public class PacketSender {
             InetAddress serveur = InetAddress.getByName(synchroConfig.getHost());
             return new Socket(serveur, synchroConfig.getPort());
         } catch (Exception e) {
-            Histeria.log("§cFailed to connect to sync server",LogType.ERROR);
+            Histeria.log("Failed to connect to sync server",LogType.ERROR);
         }
         return null;
     }

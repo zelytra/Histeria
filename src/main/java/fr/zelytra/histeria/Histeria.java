@@ -101,12 +101,12 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.4";
+    public static String version = "v2.5";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -129,7 +129,7 @@ public final class Histeria extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getServer().getConsoleSender().sendMessage(Message.CONSOLE_STRATUP.getMsg());
+        Message.startUpMessage();
         isReloading = false;
         regCommands();
         loadAPI();
@@ -332,7 +332,7 @@ public final class Histeria extends JavaPlugin {
 
     public static void log(String msg, LogType type) {
         if (log) {
-            Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.CONSOLE_PREFIX.getMsg() + msg);
+            Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.CONSOLE_PREFIX.getMsg() + type.color + msg);
         }
         logs.log(msg, type);
 

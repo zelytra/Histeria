@@ -108,7 +108,7 @@ public class ArenaChest implements Serializable {
                     LangMessage.broadcast(Message.HISTALERT.getMsg(), "arena.refill", "");
 
 
-                }, 0, 216000 * 20), remain);
+                }, 0, 3600 * 20), remain);
 
     }
 
@@ -134,7 +134,7 @@ public class ArenaChest implements Serializable {
 
         }
 
-        Histeria.log("§6" + chestList.size() + "§a ArenaChest has been saved", LogType.INFO);
+        Histeria.log("" + chestList.size() + "§a ArenaChest has been saved", LogType.INFO);
     }
 
     public static void loadAll() {
@@ -155,13 +155,13 @@ public class ArenaChest implements Serializable {
                 oos.close();
 
             } catch (Exception e) {
-                Histeria.log("§cWrong ArenaChest file format for : " + file.getName(), LogType.ERROR);
+                Histeria.log("Wrong ArenaChest file format for : " + file.getName(), LogType.ERROR);
                 file.delete();
             }
 
         }
 
-        Histeria.log("§6" + chestList.size() + "§a ArenaChest has been loaded", LogType.INFO);
+        Histeria.log(chestList.size() + " ArenaChest has been loaded", LogType.INFO);
 
 
     }

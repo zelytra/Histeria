@@ -22,7 +22,7 @@ public class Skin implements Serializable {
     public Skin(String url) {
 
         try {
-            Histeria.log("§6Doawnloading skin...", LogType.INFO);
+            Histeria.log("Doawnloading skin...", LogType.INFO);
             URL target = new URL("https://api.mineskin.org/generate/url");
             HttpURLConnection con = (HttpURLConnection) target.openConnection();
 
@@ -48,10 +48,10 @@ public class Skin implements Serializable {
             this.signature = (String) texture.get("signature");
 
             con.disconnect();
-            Histeria.log("§6Skin downloaded", LogType.INFO);
+            Histeria.log("Skin downloaded", LogType.INFO);
 
         } catch (Throwable t) {
-            Histeria.log("§cFailed to download skin from server", LogType.ERROR);
+            Histeria.log("Failed to download skin from server", LogType.ERROR);
             t.printStackTrace();
         }
     }
