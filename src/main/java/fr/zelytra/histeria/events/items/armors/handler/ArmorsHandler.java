@@ -46,26 +46,26 @@ public class ArmorsHandler implements Listener {
 
     @EventHandler
     public void armorDamageEvent(EntityDamageEvent e) {
-        if (!(e.getEntity() instanceof Player)) {
+
+        if (!(e.getEntity() instanceof Player))
             return;
-        }
+
         Player player = (Player) e.getEntity();
         ItemStack[] armors = player.getInventory().getArmorContents();
 
         for (ItemStack armor : armors) {
-            if (armor == null || e.isCancelled() | !CustomItemStack.hasTag(armor)) {
+
+            if (armor == null || e.isCancelled() | !CustomItemStack.hasTag(armor))
                 continue;
-            }
 
             CustomMaterial material = CustomItemStack.getCustomMaterial(armor);
             DurabilityHandler durability = new DurabilityHandler(player, material, SlotEnum.getArmorSlot(armor));
             durability.iterate();
 
-            if (durability.isBroken()) {
-                for (PotionEffect potion : material.getPotions()) {
+            if (durability.isBroken())
+                for (PotionEffect potion : material.getPotions())
                     player.removePotionEffect(potion.getType());
-                }
-            }
+
 
         }
     }
