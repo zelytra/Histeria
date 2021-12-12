@@ -60,7 +60,7 @@ public class BanCommand implements CommandExecutor {
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(target.getName());
             customPlayer.ban(time, reason.toString(), (Player) sender);
-
+            customPlayer.saveData();
             target.kick(Component.text().content(Message.HISTBAN.getMsg()
                     + "§c" + customPlayer.getLang().get("command.playerBan")
                     + "§6" + reason

@@ -55,6 +55,7 @@ public class MuteCommand implements CommandExecutor {
 
         CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(target.getName());
         customPlayer.mute(time, reason.toString(), (Player) sender);
+        customPlayer.saveData();
 
         LangMessage.broadcast(Message.HISTBAN.getMsg() + "§c" + target.getName()+" ", "command.mute", "§c " + args[1] + " : " + reason);
 
