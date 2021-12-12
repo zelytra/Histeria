@@ -37,6 +37,11 @@ public class XpBottle implements CommandExecutor {
                     return false;
                 }
 
+                if (Utils.isFullInv(player)) {
+                    LangMessage.sendMessage(player, "miscellaneous.notEnoughSpace");
+                    return false;
+                }
+
                 if (!Cooldown.cooldownCheck(player, "XpBottleCommand", true)) {
                     return false;
                 }
