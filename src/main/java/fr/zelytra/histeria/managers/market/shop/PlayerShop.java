@@ -16,6 +16,7 @@ import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -163,6 +164,8 @@ public class PlayerShop implements Listener {
 
             if (customPlayer.getBankAccount().getMoney() < finalPrice) {
                 LangMessage.sendMessage(player, "shop.notEnoughMoney");
+            } else if (Utils.isFullInv(customPlayer.getPlayer())) {
+                LangMessage.sendMessage(player, "miscellaneous.notEnoughSpace");
             } else {
                 customPlayer.getBankAccount().takeMoney(finalPrice);
                 player.getInventory().addItem(shopItem.getFinalItemStack(currentItem.getAmount()));
