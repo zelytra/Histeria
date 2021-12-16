@@ -69,7 +69,7 @@ public class HoloLine implements Serializable {
     }
 
     public void changeText(String text) {
-        this.stand.setCustomName(text);
+        this.stand.setCustomName(text.replace("&", "§"));
     }
 
     public Location getLocation() {

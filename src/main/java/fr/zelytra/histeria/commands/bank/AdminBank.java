@@ -27,22 +27,30 @@ public class AdminBank implements CommandExecutor {
         }
 
         Player target = Bukkit.getPlayer(args[1]);
+        Bank targetBank;
+        CustomPlayer customPlayer = null;
 
         if (target == null) {
-            //TODO Handle offline transaction
-            LangMessage.sendMessage(player, "command.playerOffLine");
-            return false;
+
+            customPlayer = new CustomPlayer(args[1]);
+            targetBank = customPlayer.getBankAccount();
+
+            if (targetBank == null) {
+                LangMessage.sendMessage(player, "command.playerNotExist");
+                return false;
+            }
+
+        } else {
+            targetBank = CustomPlayer.getCustomPlayer(target.getName()).getBankAccount();
         }
 
-        int amount = 0;
+        int amount;
         try {
             amount = Integer.parseInt(args[2]);
         } catch (NumberFormatException exception) {
             LangMessage.sendMessage(player, "command.playerOffLine");
             return false;
         }
-
-        Bank targetBank = CustomPlayer.getCustomPlayer(target.getName()).getBankAccount();
 
         if (args[0].equalsIgnoreCase("set")) {
 
@@ -62,6 +70,8 @@ public class AdminBank implements CommandExecutor {
         } else
             LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
 
+        if (customPlayer != null && target == null)
+            customPlayer.saveData();
 
         return true;
 
