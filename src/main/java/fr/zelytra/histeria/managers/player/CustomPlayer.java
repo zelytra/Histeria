@@ -39,7 +39,7 @@ import java.util.Objects;
 public class CustomPlayer {
 
     private static final List<CustomPlayer> customPlayerList = new ArrayList<>();
-    private static Object syncObject = new Object();
+    private static final Object syncObject = new Object();
 
     private final String name;
     private int kill;
@@ -51,9 +51,9 @@ public class CustomPlayer {
     private Lang lang;
     private final String uuid;
     private int id;
-    private boolean playedBefore = false;
+    private final boolean playedBefore;
 
-    private final Bank bank;
+    private Bank bank;
     private Mute mute;
     private Ban ban;
     private Afk afk;
@@ -95,24 +95,18 @@ public class CustomPlayer {
      */
     public CustomPlayer(String name) {
         this.name = name;
-        this.bank = new Bank(this);
         this.uuid = Bukkit.getOfflinePlayer(name).getUniqueId().toString();
-
-        if (this.uuid == null) {
-            playedBefore = false;
-            return;
-        }
-
         this.playedBefore = playedBeforeTask();
+
+        if (!playedBefore)
+            return;
+
+        this.bank = new Bank(this);
         this.homes = new ArrayList<>();
+        this.id = getBaseID();
+        this.loadData();
 
-        if (playedBefore) {
-
-            this.id = getBaseID();
-            this.loadData();
-
-            customPlayerList.add(this);
-        }
+        customPlayerList.add(this);
 
 
     }
@@ -239,6 +233,10 @@ public class CustomPlayer {
 
     public String getName() {
         return name;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public Bank getBankAccount() {

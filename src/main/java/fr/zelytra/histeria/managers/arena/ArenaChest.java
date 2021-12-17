@@ -101,7 +101,7 @@ public class ArenaChest implements Serializable {
         long remain = (3600 - ((System.currentTimeMillis() / 1000) % 3600)) * 20 + 30;
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () ->
                 Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> {
-                    System.out.println(chestList.size());
+
                     for (ArenaChest chest : chestList)
                         chest.draw();
 

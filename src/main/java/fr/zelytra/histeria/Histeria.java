@@ -19,6 +19,7 @@ import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
+import fr.zelytra.histeria.commands.stats.Stats;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;

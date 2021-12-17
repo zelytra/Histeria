@@ -35,7 +35,7 @@ public class AdminBank implements CommandExecutor {
             customPlayer = new CustomPlayer(args[1]);
             targetBank = customPlayer.getBankAccount();
 
-            if (targetBank == null) {
+            if (!customPlayer.hasPlayedBefore()) {
                 LangMessage.sendMessage(player, "command.playerNotExist");
                 return false;
             }
@@ -70,8 +70,10 @@ public class AdminBank implements CommandExecutor {
         } else
             LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
 
-        if (customPlayer != null && target == null)
+        if (customPlayer != null && target == null) {
             customPlayer.saveData();
+            customPlayer.destroy();
+        }
 
         return true;
 

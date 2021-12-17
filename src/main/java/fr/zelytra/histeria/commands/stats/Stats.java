@@ -7,10 +7,10 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.miscellaneous;
+package fr.zelytra.histeria.commands.stats;
 
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
-import fr.zelytra.histeria.utils.Message;
 import fr.zelytra.histeria.utils.TimeFormater;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
@@ -21,7 +21,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 public class Stats implements CommandExecutor {
 
@@ -36,10 +35,15 @@ public class Stats implements CommandExecutor {
             if (args.length > 0) {
 
                 if (Bukkit.getPlayer(args[0]) == null) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cThis player is not connected on the server");
-                    return false;
-                }
-                target = CustomPlayer.getCustomPlayer(args[0]);
+                    target = new CustomPlayer(args[0]);
+
+                    if (!target.hasPlayedBefore()) {
+                        LangMessage.sendMessage(player, "command.playerNotExist");
+                        return false;
+                    }
+
+                } else
+                    target = CustomPlayer.getCustomPlayer(args[0]);
 
             } else
                 target = CustomPlayer.getCustomPlayer(player.getName());
@@ -58,7 +62,7 @@ public class Stats implements CommandExecutor {
             player.sendMessage("§6 Player  : §e" + target.getName());
 
             if (Utils.canByPass(player)) {
-                player.sendMessage("§6 UUID     : §e" + Objects.requireNonNull(target.getPlayer()).getUniqueId());
+                player.sendMessage("§6 UUID     : §e" + target.getUuid());
                 player.sendMessage("§6 IP        : §e" + target.getIp());
             }
 
@@ -72,6 +76,10 @@ public class Stats implements CommandExecutor {
             player.sendMessage("§6 Money   : §e" + target.getBankAccount().getMoney());
 
             player.sendMessage("§9|-----------------------------------|");
+
+            if (Bukkit.getPlayer(args[0]) == null) {
+                target.destroy();
+            }
             return true;
 
 
