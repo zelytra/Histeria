@@ -58,7 +58,7 @@ public class BankCommands implements CommandExecutor {
                     Objects.requireNonNull(CustomPlayer.getCustomPlayer(args[1])).getBankAccount().addMoney(amount);
 
 
-                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.sendMoney", "§6" + Emote.GOLD + " §e-> §6" + args[1]);
+                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.sendMoney", "§6" + amount + Emote.GOLD + " §e-> §6" + args[1]);
                     LangMessage.sendMessage(Bukkit.getPlayer(args[1]), Message.PLAYER_PREFIX + "§6" + player.getName(), "bank.receiveMoney", "§6" + amount + Emote.GOLD);
 
                 } else {
