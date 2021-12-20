@@ -69,7 +69,7 @@ public class Ban {
     public void forceDataSave() {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             MySQL mySQL = Histeria.mySQL;
-            ResultSet resultSet = mySQL.query("SELECT `uuid` FROM `Ban`;");
+            ResultSet resultSet = mySQL.query("SELECT `uuid` FROM `Ban` WHERE `uuid` = '" + this.uuid + "' ;");
 
             try {
                 if (!resultSet.next())
@@ -88,7 +88,6 @@ public class Ban {
                             " ,`reason` = '" + this.getReason() +
                             "' ,`staff` = '" + this.getStaffName() + "' WHERE `uuid` = '" + this.uuid + "' ;");
                 resultSet.close();
-                //test
             } catch (SQLException e) {
                 e.printStackTrace();
             }

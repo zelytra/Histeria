@@ -361,9 +361,10 @@ public class CustomPlayer {
         if (this.ban != null) {
 
             try {
-                ResultSet resultSet = mySQL.query("SELECT * FROM `Ban` WHERE `uuid` = '" + this.uuid + "';");
+                ResultSet resultSet = mySQL.query("SELECT `uuid` FROM `Ban` WHERE `uuid` = '" + this.uuid + "';");
 
-                if (!resultSet.next()) {
+                if (!resultSet.next() && isBan()) {
+
                     mySQL.update("INSERT INTO `Ban` (`uuid`,`name`,`startTime`,`time`,`reason`,`staff`) VALUES ('"
                             + this.uuid + "','"
                             + this.name + "',"
@@ -372,6 +373,7 @@ public class CustomPlayer {
                             + this.ban.getReason() + "','"
                             + this.ban.getStaffName() + "');");
                 } else if (isBan()) {
+
                     mySQL.update("UPDATE `Ban` SET `uuid` = '" + this.uuid +
                             "' ,`name` = '" + this.name +
                             "' ,`startTime` = " + this.ban.getStartTime() +

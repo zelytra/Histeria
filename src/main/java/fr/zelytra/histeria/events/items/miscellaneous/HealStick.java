@@ -23,7 +23,7 @@ import org.bukkit.event.Listener;
 
 public class HealStick implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.HEAL_STICK;
-    private final int itemCooldown = 2;
+    private final int itemCooldown = 10;
 
     @EventHandler
     public void onInteract(CustomItemUseEvent e) {
