@@ -76,7 +76,7 @@ public class Shop {
             }
     }
 
-    public ItemStack[] getPage(int pageNumber, ShopFilter filter,PlayerShop playerShop) {
+    public ItemStack[] getPage(int pageNumber, ShopFilter filter, PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[54];
 
         for (int x = 0; x <= 3; x++)
@@ -134,7 +134,7 @@ public class Shop {
         return content;
     }
 
-    public ItemStack[] getItemPage(ShopItem item,PlayerShop playerShop) {
+    public ItemStack[] getItemPage(ShopItem item, PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[45];
 
         for (int x = 0; x <= 8; x++) {
@@ -189,7 +189,7 @@ public class Shop {
         return content;
     }
 
-    public ItemStack[] getSellPage(PlayerShop playerShop){
+    public ItemStack[] getSellPage(PlayerShop playerShop) {
         ItemStack[] content = new ItemStack[54];
         for (int x = 0; x <= 8; x++)
             content[x] = VisualType.BLANK_BLUE_GLASSE.getItem();
@@ -262,8 +262,10 @@ public class Shop {
                     return items;
         } else {
             for (ShopItem items : Histeria.shop.shopItemList)
-                if (items.getItem().getType() == item.getType())
+                if (items.getItem().getType() == item.getType() && items.getFilter() != ShopFilter.CUSTOM_ITEM) {
+                    System.out.println(items);
                     return items;
+                }
         }
         return null;
     }

@@ -358,7 +358,6 @@ public class CustomPlayer {
 
     private void saveDataTask() {
         MySQL mySQL = Histeria.mySQL;
-        System.out.println(ip);
         mySQL.update("UPDATE `Player` SET `name` = '" + this.name
                 + "',`kill` = " + this.kill
                 + ",`death` = " + this.death
