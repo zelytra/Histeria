@@ -18,6 +18,8 @@ import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
+import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.pvp.PvP;
 import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
@@ -64,6 +66,7 @@ public class CustomPlayer {
         this.name = player.getName();
         this.bank = new Bank(this);
         this.uuid = player.getUniqueId().toString();
+        this.ip = player.getAddress().toString().replace("/", "").split(":")[0];
         this.afk = new Afk(player);
         this.pvp = new PvP(this);
         this.homes = new ArrayList<>();
@@ -82,10 +85,35 @@ public class CustomPlayer {
                 this.id = getBaseID();
                 this.loadData();
             }
+            dcChecker();
             customPlayerList.add(this);
 
         });
 
+    }
+
+    private void dcChecker() {
+        Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
+            try {
+                ResultSet result = Histeria.mySQL.query("SELECT `ip`,`name` FROM `Player` WHERE `ip` = '" + this.ip + "';");
+                int count = 0;
+                StringBuilder linkedAccount = new StringBuilder();
+
+                while (result.next()) {
+                    linkedAccount.append(result.getString("name") + " ");
+                    count++;
+                }
+
+                if (count > 1) {
+                    Histeria.log("DC detected on player " + name + " | IP: " + ip + " | Linked account: " + linkedAccount, LogType.WARN);
+                    new DiscordLog(WebHookType.CHEATER, "DC detected on player **" + name + "** | IP: **" + ip + "** | Linked account: " + linkedAccount);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        });
     }
 
     /**
@@ -166,15 +194,20 @@ public class CustomPlayer {
                     Objects.requireNonNull(getPlayer()).sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to load bank account please try to reconnect to the server or contact an admin if the problem persist.");
                 }
 
-                resultSet = mySQL.query("SELECT * FROM `Player` WHERE `id` =" + this.id + "; ");
+                resultSet = mySQL.query("SELECT * FROM `Player` WHERE `id` =" + this.id + ";");
                 if (resultSet.next()) {
 
                     this.kill = resultSet.getInt("kill");
                     this.death = resultSet.getInt("death");
                     this.timePlayed = resultSet.getInt("playTime");
-                    this.ip = resultSet.getString("ip");
                     this.primConnection = resultSet.getString("primconnection");
                     this.lang = Lang.valueOf(resultSet.getString("lang"));
+
+                    String ip = resultSet.getString("ip");
+                    if (!ip.equalsIgnoreCase(this.ip)) {
+                        Histeria.log(".IP change detected for " + name + " | Previous IP: " + ip + " | new IP: " + this.ip, LogType.WARN);
+                        new DiscordLog(WebHookType.CHEATER, ".IP change detected for **" + name + "** | Previous IP: **" + ip + "** | new IP: **" + this.ip + "**");
+                    }
 
                 }
 
@@ -325,7 +358,14 @@ public class CustomPlayer {
 
     private void saveDataTask() {
         MySQL mySQL = Histeria.mySQL;
-        mySQL.update("UPDATE `Player` SET `name` = '" + this.name + "',`kill` = " + this.kill + ",`death` = " + this.death + ", `lang` = '" + lang.name() + "' WHERE `id` = " + this.id + " ;");
+        System.out.println(ip);
+        mySQL.update("UPDATE `Player` SET `name` = '" + this.name
+                + "',`kill` = " + this.kill
+                + ",`death` = " + this.death
+                + ", `lang` = '" + lang.name()
+                + "', `ip` = '" + this.ip
+                + "' WHERE `id` = " + this.id + " ;");
+
         timePlayed += (int) ((System.currentTimeMillis() - lastConnection) / 1000.0);
         mySQL.update("UPDATE `Player` SET `playTime` = " + timePlayed + " WHERE `id` = " + this.id + ";");
 
