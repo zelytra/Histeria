@@ -102,12 +102,12 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.10";
+    public static String version = "v2.11";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -157,7 +157,6 @@ public final class Histeria extends JavaPlugin {
         ArenaChest.loadAll();
         Hologram.load();
         autoReboot();
-        //EnchantRegister.registerEnchants();
 
         logs.log("Histeria successfully start", LogType.INFO);
         CustomPlayer.forceLoadAll();

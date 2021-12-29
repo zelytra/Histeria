@@ -33,11 +33,12 @@ public class HealStick implements Listener {
 
         Player player = e.getPlayer();
 
-        //Cooldown check
+
         if (player.getHealth() == player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()) {
             player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§6Your health is already full.");
             return;
         }
+        //Cooldown check
         if (!Cooldown.cooldownCheck(player, customMaterial.getName(),true)) {
             return;
         }

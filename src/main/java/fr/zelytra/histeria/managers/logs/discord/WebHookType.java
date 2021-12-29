@@ -12,9 +12,11 @@ package fr.zelytra.histeria.managers.logs.discord;
 public enum WebHookType {
     BAN("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistBan", "discord.ban"),
     COMMANDS("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistCommands", "discord.commands"),
-    ERROR("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png","ErrorAlert","discord.error"),
+    ERROR("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "ErrorAlert", "discord.error"),
     CHAT("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistChat", "discord.chat"),
+    CHEATER("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistCheater", "discord.cheater"),
     ORE("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistOre", "discord.ore");
+
 
     private final String avatar;
     private final String userName;
