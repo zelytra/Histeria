@@ -20,6 +20,7 @@ import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.stats.Stats;
+import fr.zelytra.histeria.events.antiCheat.ClickLogger;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
@@ -102,7 +103,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -318,6 +319,7 @@ public final class Histeria extends JavaPlugin {
         Afk.startAfkListener();
         HGuardListener.startEntityKiller();
         ArenaChest.startTask();
+        ClickLogger.clickerTask();
     }
 
     private void loadAPI() {

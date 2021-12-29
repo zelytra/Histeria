@@ -18,6 +18,8 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.vanish.VanishListener;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawnListener;
+import fr.zelytra.histeria.events.antiCheat.ClickLogger;
+import fr.zelytra.histeria.events.antiCheat.FlyDetector;
 import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
 import fr.zelytra.histeria.events.blocks.LuckyBlock;
@@ -136,7 +138,10 @@ public class EventManager {
         pm.registerEvents(new TexturePack(), pl);
         pm.registerEvents(new MobSpawnArmor(), pl);
         pm.registerEvents(new VillagerTrade(), pl);
+
+        /* Anti-Cheat */
         pm.registerEvents(new FlyDetector(), pl);
+        pm.registerEvents(new ClickLogger(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
