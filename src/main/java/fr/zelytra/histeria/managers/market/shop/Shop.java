@@ -262,10 +262,9 @@ public class Shop {
                     return items;
         } else {
             for (ShopItem items : Histeria.shop.shopItemList)
-                if (items.getItem().getType() == item.getType() && items.getFilter() != ShopFilter.CUSTOM_ITEM) {
-                    System.out.println(items);
+                if (items.getItem().getType() == item.getType() && items.getFilter() != ShopFilter.CUSTOM_ITEM)
                     return items;
-                }
+
         }
         return null;
     }
