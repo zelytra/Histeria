@@ -21,6 +21,7 @@ import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
 import fr.zelytra.histeria.commands.stats.Stats;
 import fr.zelytra.histeria.events.antiCheat.ClickLogger;
+import fr.zelytra.histeria.events.antiCheat.XRayDetector;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
@@ -108,7 +109,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.11";
+    public static String version = "v2.12";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -320,6 +321,7 @@ public final class Histeria extends JavaPlugin {
         HGuardListener.startEntityKiller();
         ArenaChest.startTask();
         ClickLogger.clickerTask();
+        XRayDetector.profilerAnalysis();
     }
 
     private void loadAPI() {
