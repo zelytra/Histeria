@@ -104,12 +104,12 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.12";
+    public static String version = "v2.12-beta";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;

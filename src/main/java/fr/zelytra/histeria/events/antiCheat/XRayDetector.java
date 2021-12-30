@@ -29,7 +29,7 @@ import java.util.List;
 public class XRayDetector implements Listener {
 
     private static List<XRayProfiler> profilers = new ArrayList<>();
-    private final static int timer = 10; //time in second
+    private final static int timer = 300; //time in second
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent e) {
