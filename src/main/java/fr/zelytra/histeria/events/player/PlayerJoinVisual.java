@@ -9,6 +9,9 @@
 
 package fr.zelytra.histeria.events.player;
 
+import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
+import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.server.PMessage;
 import fr.zelytra.histeria.managers.server.SubChannel;
 import fr.zelytra.histeria.managers.visual.tab.Tab;
@@ -28,6 +31,7 @@ public class PlayerJoinVisual implements Listener {
         e.joinMessage(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());
         new PMessage(SubChannel.PLAYER_COUNT, null, new String[]{"ALL"});
         Tab.updateTab(e.getPlayer());
+        new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " join server " + Histeria.server.getServerName());
     }
 
 

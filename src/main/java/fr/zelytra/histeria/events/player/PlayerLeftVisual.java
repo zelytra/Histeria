@@ -9,6 +9,9 @@
 
 package fr.zelytra.histeria.events.player;
 
+import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
+import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.server.PMessage;
 import fr.zelytra.histeria.managers.server.SubChannel;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
@@ -26,8 +29,11 @@ public class PlayerLeftVisual implements Listener {
             e.quitMessage(Component.text().content("§7[§c-§7] " + e.getPlayer().getName()).build());
             new PMessage(SubChannel.PLAYER_COUNT, null, new String[]{"ALL"});
             Tab.updateTab(e.getPlayer());
-        } else
+            new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " left server " + Histeria.server.getServerName());
+        } else {
             e.quitMessage(Component.text().content("§7[§b◯§7] " + e.getPlayer().getName()).build());
+            new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " switch server");
+        }
     }
 
 
