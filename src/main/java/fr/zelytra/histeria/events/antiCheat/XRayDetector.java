@@ -134,7 +134,7 @@ class XRayProfiler {
     public String toString() {
         String format = "0.00";
         NumberFormat formatter = new DecimalFormat(format);
-        return name + " mining luck: Diamond = " + formatter.format(compute(StatType.DIAMOND)) + "% | Histerite = " + formatter.format(compute(StatType.HISTERITE)) + "% | Netherite = " + formatter.format(compute(StatType.NETHERITE)) + "%";
+        return name + " mining luck: Diamond(" + diamondCount + ") = " + formatter.format(compute(StatType.DIAMOND)) + "% | Histerite(" + histeriteCount + ") = " + formatter.format(compute(StatType.HISTERITE)) + "% | Netherite(" + netheriteCount + ") = " + formatter.format(compute(StatType.NETHERITE)) + "% | Stone(" + commonBlockCount + ")";
     }
 
 
