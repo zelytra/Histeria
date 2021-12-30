@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -19,11 +19,13 @@ public class ClickLogger implements Listener {
     private static List<PlayerClick> playersClick = new ArrayList<>();
 
     @EventHandler
-    public void onClick(PlayerInteractEvent e) {
-        PlayerClick playerClick = getPlayerClick(e.getPlayer());
+    public void onClick(EntityDamageByEntityEvent e) {
+
+        if (!(e.getDamager() instanceof Player)) return;
+        PlayerClick playerClick = getPlayerClick((Player) e.getDamager());
 
         if (playerClick == null) {
-            playerClick = new PlayerClick(e.getPlayer().getName());
+            playerClick = new PlayerClick(e.getDamager().getName());
             playersClick.add(playerClick);
         }
 
@@ -44,7 +46,7 @@ public class ClickLogger implements Listener {
         Bukkit.getScheduler().runTaskTimerAsynchronously(Histeria.getInstance(), () -> {
             for (PlayerClick playerClick : playersClick) {
 
-                if (playerClick.getCount() >= 12) {
+                if (playerClick.getCount() >= 1) {
                     Histeria.log(playerClick.getName() + " at " + playerClick.getCount() + " CPS", LogType.WARN);
                     new DiscordLog(WebHookType.CHEATER, "**" + playerClick.getName() + "** at **" + playerClick.getCount() + " CPS** on server " + Histeria.server.getServerName().replace("§ca", ""));
                 }

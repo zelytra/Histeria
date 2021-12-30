@@ -36,6 +36,7 @@ public class DiscordLog {
                 try {
                     webhook.execute();
                 } catch (IOException e) {
+                    //e.printStackTrace();
                     Histeria.log("Failed to send a webhook : " + type.name() + " -> " + message, LogType.WARN);
                 }
 

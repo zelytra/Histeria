@@ -29,7 +29,7 @@ import java.util.List;
 public class XRayDetector implements Listener {
 
     private static List<XRayProfiler> profilers = new ArrayList<>();
-    private final static int timer = 300; //time in second
+    private final static int timer = 10; //time in second
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent e) {
@@ -47,7 +47,7 @@ public class XRayDetector implements Listener {
     public void onLeft(PlayerQuitEvent e) {
         XRayProfiler xRayProfiler = getProfiler(e.getPlayer());
 
-        if (xRayProfiler != null)
+        if (xRayProfiler != null && xRayProfiler.getCommonBlockCount() <= 5.0)
             profilers.remove(xRayProfiler);
 
     }
@@ -104,6 +104,10 @@ class XRayProfiler {
                 netheriteCount++;
                 break;
         }
+    }
+
+    public double getCommonBlockCount() {
+        return commonBlockCount;
     }
 
     public double compute(StatType stat) {
