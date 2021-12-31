@@ -256,7 +256,7 @@ public class Shop {
 
     public ShopItem getItemShop(ItemStack item) {
         CustomMaterial material = CustomItemStack.getCustomMaterial(item);
-        if (material != null) {
+        if (material != null || CustomMaterial.getCustomBlocks().contains(item.getType())) {
             for (ShopItem items : Histeria.shop.shopItemList)
                 if (material == CustomItemStack.getCustomMaterial(items.getItem()))
                     return items;
