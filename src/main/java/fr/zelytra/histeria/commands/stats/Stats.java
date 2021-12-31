@@ -77,7 +77,7 @@ public class Stats implements CommandExecutor {
 
             player.sendMessage("§9|-----------------------------------|");
 
-            if (Bukkit.getPlayer(args[0]) == null) {
+            if (args.length > 0 && Bukkit.getPlayer(args[0]) == null) {
                 target.destroy();
             }
             return true;
