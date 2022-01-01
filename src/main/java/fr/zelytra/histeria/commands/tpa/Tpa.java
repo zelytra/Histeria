@@ -25,13 +25,13 @@ public class Tpa implements CommandExecutor {
 
             Player target = Bukkit.getPlayer(args[0]);
 
-            if(target.getName().equalsIgnoreCase(player.getName())){
-                LangMessage.sendMessage((Player) sender, "tpa.notOnYourSelf");
+            if (target == null) {
+                LangMessage.sendMessage((Player) sender, "command.playerOffLine");
                 return false;
             }
 
-            if (target == null) {
-                LangMessage.sendMessage((Player) sender, "command.playerOffLine");
+            if(target.getName().equalsIgnoreCase(player.getName())){
+                LangMessage.sendMessage((Player) sender, "tpa.notOnYourSelf");
                 return false;
             }
 
