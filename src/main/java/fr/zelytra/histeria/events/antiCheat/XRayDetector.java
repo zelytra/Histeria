@@ -29,7 +29,7 @@ import java.util.List;
 public class XRayDetector implements Listener {
 
     private static List<XRayProfiler> profilers = new ArrayList<>();
-    private final static int timer = 300; //time in second
+    private final static int timer = 5; //time in second
 
     @EventHandler
     public void onBreakBlock(BlockBreakEvent e) {
@@ -89,6 +89,7 @@ class XRayProfiler {
             case ANDESITE:
             case DIRT:
             case GRANITE:
+            case NETHERRACK:
                 commonBlockCount++;
                 break;
 
@@ -134,7 +135,7 @@ class XRayProfiler {
     public String toString() {
         String format = "0.00";
         NumberFormat formatter = new DecimalFormat(format);
-        return name + " mining luck: Diamond(" + diamondCount + ") = " + formatter.format(compute(StatType.DIAMOND)) + "% | Histerite(" + histeriteCount + ") = " + formatter.format(compute(StatType.HISTERITE)) + "% | Netherite(" + netheriteCount + ") = " + formatter.format(compute(StatType.NETHERITE)) + "% | Stone(" + commonBlockCount + ")";
+        return name + " mining luck: Diamond[" + diamondCount + "] = " + formatter.format(compute(StatType.DIAMOND)) + "% | Histerite[" + histeriteCount + "] = " + formatter.format(compute(StatType.HISTERITE)) + "% | Netherite[" + netheriteCount + "] = " + formatter.format(compute(StatType.NETHERITE)) + "% | Blocks[" + commonBlockCount + "]";
     }
 
 

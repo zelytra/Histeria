@@ -29,10 +29,10 @@ public class PlayerLeftVisual implements Listener {
             e.quitMessage(Component.text().content("§7[§c-§7] " + e.getPlayer().getName()).build());
             new PMessage(SubChannel.PLAYER_COUNT, null, new String[]{"ALL"});
             Tab.updateTab(e.getPlayer());
-            new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " left server " + Histeria.server.getServerName());
+            new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " left server " + Histeria.server.getServerName());
         } else {
             e.quitMessage(Component.text().content("§7[§b◯§7] " + e.getPlayer().getName()).build());
-            new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " switch server");
+            new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " switch server");
         }
     }
 

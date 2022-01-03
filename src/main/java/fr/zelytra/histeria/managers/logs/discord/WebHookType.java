@@ -15,6 +15,7 @@ public enum WebHookType {
     ERROR("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "ErrorAlert", "discord.error"),
     CHAT("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistChat", "discord.chat"),
     CHEATER("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistCheater", "discord.cheater"),
+    SERVER("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistServer", "discord.server"),
     ORE("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistOre", "discord.ore");
 
 

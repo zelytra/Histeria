@@ -46,7 +46,7 @@ public class ClickLogger implements Listener {
         Bukkit.getScheduler().runTaskTimerAsynchronously(Histeria.getInstance(), () -> {
             for (PlayerClick playerClick : playersClick) {
 
-                if (playerClick.getCount() >= 10) {
+                if (playerClick.getCount() >= 12) {
                     Histeria.log(playerClick.getName() + " at " + playerClick.getCount() + " CPS", LogType.WARN);
                     new DiscordLog(WebHookType.CHEATER, "**" + playerClick.getName() + "** at **" + playerClick.getCount() + " CPS** on server " + Histeria.server.getServerName().replace("§ca", ""));
                 }

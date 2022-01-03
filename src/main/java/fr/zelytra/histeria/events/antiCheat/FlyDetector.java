@@ -20,7 +20,7 @@ public class FlyDetector implements Listener {
         if (Utils.canByPass(e.getPlayer())) return;
 
         double speed = e.getFrom().distance(e.getTo()) * 20;
-        if (speed >= 23.0) {
+        if (speed >= 25.0) {
 
             if (!Cooldown.cooldownCheck(e.getPlayer(), "flyDetector", false))
                 return;

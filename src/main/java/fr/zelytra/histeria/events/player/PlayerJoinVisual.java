@@ -31,7 +31,7 @@ public class PlayerJoinVisual implements Listener {
         e.joinMessage(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());
         new PMessage(SubChannel.PLAYER_COUNT, null, new String[]{"ALL"});
         Tab.updateTab(e.getPlayer());
-        new DiscordLog(WebHookType.CHAT, e.getPlayer().getName() + " join server " + Histeria.server.getServerName());
+        new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " join server " + Histeria.server.getServerName());
     }
 
 
