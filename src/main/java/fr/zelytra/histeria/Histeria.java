@@ -109,7 +109,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.12";
+    public static String version = "v2.13";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -148,7 +148,10 @@ public final class Histeria extends JavaPlugin {
         lootTableManager = new LootTableManager();
         logs = new Logs();
         mySQL = new MySQL();
-        shop = new Shop();
+
+        if (mySQL.isConnected())
+            shop = new Shop();
+
         clearLag = new ClearLag();
         configurationManager = new ConfigurationManager();
         visualTeamManager = new VisualTeamManager();
@@ -174,16 +177,19 @@ public final class Histeria extends JavaPlugin {
                 PacketSender packetSender = new PacketSender(player);
                 packetSender.save();
             }
-
-            CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
-            customPlayer.saveData();
+            if (mySQL.isConnected()) {
+                CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+                customPlayer.saveData();
+            }
             log("§a" + player.getName() + " has been saved in data lake", LogType.INFO);
         }
         NPC.saveAll();
         ArenaChest.saveAll();
         Hologram.save();
         configurationManager.unload();
-        mySQL.closeConnection();
+
+        if (mySQL.isConnected())
+            mySQL.closeConnection();
     }
 
     private void regCommands() {
