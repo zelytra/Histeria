@@ -16,8 +16,10 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +54,12 @@ public class Elevator implements Listener {
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent e) {
+        if (e.getBlock().getType() == CustomMaterial.ELEVATOR.getVanillaMaterial())
+            e.getPlayer().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(CustomMaterial.ELEVATOR.getVanillaMaterial()));
     }
 
     @EventHandler
