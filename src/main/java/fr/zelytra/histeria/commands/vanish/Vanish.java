@@ -10,12 +10,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class Vanish implements CommandExecutor {
 
-    public static List<String> vanishedPlayers = new ArrayList<>();
+    private static HashSet<String> vanishedPlayers = new HashSet<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -48,22 +47,28 @@ public class Vanish implements CommandExecutor {
         return false;
     }
 
-    private void unvanish(Player player) {
+    public static void unvanish(Player player) {
         vanishedPlayers.remove(player.getName());
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (!Utils.canByPass(p))
-                p.showPlayer(Histeria.getInstance(), player);
-        }
+        Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (!Utils.canByPass(p))
+                    p.showPlayer(Histeria.getInstance(), player);
+            }
+        });
     }
 
-    private void vanish(Player player) {
+    public static void vanish(Player player) {
         vanishedPlayers.add(player.getName());
+        Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (!Utils.canByPass(p))
+                    p.hidePlayer(Histeria.getInstance(), player);
+            }
+        });
+    }
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            if (!Utils.canByPass(p))
-                p.hidePlayer(Histeria.getInstance(), player);
-        }
+    public static boolean isVanished(Player player) {
+        return vanishedPlayers.contains(player.getName());
     }
 
 }

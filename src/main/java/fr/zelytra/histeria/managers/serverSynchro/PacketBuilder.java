@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
@@ -78,6 +79,9 @@ public class PacketBuilder {
                 homePacketSize = homeZ.length * 4 + homeWorld.length;
             }
 
+            byte[] vanishStatus = Vanish.isVanished(player) ? new byte[]{1} : new byte[]{0};
+            Histeria.log("S Vanish status :" + (vanishStatus[0] == 1), LogType.INFO);
+
             byte[] packetID = new byte[]{1};
             byte[] playerNameLenght = new byte[]{(byte) (player.getUniqueId().toString().length() & 0xff)};
             byte[] playerUUID = player.getUniqueId().toString().getBytes();
@@ -94,6 +98,7 @@ public class PacketBuilder {
                     playerXP.length +
                     playerEffect.length +
                     effectLength.length +
+                    vanishStatus.length +
                     homePacketSize)).array());
 
             // Packet construction
@@ -109,6 +114,7 @@ public class PacketBuilder {
             outputStream.write(playerXP);
             outputStream.write(effectLength);
             outputStream.write(playerEffect);
+            outputStream.write(vanishStatus);
 
             if (homePacketSize != 0) {
                 outputStream.write(homeX);

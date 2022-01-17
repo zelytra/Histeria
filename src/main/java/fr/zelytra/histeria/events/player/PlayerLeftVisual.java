@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.events.player;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
 import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.server.PMessage;
@@ -31,7 +32,10 @@ public class PlayerLeftVisual implements Listener {
             Tab.updateTab(e.getPlayer());
             new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " left server " + Histeria.server.getServerName());
         } else {
-            e.quitMessage(Component.text().content("§7[§b◯§7] " + e.getPlayer().getName()).build());
+            if (!Vanish.isVanished(e.getPlayer()))
+                e.quitMessage(Component.text().content("§7[§b◯§7] " + e.getPlayer().getName()).build());
+            else
+                e.quitMessage(Component.text().build());
             new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " switch server");
         }
     }

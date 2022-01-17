@@ -1,9 +1,6 @@
 package fr.zelytra.histeria.commands.vanish;
 
-import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.utils.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -13,23 +10,17 @@ public class VanishListener implements Listener {
 
     @EventHandler
     public void onLeft(PlayerQuitEvent e) {
-        if (Vanish.vanishedPlayers.contains(e.getPlayer().getName())) {
-            Vanish.vanishedPlayers.remove(e.getPlayer().getName());
 
-            for (Player p : Bukkit.getOnlinePlayers()) {
-                if (!Utils.canByPass(p))
-                    p.showPlayer(Histeria.getInstance(), e.getPlayer());
-            }
-        }
+        if (Vanish.isVanished(e.getPlayer()) && !SwitchServer.getPlayerSwitching().contains(e.getPlayer()))
+            Vanish.unvanish(e.getPlayer());
+
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
 
-        for (String playerName : Vanish.vanishedPlayers) {
-            if (!Utils.canByPass(e.getPlayer()))
-                e.getPlayer().hidePlayer(Histeria.getInstance(), Bukkit.getPlayer(playerName));
-        }
+        if (Vanish.isVanished(e.getPlayer()))
+            Vanish.vanish(e.getPlayer());
 
     }
 }

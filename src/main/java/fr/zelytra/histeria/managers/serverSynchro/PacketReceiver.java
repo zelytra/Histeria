@@ -28,13 +28,13 @@ import java.nio.charset.StandardCharsets;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class PacketReceiver {
     private final Player player;
-    private PlayerDat playerDat;
+    private PlayerData playerData;
     private boolean isNew = false;
     private boolean isLoaded = false;
 
     public PacketReceiver(Player player) {
         this.player = player;
-        this.playerDat = new PlayerDat(player);
+        this.playerData = new PlayerData(player);
     }
 
     private Socket connexion() {
@@ -85,7 +85,7 @@ public class PacketReceiver {
             byte[] inventory = new byte[InvLengh];
             input.read(inventory);
 
-            playerDat.setInventory(itemStackArrayFromBase64(inventory));
+            playerData.setInventory(itemStackArrayFromBase64(inventory));
 
             // EnderChest
             byte[] endersize = new byte[4];
@@ -94,22 +94,22 @@ public class PacketReceiver {
             byte[] enderChest = new byte[enderLengh];
             input.read(enderChest);
 
-            playerDat.setEnderChest(itemStackArrayFromBase64(enderChest));
+            playerData.setEnderChest(itemStackArrayFromBase64(enderChest));
 
             // Health
             byte[] health = new byte[8];
             input.read(health);
-            playerDat.setHealth(ByteBuffer.wrap(health).getDouble());
+            playerData.setHealth(ByteBuffer.wrap(health).getDouble());
 
             // Food
             byte[] food = new byte[4];
             input.read(food);
-            playerDat.setFood(ByteBuffer.wrap(food).getInt());
+            playerData.setFood(ByteBuffer.wrap(food).getInt());
 
             // XP
             byte[] xp = new byte[4];
             input.read(xp);
-            playerDat.setXp(ByteBuffer.wrap(xp).getInt());
+            playerData.setXp(ByteBuffer.wrap(xp).getInt());
 
             // Effect
             byte[] effectSize = new byte[4];
@@ -117,7 +117,13 @@ public class PacketReceiver {
             int effectLength = ByteBuffer.wrap(effectSize).getInt();
             byte[] potionEffect = new byte[effectLength];
             input.read(potionEffect);
-            playerDat.setEffects(potionArrayFromBase64(potionEffect));
+            playerData.setEffects(potionArrayFromBase64(potionEffect));
+
+            //Vanish status
+            byte[] vanishStatus = new byte[1];
+            input.read(vanishStatus);
+            playerData.setVanish(vanishStatus[0] == 1);
+            Histeria.log("R Vanish status :" + (vanishStatus[0] == 1), LogType.INFO);
 
             // Home
             byte[] coordinateSize = new byte[4];
@@ -135,7 +141,7 @@ public class PacketReceiver {
 
                 input.read(worldNameSize);
                 String worldName = new String(worldNameSize, StandardCharsets.UTF_8);
-                playerDat.setTeleportTask(new Location(Bukkit.getWorld(worldName), x, y, z));
+                playerData.setTeleportTask(new Location(Bukkit.getWorld(worldName), x, y, z));
             }
 
 
@@ -158,7 +164,7 @@ public class PacketReceiver {
     }
 
     public void buildPlayer() {
-        playerDat.buildPlayer();
+        playerData.buildPlayer();
     }
 
     private byte[] requestDatBuilder() {

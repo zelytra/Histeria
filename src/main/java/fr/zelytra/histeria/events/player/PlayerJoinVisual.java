@@ -28,7 +28,13 @@ public class PlayerJoinVisual implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
-        e.joinMessage(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());
+        if (!Histeria.synchro)
+            e.joinMessage(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());
+
+        else
+            e.joinMessage(Component.text().build());
+
+
         new PMessage(SubChannel.PLAYER_COUNT, null, new String[]{"ALL"});
         Tab.updateTab(e.getPlayer());
         new DiscordLog(WebHookType.SERVER, e.getPlayer().getName() + " join server " + Histeria.server.getServerName());

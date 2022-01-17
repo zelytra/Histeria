@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.commands.vanish.Vanish;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
@@ -19,7 +20,8 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.Arrays;
 
-public class PlayerDat {
+public class PlayerData {
+
     private final Player player;
     private ItemStack[] inventory;
     private ItemStack[] enderChest;
@@ -28,10 +30,10 @@ public class PlayerDat {
     private int food;
     private int xp;
     private Location teleportTask = null;
+    private boolean isVanish = false;
 
-    public PlayerDat(Player player) {
+    public PlayerData(Player player) {
         this.player = player;
-
     }
 
     public void setEffects(PotionEffect[] effects) {
@@ -62,6 +64,10 @@ public class PlayerDat {
         this.teleportTask = teleportTask;
     }
 
+    public void setVanish(boolean vanish) {
+        isVanish = vanish;
+    }
+
     public void buildPlayer() {
         //Set inventory
         player.getInventory().setContents(this.inventory);
@@ -86,17 +92,20 @@ public class PlayerDat {
 
 
         // Health
-        if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() < this.health) {
+        if (player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() < this.health)
             player.setHealth((player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
-        } else {
+        else
             player.setHealth(this.health);
-        }
 
         //Home task
-        if (teleportTask != null) {
-            System.out.println("Home trigger");
+        if (teleportTask != null)
             Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> player.teleport(teleportTask));
-        }
+
+        // Vanish
+        if (isVanish)
+            Vanish.vanish(player);
+        else
+            Vanish.unvanish(player);
 
 
     }
