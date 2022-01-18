@@ -80,8 +80,6 @@ public class PacketBuilder {
             }
 
             byte[] vanishStatus = Vanish.isVanished(player) ? new byte[]{1} : new byte[]{0};
-            Histeria.log("S Vanish status :" + (vanishStatus[0] == 1), LogType.INFO);
-
             byte[] packetID = new byte[]{1};
             byte[] playerNameLenght = new byte[]{(byte) (player.getUniqueId().toString().length() & 0xff)};
             byte[] playerUUID = player.getUniqueId().toString().getBytes();
