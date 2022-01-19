@@ -1,32 +1,25 @@
-/*
- * Copyright (c) 2022.
- * Made by Zelytra :
- *  - Website : https://zelytra.fr
- *  - GitHub : http://github.zelytra.fr
- *
- * All right reserved
- */
-
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
+import fr.zelytra.histeria.commands.vanish.Vanish;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 
-public class FoodCapsule implements Capsule {
+public class VanishCapsule implements Capsule {
 
     private byte[] message;
-    public static final int length = 4;
+    public static final int length = 1;
 
-    public FoodCapsule(Player player) {
-        this.message = ByteBuffer.allocate(4).putInt(player.getFoodLevel()).array();
+    public VanishCapsule(Player player) {
+        this.message = Vanish.isVanished(player) ? new byte[]{1} : new byte[]{0};
     }
 
-    public FoodCapsule(){}
+    public VanishCapsule() {
+    }
+
 
     @Override
     public byte[] build() {
@@ -45,7 +38,7 @@ public class FoodCapsule implements Capsule {
 
     @Override
     public PlayerData uncaps(PlayerData data, byte[] message, InputStream input) throws IOException {
-        data.setFood(ByteBuffer.wrap(message).getInt());
+        data.setVanish(message[0] == 1);
         return data;
     }
 }

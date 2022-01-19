@@ -12,7 +12,8 @@ package fr.zelytra.histeria.events.player;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
-import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
+import fr.zelytra.histeria.managers.serverSynchro.server.Request;
+import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
 import fr.zelytra.histeria.managers.switchServer.SwitchServer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -26,12 +27,13 @@ public class PlayerLeftSync implements Listener {
     public void OnPlayerLeft(PlayerQuitEvent e) {
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
+
             if (SwitchServer.getPlayerSwitching().contains(e.getPlayer())) {
                 SwitchServer.getPlayerSwitching().remove(e.getPlayer());
                 return;
             }
-            PacketSender packetSender = new PacketSender(e.getPlayer());
-            packetSender.save();
+            SyncServer server = new SyncServer(e.getPlayer(), Request.SEND);
+            server.execute();
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
             customPlayer.getAfk().setAfk(false);

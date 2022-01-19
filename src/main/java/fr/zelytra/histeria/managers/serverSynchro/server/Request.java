@@ -10,6 +10,12 @@
 package fr.zelytra.histeria.managers.serverSynchro.server;
 
 public enum Request {
-    SEND,
-    GET;
+    SEND((byte) 1),
+    GET((byte) 0);
+
+    public byte id;
+
+    Request(byte id) {
+        this.id = id;
+    }
 }

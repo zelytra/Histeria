@@ -9,19 +9,27 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
-import fr.zelytra.histeria.managers.serverSynchro.PlayerData;
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 public class EChestCapsule implements Capsule {
 
-    private final byte[] message;
+    private byte[] message;
+    public static final int length = 4;
 
     public EChestCapsule(Player player) {
-        this.message = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
+        byte[] ecContent = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
+        this.message = ArrayUtils.addAll(ByteBuffer.allocate(4).putInt(ecContent.length).array(), ecContent);
+    }
+
+    public EChestCapsule() {
     }
 
     @Override
@@ -35,7 +43,20 @@ public class EChestCapsule implements Capsule {
     }
 
     @Override
-    public PlayerData uncaps(PlayerData data, byte[] message) throws IOException {
+    public int firstPacketSize() {
+        return length;
+    }
+
+    @Override
+    public PlayerData uncaps(PlayerData data, byte[] message, InputStream input) throws IOException {
+
+        int invLength = ByteBuffer.wrap(message).getInt();
+
+        byte[] content = new byte[invLength];
+        input.read(content);
+
+        data.setEnderChest(ByteConverter.itemStackArrayFromBase64(content));
         return data;
+
     }
 }

@@ -19,11 +19,6 @@ import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
-import fr.zelytra.histeria.commands.stats.Stats;
-import fr.zelytra.histeria.events.antiCheat.ClickLogger;
-import fr.zelytra.histeria.events.antiCheat.XRayDetector;
-import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
-import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
 import fr.zelytra.histeria.commands.kit.KitCommand;
 import fr.zelytra.histeria.commands.lang.LangCommand;
@@ -40,6 +35,7 @@ import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
 import fr.zelytra.histeria.commands.shop.StandTab;
+import fr.zelytra.histeria.commands.stats.Stats;
 import fr.zelytra.histeria.commands.stats.TopStats;
 import fr.zelytra.histeria.commands.stats.TopStatsTab;
 import fr.zelytra.histeria.commands.switchServer.SwitchServerCommand;
@@ -51,6 +47,8 @@ import fr.zelytra.histeria.commands.vote.VoteCommand;
 import fr.zelytra.histeria.commands.wiki.Wiki;
 import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
+import fr.zelytra.histeria.events.antiCheat.ClickLogger;
+import fr.zelytra.histeria.events.antiCheat.XRayDetector;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.arena.ArenaChest;
 import fr.zelytra.histeria.managers.arena.ArenaCommand;
@@ -58,6 +56,8 @@ import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
+import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
 import fr.zelytra.histeria.managers.hologram.HoloCommand;
 import fr.zelytra.histeria.managers.hologram.HoloTab;
 import fr.zelytra.histeria.managers.hologram.Hologram;
@@ -79,7 +79,8 @@ import fr.zelytra.histeria.managers.npc.command.NPCTab;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.server.PluginMessage;
 import fr.zelytra.histeria.managers.server.Server;
-import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
+import fr.zelytra.histeria.managers.serverSynchro.server.Request;
+import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
@@ -109,7 +110,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.15";
+    public static String version = "v2.16";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -174,8 +175,8 @@ public final class Histeria extends JavaPlugin {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             if (synchro) {
-                PacketSender packetSender = new PacketSender(player);
-                packetSender.save();
+                SyncServer server = new SyncServer(player, Request.SEND);
+                server.execute();
             }
             if (mySQL.isConnected()) {
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());

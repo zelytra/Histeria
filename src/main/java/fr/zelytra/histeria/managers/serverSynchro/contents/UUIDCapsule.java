@@ -1,32 +1,27 @@
-/*
- * Copyright (c) 2022.
- * Made by Zelytra :
- *  - Website : https://zelytra.fr
- *  - GitHub : http://github.zelytra.fr
- *
- * All right reserved
- */
-
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
-import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
-public class FoodCapsule implements Capsule {
+public class UUIDCapsule implements Capsule {
 
     private byte[] message;
-    public static final int length = 4;
 
-    public FoodCapsule(Player player) {
-        this.message = ByteBuffer.allocate(4).putInt(player.getFoodLevel()).array();
+    public UUIDCapsule(Player player) {
+        byte[] uuidContent = player.getUniqueId().toString().getBytes(StandardCharsets.UTF_8);
+        byte[] uuidLength = new byte[]{(byte) (player.getUniqueId().toString().length() & 0xff)};
+        this.message = ArrayUtils.addAll(uuidLength, uuidContent);
     }
 
-    public FoodCapsule(){}
+    public UUIDCapsule() {
+    }
+
 
     @Override
     public byte[] build() {
@@ -40,12 +35,11 @@ public class FoodCapsule implements Capsule {
 
     @Override
     public int firstPacketSize() {
-        return length;
+        return 0;
     }
 
     @Override
     public PlayerData uncaps(PlayerData data, byte[] message, InputStream input) throws IOException {
-        data.setFood(ByteBuffer.wrap(message).getInt());
-        return data;
+        return null;
     }
 }

@@ -22,7 +22,8 @@ import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
 import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.pvp.PvP;
-import fr.zelytra.histeria.managers.serverSynchro.PacketSender;
+import fr.zelytra.histeria.managers.serverSynchro.server.Request;
+import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
 import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -500,7 +501,8 @@ public class CustomPlayer {
 
             CustomPlayer.getCustomPlayer(player.getName()).saveData();
             if (Histeria.synchro)
-                new PacketSender(player).save();
+                new SyncServer(player, Request.SEND).execute();
+
         }
 
     }

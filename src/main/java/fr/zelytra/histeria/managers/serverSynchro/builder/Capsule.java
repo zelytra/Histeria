@@ -9,9 +9,8 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.builder;
 
-import fr.zelytra.histeria.managers.serverSynchro.PlayerData;
-
 import java.io.IOException;
+import java.io.InputStream;
 
 public interface Capsule {
 
@@ -19,6 +18,8 @@ public interface Capsule {
 
     int getSize();
 
-    PlayerData uncaps(PlayerData data, byte[] message) throws IOException;
+    int firstPacketSize();
+
+    PlayerData uncaps(PlayerData data, byte[] message, InputStream stream) throws IOException;
 
 }

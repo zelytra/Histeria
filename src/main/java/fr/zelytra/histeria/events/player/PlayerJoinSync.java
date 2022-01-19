@@ -11,7 +11,8 @@ package fr.zelytra.histeria.events.player;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.vanish.Vanish;
-import fr.zelytra.histeria.managers.serverSynchro.PacketReceiver;
+import fr.zelytra.histeria.managers.serverSynchro.server.Request;
+import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -25,19 +26,18 @@ public class PlayerJoinSync implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-            PacketReceiver packetReceiver = new PacketReceiver(e.getPlayer());
-            packetReceiver.requestPlayer();
+            SyncServer server = new SyncServer(e.getPlayer(), Request.GET);
+            server.execute();
+
             long time = System.currentTimeMillis();
-            while (!packetReceiver.receiveFinish()) {
+            while (!server.isCommunicationOver) {
                 if (System.currentTimeMillis() - time >= 2000) {
                     Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> e.getPlayer().kickPlayer("§cFailed to sync inventory please contact an admin"));
                     return;
                 }
-                if (packetReceiver.isNew()) {
-                    return;
-                }
+
+                if (server.isNewPlayer) return;
             }
-            packetReceiver.buildPlayer();
 
             if (!Vanish.isVanished(e.getPlayer()))
                 Bukkit.broadcast(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());

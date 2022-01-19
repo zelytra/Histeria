@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.managers.serverSynchro;
+package fr.zelytra.histeria.managers.serverSynchro.builder;
 
 import fr.zelytra.histeria.Histeria;
 import org.bukkit.Bukkit;

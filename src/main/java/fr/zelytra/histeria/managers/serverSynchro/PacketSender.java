@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.serverSynchro;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.serverSynchro.builder.SynchroConfig;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;

@@ -9,17 +9,27 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+
 public class InventoryCapsule implements Capsule {
 
-    private final byte[] message;
+    private byte[] message;
+    public static final int length = 4;
 
-    public InventoryCapsule(Player player){
+    public InventoryCapsule(Player player) {
         this.message = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
     }
+
+    public InventoryCapsule() {
+    }
+
 
     @Override
     public byte[] build() {
@@ -29,6 +39,24 @@ public class InventoryCapsule implements Capsule {
     @Override
     public int getSize() {
         return message.length;
+    }
+
+    @Override
+    public int firstPacketSize() {
+        return length;
+    }
+
+    @Override
+    public PlayerData uncaps(PlayerData data, byte[] message, InputStream input) throws IOException {
+
+        int invLength = ByteBuffer.wrap(message).getInt();
+
+        byte[] content = new byte[invLength];
+        input.read(content);
+
+        data.setInventory(ByteConverter.itemStackArrayFromBase64(content));
+        return data;
+
     }
 
 
