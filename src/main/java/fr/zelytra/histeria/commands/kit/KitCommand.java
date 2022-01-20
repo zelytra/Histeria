@@ -20,7 +20,7 @@ import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.utils.Message;
-import fr.zelytra.histeria.utils.TimeFormater;
+import fr.zelytra.histeria.utils.timer.TimeFormater;
 import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022.
+ * Copyright (c) 2022-2022.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr

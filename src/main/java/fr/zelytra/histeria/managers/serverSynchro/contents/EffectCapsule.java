@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.serverSynchro.contents;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -24,7 +25,9 @@ public class EffectCapsule implements Capsule {
     public static final int length = 4;
 
     public EffectCapsule(Player player) {
-        this.message = ByteConverter.potionArrayToBase64(player.getActivePotionEffects());
+        byte[] effectsContent = ByteConverter.potionArrayToBase64(player.getActivePotionEffects());
+        byte[] effectsLength = ByteBuffer.allocate(4).putInt(effectsContent.length).array();
+        this.message = ArrayUtils.addAll(effectsLength, effectsContent);
     }
 
     public EffectCapsule() {

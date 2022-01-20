@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2022.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr
@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.utils;
+package fr.zelytra.histeria.utils.timer;
 
 public abstract class TimeFormater {
 
@@ -38,6 +38,7 @@ public abstract class TimeFormater {
             return "§e" + TimeInHour + "§6h" + "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
         }
     }
+
 
     public static String display(int timeInSec) {
 

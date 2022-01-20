@@ -14,7 +14,7 @@ import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
 import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.utils.Message;
-import fr.zelytra.histeria.utils.TimeString;
+import fr.zelytra.histeria.utils.timer.TimeString;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

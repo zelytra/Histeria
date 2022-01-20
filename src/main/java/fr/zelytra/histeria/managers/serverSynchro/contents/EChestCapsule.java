@@ -9,9 +9,9 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
-import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
@@ -25,8 +25,9 @@ public class EChestCapsule implements Capsule {
     public static final int length = 4;
 
     public EChestCapsule(Player player) {
-        byte[] ecContent = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
-        this.message = ArrayUtils.addAll(ByteBuffer.allocate(4).putInt(ecContent.length).array(), ecContent);
+        byte[] inventoryContent = ByteConverter.itemStackArrayToBase64(player.getEnderChest().getContents());
+        byte[] inventoryLength = ByteBuffer.allocate(4).putInt(inventoryContent.length).array();
+        this.message = ArrayUtils.addAll(inventoryLength, inventoryContent);
     }
 
     public EChestCapsule() {

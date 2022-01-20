@@ -12,9 +12,9 @@ package fr.zelytra.histeria.managers.serverSynchro.server;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.SynchroConfig;
-import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import fr.zelytra.histeria.managers.serverSynchro.contents.*;
 import org.bukkit.entity.Player;
 
@@ -53,6 +53,7 @@ public class SyncServer {
 
             switch (request) {
                 case GET:
+                    Histeria.log("Requesting " + player.getName() + " data...", LogType.INFO);
 
                     // Sending GET request
                     List<Capsule> capsuleList = new ArrayList<>();
@@ -98,11 +99,12 @@ public class SyncServer {
                     }
 
                     playerData.buildPlayer();
+                    Histeria.log(player.getName() + " inventory's has been synchronised.", LogType.INFO);
                     isCommunicationOver = true;
                     break;
 
                 case SEND:
-
+                    Histeria.log(player.getName() + " inventory's send to the server...", LogType.INFO);
                     // Building capsules
                     capsuleList = new ArrayList<>();
                     capsuleList.add(new IDCapsule(request));
@@ -132,6 +134,7 @@ public class SyncServer {
                     }
 
                     isCommunicationOver = true;
+                    Histeria.log("Inventory received", LogType.INFO);
                     break;
             }
 
@@ -146,7 +149,7 @@ public class SyncServer {
             int messageLength = 0;
             for (Capsule capsule : capsuleList)
                 messageLength += capsule.getSize();
-            System.out.println("message length: " + messageLength);
+
             output.write(ByteBuffer.allocate(4).putInt(Integer.reverseBytes(messageLength)).array());
 
             for (Capsule capsule : capsuleList)

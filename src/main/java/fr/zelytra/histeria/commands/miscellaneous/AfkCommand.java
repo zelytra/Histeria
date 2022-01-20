@@ -10,7 +10,7 @@
 package fr.zelytra.histeria.commands.miscellaneous;
 
 import fr.zelytra.histeria.managers.player.CustomPlayer;
-import fr.zelytra.histeria.utils.TimeFormater;
+import fr.zelytra.histeria.utils.timer.TimeFormater;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

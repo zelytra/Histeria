@@ -11,8 +11,8 @@ package fr.zelytra.histeria.managers.serverSynchro.contents;
 
 import fr.zelytra.histeria.managers.home.Home;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
-import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -88,18 +88,22 @@ public class HomeCapsule implements Capsule {
         byte[] buffer = new byte[4];
         input.read(buffer);
         if (ByteBuffer.wrap(buffer).getInt() < 1) return data;
-
+        System.out.println("home length " + ByteBuffer.wrap(buffer).getInt());
         // Reading coordinates
         input.read(buffer);
         int x = ByteBuffer.wrap(buffer).getInt();
+
         input.read(buffer);
         int y = ByteBuffer.wrap(buffer).getInt();
+
         input.read(buffer);
         int z = ByteBuffer.wrap(buffer).getInt();
-        
+
         // Reading worldName
         input.read(buffer);
         buffer = new byte[ByteBuffer.wrap(buffer).getInt()];
+
+        input.read(buffer);
         String worldName = new String(buffer, StandardCharsets.UTF_8);
 
         data.setTeleportTask(new Location(Bukkit.getWorld(worldName), x, y, z));

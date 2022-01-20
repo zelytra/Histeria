@@ -12,7 +12,7 @@ package fr.zelytra.histeria.commands.stats;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
-import fr.zelytra.histeria.utils.TimeFormater;
+import fr.zelytra.histeria.utils.timer.TimeFormater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

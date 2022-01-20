@@ -12,7 +12,7 @@ package fr.zelytra.histeria.commands.moderation.Mute;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.utils.Message;
-import fr.zelytra.histeria.utils.TimeString;
+import fr.zelytra.histeria.utils.timer.TimeString;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

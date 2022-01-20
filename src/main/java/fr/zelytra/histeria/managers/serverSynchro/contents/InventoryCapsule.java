@@ -9,9 +9,10 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
-import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
+import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -24,7 +25,9 @@ public class InventoryCapsule implements Capsule {
     public static final int length = 4;
 
     public InventoryCapsule(Player player) {
-        this.message = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
+        byte[] inventoryContent = ByteConverter.itemStackArrayToBase64(player.getInventory().getContents());
+        byte[] inventoryLength = ByteBuffer.allocate(4).putInt(inventoryContent.length).array();
+        this.message = ArrayUtils.addAll(inventoryLength, inventoryContent);
     }
 
     public InventoryCapsule() {
