@@ -91,6 +91,7 @@ public class SyncServer {
                     capsuleList.add(new EffectCapsule());
                     capsuleList.add(new VanishCapsule());
                     capsuleList.add(new HomeCapsule());
+                    capsuleList.add(new GameModeCapsule());
 
                     // Reading data and uncaps
                     for (Capsule capsule : capsuleList) {
@@ -119,6 +120,7 @@ public class SyncServer {
                     capsuleList.add(new EffectCapsule(player));
                     capsuleList.add(new VanishCapsule(player));
                     capsuleList.add(new HomeCapsule(CustomPlayer.getCustomPlayer(player.getName())));
+                    capsuleList.add(new GameModeCapsule(player));
 
                     // Sending capsules
                     sendCapsule(output, capsuleList);

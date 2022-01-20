@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.serverSynchro.builder;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.vanish.Vanish;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -31,6 +32,7 @@ public class PlayerData {
     private int xp;
     private Location teleportTask = null;
     private boolean isVanish = false;
+    private GameMode gameMode = GameMode.SURVIVAL;
 
     public PlayerData(Player player) {
         this.player = player;
@@ -68,6 +70,10 @@ public class PlayerData {
         isVanish = vanish;
     }
 
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
     public void buildPlayer() {
         //Set inventory
         player.getInventory().setContents(this.inventory);
@@ -96,6 +102,10 @@ public class PlayerData {
             player.setHealth((player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
         else
             player.setHealth(this.health);
+
+        //GameMode
+        if (player.getGameMode() != gameMode)
+            Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> player.setGameMode(gameMode));
 
         //Home task
         if (teleportTask != null)

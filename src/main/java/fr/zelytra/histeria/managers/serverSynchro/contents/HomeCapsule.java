@@ -28,7 +28,7 @@ public class HomeCapsule implements Capsule {
     public static final int length = 4;
 
     public HomeCapsule(CustomPlayer player) {
-        this.message = new byte[]{};
+        this.message = new byte[4];
 
         if (player == null) return;
 
@@ -87,6 +87,7 @@ public class HomeCapsule implements Capsule {
         //Reading message size
         byte[] buffer = new byte[4];
         if (ByteBuffer.wrap(message).getInt() < 1) return data;
+
 
         // Reading coordinates
         input.read(buffer);
