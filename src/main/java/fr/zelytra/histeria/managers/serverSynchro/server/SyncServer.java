@@ -16,6 +16,7 @@ import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.SynchroConfig;
 import fr.zelytra.histeria.managers.serverSynchro.contents.*;
+import fr.zelytra.histeria.utils.timer.Timer;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class SyncServer {
             switch (request) {
                 case GET:
                     Histeria.log("Requesting " + player.getName() + " data...", LogType.INFO);
-
+                    Timer timer = new Timer();
                     // Sending GET request
                     List<Capsule> capsuleList = new ArrayList<>();
                     capsuleList.add(new IDCapsule(request));
@@ -70,7 +71,7 @@ public class SyncServer {
 
                     // If player don't find in server
                     if (id[0] == (byte) 254) {
-                        Histeria.log(player.getName() + " is a new player. Nothing to do.", LogType.INFO);
+                        Histeria.log(player.getName() + " is a new player, nothing to do §7[" + timer.stop() + "]", LogType.INFO);
                         server.close();
                         isCommunicationOver = true;
                         isNewPlayer = true;
@@ -99,12 +100,13 @@ public class SyncServer {
                     }
 
                     playerData.buildPlayer();
-                    Histeria.log(player.getName() + " inventory's has been synchronised.", LogType.INFO);
+                    Histeria.log(player.getName() + " inventory's has been synchronised §7[" + timer.stop() + "]", LogType.INFO);
                     isCommunicationOver = true;
                     break;
 
                 case SEND:
                     Histeria.log(player.getName() + " inventory's send to the server...", LogType.INFO);
+                    timer = new Timer();
                     // Building capsules
                     capsuleList = new ArrayList<>();
                     capsuleList.add(new IDCapsule(request));
@@ -128,13 +130,13 @@ public class SyncServer {
                     input.read(response);
 
                     if (Integer.reverseBytes(ByteBuffer.wrap(response).getInt()) != 1) {
-                        Histeria.log("Inventory not received.", LogType.WARN);
+                        Histeria.log("Inventory not received §7[" + timer.stop() + "]", LogType.WARN);
                         server.close();
                         return;
                     }
 
                     isCommunicationOver = true;
-                    Histeria.log("Inventory received", LogType.INFO);
+                    Histeria.log("Inventory received §7[" + timer.stop() + "]", LogType.INFO);
                     break;
             }
 

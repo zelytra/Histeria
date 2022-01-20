@@ -11,23 +11,32 @@ package fr.zelytra.histeria.utils.timer;
 
 public abstract class TimeFormater {
 
-    public static String display(long timeInMilli) {
+    public static String display(long timeInMilli, boolean color) {
 
         //Milliseconds display
         if (timeInMilli <= 1000) {
-            return "§e" + (timeInMilli) + "§6ms";
+            if (color)
+                return "§e" + (timeInMilli) + "§6ms";
+            else
+                return timeInMilli + "ms";
         }
         //Seconds display
         else if (timeInMilli <= 60000) {
             int timeInSec = (int) (timeInMilli / 1000) % 60;
-            return "§e" + timeInSec + "§6s";
+            if (color)
+                return "§e" + timeInSec + "§6s";
+            else
+                return timeInSec + "s";
         }
         //Minutes display
         else if (timeInMilli <= 3600000) {
             int remainingSec = (int) (timeInMilli / 1000);
             int timeInSec = (remainingSec % 60);
             int timeInMin = (remainingSec % 3600) / 60;
-            return "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
+            if (color)
+                return "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
+            else
+                return timeInMin + "m" + timeInSec + "s";
         }
         //Hours display
         else {
@@ -35,7 +44,10 @@ public abstract class TimeFormater {
             int timeInSec = (remainingSec % 60);
             int timeInMin = (remainingSec % 3600) / 60;
             int TimeInHour = remainingSec / 3600;
-            return "§e" + TimeInHour + "§6h" + "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
+            if (color)
+                return "§e" + TimeInHour + "§6h" + "§e" + timeInMin + "§6m" + "§e" + timeInSec + "§6s";
+            else
+                return TimeInHour + "h" + timeInMin + "m" + timeInSec + "s";
         }
     }
 

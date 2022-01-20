@@ -51,10 +51,10 @@ public class HomeCapsule implements Capsule {
             homeWorld = selectedHome.getWorldName().getBytes(StandardCharsets.UTF_8);
         else
             homeWorld = selectedHome.getLocation().getWorld().getName().getBytes(StandardCharsets.UTF_8);
+
         byte[] homeWorldSize = ByteBuffer.allocate(4).putInt(homeWorld.length).array();
 
         byte[] messageSize = ByteBuffer.allocate(4).putInt(homeX.length * 3 + homeWorldSize.length + homeWorld.length).array();
-
 
         message = ArrayUtils.addAll(messageSize, homeX);
         message = ArrayUtils.addAll(message, homeY);
@@ -86,9 +86,8 @@ public class HomeCapsule implements Capsule {
 
         //Reading message size
         byte[] buffer = new byte[4];
-        input.read(buffer);
-        if (ByteBuffer.wrap(buffer).getInt() < 1) return data;
-        System.out.println("home length " + ByteBuffer.wrap(buffer).getInt());
+        if (ByteBuffer.wrap(message).getInt() < 1) return data;
+
         // Reading coordinates
         input.read(buffer);
         int x = ByteBuffer.wrap(buffer).getInt();
@@ -102,7 +101,6 @@ public class HomeCapsule implements Capsule {
         // Reading worldName
         input.read(buffer);
         buffer = new byte[ByteBuffer.wrap(buffer).getInt()];
-
         input.read(buffer);
         String worldName = new String(buffer, StandardCharsets.UTF_8);
 
