@@ -1,7 +1,9 @@
-package fr.zelytra.histeria.commands.miscellaneous;
+package fr.zelytra.histeria.commands.hardDelete;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
+import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
+import fr.zelytra.histeria.managers.logs.discord.WebHookType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.serverSynchro.server.Request;
 import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
@@ -67,11 +69,14 @@ public class HardDelete implements CommandExecutor {
 
                 if (uuid == null) {
                     Histeria.log("Player unknown in data base", LogType.ERROR);
+                    new DiscordLog(WebHookType.CHEATER, "**" + name + "** has not been found in database for Hard deletion");
                     return;
                 }
-                System.out.println(uuid);
+
                 SyncServer server = new SyncServer(uuid, Request.DELETE);
                 server.execute();
+
+                new DiscordLog(WebHookType.CHEATER, "**" + name + "** data's has been deleted");
                 Histeria.log("Inventory delete task done", LogType.INFO);
 
             } catch (Exception e) {

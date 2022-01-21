@@ -19,6 +19,8 @@ import fr.zelytra.histeria.commands.broadcast.BroadcastTab;
 import fr.zelytra.histeria.commands.customItems.HGive;
 import fr.zelytra.histeria.commands.customItems.HGiveTab;
 import fr.zelytra.histeria.commands.freeze.Freeze;
+import fr.zelytra.histeria.commands.hardDelete.HardDelete;
+import fr.zelytra.histeria.commands.hardDelete.HardDeleteTab;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryLooker;
 import fr.zelytra.histeria.commands.kit.KitCommand;
 import fr.zelytra.histeria.commands.lang.LangCommand;
@@ -260,8 +262,11 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
-        getCommand("harddelete").setExecutor(new HardDelete());
 
+
+        /* HardDelete */
+        getCommand("harddelete").setExecutor(new HardDelete());
+        getCommand("harddelete").setTabCompleter(new HardDeleteTab());
         /* Hologram */
         getCommand("hologram").setExecutor(new HoloCommand());
         getCommand("hologram").setTabCompleter(new HoloTab());
