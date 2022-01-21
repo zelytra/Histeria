@@ -5,6 +5,7 @@ import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.serverSynchro.server.Request;
 import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,14 +22,34 @@ public class HardDelete implements CommandExecutor {
 
         if (sender instanceof Player) {
 
+            if (args.length != 1) {
+                sender.sendMessage(Message.PLAYER_PREFIX + "§cWrong command syntax");
+                return false;
+            }
+
+            if (Bukkit.getPlayer(args[0]) != null) {
+                sender.sendMessage(Message.PLAYER_PREFIX + "§cYou cannot execute this command while this player is online");
+                return false;
+            }
+
+            sender.sendMessage(Message.PLAYER_PREFIX + "§eStarting task...");
+
         } else {
+
             if (args.length != 1) {
                 Histeria.log("Wrong command syntax", LogType.ERROR);
                 return false;
             }
-            executeDelete(args[0]);
+
+            if (Bukkit.getPlayer(args[0]) != null) {
+                Histeria.log("You cannot execute this command while this player is online", LogType.INFO);
+                return false;
+            }
 
         }
+
+        executeDelete(args[0]);
+        sender.sendMessage(Message.PLAYER_PREFIX + "§eDeleting task done");
         return true;
 
     }
