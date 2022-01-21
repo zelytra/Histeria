@@ -34,16 +34,13 @@ public class AdminHomeCommand implements CommandExecutor {
 
             });
 
-            return true;
-
         } else {
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(target.getName());
             teleportPlayer(customPlayer, player, args[1]);
 
-            return true;
-
         }
+        return true;
 
     }
 

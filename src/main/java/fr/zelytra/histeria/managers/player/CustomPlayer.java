@@ -205,7 +205,7 @@ public class CustomPlayer {
                     this.lang = Lang.valueOf(resultSet.getString("lang"));
 
                     String ip = resultSet.getString("ip");
-                    if (!ip.equalsIgnoreCase(this.ip)) {
+                    if (this.ip != null && !ip.equalsIgnoreCase(this.ip)) {
                         Histeria.log(".IP change detected for " + name + " | Previous IP: " + ip + " | new IP: " + this.ip, LogType.WARN);
                         new DiscordLog(WebHookType.CHEATER, ".IP change detected for **" + name + "** | Previous IP: **" + ip + "** | new IP: **" + this.ip + "**");
                     }
