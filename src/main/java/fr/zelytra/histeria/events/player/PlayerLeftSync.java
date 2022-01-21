@@ -30,6 +30,7 @@ public class PlayerLeftSync implements Listener {
 
             if (SwitchServer.getPlayerSwitching().contains(e.getPlayer())) {
                 SwitchServer.getPlayerSwitching().remove(e.getPlayer());
+                CustomPlayer.getCustomPlayer(e.getPlayer().getName()).destroy();
                 return;
             }
             SyncServer server = new SyncServer(e.getPlayer(), Request.SEND);

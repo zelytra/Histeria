@@ -43,14 +43,19 @@ public class SwitchServer {
             String args[] = new String[1];
             args[0] = serverName;
 
+            new PMessage(SubChannel.SERVERS_NAME, player, null);
+
+            if (!Histeria.server.getServersList().contains(serverName)){
+                LangMessage.sendMessage(player, "server.offline");
+                return;
+            }
+
             SyncServer server = new SyncServer(player, Request.SEND);
             server.execute();
             playerSwitching.add(player);
 
             CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
             customPlayer.saveData();
-            customPlayer.destroy();
-
 
             long time = System.currentTimeMillis();
 
@@ -63,6 +68,13 @@ public class SwitchServer {
 
             Histeria.log(player.getName() + " switch to -> " + serverName + " server", LogType.INFO);
             new PMessage(SubChannel.CONNECT, player, args);
+
+            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
+                LangMessage.sendMessage(player, "server.offline");
+                playerSwitching.remove(player);
+                return;
+            },40);
+
         });
     }
 
