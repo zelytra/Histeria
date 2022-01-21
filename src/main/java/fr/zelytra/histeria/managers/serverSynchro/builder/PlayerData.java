@@ -119,4 +119,14 @@ public class PlayerData {
 
 
     }
+
+    public void clear() {
+        Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+            player.getInventory().clear();
+            player.getEnderChest().clear();
+            player.getActivePotionEffects().clear();
+            player.setHealth((player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue()));
+            player.setGameMode(GameMode.SURVIVAL);
+        });
+    }
 }

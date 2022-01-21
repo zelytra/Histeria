@@ -260,6 +260,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("randomtp").setExecutor(new RandomTp());
         getCommand("clearlag").setExecutor(new ClearLagCommand());
         getCommand("kit").setExecutor(new KitCommand());
+        getCommand("harddelete").setExecutor(new HardDelete());
 
         /* Hologram */
         getCommand("hologram").setExecutor(new HoloCommand());

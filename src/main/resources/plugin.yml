@@ -286,5 +286,8 @@ commands:
     description: Hologram command
     permission: histeria.hologram
 
-  status:
-    description: status
+  harddelete:
+    description: Hard delete inventorys of a player with synch server
+    permission: histeria.harddelete
+    aliases:
+      - hd

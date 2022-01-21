@@ -33,14 +33,22 @@ public class SyncServer {
     private static int timeOut = 2;
 
     private final Request request;
-    private final Player player;
     private final Socket server;
+
+    private Player player;
+    private String uuid;
 
     public boolean isCommunicationOver = false;
     public boolean isNewPlayer = false;
 
     public SyncServer(Player player, Request request) {
         this.player = player;
+        this.request = request;
+        this.server = connexion();
+    }
+
+    public SyncServer(String uuid, Request request) {
+        this.uuid = uuid;
         this.request = request;
         this.server = connexion();
     }
@@ -54,6 +62,12 @@ public class SyncServer {
 
             switch (request) {
                 case GET:
+
+                    if (player == null) {
+                        Histeria.log("Cannot request player data of a null object", LogType.ERROR);
+                        return;
+                    }
+
                     Histeria.log("Requesting " + player.getName() + " data...", LogType.INFO);
                     Timer timer = new Timer();
                     // Sending GET request
@@ -65,6 +79,7 @@ public class SyncServer {
                     // Getting server status response
                     byte[] response = new byte[4];
                     input.read(response);
+                    int messageSize = Integer.reverseBytes(ByteBuffer.wrap(response).getInt());
 
                     byte[] id = new byte[1];
                     input.read(id);
@@ -80,6 +95,14 @@ public class SyncServer {
 
                     // Reading data sent
                     PlayerData playerData = new PlayerData(player);
+
+                    if (messageSize<=2){
+                        Histeria.log(player.getName() + " has an empty file, clearing player data §7[" + timer.stop() + "]", LogType.INFO);
+                        server.close();
+                        isCommunicationOver = true;
+                        playerData.clear();
+                        return;
+                    }
 
                     // Building capsules
                     capsuleList = new ArrayList<>();
@@ -106,6 +129,12 @@ public class SyncServer {
                     break;
 
                 case SEND:
+
+                    if (player == null) {
+                        Histeria.log("Cannot save player data of a null object", LogType.ERROR);
+                        return;
+                    }
+
                     Histeria.log(player.getName() + " inventory's send to the server...", LogType.INFO);
                     timer = new Timer();
                     // Building capsules
@@ -139,6 +168,38 @@ public class SyncServer {
 
                     isCommunicationOver = true;
                     Histeria.log("Inventory received §7[" + timer.stop() + "]", LogType.INFO);
+                    break;
+
+                case DELETE:
+
+                    Histeria.log(uuid + " deleting data...", LogType.INFO);
+                    timer = new Timer();
+
+                    // Building capsules
+                    capsuleList = new ArrayList<>();
+                    capsuleList.add(new IDCapsule(request));
+                    if (player != null)
+                        capsuleList.add(new UUIDCapsule(player));
+                    else
+                        capsuleList.add(new UUIDCapsule(uuid));
+                    capsuleList.add(new EmptyCapsule());
+
+                    sendCapsule(output, capsuleList);
+
+                    // Getting server response status
+                    response = new byte[4];
+                    input.read(response);
+                    response = new byte[ByteBuffer.wrap(response).getInt()];
+                    input.read(response);
+
+                    if (Integer.reverseBytes(ByteBuffer.wrap(response).getInt()) != 1) {
+                        Histeria.log("Deleting failed §7[" + timer.stop() + "]", LogType.WARN);
+                        server.close();
+                        return;
+                    }
+
+                    isCommunicationOver = true;
+                    Histeria.log("Data deleted §7[" + timer.stop() + "]", LogType.INFO);
                     break;
             }
 

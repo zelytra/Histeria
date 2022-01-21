@@ -19,6 +19,12 @@ public class UUIDCapsule implements Capsule {
         this.message = ArrayUtils.addAll(uuidLength, uuidContent);
     }
 
+    public UUIDCapsule(String uuid) {
+        byte[] uuidContent = uuid.getBytes(StandardCharsets.UTF_8);
+        byte[] uuidLength = new byte[]{(byte) (uuid.length() & 0xff)};
+        this.message = ArrayUtils.addAll(uuidLength, uuidContent);
+    }
+
     public UUIDCapsule() {
     }
 

@@ -11,7 +11,8 @@ package fr.zelytra.histeria.managers.serverSynchro.server;
 
 public enum Request {
     SEND((byte) 1),
-    GET((byte) 0);
+    GET((byte) 0),
+    DELETE((byte) 1);
 
     public byte id;
 
