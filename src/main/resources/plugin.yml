@@ -1,12 +1,12 @@
 name: Histeria
-version: 2.0
+version: 3.0
 main: fr.zelytra.histeria.Histeria
 depend:
   - WorldEdit
   - LuckPerms
 softdepend:
   - Factions
-api-version: 1.16
+api-version: 1.18
 authors: [ Zelytra ]
 description: Histeria server core
 website: https://zelytra.fr

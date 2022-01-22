@@ -39,7 +39,7 @@ public class Vanish implements CommandExecutor {
                 return false;
             } else {
                 unvanish(player);
-                LangMessage.sendMessage(player, "vanish.unvanished");
+                LangMessage.sendMessage(player, "vanish.unvanish");
                 return true;
             }
         }
