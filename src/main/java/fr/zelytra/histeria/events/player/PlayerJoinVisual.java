@@ -28,6 +28,7 @@ public class PlayerJoinVisual implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
+
         if (!Histeria.synchro)
             e.joinMessage(Component.text().content("§7[§a+§7] " + e.getPlayer().getName()).build());
 

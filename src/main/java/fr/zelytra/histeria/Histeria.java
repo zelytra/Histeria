@@ -86,13 +86,13 @@ import fr.zelytra.histeria.managers.serverSynchro.server.SyncServer;
 import fr.zelytra.histeria.managers.visual.tab.VisualTeamManager;
 import fr.zelytra.histeria.utils.Message;
 import net.luckperms.api.LuckPerms;
-import net.minecraft.server.v1_16_R3.DedicatedServer;
-import net.minecraft.server.v1_16_R3.DedicatedServerProperties;
+import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.dedicated.DedicatedServerProperties;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -107,12 +107,12 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = true;
+    public static boolean synchro = false;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v2.18";
+    public static String version = "v3.0";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -378,13 +378,12 @@ public final class Histeria extends JavaPlugin {
 
         try {
             DedicatedServer server = ((CraftServer) Bukkit.getServer()).getServer();
-            DedicatedServerProperties properties = server.getDedicatedServerProperties();
-
+            DedicatedServerProperties properties = server.getProperties();
             Field spawnProtectionField = properties.getClass().getField("spawnProtection");
             spawnProtectionField.setAccessible(true);
             spawnProtectionField.set(properties, 0);
 
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
+        } catch (Exception ignored) {
         }
 
     }

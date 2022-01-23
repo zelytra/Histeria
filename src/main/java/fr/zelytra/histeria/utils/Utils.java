@@ -11,10 +11,7 @@ package fr.zelytra.histeria.utils;
 
 import fr.zelytra.histeria.Histeria;
 import net.luckperms.api.model.user.User;
-import net.minecraft.server.v1_16_R3.EntityPlayer;
-import net.minecraft.server.v1_16_R3.PacketPlayOutEntityStatus;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -89,12 +86,6 @@ public abstract class Utils {
         ItemStack item = new ItemStack(material);
         item.addUnsafeEnchantment(enchantment, lvl);
         return item;
-    }
-
-    public static void runTotemDisplay(Player player) {
-        EntityPlayer ep = ((CraftPlayer) player).getHandle();
-        PacketPlayOutEntityStatus status = new PacketPlayOutEntityStatus(ep, (byte) 35);
-        ep.playerConnection.sendPacket(status);
     }
 
     public static boolean isFullInv(Player player) {

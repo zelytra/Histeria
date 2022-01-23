@@ -14,12 +14,17 @@ import com.mojang.authlib.properties.Property;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
-import net.minecraft.server.v1_16_R3.*;
+import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -31,7 +36,7 @@ public class NPC implements Serializable {
     public static List<NPC> npcList = new ArrayList<>();
 
     private final String name;
-    private final transient EntityPlayer npc;
+    private final transient ServerPlayer npc;
     private final transient Location location;
     private NPCAction action = NPCAction.DEFAULT;
     private String serverName;
@@ -71,9 +76,9 @@ public class NPC implements Serializable {
 
     }
 
-    private EntityPlayer summonNPC() {
+    private ServerPlayer summonNPC() {
         MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
-        WorldServer nmsWorld = ((CraftWorld) location.getWorld()).getHandle();
+        ServerLevel nmsWorld = ((CraftWorld) location.getWorld()).getHandle();
 
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), name.replace("&", "§"));
 
@@ -82,8 +87,9 @@ public class NPC implements Serializable {
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
         }
 
-        EntityPlayer entity = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
-        entity.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+        ServerPlayer entity = new ServerPlayer(nmsServer, nmsWorld, gameProfile);
+        entity.setPosRaw(location.getX(), location.getY(), location.getZ());
+        entity.setRot(location.getYaw(), location.getPitch());
 
         npcList.add(this);
         return entity;
@@ -91,14 +97,14 @@ public class NPC implements Serializable {
 
     public void destroy() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
+            ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
+            connection.send(new ClientboundRemoveEntitiesPacket(npc.getId()));
         }
         npcList.remove(this);
         String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "NPC";
         File file = new File(folderPath + File.separator + name + ".npc");
 
-        if(file.exists())
+        if (file.exists())
             file.delete();
     }
 
@@ -123,9 +129,10 @@ public class NPC implements Serializable {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            PlayerConnection connection = getPlayerConnection(player);
-            npc.setLocation(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5, location.getYaw(), location.getPitch());
-            connection.sendPacket(new PacketPlayOutEntityTeleport(npc));
+            ServerGamePacketListenerImpl connection = getPlayerConnection(player);
+            npc.setPosRaw(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5);
+            npc.setRot(location.getYaw(), location.getPitch());
+            connection.send(new ClientboundTeleportEntityPacket(npc));
 
         }
     }
@@ -141,7 +148,7 @@ public class NPC implements Serializable {
                 return;
             }
 
-            GameProfile gameProfile = npc.getProfile();
+            GameProfile gameProfile = npc.getGameProfile();
             gameProfile.getProperties().removeAll("textures");
             gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
 
@@ -149,10 +156,9 @@ public class NPC implements Serializable {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 removeNPCPacket(player);
 
-                DataWatcher watcher = npc.getDataWatcher();
-                watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
-                PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(npc.getId(), watcher, true);
-                ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+                SynchedEntityData watcher = npc.getEntityData();
+                ClientboundSetEntityDataPacket packet = new ClientboundSetEntityDataPacket(npc.getId(), watcher, true);
+                ((CraftPlayer) player).getHandle().connection.send(packet);
 
                 addNPCPacket(player);
 
@@ -187,9 +193,9 @@ public class NPC implements Serializable {
         return null;
     }
 
-    private PlayerConnection getPlayerConnection(Player player) {
+    private ServerGamePacketListenerImpl getPlayerConnection(Player player) {
 
-        return ((CraftPlayer) player).getHandle().playerConnection;
+        return ((CraftPlayer) player).getHandle().connection;
 
     }
 
@@ -203,23 +209,22 @@ public class NPC implements Serializable {
 
     private void removeNPCPacket(Player player) {
 
-        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-        connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getId()));
+        ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
+        connection.send(new ClientboundRemoveEntitiesPacket(npc.getId()));
 
     }
 
     private void addNPCPacket(Player player) {
 
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
-            PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-            connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-            connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-            connection.sendPacket(new PacketPlayOutEntityHeadRotation(npc, (byte) (npc.yaw * 256 / 360)));
+            ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
+            connection.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.ADD_PLAYER, npc));
+            connection.send(new ClientboundAddPlayerPacket(npc));
+            connection.send(new ClientboundRotateHeadPacket(npc, (byte) (npc.getBukkitYaw() * 256 / 360)));
 
-            DataWatcher watcher = npc.getDataWatcher();
-            watcher.set(new DataWatcherObject<>(16, DataWatcherRegistry.a), (byte) 127);
-            connection.sendPacket(new PacketPlayOutEntityMetadata(npc.getId(), watcher, true));
-            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)), 1);
+            SynchedEntityData watcher = npc.getEntityData();
+            connection.send(new ClientboundSetEntityDataPacket(npc.getId(), watcher, true));
+            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.REMOVE_PLAYER, npc)), 1);
         }, 20);
 
     }

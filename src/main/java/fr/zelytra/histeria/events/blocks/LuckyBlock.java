@@ -25,13 +25,12 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;
-import net.minecraft.server.v1_16_R3.EntityPufferFish;
-import net.minecraft.server.v1_16_R3.EntitySpider;
-import net.minecraft.server.v1_16_R3.EntityTypes;
-import net.minecraft.server.v1_16_R3.EntityZombie;
+import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.monster.Spider;
+import net.minecraft.world.entity.monster.Zombie;
 import org.bukkit.*;
 import org.bukkit.block.Barrel;
-import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -257,8 +256,8 @@ public class LuckyBlock implements Listener {
             skull.setOwningPlayer(Bukkit.getOfflinePlayer("Dadodasyra"));
             item.setItemMeta(skull);
 
-            EntityZombie customDado = new EntityZombie(EntityTypes.ZOMBIE, world.getHandle());
-            customDado.setPosition(e.getBlock().getLocation().getX(), e.getBlock().getLocation().getY(),
+            Zombie customDado = new Zombie(net.minecraft.world.entity.EntityType.ZOMBIE, world.getHandle());
+            customDado.setPos(e.getBlock().getLocation().getX(), e.getBlock().getLocation().getY(),
                     e.getBlock().getLocation().getZ());
             ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setBoots(new CustomItemStack(CustomMaterial.NOCTURITE_BOOTS, 1).getItem());
             ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setLeggings(new CustomItemStack(CustomMaterial.NOCTURITE_LEGGINGS, 1).getItem());
@@ -273,7 +272,7 @@ public class LuckyBlock implements Listener {
             ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setHelmetDropChance((float) 0.01);
             ((LivingEntity) customDado.getBukkitEntity()).getEquipment().setItemInMainHandDropChance(0);
 
-            world.getHandle().addEntity(customDado);
+            world.getHandle().addFreshEntity(customDado);
 
         } // Lucky BlockCeption
         else if (rand <= 474) {
@@ -324,9 +323,9 @@ public class LuckyBlock implements Listener {
         else if (rand <= 722) {
             CraftWorld world = (CraftWorld) e.getBlock().getWorld();
             for (int x = 0; x < 3; x++) {
-                EntitySpider spider = new EntitySpider(EntityTypes.CAVE_SPIDER, world.getHandle());
-                spider.setPosition(e.getPlayer().getLocation().getX(), e.getPlayer().getLocation().getY(), e.getPlayer().getLocation().getZ());
-                world.getHandle().addEntity(spider);
+                Spider spider = new Spider(net.minecraft.world.entity.EntityType.CAVE_SPIDER, world.getHandle());
+                spider.setPos(e.getPlayer().getLocation().getX(), e.getPlayer().getLocation().getY(), e.getPlayer().getLocation().getZ());
+                world.getHandle().addFreshEntity(spider);
             }
             WEgenerate(BukkitAdapter.adapt(e.getBlock().getWorld()), "cobweb", e.getPlayer().getLocation().getX(), e.getPlayer().getLocation().getY(), e.getPlayer().getLocation().getZ());
 
@@ -366,10 +365,10 @@ public class LuckyBlock implements Listener {
         } // PufferFish
         else if (rand <= 1000) {
             CraftWorld world = (CraftWorld) e.getBlock().getWorld();
-            EntityPufferFish fish = new EntityPufferFish(EntityTypes.PUFFERFISH, world.getHandle());
+            Pufferfish fish = new Pufferfish(net.minecraft.world.entity.EntityType.PUFFERFISH, world.getHandle());
             ((LivingEntity) fish.getBukkitEntity()).setCustomName("Give me a hug");
-            fish.setPosition(e.getBlock().getLocation().getX(), e.getBlock().getLocation().getY(), e.getBlock().getLocation().getZ());
-            world.getHandle().addEntity(fish);
+            fish.setPos(e.getBlock().getLocation().getX(), e.getBlock().getLocation().getY(), e.getBlock().getLocation().getZ());
+            world.getHandle().addFreshEntity(fish);
 
             e.getPlayer().sendMessage("§dHoooooo so cute... §c§lWAIT WHAT ?!");
         }

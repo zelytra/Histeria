@@ -284,9 +284,8 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.NOCTURITE_CORE);
         shapedRecipeBuilder.register();
 
-        NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "histerite_ore");
-        Bukkit.getServer().addRecipe(new FurnaceRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5,180));
-        Bukkit.getServer().addRecipe(new BlastingRecipe(key, new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(),(float) 1.5, 100));
+        Bukkit.getServer().addRecipe(new FurnaceRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore1"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5,180));
+        Bukkit.getServer().addRecipe(new BlastingRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore2"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(),(float) 1.5, 100));
 
 
     }

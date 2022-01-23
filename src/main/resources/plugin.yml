@@ -16,6 +16,10 @@ commands:
     description: a test command
     permission: histeria.test
 
+  ping:
+    description: Return the ping of the player
+    permission: histeria.ping
+
   server:
     description: Open server selector interface
     permission: histeria.server
@@ -54,10 +58,6 @@ commands:
       - ec
       - enderc
       - echest
-
-  ping:
-    description: Get player ping
-    permission: histeria.ping
 
   craft:
     description: Open a crafting inventory
