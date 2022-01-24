@@ -30,7 +30,7 @@ public class ServerPingListener implements Listener {
             exception.printStackTrace();
         }
 
-        e.setMotd(" §6PvP§e-§6Faction  §3«§b« §a♦ §bHISTERIA §a♦ §b»§3»  §6Vanilla-Modded  §9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*  §adiscord.histeria.fr  §9*§b*§9*§b*§9*§b*§9*§b*§c1.16§b*§9*§b*§9*§b*§9*§b*§9*");
+        e.setMotd(" §6PvP§e-§6Faction  §3«§b« §a♦ §bHISTERIA §a♦ §b»§3»  §6Vanilla-Modded  §9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*§b*§9*  §adiscord.histeria.fr  §9*§b*§9*§b*§9*§b*§9*§b*§c1.18.1§b*§9*§b*§9*§b*§9*§b*§9*");
 
     }
 

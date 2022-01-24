@@ -73,7 +73,6 @@ public class CustomPlayer {
         this.homes = new ArrayList<>();
         this.playedBefore = playedBeforeTask();
 
-
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             /* Init first time */
             if (!playedBefore) {

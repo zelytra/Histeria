@@ -45,7 +45,7 @@ public class SwitchServer {
 
             new PMessage(SubChannel.SERVERS_NAME, player, null);
 
-            if (!Histeria.server.getServersList().contains(serverName)){
+            if (!Histeria.server.getServersList().contains(serverName)) {
                 LangMessage.sendMessage(player, "server.offline");
                 return;
             }
@@ -70,10 +70,11 @@ public class SwitchServer {
             new PMessage(SubChannel.CONNECT, player, args);
 
             Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
+                if (!playerSwitching.contains(player)) return;
                 LangMessage.sendMessage(player, "server.offline");
                 playerSwitching.remove(player);
                 return;
-            },40);
+            }, 40);
 
         });
     }
