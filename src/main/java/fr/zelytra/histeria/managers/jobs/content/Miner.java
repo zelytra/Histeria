@@ -1,16 +1,13 @@
-package fr.zelytra.histeria.managers.jobs;
+package fr.zelytra.histeria.managers.jobs.content;
 
 import fr.zelytra.histeria.managers.jobs.builder.Job;
+import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 
-public class Miner implements Job {
+public class Miner extends Job implements JobInterface  {
 
-    private final int level;
-    private final double xp;
-
-    public Miner(int level,double xp) {
-        this.level = level;
-        this.xp = xp;
+    public Miner(int level,int xp) {
+        super(level,xp);
     }
 
     @Override
@@ -29,17 +26,8 @@ public class Miner implements Job {
     }
 
     @Override
-    public double getXp() {
+    public double getXP() {
         return xp;
     }
 
-    @Override
-    public String getProgression() {
-        return "0%";
-    }
-
-    @Override
-    public boolean consumeXP(double xp) {
-        return false;
-    }
 }

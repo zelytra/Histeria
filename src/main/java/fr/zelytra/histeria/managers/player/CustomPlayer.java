@@ -15,8 +15,13 @@ import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.home.Home;
-import fr.zelytra.histeria.managers.jobs.Miner;
-import fr.zelytra.histeria.managers.jobs.builder.Job;
+import fr.zelytra.histeria.managers.jobs.builder.JobType;
+import fr.zelytra.histeria.managers.jobs.content.Enchanter;
+import fr.zelytra.histeria.managers.jobs.content.Farmer;
+import fr.zelytra.histeria.managers.jobs.content.Fighter;
+import fr.zelytra.histeria.managers.jobs.content.Miner;
+import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
+import fr.zelytra.histeria.managers.jobs.listener.JobUtils;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -64,7 +69,7 @@ public class CustomPlayer {
     private Afk afk;
     private PvP pvp;
     private List<Home> homes;
-    private List<Job> jobs;
+    private List<JobInterface> jobs;
 
     public CustomPlayer(Player player) {
         this.name = player.getName();
@@ -164,6 +169,11 @@ public class CustomPlayer {
                     + formatter.format(date) + "','"
                     + lang.name() + "');");
 
+            jobs.add(new Miner(0, 0));
+            jobs.add(new Farmer(0, 0));
+            jobs.add(new Fighter(0, 0));
+            jobs.add(new Enchanter(0, 0));
+
         }
 
     }
@@ -247,19 +257,31 @@ public class CustomPlayer {
                 }
                 resultSet.close();
 
-                //Load jobs
+                //Load jobInterfaces
                 resultSet = mySQL.query("SELECT * FROM `Jobs` WHERE `uuid` = '" + this.uuid + "' ;");
                 while (resultSet.next()) {
 
                     switch (resultSet.getString("type")) {
-                        
+
                         case "MINER":
                             jobs.add(new Miner(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            break;
+                        case "FARMER":
+                            jobs.add(new Farmer(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            break;
+                        case "ENCHANTER":
+                            jobs.add(new Enchanter(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            break;
+                        case "FIGHTER":
+                            jobs.add(new Fighter(resultSet.getInt("level"), resultSet.getDouble("experience")));
                             break;
 
                     }
 
                 }
+                //Completing job init if already not
+                jobs = JobUtils.completeJobList(jobs);
+
 
                 resultSet.close();
 
@@ -460,12 +482,12 @@ public class CustomPlayer {
 
         //Jobs save data
         mySQL.update("DELETE FROM `Jobs` WHERE `uuid` = '" + this.uuid + "';");
-        for (Job job : jobs) {
+        for (JobInterface jobInterface : jobs) {
             mySQL.update("INSERT IGNORE INTO `Jobs` SET " +
                     "`uuid` = '" + this.uuid +
-                    "' ,`type` = '" + job.getJob().name() +
-                    "' ,`level` = " + job.getLevel() +
-                    " ,`experience` = " + job.getXp() + ";");
+                    "' ,`type` = '" + jobInterface.getJob().name() +
+                    "' ,`level` = " + jobInterface.getLevel() +
+                    " ,`experience` = " + jobInterface.getXP() + ";");
         }
     }
 
@@ -515,6 +537,16 @@ public class CustomPlayer {
 
     public Afk getAfk() {
         return this.afk;
+    }
+
+    public JobInterface getJob(JobType jobType) {
+        System.out.println(jobs.size());
+        for (JobInterface job : jobs) {
+            System.out.println(job.getJob());
+            if (job.getJob() == jobType)
+                return job;
+        }
+        return null;
     }
 
     public boolean wasAFK() {

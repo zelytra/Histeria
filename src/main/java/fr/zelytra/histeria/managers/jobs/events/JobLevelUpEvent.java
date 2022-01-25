@@ -9,8 +9,8 @@
 
 package fr.zelytra.histeria.managers.jobs.events;
 
-import fr.zelytra.histeria.managers.jobs.builder.Job;
-import org.bukkit.entity.Player;
+import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -20,13 +20,13 @@ public class JobLevelUpEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS_LIST = new HandlerList();
     private boolean isCancelled;
 
-    private final Player player;
-    private final Job job;
+    private final CustomPlayer player;
+    private final JobInterface jobInterface;
 
-    public JobLevelUpEvent(Player player, Job job) {
+    public JobLevelUpEvent(CustomPlayer player, JobInterface jobInterface) {
 
         this.player = player;
-        this.job = job;
+        this.jobInterface = jobInterface;
 
     }
 
@@ -49,11 +49,11 @@ public class JobLevelUpEvent extends Event implements Cancellable {
         return HANDLERS_LIST;
     }
 
-    public Player getPlayer() {
+    public CustomPlayer getPlayer() {
         return player;
     }
 
-    public Job getJob() {
-        return job;
+    public JobInterface getJob() {
+        return jobInterface;
     }
 }

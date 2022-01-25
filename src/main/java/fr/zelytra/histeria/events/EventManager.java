@@ -40,6 +40,7 @@ import fr.zelytra.histeria.events.player.*;
 import fr.zelytra.histeria.managers.afk.AfkListener;
 import fr.zelytra.histeria.managers.arena.ArenaListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
 import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
 import fr.zelytra.histeria.managers.logs.listener.OreLogger;
@@ -58,10 +59,8 @@ public class EventManager {
         PluginManager pm = Bukkit.getPluginManager();
 
         /* Player */
-        if (Histeria.synchro) {
-            pm.registerEvents(new PlayerJoinSync(), pl);
-            pm.registerEvents(new PlayerLeftSync(), pl);
-        }
+        pm.registerEvents(new PlayerJoinSync(), pl);
+        pm.registerEvents(new PlayerLeftSync(), pl);
         pm.registerEvents(new PlayerJoinData(), pl);
         pm.registerEvents(new BanListener(), pl);
         pm.registerEvents(new PlayerDeathListener(), pl);
@@ -144,6 +143,9 @@ public class EventManager {
         pm.registerEvents(new FlyDetector(), pl);
         pm.registerEvents(new ClickLogger(), pl);
         pm.registerEvents(new XRayDetector(), pl);
+
+        /* Jobs */
+        pm.registerEvents(new MinerListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
