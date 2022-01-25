@@ -51,7 +51,7 @@ CREATE TABLE `Player`
     UNIQUE KEY `Player_id_uindex` (`id`),
     UNIQUE KEY `Player_uuid_uindex` (`uuid`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 6
+  AUTO_INCREMENT = 0
   DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Shop`
@@ -64,7 +64,7 @@ CREATE TABLE `Shop`
     `buyPrice`  int(11)      NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 297
+  AUTO_INCREMENT = 0
   DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE `Home`
@@ -87,8 +87,19 @@ CREATE TABLE `Kit`
     `cooldown` mediumtext NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 265
-  DEFAULT CHARSET = utf8mb4
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `Jobs`
+(
+    `uuid`       varchar(40) NOT NULL,
+    `type`       varchar(15) NOT NULL,
+    `level`      int(11)     NOT NULL DEFAULT 0,
+    `experience` double      NOT NULL DEFAULT 0
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
+
+
 
 
 

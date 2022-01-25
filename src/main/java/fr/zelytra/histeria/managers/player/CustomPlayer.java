@@ -15,6 +15,8 @@ import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.home.Home;
+import fr.zelytra.histeria.managers.jobs.Miner;
+import fr.zelytra.histeria.managers.jobs.builder.Job;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -62,6 +64,7 @@ public class CustomPlayer {
     private Afk afk;
     private PvP pvp;
     private List<Home> homes;
+    private List<Job> jobs;
 
     public CustomPlayer(Player player) {
         this.name = player.getName();
@@ -71,6 +74,7 @@ public class CustomPlayer {
         this.afk = new Afk(player);
         this.pvp = new PvP(this);
         this.homes = new ArrayList<>();
+        this.jobs = new ArrayList<>();
         this.playedBefore = playedBeforeTask();
 
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
@@ -241,6 +245,22 @@ public class CustomPlayer {
                     this.homes.add(new Home(this, location, resultSet.getString("server"), resultSet.getString("name"), resultSet.getString("world")));
 
                 }
+                resultSet.close();
+
+                //Load jobs
+                resultSet = mySQL.query("SELECT * FROM `Jobs` WHERE `uuid` = '" + this.uuid + "' ;");
+                while (resultSet.next()) {
+
+                    switch (resultSet.getString("type")) {
+                        
+                        case "MINER":
+                            jobs.add(new Miner(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            break;
+
+                    }
+
+                }
+
                 resultSet.close();
 
 
@@ -436,6 +456,16 @@ public class CustomPlayer {
                     " ,`z` = " + home.getLocation().getZ() +
                     " ,`world` = '" + home.getLocation().getWorld().getName() +
                     "' ,`server` = '" + home.getServerName() + "' ;");
+        }
+
+        //Jobs save data
+        mySQL.update("DELETE FROM `Jobs` WHERE `uuid` = '" + this.uuid + "';");
+        for (Job job : jobs) {
+            mySQL.update("INSERT IGNORE INTO `Jobs` SET " +
+                    "`uuid` = '" + this.uuid +
+                    "' ,`type` = '" + job.getJob().name() +
+                    "' ,`level` = " + job.getLevel() +
+                    " ,`experience` = " + job.getXp() + ";");
         }
     }
 

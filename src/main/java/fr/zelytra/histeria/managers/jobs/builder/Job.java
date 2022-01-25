@@ -1,30 +1,25 @@
+/*
+ * Copyright (c) 2022.
+ * Made by Zelytra :
+ *  - Website : https://zelytra.fr
+ *  - GitHub : http://github.zelytra.fr
+ *
+ * All right reserved
+ */
+
 package fr.zelytra.histeria.managers.jobs.builder;
 
-public class Job {
+public interface Job {
 
-    private final int level;
-    private final double xp;
+    JobType getJob();
 
-    public Job() {
-        this.level = 0;
-        this.xp = 0;
-    }
+    int getLevel();
 
-    public int getLevel() {
-        return level;
-    }
+    double getXp();
 
-    public double getXp() {
-        return xp;
-    }
+    String getProgression();
 
-    public String getProgression(){
-        //TODO calculation
-        return "0%";
-    }
+    boolean consumeXP(double xp);
 
-    public boolean consumeXP(double xp){
-        //TODO Handle level up and cp calculation
-        return false;
-    }
+
 }
