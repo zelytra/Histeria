@@ -38,10 +38,10 @@ public class Miner extends Job implements JobInterface {
     public VisualItemStack getItemMenu() {
         VisualItemStack visualItem = new VisualItemStack(CustomMaterial.BADGE_MINER, "§6Miner", level == 100,
                 "§6Level §e" + level,
-                "§6XP: §e" + xp,
+                "§6XP: §e" + formatBigNumber(xp),
                 "",
                 "§6XP remaining before level §6UP:",
-                "§e" + ExperienceMath.getXpRemaining(level, xp),
+                "§e" + formatBigNumber(ExperienceMath.getXpRemaining(level, xp)),
                 "",
                 "§6Total progression: §e" + getProgression()
         );

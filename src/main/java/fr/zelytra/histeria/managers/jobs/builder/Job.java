@@ -5,8 +5,11 @@ import fr.zelytra.histeria.managers.jobs.utils.ExperienceMath;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.Bukkit;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Job {
 
@@ -28,6 +31,11 @@ public class Job {
         return formatter.format(progression) + "%";
     }
 
+    /**
+     * @param xp     given consume by the job
+     * @param player The custom player to link the level up event
+     * @return true when xp has been consume, and false when not consume or reached max level
+     */
     public boolean consumeXP(double xp, CustomPlayer player) {
         if (level >= 100) return false;
         this.xp += xp;
@@ -41,6 +49,16 @@ public class Job {
 
         }
         return true;
+    }
+
+    public String formatBigNumber(int value) {
+        BigDecimal bd = new BigDecimal(value);
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(' ');
+        formatter.setDecimalFormatSymbols(symbols);
+        return formatter.format(bd.longValue());
     }
 
     @Override
