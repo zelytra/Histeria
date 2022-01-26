@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class MinerListener implements Listener {
 
-    private static final HashMap<Material, Double> xpMap = new HashMap<>();
+    private static final HashMap<Material, Integer> xpMap = new HashMap<>();
 
     {
         xpMap.put(Material.STONE, 1);

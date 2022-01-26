@@ -1,0 +1,369 @@
+default:
+  item1:
+    material: CARVED_PUMPKIN
+    amount: 1
+  item2:
+    material:
+  item3:
+    material:
+  item4:
+    material:
+  item5:
+    material: STONE_SWORD
+    amount: 1
+  item6:
+    material: STONE_AXE
+    amount: 1
+  item7:
+    material: STONE_PICKAXE
+    amount: 1
+  item8:
+    material: COOKED_BEEF
+    amount: 16
+  item9:
+    material: TORCH
+    amount: 32
+
+vote:
+  item1:
+    material: IRON_HELMET
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item2:
+    material: DIAMOND_CHESTPLATE
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 1
+  item3:
+    material: IRON_LEGGINGS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item4:
+    material: IRON_BOOTS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+  item5:
+    material: IRON_SWORD
+    amount: 1
+    enchant:
+      type: DAMAGE_ALL
+      level: 2
+  item6:
+    material: DIAMOND_PICKAXE
+    amount: 1
+  item7:
+    material: COOKED_BEEF
+    amount: 32
+  item8:
+    material: TORCH
+    amount: 64
+  item9:
+    material:
+  item10:
+    material: HONEYCOMB_BLOCK
+    amount: 1
+  item11:
+    material: GOLDEN_APPLE
+    amount: 1
+  item12:
+    material: VOTE_KEY
+    amount: 1
+
+lord:
+
+  item1:
+    material: DIAMOND_HELMET
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+
+  item2:
+    material: DIAMOND_CHESTPLATE
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+
+  item3:
+    material: DIAMOND_LEGGINGS
+    amount: 1
+    luck: 4.5
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+
+  item4:
+    material: DIAMOND_BOOTS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 2
+
+  item5:
+    material: DIAMOND_SWORD
+    amount: 1
+    enchant:
+      type: DAMAGE_ALL
+      level: 2
+
+  item6:
+    material: DIAMOND_PICKAXE
+    amount: 1
+    enchant:
+      type: DIG_SPEED
+      level: 2
+
+  item7:
+    material: COOKED_BEEF
+    amount: 64
+
+  item8:
+    material: histerite_apple
+    amount: 2
+
+  item9:
+    material:
+
+  item10:
+    material: HONEYCOMB_BLOCK
+    amount: 8
+
+  item11:
+    material: IRON_INGOT
+    amount: 32
+
+  item12:
+    material: DIAMOND
+    amount: 16
+
+  item14:
+    material: histerite_ingot
+    amount: 4
+
+  item15:
+    material:
+
+  item16:
+    material: healstick
+    amount: 2
+
+  item17:
+    material: jumpstick
+    amount: 2
+
+  item18:
+    material: speedstick
+    amount: 2
+
+  item19:
+    material: diamond_key
+    amount: 1
+
+monarch:
+
+  item1:
+    material: DIAMOND_HELMET
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 3
+
+  item2:
+    material: histerite_chestplate
+    amount: 1
+    enchant:
+      enchant1:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+      enchant2:
+        type: DURABILITY
+        level: 1
+
+  item3:
+    material: DIAMOND_LEGGINGS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 3
+
+  item4:
+    material: histerite_boots
+    amount: 1
+    enchant:
+      enchant1:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 1
+      enchant2:
+        type: DURABILITY
+        level: 1
+
+  item5:
+    material: DIAMOND_SWORD
+    amount: 1
+    enchant:
+      type: DAMAGE_ALL
+      level: 4
+
+  item6:
+    material: NETHERITE_PICKAXE
+    amount: 1
+    enchant:
+      type: DIG_SPEED
+      level: 2
+
+  item7:
+    material: COOKED_BEEF
+    amount: 64
+
+  item8:
+    material: histerite_apple
+    amount: 4
+
+  item9:
+    material:
+
+  item10:
+    material: HONEYCOMB_BLOCK
+    amount: 16
+
+  item11:
+    material: IRON_INGOT
+    amount: 64
+
+  item12:
+    material: DIAMOND
+    amount: 32
+
+  item14:
+    material: histerite_ingot
+    amount: 8
+
+  item15:
+    material:
+
+  item16:
+    material: healstick
+    amount: 4
+
+  item17:
+    material: jumpstick
+    amount: 4
+
+  item18:
+    material: speedstick
+    amount: 4
+
+  item19:
+    material: histerite_key
+    amount: 1
+
+demigod:
+
+  item1:
+    material: DIAMOND_HELMET
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 4
+
+  item2:
+    material: histerite_chestplate
+    amount: 1
+    enchant:
+      enchant1:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      enchant2:
+        type: DURABILITY
+        level: 2
+
+  item3:
+    material: DIAMOND_LEGGINGS
+    amount: 1
+    enchant:
+      type: PROTECTION_ENVIRONMENTAL
+      level: 4
+
+  item4:
+    material: histerite_boots
+    amount: 1
+    enchant:
+      enchant1:
+        type: PROTECTION_ENVIRONMENTAL
+        level: 2
+      enchant2:
+        type: DURABILITY
+        level: 2
+
+  item5:
+    material: NETHERITE_SWORD
+    amount: 1
+    enchant:
+      type: DAMAGE_ALL
+      level: 4
+
+  item6:
+    material: NETHERITE_PICKAXE
+    amount: 1
+    enchant:
+      type: DIG_SPEED
+      level: 3
+
+  item7:
+    material: COOKED_BEEF
+    amount: 64
+
+  item8:
+    material: histerite_apple
+    amount: 8
+
+  item9:
+    material:
+
+  item10:
+    material: HONEYCOMB_BLOCK
+    amount: 32
+
+  item11:
+    material: IRON_INGOT
+    amount: 64
+
+  item12:
+    material: DIAMOND
+    amount: 64
+
+  item13:
+    material: histerite_ingot
+    amount: 16
+
+  item14:
+    material: nocturite_nugget
+    amount: 1
+
+  item15:
+    material: LODESTONE
+    amount: 16
+
+  item16:
+    material: healstick
+    amount: 8
+
+  item17:
+    material: jumpstick
+    amount: 8
+
+  item18:
+    material: speedstick
+    amount: 8
+
+  item19:
+    material: nocturite_key
+    amount: 1

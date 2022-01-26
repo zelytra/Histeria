@@ -1,0 +1,155 @@
+item1:
+  material: OAK_WOOD
+  amount: 64
+  luck: 6
+item2:
+  material: TURTLE_HELMET
+  amount: 1
+  luck: 6
+item3:
+  material: ANVIL
+  amount: 3
+  luck: 6
+item4:
+  material: SHURIKEN
+  amount: 5
+  luck: 6
+item5:
+  material: IRON_INGOT
+  amount: 32
+  luck: 5
+item6:
+  material: ENCHANTED_BOOK
+  amount: 1
+  luck: 5
+  enchant:
+    type: DURABILITY
+    level: 1
+item7:
+  material: ENDER_PEARL
+  amount: 8
+  luck: 5
+item8:
+  material: COOKED_BEEF
+  amount: 16
+  luck: 5
+item9:
+  material: HISTERITE_STICK
+  amount: 2
+  luck: 5
+item10:
+  material: DIAMOND
+  amount: 5
+  luck: 4
+item11:
+  material: TOTEM_OF_UNDYING
+  amount: 1
+  luck: 4
+item12:
+  material: HEALSTICK
+  amount: 3
+  luck: 4
+item13:
+  material: SPEEDSTICK
+  amount: 3
+  luck: 4
+item14:
+  material: JUMPSTICK
+  amount: 3
+  luck: 4
+item15:
+  material: BUBBLEWAND
+  amount: 2
+  luck: 4
+item16:
+  material: ENCHANTED_BOOK
+  amount: 1
+  luck: 3.5
+  enchant:
+    type: PROTECTION_ENVIRONMENTAL
+    level: 2
+item17:
+  material: DYNAMITE
+  amount: 4
+  luck: 3.5
+item18:
+  material: EXPERIENCE_BOTTLE
+  amount: 32
+  luck: 3.5
+item19:
+  material: LUCKY_BLOCK
+  amount: 4
+  luck: 2.3
+item20:
+  material: COMPRESS_COBBLESTONE
+  amount: 64
+  luck: 1.5
+item21:
+  material: HISTERITE_NUGGET
+  amount: 9
+  luck: 1.5
+item22:
+  material: HISTERITE_APPLE
+  amount: 2
+  luck: 1.5
+item23:
+  material: ENCHANTED_BOOK
+  amount: 1
+  luck: 1.5
+  enchant:
+    type: PROTECTION_ENVIRONMENTAL
+    level: 3
+item24:
+  material: GOLDEN_APPLE
+  amount: 16
+  luck: 1
+item25:
+  material: OBSIDIAN_BREAKER
+  amount: 3
+  luck: 1
+item26:
+  material: CHEST_EXPLORER
+  amount: 2
+  luck: 1
+item27:
+  material: DIAMOND_PICKAXE
+  amount: 1
+  luck: 1
+  enchant:
+    enchant1:
+      type: DIG_SPEED
+      level: 3
+    enchant2:
+      type: DURABILITY
+      level: 2
+item28:
+  material: HISTERITE_SWORD
+  amount: 1
+  luck: 1
+  enchant:
+    type: DAMAGE_ALL
+    level: 2
+item29:
+  material: NETHERITE_SCRAP
+  amount: 2
+  luck: 1
+item30:
+  material: REINFORCED_OBSIDIAN
+  amount: 3
+  luck: 1
+item31:
+  material: VOTE_KEY
+  amount: 1
+  luck: 1
+item32:
+  material: LOTTERY_TICKET
+  amount: 1
+  luck: 0.1
+item33:
+  material: NOCTURITE_NUGGET
+  amount: 1
+  luck: 0.1
+item34:
+  material: NETHERITE_INGOT
+  amount: 1
+  luck: 0.1
