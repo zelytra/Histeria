@@ -1,14 +1,20 @@
 package fr.zelytra.histeria.managers.jobs.listener;
 
+import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.content.Miner;
 import fr.zelytra.histeria.managers.jobs.utils.JobUtils;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 
@@ -32,6 +38,13 @@ public class MinerListener implements Listener {
 
         if (!xpMap.containsKey(e.getBlock().getType())) return;
 
+        // Block logger checker (to avoid player abuse place and break abuse for infinite xp)
+        PersistentDataContainer chunkData = e.getBlock().getChunk().getPersistentDataContainer();
+        if (chunkData.has(generateLocKey(e.getBlock().getLocation()))) {
+            chunkData.remove(generateLocKey(e.getBlock().getLocation()));
+            return;
+        }
+
         CustomPlayer player = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
         if (player == null) return;
 
@@ -41,6 +54,24 @@ public class MinerListener implements Listener {
         job.consumeXP(xp, player);
         JobUtils.displayXP(job.getJob(), player, xp);
 
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) {
+
+        if (!xpMap.containsKey(e.getBlock().getType())) return;
+
+        PersistentDataContainer chunkData = e.getBlock().getChunk().getPersistentDataContainer();
+
+        if (chunkData.has(generateLocKey(e.getBlock().getLocation()))) return;
+
+        chunkData.set(generateLocKey(e.getBlock().getLocation()), PersistentDataType.STRING, "jobBlockLogs");
+
+
+    }
+
+    private NamespacedKey generateLocKey(Location location) {
+        return new NamespacedKey(Histeria.getInstance(), location.getBlockX() + "_" + location.getBlockY() + "_" + location.getBlockZ());
     }
 
 
