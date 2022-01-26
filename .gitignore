@@ -113,3 +113,4 @@ buildNumber.properties
 run/
 src/main/resources/server.yml
 .gradle/
+/build/
