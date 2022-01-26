@@ -19,7 +19,7 @@ public class MinerListener implements Listener {
     {
         xpMap.put(Material.STONE, 1.0);
         xpMap.put(Material.COAL_ORE, 10.0);
-        xpMap.put(Material.IRON_ORE, 10000.0);
+        xpMap.put(Material.IRON_ORE, 100000.0);
         xpMap.put(Material.GOLD_ORE, 2.0);
         xpMap.put(Material.DIAMOND_ORE, 2.0);
         xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2.0);

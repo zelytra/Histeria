@@ -38,7 +38,7 @@ public class Enchanter extends Job implements JobInterface {
     @Override
     public VisualItemStack getItemMenu() {
         VisualItemStack visualItem = new VisualItemStack(CustomMaterial.BADGE_ENCHANTER, "§6Enchanter", level == 100,
-                "§6Level " + level,
+                "§6Level §e" + level,
                 "§6XP: §e" + xp,
                 "",
                 "§6XP remaining before level §6UP:",

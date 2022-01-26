@@ -38,7 +38,7 @@ public class Fighter extends Job implements JobInterface {
     @Override
     public VisualItemStack getItemMenu() {
         VisualItemStack visualItem = new VisualItemStack(CustomMaterial.BADGE_FIGHTER, "§6Fighter", level == 100,
-                "§6Level " + level,
+                "§6Level §e" + level,
                 "§6XP: §e" + xp,
                 "",
                 "§6XP remaining before level §6UP:",

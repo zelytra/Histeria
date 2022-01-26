@@ -13,6 +13,8 @@ public abstract class ExperienceMath {
 
     /**
      * All Experience calculation constant
+     * Check this desmos graph for adjusting constant and create a good balenced system
+     * https://www.desmos.com/calculator/7qbvhieqtb
      */
     private static int xp_0_to_1 = 100;
     private static int xp_99_to_100 = 170000;
