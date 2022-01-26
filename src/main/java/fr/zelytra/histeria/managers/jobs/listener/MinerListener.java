@@ -23,14 +23,14 @@ public class MinerListener implements Listener {
     private static final HashMap<Material, Double> xpMap = new HashMap<>();
 
     {
-        xpMap.put(Material.STONE, 1.0);
-        xpMap.put(Material.COAL_ORE, 10.0);
-        xpMap.put(Material.IRON_ORE, 100000.0);
-        xpMap.put(Material.GOLD_ORE, 2.0);
-        xpMap.put(Material.DIAMOND_ORE, 2.0);
-        xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2.0);
-        xpMap.put(Material.EMERALD_ORE, 2.0);
-        xpMap.put(Material.ANCIENT_DEBRIS, 2.0);
+        xpMap.put(Material.STONE, 1);
+        xpMap.put(Material.COAL_ORE, 10);
+        xpMap.put(Material.IRON_ORE, 100000);
+        xpMap.put(Material.GOLD_ORE, 2);
+        xpMap.put(Material.DIAMOND_ORE, 2);
+        xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2);
+        xpMap.put(Material.EMERALD_ORE, 2);
+        xpMap.put(Material.ANCIENT_DEBRIS, 2);
     }
 
     @EventHandler
