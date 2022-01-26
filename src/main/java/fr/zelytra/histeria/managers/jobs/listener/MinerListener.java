@@ -29,7 +29,7 @@ public class MinerListener implements Listener {
         xpMap.put(Material.GOLD_ORE, 2);
         xpMap.put(Material.DIAMOND_ORE, 2);
         xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2);
-        xpMap.put(Material.EMERALD_ORE, 2);
+        xpMap.put(Material.EMERALD_ORE, 200);
         xpMap.put(Material.ANCIENT_DEBRIS, 2);
     }
 
