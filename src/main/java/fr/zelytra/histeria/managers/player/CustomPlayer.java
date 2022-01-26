@@ -15,13 +15,13 @@ import fr.zelytra.histeria.commands.moderation.Mute.Mute;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.economy.Bank;
 import fr.zelytra.histeria.managers.home.Home;
+import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.content.Enchanter;
 import fr.zelytra.histeria.managers.jobs.content.Farmer;
 import fr.zelytra.histeria.managers.jobs.content.Fighter;
 import fr.zelytra.histeria.managers.jobs.content.Miner;
-import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
-import fr.zelytra.histeria.managers.jobs.listener.JobUtils;
+import fr.zelytra.histeria.managers.jobs.utils.JobUtils;
 import fr.zelytra.histeria.managers.languages.Lang;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -264,16 +264,16 @@ public class CustomPlayer {
                     switch (resultSet.getString("type")) {
 
                         case "MINER":
-                            jobs.add(new Miner(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            jobs.add(new Miner(resultSet.getInt("level"), resultSet.getInt("experience")));
                             break;
                         case "FARMER":
-                            jobs.add(new Farmer(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            jobs.add(new Farmer(resultSet.getInt("level"), resultSet.getInt("experience")));
                             break;
                         case "ENCHANTER":
-                            jobs.add(new Enchanter(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            jobs.add(new Enchanter(resultSet.getInt("level"), resultSet.getInt("experience")));
                             break;
                         case "FIGHTER":
-                            jobs.add(new Fighter(resultSet.getInt("level"), resultSet.getDouble("experience")));
+                            jobs.add(new Fighter(resultSet.getInt("level"), resultSet.getInt("experience")));
                             break;
 
                     }
@@ -281,8 +281,6 @@ public class CustomPlayer {
                 }
                 //Completing job init if already not
                 jobs = JobUtils.completeJobList(jobs);
-
-
                 resultSet.close();
 
 
@@ -540,12 +538,10 @@ public class CustomPlayer {
     }
 
     public JobInterface getJob(JobType jobType) {
-        System.out.println(jobs.size());
-        for (JobInterface job : jobs) {
-            System.out.println(job.getJob());
+        for (JobInterface job : jobs)
             if (job.getJob() == jobType)
                 return job;
-        }
+
         return null;
     }
 

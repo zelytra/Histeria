@@ -86,7 +86,13 @@ public enum CustomMaterial {
     PREVIOUS_ARROW("§bPrevious","previous_arrow",43, Material.BAKED_POTATO, ItemType.SPECIAL),
     SELL_BUTTON("§aSell","sell_button",44, Material.COOKED_MUTTON, ItemType.SPECIAL),
     BUY_BUTTON("§aBuy","buy_button",45, Material.MUTTON, ItemType.SPECIAL),
-    VALIDAY("§aConfirm","validay",46, Material.SLIME_BALL, ItemType.SPECIAL);
+    VALIDAY("§aConfirm","validay",46, Material.SLIME_BALL, ItemType.SPECIAL),
+
+    BADGE_MINER("§6Miner","miner_badge",47, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FARMER("§6Farmer","farmer_badge",48, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FIGHTER("§6Miner","fighter_badge",49, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_ENCHANTER("§6Miner","miner_badge",50, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    ;
 
 
     private String displayName;

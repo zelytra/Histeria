@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.managers.jobs.builder;
 
+import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import org.bukkit.inventory.ItemStack;
 
 public interface JobInterface {
@@ -19,7 +20,7 @@ public interface JobInterface {
 
     double getXP();
 
-    ItemStack[] getMenuContent();
+    VisualItemStack getItemMenu();
 
     ItemStack[] getProgressionContent();
 

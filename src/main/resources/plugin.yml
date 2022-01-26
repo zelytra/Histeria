@@ -295,3 +295,7 @@ commands:
   admin:
     description: Change player status between player and admin
     permission: histeria.admin
+
+  job:
+    description: Open job detail menu
+    permission: histeria.job

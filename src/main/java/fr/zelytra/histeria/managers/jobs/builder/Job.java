@@ -1,7 +1,7 @@
 package fr.zelytra.histeria.managers.jobs.builder;
 
 import fr.zelytra.histeria.managers.jobs.events.JobLevelUpEvent;
-import fr.zelytra.histeria.managers.jobs.listener.JobUtils;
+import fr.zelytra.histeria.managers.jobs.utils.ExperienceMath;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.Bukkit;
 
@@ -19,8 +19,9 @@ public class Job {
     }
 
     public String getProgression() {
-        int totalXP = JobUtils.getRecursiveXpFromLevel(100);
-        double progression = (100 * xp) / totalXP;
+        int totalXP = ExperienceMath.getRecursiveXpFromLevel(100);
+        System.out.println(totalXP);
+        double progression = (100.0 * xp) / totalXP;
 
         String format = "0.00";
         NumberFormat formatter = new DecimalFormat(format);
@@ -30,7 +31,7 @@ public class Job {
 
     public void consumeXP(double xp, CustomPlayer player) {
         this.xp += xp;
-        int newLevel = JobUtils.getLevelFromXp(this.xp);
+        int newLevel = ExperienceMath.getLevelFromXp(this.xp);
 
         if (level != newLevel) {
             level = newLevel;
@@ -39,8 +40,6 @@ public class Job {
             Bukkit.getPluginManager().callEvent(jobLevelUpEvent);
 
         }
-
-
     }
 
     @Override

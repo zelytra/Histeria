@@ -3,6 +3,7 @@ package fr.zelytra.histeria.managers.jobs.listener;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.content.Miner;
+import fr.zelytra.histeria.managers.jobs.utils.JobUtils;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -18,7 +19,7 @@ public class MinerListener implements Listener {
     {
         xpMap.put(Material.STONE, 1.0);
         xpMap.put(Material.COAL_ORE, 10.0);
-        xpMap.put(Material.IRON_ORE, 2.0);
+        xpMap.put(Material.IRON_ORE, 10000.0);
         xpMap.put(Material.GOLD_ORE, 2.0);
         xpMap.put(Material.DIAMOND_ORE, 2.0);
         xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2.0);

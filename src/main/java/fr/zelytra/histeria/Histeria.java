@@ -68,6 +68,7 @@ import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
 import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
+import fr.zelytra.histeria.managers.jobs.command.JobCommand;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
@@ -112,7 +113,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v3.0";
+    public static String version = "v3.0.1";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -321,6 +322,9 @@ public final class Histeria extends JavaPlugin {
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("unmute").setExecutor(new UnMuteCommand());
         getCommand("unmute").setTabCompleter(new UnMuteTab());
+
+        /* Job */
+        getCommand("job").setExecutor(new JobCommand());
 
     }
 

@@ -95,7 +95,7 @@ CREATE TABLE `Jobs`
     `uuid`       varchar(40) NOT NULL,
     `type`       varchar(15) NOT NULL,
     `level`      int(11)     NOT NULL DEFAULT 0,
-    `experience` double      NOT NULL DEFAULT 0
+    `experience` int(11)      NOT NULL DEFAULT 0
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
 

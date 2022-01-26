@@ -40,6 +40,7 @@ import fr.zelytra.histeria.events.player.*;
 import fr.zelytra.histeria.managers.afk.AfkListener;
 import fr.zelytra.histeria.managers.arena.ArenaListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
+import fr.zelytra.histeria.managers.jobs.listener.LevelUpListener;
 import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import fr.zelytra.histeria.managers.logs.listener.CommandLogger;
 import fr.zelytra.histeria.managers.logs.listener.ErrorLogger;
@@ -146,6 +147,7 @@ public class EventManager {
 
         /* Jobs */
         pm.registerEvents(new MinerListener(), pl);
+        pm.registerEvents(new LevelUpListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
