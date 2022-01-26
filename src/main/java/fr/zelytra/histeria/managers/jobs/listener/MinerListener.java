@@ -51,8 +51,8 @@ public class MinerListener implements Listener {
         Miner job = (Miner) player.getJob(JobType.MINER);
         double xp = xpMap.get(e.getBlock().getType());
 
-        job.consumeXP(xp, player);
-        JobUtils.displayXP(job.getJob(), player, xp);
+        if (job.consumeXP(xp, player))
+            JobUtils.displayXP(job.getJob(), player, xp);
 
     }
 

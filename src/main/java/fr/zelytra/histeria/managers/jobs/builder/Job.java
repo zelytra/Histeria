@@ -20,7 +20,6 @@ public class Job {
 
     public String getProgression() {
         int totalXP = ExperienceMath.getRecursiveXpFromLevel(100);
-        System.out.println(totalXP);
         double progression = (100.0 * xp) / totalXP;
 
         String format = "0.00";
@@ -29,7 +28,8 @@ public class Job {
         return formatter.format(progression) + "%";
     }
 
-    public void consumeXP(double xp, CustomPlayer player) {
+    public boolean consumeXP(double xp, CustomPlayer player) {
+        if (level >= 100) return false;
         this.xp += xp;
         int newLevel = ExperienceMath.getLevelFromXp(this.xp);
 
@@ -40,6 +40,7 @@ public class Job {
             Bukkit.getPluginManager().callEvent(jobLevelUpEvent);
 
         }
+        return true;
     }
 
     @Override
