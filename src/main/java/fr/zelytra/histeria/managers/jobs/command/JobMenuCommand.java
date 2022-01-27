@@ -12,6 +12,7 @@ package fr.zelytra.histeria.managers.jobs.command;
 import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
+import fr.zelytra.histeria.managers.jobs.visual.JobPage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,7 +21,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class JobCommand implements CommandExecutor {
+public class JobMenuCommand implements CommandExecutor {
+
+    public static String menuName = "§6Jobs: ";
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -29,7 +32,7 @@ public class JobCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        InterfaceBuilder interfaceBuilder = new InterfaceBuilder(9, "§6Jobs Menu");
+        InterfaceBuilder interfaceBuilder = new InterfaceBuilder(9, menuName + JobPage.MENU.pageName);
         interfaceBuilder.setContent(getMenuContent(CustomPlayer.getCustomPlayer(player.getName())));
         interfaceBuilder.open(player);
 

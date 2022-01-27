@@ -6,7 +6,7 @@ import fr.zelytra.histeria.managers.jobs.builder.Job;
 import fr.zelytra.histeria.managers.jobs.builder.JobInterface;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.utils.ExperienceMath;
-import org.bukkit.inventory.ItemStack;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 
 public class Fighter extends Job implements JobInterface {
 
@@ -50,7 +50,12 @@ public class Fighter extends Job implements JobInterface {
     }
 
     @Override
-    public ItemStack[] getProgressionContent() {
-        return new ItemStack[0];
+    public void executeReward(CustomPlayer player) {
+
+    }
+
+    @Override
+    public String getReward(int level) {
+        return null;
     }
 }

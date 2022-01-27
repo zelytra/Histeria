@@ -10,7 +10,7 @@
 package fr.zelytra.histeria.managers.jobs.builder;
 
 import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
-import org.bukkit.inventory.ItemStack;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 
 public interface JobInterface {
 
@@ -22,6 +22,8 @@ public interface JobInterface {
 
     VisualItemStack getItemMenu();
 
-    ItemStack[] getProgressionContent();
+    void executeReward(CustomPlayer player);
+
+    String getReward(int level);
 
 }

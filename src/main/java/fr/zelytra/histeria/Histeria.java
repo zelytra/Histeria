@@ -68,7 +68,7 @@ import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
 import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
-import fr.zelytra.histeria.managers.jobs.command.JobCommand;
+import fr.zelytra.histeria.managers.jobs.command.JobMenuCommand;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.managers.logs.Logs;
@@ -324,7 +324,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("unmute").setTabCompleter(new UnMuteTab());
 
         /* Job */
-        getCommand("job").setExecutor(new JobCommand());
+        getCommand("job").setExecutor(new JobMenuCommand());
 
     }
 

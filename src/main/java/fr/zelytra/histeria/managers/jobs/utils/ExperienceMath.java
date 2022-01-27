@@ -13,11 +13,11 @@ public abstract class ExperienceMath {
 
     /**
      * All Experience calculation constant
-     * Check this desmos graph for adjusting constant and create a good balenced system
+     * Check this Desmos graph for adjusting constant and create a good balanced system
      * https://www.desmos.com/calculator/7qbvhieqtb
      */
-    private static int xp_0_to_1 = 100;
-    private static int xp_99_to_100 = 170000;
+    private static int xp_0_to_1 = 500;
+    private static int xp_99_to_100 = 140000;
     private static double a = Math.pow(xp_99_to_100 / xp_0_to_1, 1 / 99f);
 
     /**

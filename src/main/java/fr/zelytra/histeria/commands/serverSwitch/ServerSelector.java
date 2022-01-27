@@ -44,9 +44,9 @@ public class ServerSelector implements CommandExecutor, Interface, Listener {
         content[0] = new VisualItemStack(CustomMaterial.HISTERITE_CRYSTAL, "§7Beta", false).getItem();
         content[1] = VisualType.BLANK_BLUE_GLASSE.getItem();
         content[2] = new VisualItemStack(Material.NETHERITE_BLOCK, "§cNether", false).getItem();
-        content[3] = new VisualItemStack(CustomMaterial.HISTERITE_SWORD, "§4Arena", false).getItem();
-        content[4] = new VisualItemStack(CustomMaterial.UNCLAIM_FINDER, "§bFaction", false).getItem();
-        content[5] = new VisualItemStack(CustomMaterial.HISTERITE_PICKAXE, "§6Mining", false).getItem();
+        content[3] = new VisualItemStack(CustomMaterial.HISTERITE_SWORD, "§4Arena", false,"").getItem();
+        content[4] = new VisualItemStack(CustomMaterial.UNCLAIM_FINDER, "§bFaction", false,"").getItem();
+        content[5] = new VisualItemStack(CustomMaterial.HISTERITE_PICKAXE, "§6Mining", false,"").getItem();
         content[6] = new VisualItemStack(Material.GRASS_BLOCK, "§9Build", false).getItem();
         content[7] = VisualType.BLANK_BLUE_GLASSE.getItem();
         content[8] = new VisualItemStack(Material.DRAGON_EGG, "§5Dragon", false).getItem();
