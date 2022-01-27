@@ -20,8 +20,8 @@ import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.utils.Message;
-import fr.zelytra.histeria.utils.timer.TimeFormater;
 import fr.zelytra.histeria.utils.Utils;
+import fr.zelytra.histeria.utils.timer.TimeFormater;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -199,7 +199,7 @@ public class KitCommand implements CommandExecutor, Listener {
                 return;
             }
 
-            if(Utils.getEmptySlots(player)<=new Kit(kitEnum).getItemList().size()){
+            if (Utils.getEmptySlots(player) <= new Kit(kitEnum).getItemList().size()) {
                 LangMessage.sendMessage(player, "miscellaneous.notEnoughSpace");
                 return;
             }
