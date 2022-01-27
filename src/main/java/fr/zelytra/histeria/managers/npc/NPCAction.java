@@ -6,6 +6,7 @@ public enum NPCAction {
     SERVER,
     TELEPORT,
     SHOP,
+    JOB,
     HMARKET;
 
     public static NPCAction getByName(String name) {

@@ -199,6 +199,11 @@ public class KitCommand implements CommandExecutor, Listener {
                 return;
             }
 
+            if(Utils.getEmptySlots(player)<=new Kit(kitEnum).getItemList().size()){
+                LangMessage.sendMessage(player, "miscellaneous.notEnoughSpace");
+                return;
+            }
+
             int time = getClaimDelta(player, kitEnum);
             if (!Utils.canByPass(player) && time < kitEnum.getCoolDown()) {
                 LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "kit.coolDown", TimeFormater.display(kitEnum.getCoolDown() - time));

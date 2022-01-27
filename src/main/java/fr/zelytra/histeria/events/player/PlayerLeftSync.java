@@ -33,6 +33,7 @@ public class PlayerLeftSync implements Listener {
                 CustomPlayer.getCustomPlayer(e.getPlayer().getName()).destroy();
                 return;
             }
+
             if (Histeria.synchro) {
                 SyncServer server = new SyncServer(e.getPlayer(), Request.SEND);
                 server.execute();

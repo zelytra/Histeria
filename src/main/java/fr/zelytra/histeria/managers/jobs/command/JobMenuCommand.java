@@ -40,7 +40,7 @@ public class JobMenuCommand implements CommandExecutor {
 
     }
 
-    public ItemStack[] getMenuContent(CustomPlayer customPlayer) {
+    public static ItemStack[] getMenuContent(CustomPlayer customPlayer) {
         ItemStack[] content = new ItemStack[9];
 
         for (int x = 0; x < content.length; x++)

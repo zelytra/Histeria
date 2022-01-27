@@ -30,7 +30,7 @@ public class LevelUpListener implements Listener {
         e.getPlayer().getPlayer().showTitle(
                 Title.title(Component.text(e.getJob().getJob().badge.toString())
                         , Component.empty()
-                        , Title.Times.of(Duration.ofMillis(200), Duration.ofMillis(500), Duration.ofMillis(200))));
+                        , Title.Times.of(Duration.ofMillis(200), Duration.ofMillis(1200), Duration.ofMillis(200))));
         e.getPlayer().getPlayer().playSound(e.getPlayer().getPlayer().getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         LangMessage.sendMessage(e.getPlayer().getPlayer(), Message.PLAYER_PREFIX.toString(), "jobs.levelUp", " §e" + e.getJob().getLevel());
         Histeria.log(e.getPlayer().getName() + " is now level §e" + e.getJob().getLevel() + " §6on §e" + e.getJob().getJob().name() + "§6 job's", LogType.INFO);
