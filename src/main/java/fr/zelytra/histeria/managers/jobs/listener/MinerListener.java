@@ -23,14 +23,30 @@ public class MinerListener implements Listener {
     private static final HashMap<Material, Integer> xpMap = new HashMap<>();
 
     {
-        xpMap.put(Material.STONE, 1);
-        xpMap.put(Material.COAL_ORE, 10);
-        xpMap.put(Material.IRON_ORE, 100000);
-        xpMap.put(Material.GOLD_ORE, 2);
-        xpMap.put(Material.DIAMOND_ORE, 2);
-        xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 2);
-        xpMap.put(Material.EMERALD_ORE, 200);
-        xpMap.put(Material.ANCIENT_DEBRIS, 2);
+        xpMap.put(Material.STONE, );
+        xpMap.put(Material.COAL_ORE, );
+        xpMap.put(Material.DEEPSLATE_COAL_ORE, );
+        xpMap.put(Material.IRON_ORE, );
+        xpMap.put(Material.DEEPSLATE_IRON_ORE, );
+        xpMap.put(Material.RAW_IRON_BLOCK, );
+        xpMap.put(Material.COPPER_ORE, );
+        xpMap.put(Material.DEEPSLATE_COPPER_ORE, );
+        xpMap.put(Material.RAW_COPPER_BLOCK, );
+        xpMap.put(Material.GOLD_ORE, );
+        xpMap.put(Material.DEEPSLATE_GOLD_ORE, );
+        xpMap.put(Material.RAW_GOLD_BLOCK, );
+        xpMap.put(Material.REDSTONE_ORE, );
+        xpMap.put(Material.DEEPSLATE_REDSTONE_ORE, );
+        xpMap.put(Material.EMERALD_ORE, );
+        xpMap.put(Material.DEEPSLATE_EMERALD_ORE, );
+        xpMap.put(Material.LAPIS_ORE, );
+        xpMap.put(Material.DEEPSLATE_LAPIS_ORE, );
+        xpMap.put(Material.DIAMOND_ORE, );
+        xpMap.put(Material.DEEPSLATE_DIAMOND_ORE, );
+        xpMap.put(Material.NETHER_GOLD_ORE, );
+        xpMap.put(Material.NETHER_QUARTZ_ORE, );
+        xpMap.put(Material.ANCIENT_DEBRIS, );
+        xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), );
     }
 
     @EventHandler
