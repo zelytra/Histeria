@@ -46,18 +46,18 @@ public class FarmerListener implements Listener {
         blockXpMap.put(Material.MELON, 10);
         blockXpMap.put(Material.PUMPKIN, 10);
 
-        entityXpMap.put(EntityType.PIG, 50);
-        entityXpMap.put(EntityType.COW, 50);
-        entityXpMap.put(EntityType.SHEEP, 50);
-        entityXpMap.put(EntityType.RABBIT, 50);
-        entityXpMap.put(EntityType.CHICKEN, 50);
+        entityXpMap.put(EntityType.PIG, 15);
+        entityXpMap.put(EntityType.COW, 15);
+        entityXpMap.put(EntityType.SHEEP, 15);
+        entityXpMap.put(EntityType.RABBIT, 15);
+        entityXpMap.put(EntityType.CHICKEN, 15);
 
-        entityXpMap.put(EntityType.HORSE, 80);
-        entityXpMap.put(EntityType.MULE, 90);
-        entityXpMap.put(EntityType.FOX, 100);
+        entityXpMap.put(EntityType.HORSE, 20);
+        entityXpMap.put(EntityType.MULE, 25);
+        entityXpMap.put(EntityType.FOX, 30);
 
-        entityXpMap.put(EntityType.GOAT, 150);
-        entityXpMap.put(EntityType.MUSHROOM_COW, 300);
+        entityXpMap.put(EntityType.GOAT, 50);
+        entityXpMap.put(EntityType.MUSHROOM_COW, 100);
 
     }
 
