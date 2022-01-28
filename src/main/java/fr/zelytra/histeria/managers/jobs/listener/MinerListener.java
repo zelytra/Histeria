@@ -81,7 +81,7 @@ public class MinerListener implements Listener {
 
         if (chunkData.has(generateLocKey(e.getBlock().getLocation()))) return;
 
-        chunkData.set(generateLocKey(e.getBlock().getLocation()), PersistentDataType.STRING, "jobBlockLogs");
+        chunkData.set(generateLocKey(e.getBlock().getLocation()), PersistentDataType.STRING, "jobBlockLogs_miner");
 
 
     }
