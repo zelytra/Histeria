@@ -19,10 +19,12 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -32,16 +34,30 @@ public class FarmerListener implements Listener {
 
     private static final HashMap<Material, Integer> seedXpMap = new HashMap<>();
     private static final HashMap<Material, Integer> blockXpMap = new HashMap<>();
+    private static final HashMap<EntityType, Integer> entityXpMap = new HashMap<>();
 
     {
-        seedXpMap.put(Material.WHEAT, 1);
-        seedXpMap.put(Material.POTATOES, 1);
-        seedXpMap.put(Material.BEETROOTS, 1);
-        seedXpMap.put(Material.CARROTS, 1);
-        seedXpMap.put(Material.COCOA, 1);
+        seedXpMap.put(Material.WHEAT, 3);
+        seedXpMap.put(Material.POTATOES, 3);
+        seedXpMap.put(Material.BEETROOTS, 3);
+        seedXpMap.put(Material.CARROTS, 3);
+        seedXpMap.put(Material.COCOA, 5);
 
-        blockXpMap.put(Material.MELON,1);
-        blockXpMap.put(Material.PUMPKIN,1);
+        blockXpMap.put(Material.MELON, 10);
+        blockXpMap.put(Material.PUMPKIN, 10);
+
+        entityXpMap.put(EntityType.PIG, 50);
+        entityXpMap.put(EntityType.COW, 50);
+        entityXpMap.put(EntityType.SHEEP, 50);
+        entityXpMap.put(EntityType.RABBIT, 50);
+        entityXpMap.put(EntityType.CHICKEN, 50);
+
+        entityXpMap.put(EntityType.HORSE, 80);
+        entityXpMap.put(EntityType.MULE, 90);
+        entityXpMap.put(EntityType.FOX, 100);
+
+        entityXpMap.put(EntityType.GOAT, 150);
+        entityXpMap.put(EntityType.MUSHROOM_COW, 300);
 
     }
 
@@ -62,6 +78,25 @@ public class FarmerListener implements Listener {
 
         Farmer job = (Farmer) player.getJob(JobType.FARMER);
         double xp = seedXpMap.get(e.getBlock().getType());
+
+        if (job.consumeXP(xp, player))
+            JobUtils.displayXP(job.getJob(), player, xp);
+
+
+    }
+
+    @EventHandler
+    public void onEntityKill(EntityDeathEvent e) {
+
+        if (e.getEntity().getKiller() == null) return;
+        if (!entityXpMap.containsKey(e.getEntity().getType())) return;
+
+        // Job consuming experience
+        CustomPlayer player = CustomPlayer.getCustomPlayer(e.getEntity().getKiller().getName());
+        if (player == null) return;
+
+        Farmer job = (Farmer) player.getJob(JobType.FARMER);
+        double xp = entityXpMap.get(e.getEntity().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);
