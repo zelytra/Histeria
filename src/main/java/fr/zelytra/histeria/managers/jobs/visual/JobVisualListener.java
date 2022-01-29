@@ -35,8 +35,21 @@ public class JobVisualListener implements Listener {
             builder.open(player.getPlayer());
 
         } else if (e.getView().getTitle().equals(JobMenuCommand.menuName + JobPage.PROGRESSION.pageName)) {
+
             if (e.getCurrentItem() == null) return;
             e.setCancelled(true);
+
+            CustomPlayer player = CustomPlayer.getCustomPlayer(e.getWhoClicked().getName());
+            if (player == null) return;
+
+            if (e.getCurrentItem().getType() == Material.BARRIER) {
+
+                InterfaceBuilder builder = new InterfaceBuilder(9, JobMenuCommand.menuName + JobPage.MENU.pageName);
+                builder.setContent(JobMenuCommand.getMenuContent(player));
+                builder.open(player.getPlayer());
+
+            }
+
         }
 
 
@@ -51,6 +64,7 @@ public class JobVisualListener implements Listener {
             content[x] = VisualType.BLANK_BLACK_GLASSE.getItem();
 
         content[4] = job.getItemMenu().getItem();
+        content[49] = new VisualItemStack(Material.BARRIER, "§6Back", false).getItem();
 
         // Generating progress glass display
         int countLevel = 1;

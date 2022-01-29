@@ -51,9 +51,6 @@ public class FarmerListener implements Listener {
         entityXpMap.put(EntityType.SHEEP, 15);
         entityXpMap.put(EntityType.RABBIT, 15);
         entityXpMap.put(EntityType.CHICKEN, 15);
-
-        entityXpMap.put(EntityType.HORSE, 20);
-        entityXpMap.put(EntityType.MULE, 25);
         entityXpMap.put(EntityType.FOX, 30);
 
         entityXpMap.put(EntityType.GOAT, 50);
