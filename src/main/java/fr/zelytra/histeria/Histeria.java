@@ -265,10 +265,10 @@ public final class Histeria extends JavaPlugin {
         getCommand("kit").setExecutor(new KitCommand());
         getCommand("admin").setExecutor(new Admin());
 
-
         /* HardDelete */
         getCommand("harddelete").setExecutor(new HardDelete());
         getCommand("harddelete").setTabCompleter(new HardDeleteTab());
+
         /* Hologram */
         getCommand("hologram").setExecutor(new HoloCommand());
         getCommand("hologram").setTabCompleter(new HoloTab());
@@ -298,7 +298,6 @@ public final class Histeria extends JavaPlugin {
         getCommand("listhome").setExecutor(new HomeCommand());
         getCommand("adminhome").setExecutor(new AdminHomeCommand());
         getCommand("adminhome").setTabCompleter(new AdminHomeTab());
-
 
         /* TPA */
         getCommand("tpa").setExecutor(new Tpa());

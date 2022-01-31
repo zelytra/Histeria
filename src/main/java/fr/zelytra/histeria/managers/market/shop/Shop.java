@@ -111,6 +111,7 @@ public class Shop {
 
         ItemStack[] itemContent = new ItemStack[25];
 
+        // Creating list for pepare display (page getter content)
         int count = 0;
         for (int x = (24 * pageNumber); x <= (24 * (pageNumber + 1)); x++) {
             List<ShopItem> displayItems = getItemListByFilter(filter);
@@ -123,6 +124,7 @@ public class Shop {
             count++;
         }
 
+        // Setting on the interface the content get by the page
         count = 0;
         for (int a = 0; a < 4; a++) {
             for (int id = 11; id <= 16; id++) {

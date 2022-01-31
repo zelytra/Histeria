@@ -16,14 +16,14 @@ public class ShopItem {
 
     private ItemStack item;
 
-    private ShopFilter filter;
+    private final ShopFilter filter;
 
-    private int sellPrice;
-    private int buyPrice;
-    private int id;
+    private final int sellPrice;
+    private final int buyPrice;
+    private final int id;
 
-    private String displayName;
-    private String itemName;
+    private final String displayName;
+    private final String itemName;
 
     public ShopItem(int id, String itemName, String displayName, int sellPrice, int buyPrice, String filterName) {
         this.id = id;

@@ -29,7 +29,7 @@ public class MySQL {
         connect();
     }
 
-    public boolean isConnected(){
+    public boolean isConnected() {
         return isConnected;
     }
 
@@ -58,7 +58,9 @@ public class MySQL {
                 checkConnection();
                 statement.executeUpdate(sql);
             }
-        } catch (SQLException ignored) {
+        } catch (Exception e) {
+            Histeria.log("SQL Update error:\nRequest: " + sql, LogType.ERROR);
+            e.printStackTrace();
         }
 
     }
@@ -77,6 +79,10 @@ public class MySQL {
 
     }
 
+    public Connection getConnection() {
+        return this.connection;
+    }
+
     public ResultSet query(String sql) {
 
         try {
@@ -84,7 +90,9 @@ public class MySQL {
                 checkConnection();
                 return statement.executeQuery(sql);
             }
-        } catch (SQLException ignored) {
+        } catch (Exception e) {
+            Histeria.log("SQL Querry error:\nRequest: " + sql, LogType.ERROR);
+            e.printStackTrace();
         }
         return null;
     }

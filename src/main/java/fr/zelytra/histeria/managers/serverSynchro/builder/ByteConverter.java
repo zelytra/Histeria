@@ -41,6 +41,20 @@ public abstract class ByteConverter {
         }
     }
 
+    public static byte[] itemStackToBase64(ItemStack item) {
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+
+            dataOutput.writeObject(item);
+
+            dataOutput.close();
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            throw new IllegalStateException("Unable to save item stacks.", e);
+        }
+    }
+
     public static byte[] potionArrayToBase64(Collection<PotionEffect> potion) throws IllegalStateException {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -78,6 +92,20 @@ public abstract class ByteConverter {
             dataInput.close();
             return items;
         } catch (ClassNotFoundException e) {
+            throw new IOException("Unable to decode class type.", e);
+        }
+    }
+
+    public static ItemStack itemStackFromBase64(byte[] data) throws IOException {
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
+            BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+
+            ItemStack item = (ItemStack) dataInput.readObject();
+
+            dataInput.close();
+            return item;
+        } catch (Exception e) {
             throw new IOException("Unable to decode class type.", e);
         }
     }

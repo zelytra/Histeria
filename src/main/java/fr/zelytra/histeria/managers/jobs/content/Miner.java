@@ -52,7 +52,60 @@ public class Miner extends Job implements JobInterface {
     public void executeReward(CustomPlayer player) {
         switch (level) {
             case 5:
+                player.getBankAccount().addMoney(5000);
                 break;
+            case 10:
+                player.getBankAccount().addMoney(10000);
+                break;
+            case 15:
+                player.getBankAccount().addMoney(15000);
+                break;
+            case 20:
+                player.getBankAccount().addMoney(20000);
+                break;
+            case 25:
+                break;
+            case 30:
+                player.getBankAccount().addMoney(50000);
+                break;
+            case 35:
+                break;
+            case 40:
+                break;
+            case 45:
+                break;
+            case 50:
+                break;
+            case 55:
+                break;
+            case 60:
+                player.getBankAccount().addMoney(150000);
+                break;
+            case 65:
+                break;
+            case 70:
+                break;
+            case 75:
+                break;
+            case 80:
+                break;
+            case 85:
+                player.getBankAccount().addMoney(300000);
+                break;
+            case 90:
+                break;
+            case 95:
+                break;
+            case 100:
+                break;
+        }
+    }
+
+    @Override
+    public String getReward(int level) {
+        switch (level) {
+            case 5:
+                return "5k";
             case 10:
                 break;
             case 15:
@@ -92,10 +145,6 @@ public class Miner extends Job implements JobInterface {
             case 100:
                 break;
         }
-    }
-
-    @Override
-    public String getReward(int level) {
         return "null";
     }
 
