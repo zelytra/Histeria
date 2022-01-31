@@ -37,23 +37,23 @@ public class FarmerListener implements Listener {
     private static final HashMap<EntityType, Integer> entityXpMap = new HashMap<>();
 
     {
-        seedXpMap.put(Material.WHEAT, 3);
-        seedXpMap.put(Material.POTATOES, 3);
-        seedXpMap.put(Material.BEETROOTS, 3);
-        seedXpMap.put(Material.CARROTS, 3);
-        seedXpMap.put(Material.COCOA, 5);
+        seedXpMap.put(Material.WHEAT, 7);
+        seedXpMap.put(Material.POTATOES, 10);
+        seedXpMap.put(Material.BEETROOTS, 6);
+        seedXpMap.put(Material.CARROTS, 10);
+        seedXpMap.put(Material.COCOA, 15);
 
-        blockXpMap.put(Material.MELON, 10);
-        blockXpMap.put(Material.PUMPKIN, 10);
+        blockXpMap.put(Material.MELON, 9);
+        blockXpMap.put(Material.PUMPKIN, 9);
 
         entityXpMap.put(EntityType.PIG, 15);
         entityXpMap.put(EntityType.COW, 15);
         entityXpMap.put(EntityType.SHEEP, 15);
-        entityXpMap.put(EntityType.RABBIT, 15);
+        entityXpMap.put(EntityType.RABBIT, 30);
         entityXpMap.put(EntityType.CHICKEN, 15);
-        entityXpMap.put(EntityType.FOX, 30);
+        entityXpMap.put(EntityType.FOX, 40);
 
-        entityXpMap.put(EntityType.GOAT, 50);
+        entityXpMap.put(EntityType.GOAT, 60);
         entityXpMap.put(EntityType.MUSHROOM_COW, 100);
 
     }
