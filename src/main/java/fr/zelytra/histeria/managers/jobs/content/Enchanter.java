@@ -8,6 +8,9 @@ import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.utils.ExperienceMath;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Enchanter extends Job implements JobInterface {
 
     public Enchanter(int level, int xp) {
@@ -55,7 +58,7 @@ public class Enchanter extends Job implements JobInterface {
     }
 
     @Override
-    public String getReward(int level) {
-        return null;
+    public List<String> getReward(int level) {
+        return new ArrayList<>();
     }
 }

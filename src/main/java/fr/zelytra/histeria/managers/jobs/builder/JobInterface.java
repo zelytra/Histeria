@@ -12,6 +12,8 @@ package fr.zelytra.histeria.managers.jobs.builder;
 import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 
+import java.util.List;
+
 public interface JobInterface {
 
     JobType getJob();
@@ -24,6 +26,6 @@ public interface JobInterface {
 
     void executeReward(CustomPlayer player);
 
-    String getReward(int level);
+    List<String> getReward(int level);
 
 }

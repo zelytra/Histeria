@@ -12,6 +12,7 @@ package fr.zelytra.histeria.utils;
 import fr.zelytra.histeria.Histeria;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -88,6 +89,11 @@ public abstract class Utils {
         return item;
     }
 
+    public static ItemStack EnchantedItemStack(ItemStack item, Enchantment enchantment, int lvl) {
+        item.addUnsafeEnchantment(enchantment, lvl);
+        return item;
+    }
+
     public static boolean isFullInv(Player player) {
         if (player.getInventory().firstEmpty() == -1) {
             return true;
@@ -135,5 +141,13 @@ public abstract class Utils {
 
         return materials.contains(armor.getType());
 
+    }
+
+    public static void safeGive(Player player, ItemStack item) {
+        if (Utils.getEmptySlots(player) < 1)
+            player.getWorld().dropItem(player.getLocation(), item);
+        else
+            player.getInventory().addItem(item);
+        player.playSound(player, Sound.ENTITY_ITEM_PICKUP, 1, 1);
     }
 }

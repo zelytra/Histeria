@@ -14,6 +14,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 public class JobVisualListener implements Listener {
 
@@ -85,8 +88,16 @@ public class JobVisualListener implements Listener {
             content[x] = new VisualItemStack(glass,
                     "§6Level §e" + levelSpace * countLevel,
                     false,
-                    "§6Reward",
-                    "§e" + job.getReward(levelSpace * countLevel)).getItem();
+                    "§6Reward(s):").getItem();
+
+            // Adding rewards line to lore
+            ItemMeta meta = content[x].getItemMeta();
+            List<String> lore = meta.getLore();
+            for (String line : job.getReward(levelSpace * countLevel))
+                lore.add("§e- " + line);
+            meta.setLore(lore);
+            content[x].setItemMeta(meta);
+
             countLevel++;
         }
 
