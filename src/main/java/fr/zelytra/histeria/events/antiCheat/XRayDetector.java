@@ -93,6 +93,7 @@ class XRayProfiler {
                 commonBlockCount++;
                 break;
 
+            case DEEPSLATE_DIAMOND_ORE:
             case DIAMOND_ORE:
                 diamondCount++;
                 break;
