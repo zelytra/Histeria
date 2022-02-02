@@ -15,6 +15,7 @@ import fr.zelytra.histeria.managers.cooldown.Cooldown;
 import fr.zelytra.histeria.managers.jobs.command.JobMenuCommand;
 import fr.zelytra.histeria.managers.jobs.visual.JobPage;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.market.blackMarket.PlayerMarket;
 import fr.zelytra.histeria.managers.market.shop.PlayerShop;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
@@ -46,6 +47,9 @@ public class NPCListener implements Listener {
         switch (e.getNpc().getAction()) {
 
             case DEFAULT:
+                break;
+            case HMARKET:
+                new PlayerMarket(e.getPlayer());
                 break;
             case SHOP:
                 new PlayerShop(e.getPlayer());

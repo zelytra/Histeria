@@ -12,7 +12,13 @@ package fr.zelytra.histeria.managers.economy;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
+
+import java.util.ArrayList;
 
 public class Bank {
 
@@ -57,5 +63,20 @@ public class Bank {
     public void save() {
         MySQL mySQL = Histeria.mySQL;
         mySQL.update("UPDATE `Bank` SET `money` = " + this.money + " WHERE `id` = " + player.getID() + ";");
+    }
+
+    public ItemStack getHead() {
+        ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
+        SkullMeta skull = (SkullMeta) head.getItemMeta();
+
+        skull.setDisplayName("§b" + player.getName());
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§6" + money + " §f" + Emote.GOLD);
+
+        skull.setLore(lore);
+        skull.setOwningPlayer(player.getPlayer());
+        head.setItemMeta(skull);
+        return head;
     }
 }

@@ -10,6 +10,8 @@
 package fr.zelytra.histeria.managers.market.blackMarket;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
+import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -30,11 +32,18 @@ public class Market {
     public ItemStack[] getListPage(int page) {
         ItemStack[] content = new ItemStack[54];
 
-        ItemStack[] pageContent = new ItemStack[25];
+        for (int x = 0; x < content.length; x++)
+            content[x] = VisualType.BLANK_BLACK_GLASSE.getItem();
+
+        content[48] = VisualType.PREVIOUS_ARROW.getItem();
+        content[49] = new VisualItemStack(Material.SPRUCE_SIGN, "§7Page : §e" + page, false).getItem();
+        content[50] = VisualType.NEXT_ARROW.getItem();
+
+        ItemStack[] pageContent = new ItemStack[28];
 
         // Creating list for pepare display (page getter content)
         int count = 0;
-        for (int x = (24 * page); x <= (24 * (page + 1)); x++) {
+        for (int x = (27 * page); x <= (27 * (page + 1)); x++) {
 
             if (x < items.size())
                 pageContent[count] = items.get(x).getMarketItem();
@@ -47,7 +56,7 @@ public class Market {
         // Setting on the interface the content get by the page
         count = 0;
         for (int a = 0; a < 4; a++) {
-            for (int id = 11; id <= 16; id++) {
+            for (int id = 10; id <= 16; id++) {
                 content[(id + a * 9)] = pageContent[count];
                 count++;
             }
@@ -55,6 +64,7 @@ public class Market {
 
         return content;
     }
+
 
     public void refreshList() {
 
@@ -78,5 +88,9 @@ public class Market {
 
     public List<MarketItem> getItems() {
         return items;
+    }
+
+    public int getMaxPageNumber() {
+        return items.size() / 28;
     }
 }
