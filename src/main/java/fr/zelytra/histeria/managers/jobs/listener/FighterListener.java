@@ -30,38 +30,38 @@ public class FighterListener implements Listener {
         entityXpMap.put(EntityType.CREEPER, 15);
         entityXpMap.put(EntityType.SPIDER, 15);
         entityXpMap.put(EntityType.ZOMBIE, 15);
-        entityXpMap.put(EntityType.STRAY, 15);
-        entityXpMap.put(EntityType.HUSK, 15);
+        entityXpMap.put(EntityType.STRAY, 25);
+        entityXpMap.put(EntityType.HUSK, 25);
         entityXpMap.put(EntityType.CAVE_SPIDER, 15);
-        entityXpMap.put(EntityType.SLIME, 15);
-        entityXpMap.put(EntityType.DROWNED, 15);
-        entityXpMap.put(EntityType.WITCH, 15);
+        entityXpMap.put(EntityType.SLIME, 30);
+        entityXpMap.put(EntityType.DROWNED, 25);
+        entityXpMap.put(EntityType.WITCH, 35);
 
         entityXpMap.put(EntityType.WITHER_SKELETON, 15);
-        entityXpMap.put(EntityType.WITHER, 15);
+        entityXpMap.put(EntityType.WITHER, 50);
 
         entityXpMap.put(EntityType.PILLAGER, 15);
-        entityXpMap.put(EntityType.VEX, 15);
-        entityXpMap.put(EntityType.RAVAGER, 15);
-        entityXpMap.put(EntityType.VINDICATOR, 15);
-        entityXpMap.put(EntityType.ZOMBIE_VILLAGER, 15);
+        entityXpMap.put(EntityType.VEX, 10);
+        entityXpMap.put(EntityType.RAVAGER, 30);
+        entityXpMap.put(EntityType.VINDICATOR, 20);
+        entityXpMap.put(EntityType.ZOMBIE_VILLAGER, 45);
         entityXpMap.put(EntityType.EVOKER, 15);
 
 
-        entityXpMap.put(EntityType.GUARDIAN, 15);
-        entityXpMap.put(EntityType.ELDER_GUARDIAN, 15);
-        entityXpMap.put(EntityType.ENDERMAN, 15);
-        entityXpMap.put(EntityType.SHULKER, 15);
+        entityXpMap.put(EntityType.GUARDIAN, 30);
+        entityXpMap.put(EntityType.ELDER_GUARDIAN, 35);
+        entityXpMap.put(EntityType.ENDERMAN, 20);
+        entityXpMap.put(EntityType.SHULKER, 50);
         entityXpMap.put(EntityType.PHANTOM, 15);
 
         entityXpMap.put(EntityType.HOGLIN, 15);
         entityXpMap.put(EntityType.ZOGLIN, 15);
-        entityXpMap.put(EntityType.GHAST, 15);
+        entityXpMap.put(EntityType.GHAST, 30);
         entityXpMap.put(EntityType.MAGMA_CUBE, 15);
         entityXpMap.put(EntityType.BLAZE, 15);
-        entityXpMap.put(EntityType.PIGLIN_BRUTE, 15);
+        entityXpMap.put(EntityType.PIGLIN_BRUTE, 20);
         entityXpMap.put(EntityType.PIGLIN, 15);
-        entityXpMap.put(EntityType.ZOMBIFIED_PIGLIN, 15);
+        entityXpMap.put(EntityType.ZOMBIFIED_PIGLIN, 20);
 
     }
 
