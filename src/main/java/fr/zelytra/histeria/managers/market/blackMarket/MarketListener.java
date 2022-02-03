@@ -72,7 +72,11 @@ public class MarketListener implements Listener {
                     }
 
                     case CHEST -> {
-                        //TODO Refound task
+                        MarketItem marketItem = playerMarket.getMarket().getMarketItem(e.getInventory().getItem(22).getItemMeta().getPersistentDataContainer().get(MarketItem.key, PersistentDataType.INTEGER));
+                        e.getWhoClicked().closeInventory();
+                        e.getWhoClicked().getInventory().addItem(marketItem.getRawItem());
+                        marketItem.delete();
+                        LangMessage.sendMessage((Player) e.getWhoClicked(), "blackmarket.refound");
                     }
 
                     default -> {

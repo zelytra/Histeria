@@ -134,6 +134,7 @@ public class CustomPlayer {
         this.name = name;
         this.uuid = Bukkit.getOfflinePlayer(name).getUniqueId().toString();
         this.playedBefore = playedBeforeTask();
+        this.jobs = new ArrayList<>();
 
         if (!playedBefore)
             return;

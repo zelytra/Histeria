@@ -14,6 +14,8 @@ import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.market.blackMarket.Market;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -93,7 +95,12 @@ public class PlayerMarket {
         player.getPlayer().getInventory().addItem(item.getRawItem());
         item.delete();
         LangMessage.sendMessage(player.getPlayer(), "blackmarket.purchaseSuccess");
-        LangMessage.sendMessage(target.getPlayer(), "blackmarket.purchaseReceived");
+        if (Bukkit.getPlayer(item.getSeller()) != null)
+            LangMessage.sendMessage(target.getPlayer(), Message.PLAYER_PREFIX.getMsg(), "blackmarket.purchaseReceived", " §6" + item.getPrice() + Emote.GOLD);
+        else {
+            target.saveData();
+            target.destroy();
+        }
         return true;
 
     }
