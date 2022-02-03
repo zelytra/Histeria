@@ -36,6 +36,7 @@ public class MarketCommand implements CommandExecutor {
             }
             ItemStack item = player.getInventory().getItemInMainHand();
             new MarketItem(player.getName(), Integer.parseInt(args[0]), item).publish();
+            player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
             LangMessage.sendMessage(player, "blackmarket.itemPublish");
             return true;
         }
