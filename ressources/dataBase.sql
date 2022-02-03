@@ -95,9 +95,23 @@ CREATE TABLE `Jobs`
     `uuid`       varchar(40) NOT NULL,
     `type`       varchar(15) NOT NULL,
     `level`      int(11)     NOT NULL DEFAULT 0,
-    `experience` int(11)      NOT NULL DEFAULT 0
+    `experience` int(11)     NOT NULL DEFAULT 0
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE `BlackMarket`
+(
+    `id`     int(11)    NOT NULL AUTO_INCREMENT,
+    `seller` varchar(25)         DEFAULT NULL,
+    `price`  int(11)    NOT NULL DEFAULT 0,
+    `data`   varbinary(10000)    DEFAULT NULL,
+    `viewer` tinyint(1) NOT NULL DEFAULT 0,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `BlackMarket_id_uindex` (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 0
+  DEFAULT CHARSET = utf8mb4
+
 
 
 
