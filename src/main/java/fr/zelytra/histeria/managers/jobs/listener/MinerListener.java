@@ -58,7 +58,7 @@ public class MinerListener implements Listener {
 
         xpMap.put(CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), 30);
 
-        xpMap.put(Material.NETHER_QUARTZ_ORE, 2);
+        xpMap.put(Material.NETHER_QUARTZ_ORE, 5);
 
         xpMap.put(Material.ANCIENT_DEBRIS, 60);
 

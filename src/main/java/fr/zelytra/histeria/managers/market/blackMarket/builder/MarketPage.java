@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.managers.market.blackMarket;
+package fr.zelytra.histeria.managers.market.blackMarket.builder;
 
 public enum MarketPage {
     STAND("List"),

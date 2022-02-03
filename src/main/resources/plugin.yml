@@ -299,3 +299,9 @@ commands:
   job:
     description: Open job detail menu
     permission: histeria.job
+
+  blackmarket:
+    description: Access to the blackmarket or send an item to them
+    permission: histeria.blackmarket
+    aliases:
+      - bm

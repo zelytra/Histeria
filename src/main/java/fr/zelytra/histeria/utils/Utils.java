@@ -148,6 +148,6 @@ public abstract class Utils {
             player.getWorld().dropItem(player.getLocation(), item);
         else
             player.getInventory().addItem(item);
-        player.playSound(player, Sound.ENTITY_ITEM_PICKUP, 1, 1);
+        player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
     }
 }

@@ -9,7 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.managers.market.blackMarket.MarketItem;
+import fr.zelytra.histeria.managers.market.blackMarket.builder.MarketItem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
