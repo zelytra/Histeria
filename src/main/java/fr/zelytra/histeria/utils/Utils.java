@@ -144,7 +144,7 @@ public abstract class Utils {
     }
 
     public static void safeGive(Player player, ItemStack item) {
-        if (Utils.getEmptySlots(player) < 1)
+        if (getEmptySlots(player) < 2)
             player.getWorld().dropItem(player.getLocation(), item);
         else
             player.getInventory().addItem(item);
