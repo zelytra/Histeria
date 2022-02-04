@@ -16,6 +16,7 @@ import fr.zelytra.histeria.managers.market.blackMarket.Market;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -80,6 +81,11 @@ public class PlayerMarket {
 
         if (!player.getBankAccount().hasEnoughFor(item.getPrice())) {
             LangMessage.sendMessage(player.getPlayer(), "shop.notEnoughMoney");
+            return false;
+        }
+
+        if (Utils.getEmptySlots(player.getPlayer()) < 2) {
+            LangMessage.sendMessage(player.getPlayer(), "miscellaneous.notEnoughSpace");
             return false;
         }
 
