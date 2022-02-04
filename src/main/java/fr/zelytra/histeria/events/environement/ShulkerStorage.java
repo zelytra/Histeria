@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class ShulkerStorage implements Listener {
     private ArrayList<Material> blacklist = new ArrayList<Material>();
+
     {
         blacklist.add(Material.SHULKER_BOX);
         blacklist.add(Material.WHITE_SHULKER_BOX);
@@ -47,12 +48,13 @@ public class ShulkerStorage implements Listener {
             if (e.getCurrentItem() != null && blacklist.contains(e.getCurrentItem().getType())) {
                 e.setCancelled(true);
             }
+            if (e.getClick().isKeyboardClick()) {
+                e.setCancelled(true);
+                e.setResult(Event.Result.DENY);
+                return;
+            }
         }
-        if (e.getClick().isKeyboardClick()) {
-            e.setCancelled(true);
-            e.setResult(Event.Result.DENY);
-            return;
-        }
+
 
     }
 }
