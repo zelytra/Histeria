@@ -57,6 +57,7 @@ import fr.zelytra.histeria.managers.arena.ArenaCommand;
 import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
+import fr.zelytra.histeria.managers.enchants.RegisterEnchant;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
@@ -95,6 +96,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -140,6 +142,7 @@ public final class Histeria extends JavaPlugin {
         Message.startUpMessage();
         isReloading = false;
         regCommands();
+        regEnchants();
         loadAPI();
         regRepeatingTask();
         regPluginMessage();
@@ -344,6 +347,18 @@ public final class Histeria extends JavaPlugin {
         ClickLogger.clickerTask();
         XRayDetector.profilerAnalysis();
     }
+
+    private void regEnchants() {
+        try {
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+            RegisterEnchant.register();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void loadAPI() {
         if (!(getServer().getPluginManager().getPlugin("Factions") == null)) {

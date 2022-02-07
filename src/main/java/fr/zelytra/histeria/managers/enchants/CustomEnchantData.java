@@ -9,11 +9,57 @@
 
 package fr.zelytra.histeria.managers.enchants;
 
+import io.papermc.paper.enchantments.EnchantmentRarity;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.enchantments.EnchantmentTarget;
+import org.bukkit.inventory.EquipmentSlot;
+
+import java.util.*;
+
 public enum CustomEnchantData {
-    BLESS_OF_KEEPING();
+    BLESS_OF_KEEPING("Bless Of Keeping", "bless_of_keeping", 1, 1,
+            EnchantmentTarget.WEARABLE,
+            EnchantmentRarity.COMMON,
+            new ArrayList<>(Arrays.asList(Enchantment.ARROW_DAMAGE)),
+            new ArrayList<>(Arrays.asList(Material.NETHERITE_SWORD)),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
+            0, false, false, false, false);
 
-    private String name;
 
+    public String name;
+    private String tag;
+    public int maxLvl, minLvl;
 
+    public EnchantmentTarget target;
+    public EnchantmentRarity rarity;
 
+    public List<Enchantment> conflicts;
+    public List<Material> enchantItem;
+    public Set<EquipmentSlot> activeSlot;
+
+    public float damageIncrease;
+    public boolean isTreasure, isCursed, isTradeable, isDiscoverable;
+
+    CustomEnchantData(String name, String tag, int maxLvl, int minLvl, EnchantmentTarget target, EnchantmentRarity rarity, List<Enchantment> conflicts, List<Material> enchantItem, Set<EquipmentSlot> activeSlot, float damageIncrease, boolean isTreasure, boolean isCursed, boolean isTradeable, boolean isDiscoverable) {
+        this.name = name;
+        this.tag = tag;
+        this.maxLvl = maxLvl;
+        this.minLvl = minLvl;
+        this.target = target;
+        this.rarity = rarity;
+        this.conflicts = conflicts;
+        this.enchantItem = enchantItem;
+        this.activeSlot = activeSlot;
+        this.damageIncrease = damageIncrease;
+        this.isTreasure = isTreasure;
+        this.isCursed = isCursed;
+        this.isTradeable = isTradeable;
+        this.isDiscoverable = isDiscoverable;
+    }
+
+    public NamespacedKey getKey() {
+        return NamespacedKey.minecraft(tag);
+    }
 }

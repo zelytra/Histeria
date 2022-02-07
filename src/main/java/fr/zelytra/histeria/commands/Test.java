@@ -9,14 +9,11 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.managers.market.blackMarket.builder.MarketItem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
 
 public class Test implements CommandExecutor {
     @Override
@@ -24,10 +21,10 @@ public class Test implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        new MarketItem(player.getName(), new Random().nextInt(1, 500), player.getInventory().getItemInMainHand()).publish();
-
+        //new MarketItem(player.getName(), new Random().nextInt(1, 500), player.getInventory().getItemInMainHand()).publish();
+        //player.getInventory().getItemInMainHand().addEnchantment(new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING),1);
         //new PlayerMarket(player);
-
+        System.out.println(player.getInventory().getItemInMainHand());
         return true;
 
     }
