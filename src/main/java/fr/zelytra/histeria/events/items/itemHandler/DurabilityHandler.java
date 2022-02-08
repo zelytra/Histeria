@@ -20,9 +20,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class DurabilityHandler {
+
+    private static final String durabilityTag = "§bDurability§l>§r§f";
+
     private final ItemStack item;
     private final CustomMaterial material;
     private int durability;
@@ -94,15 +98,28 @@ public class DurabilityHandler {
 
     private void updateIndicator() {
         ItemMeta meta = this.item.getItemMeta();
-        ArrayList<String> lore = new ArrayList<>();
-        lore.add(getIndicator());
+
+        List<String> lore;
+        if (meta.getLore() != null) {
+            lore = meta.getLore();
+            for (int x = 0; x < lore.size(); x++) {
+                if (lore.get(x).startsWith(durabilityTag))
+                    lore.set(x, getIndicator());
+            }
+
+        } else {
+            lore = new ArrayList<>();
+            lore.add(getIndicator());
+        }
+
+
         meta.setLore(lore);
         meta.getPersistentDataContainer().set(CustomItemStack.getDurabilityKey(), PersistentDataType.INTEGER, durability);
         this.item.setItemMeta(meta);
     }
 
     private String getIndicator() {
-        return "§bDurability§l>§r§f" + this.durability + "/" + this.material.getDurability();
+        return durabilityTag + this.durability + "/" + this.material.getDurability();
     }
 
     public void setDurability(int value) {
