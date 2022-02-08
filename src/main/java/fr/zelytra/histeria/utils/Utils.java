@@ -10,12 +10,15 @@
 package fr.zelytra.histeria.utils;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,5 +152,37 @@ public abstract class Utils {
         else
             player.getInventory().addItem(item);
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
+    }
+
+    public static void updateCustomEnchant(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+
+        List<String> lore;
+        if (meta.getLore() != null)
+            lore = meta.getLore();
+        else
+            lore = new ArrayList<>();
+
+        if (lore.size() > 0)
+            for (int x = 0; x >= lore.size(); x++) {
+                if (lore.get(x).equalsIgnoreCase("")) break;
+                lore.remove(x);
+            }
+
+        List<String> newLore = new ArrayList<>();
+        for (var enchant : item.getEnchantments().entrySet()) {
+            System.out.println(enchant.getKey()+ " "+CustomEnchant.isCustom(enchant.getKey()));
+            if (CustomEnchant.isCustom(enchant.getKey())) {
+                //System.out.println("trigger " + enchant.getKey());
+                System.out.println(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
+                newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
+            }
+        }
+        newLore.add("");
+        newLore.addAll(lore);
+
+        meta.setLore(newLore);
+        item.setItemMeta(meta);
+
     }
 }

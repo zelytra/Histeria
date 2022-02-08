@@ -57,7 +57,7 @@ import fr.zelytra.histeria.managers.arena.ArenaCommand;
 import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
-import fr.zelytra.histeria.managers.enchants.RegisterEnchant;
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
@@ -350,10 +350,14 @@ public final class Histeria extends JavaPlugin {
 
     private void regEnchants() {
         try {
+            // Opening accessibility field
             Field f = Enchantment.class.getDeclaredField("acceptingNew");
             f.setAccessible(true);
             f.set(null, true);
-            RegisterEnchant.register();
+
+            // Enchants
+            CustomEnchant.BLESS_OF_KEEPING.register();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

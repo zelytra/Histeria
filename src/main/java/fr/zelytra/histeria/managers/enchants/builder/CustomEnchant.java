@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022.
+ * Copyright (c) 2022-2022.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr
@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.managers.enchants;
+package fr.zelytra.histeria.managers.enchants.builder;
 
 import fr.zelytra.histeria.utils.RomanNumber;
 import io.papermc.paper.enchantments.EnchantmentRarity;
@@ -24,18 +24,20 @@ import java.util.Set;
 
 public class CustomEnchant extends Enchantment {
 
+    public final static CustomEnchant BLESS_OF_KEEPING = new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING);
+
     private final CustomEnchantData customEnchantData;
 
     public CustomEnchant(CustomEnchantData customEnchantData) {
         super(customEnchantData.getKey());
         this.customEnchantData = customEnchantData;
-        try {
-            registerEnchantment(this);
-        }catch (Exception ignored){
+    }
 
-        }
-
-        System.out.println(customEnchantData.name + " " + isAcceptingRegistrations());
+    public static boolean isCustom(Enchantment enchant) {
+        for (CustomEnchantData data : CustomEnchantData.values())
+            if (data.getKey().equals(enchant.getKey()))
+                return true;
+        return false;
     }
 
     @Override
@@ -75,13 +77,12 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public boolean canEnchantItem(@NotNull ItemStack item) {
-        System.out.println("trigger");
         return customEnchantData.enchantItem.contains(item.getType());
     }
 
     @Override
     public @NotNull Component displayName(int level) {
-        return Component.text().content(customEnchantData.name + RomanNumber.toRoman(level)).build();
+        return Component.text().content("§r" + customEnchantData.color + customEnchantData.name + " " + RomanNumber.toRoman(level)).build();
     }
 
     @Override
@@ -117,6 +118,14 @@ public class CustomEnchant extends Enchantment {
     @Override
     public @NotNull Key key() {
         return super.key();
+    }
+
+    public void register() {
+        try {
+            registerEnchantment(this);
+        } catch (Exception ignored) {
+
+        }
     }
 
 }
