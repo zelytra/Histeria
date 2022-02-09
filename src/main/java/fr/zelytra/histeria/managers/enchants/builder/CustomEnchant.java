@@ -18,6 +18,7 @@ import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
@@ -25,6 +26,7 @@ import java.util.Set;
 public class CustomEnchant extends Enchantment {
 
     public final static CustomEnchant BLESS_OF_KEEPING = new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING);
+    public final static CustomEnchant LIGHTNING = new CustomEnchant(CustomEnchantData.LIGHTNING);
 
     private final CustomEnchantData customEnchantData;
 
@@ -37,6 +39,19 @@ public class CustomEnchant extends Enchantment {
         for (CustomEnchantData data : CustomEnchantData.values())
             if (data.getKey().equals(enchant.getKey()))
                 return true;
+        return false;
+    }
+
+    public static boolean hasCustomEnchants(ItemStack item) {
+        if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
+            for (var enchant : ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().entrySet())
+                if (isCustom(enchant.getKey()))
+                    return true;
+        }else {
+            for (var enchant : item.getEnchantments().entrySet())
+                if (isCustom(enchant.getKey()))
+                    return true;
+        }
         return false;
     }
 

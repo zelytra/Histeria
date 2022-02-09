@@ -58,6 +58,8 @@ import fr.zelytra.histeria.managers.arena.ArenaTab;
 import fr.zelytra.histeria.managers.clearLag.ClearLag;
 import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
+import fr.zelytra.histeria.managers.enchants.command.HEnchant;
+import fr.zelytra.histeria.managers.enchants.command.HEnchantTab;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
@@ -329,6 +331,10 @@ public final class Histeria extends JavaPlugin {
         /* Job */
         getCommand("job").setExecutor(new JobMenuCommand());
 
+        /* Custom Enchant */
+        getCommand("henchant").setExecutor(new HEnchant());
+        getCommand("henchant").setTabCompleter(new HEnchantTab());
+
         /* BlackMarket */
         getCommand("blackmarket").setExecutor(new MarketCommand());
 
@@ -357,6 +363,7 @@ public final class Histeria extends JavaPlugin {
 
             // Enchants
             CustomEnchant.BLESS_OF_KEEPING.register();
+            CustomEnchant.LIGHTNING.register();
 
         } catch (Exception e) {
             e.printStackTrace();

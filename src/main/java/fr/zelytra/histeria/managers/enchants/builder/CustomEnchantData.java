@@ -19,11 +19,20 @@ import org.bukkit.inventory.EquipmentSlot;
 import java.util.*;
 
 public enum CustomEnchantData {
+
+    LIGHTNING("Lightning", "lightning", 1, 5,
+            ChatColor.BLUE,
+            EnchantmentTarget.WEAPON,
+            EnchantmentRarity.COMMON,
+            new ArrayList<>(),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
+            0, false, false, false, false),
+
     BLESS_OF_KEEPING("Bless Of Keeping", "bless_of_keeping", 1, 1,
             ChatColor.DARK_PURPLE,
             EnchantmentTarget.WEAPON,
             EnchantmentRarity.COMMON,
-            new ArrayList<>(Arrays.asList(Enchantment.ARROW_DAMAGE)),
+            new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false);
 

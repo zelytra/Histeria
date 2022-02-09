@@ -117,6 +117,7 @@ public class DurabilityHandler {
 
         } else {
             lore = new ArrayList<>();
+            lore.add("");
             lore.add(getIndicator());
         }
 

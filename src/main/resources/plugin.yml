@@ -305,3 +305,7 @@ commands:
     permission: histeria.blackmarket
     aliases:
       - bm
+
+  henchant:
+    description: Add custom enchant to an item
+    permission: histeria.henchant

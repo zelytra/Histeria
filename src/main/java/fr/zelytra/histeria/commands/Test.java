@@ -24,6 +24,9 @@ public class Test implements CommandExecutor {
         //new MarketItem(player.getName(), new Random().nextInt(1, 500), player.getInventory().getItemInMainHand()).publish();
         //player.getInventory().getItemInMainHand().addEnchantment(new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING),1);
         //new PlayerMarket(player);
+        //player.getInventory().getItemInMainHand().addEnchantment(Enchantment.DAMAGE_ALL,1);
+        //player.getInventory().getItemInMainHand().addEnchantment(CustomEnchant.BLESS_OF_KEEPING,1);
+        //player.getInventory().setItemInMainHand(Utils.BookEnchantedItemStack(player.getInventory().getItemInMainHand(), Enchantment.DAMAGE_ALL, 1));
         System.out.println(player.getInventory().getItemInMainHand());
         return true;
 

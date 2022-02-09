@@ -61,6 +61,7 @@ public class NocturiteSword implements Listener {
             double norme = Math.sqrt(Math.pow(delta.getX(), 2) + Math.pow(delta.getY(), 2) + Math.pow(delta.getZ(), 2));
             int coef = 2;
             Vector dir = new Vector((delta.getX() / norme) * coef, (delta.getY() / norme) + 1.5, (delta.getZ() / norme) * coef);
+
             entity.setVelocity(dir);
 
             if (entity instanceof Player) {

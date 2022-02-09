@@ -18,6 +18,7 @@ import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
@@ -92,6 +93,13 @@ public abstract class Utils {
         return item;
     }
 
+    public static ItemStack BookEnchantedItemStack(ItemStack item, Enchantment enchantment, int lvl) {
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+        meta.addStoredEnchant(enchantment, lvl, false);
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public static ItemStack EnchantedItemStack(ItemStack item, Enchantment enchantment, int lvl) {
         item.addUnsafeEnchantment(enchantment, lvl);
         return item;
@@ -163,23 +171,34 @@ public abstract class Utils {
         else
             lore = new ArrayList<>();
 
-        if (lore.size() > 0)
-            for (int x = 0; x >= lore.size(); x++) {
-                if (lore.get(x).equalsIgnoreCase("")) break;
-                lore.remove(x);
-            }
 
+        // Creating custom enchant lore
         List<String> newLore = new ArrayList<>();
-        for (var enchant : item.getEnchantments().entrySet()) {
-            System.out.println(enchant.getKey()+ " "+CustomEnchant.isCustom(enchant.getKey()));
-            if (CustomEnchant.isCustom(enchant.getKey())) {
-                //System.out.println("trigger " + enchant.getKey());
-                System.out.println(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
-                newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
+        if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
+            for (var enchant : ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().entrySet()) {
+                if (CustomEnchant.isCustom(enchant.getKey())) {
+                    newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
+                }
+            }
+        } else {
+            for (var enchant : item.getEnchantments().entrySet()) {
+                if (CustomEnchant.isCustom(enchant.getKey())) {
+                    newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
+                }
             }
         }
         newLore.add("");
-        newLore.addAll(lore);
+
+        // Adding old lore without old custom enchant lore
+        boolean isEnchant = true;
+        for (String line : lore) {
+            if (isEnchant) {
+                if (line.equalsIgnoreCase(""))
+                    isEnchant = false;
+                continue;
+            } else
+                newLore.add(line);
+        }
 
         meta.setLore(newLore);
         item.setItemMeta(meta);

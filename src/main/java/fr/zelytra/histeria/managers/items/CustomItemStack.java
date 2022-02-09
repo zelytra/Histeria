@@ -76,6 +76,7 @@ public class CustomItemStack {
                 if (this.customMaterial.getDurability() != 0) {
                     itemData.set(durabilityKey, PersistentDataType.INTEGER, this.customMaterial.getDurability());
                     lore = new ArrayList<>();
+                    lore.add("");
                     lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
                     meta.setLore(lore);
                 }

@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class RomanNumber {
 
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
+    private final static TreeMap<Integer, String> map = new TreeMap<>();
 
     static {
 
