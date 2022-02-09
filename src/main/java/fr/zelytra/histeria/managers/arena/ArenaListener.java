@@ -20,6 +20,7 @@ public class ArenaListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onBreak(BlockBreakEvent e) {
+
         if (e.getBlock().getType() != Material.CHEST) return;
         if (e.isCancelled()) return;
 

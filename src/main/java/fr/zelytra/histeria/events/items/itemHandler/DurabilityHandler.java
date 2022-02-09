@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class DurabilityHandler {
 
-    private static final String durabilityTag = "§bDurability§l>§r§f";
+    private static final String durabilityTag = "Durability";
 
     private final ItemStack item;
     private final CustomMaterial material;
@@ -111,7 +111,7 @@ public class DurabilityHandler {
         if (meta.getLore() != null) {
             lore = meta.getLore();
             for (int x = 0; x < lore.size(); x++) {
-                if (lore.get(x).startsWith(durabilityTag))
+                if (lore.get(x).contains(durabilityTag))
                     lore.set(x, getIndicator());
             }
 
@@ -127,7 +127,7 @@ public class DurabilityHandler {
     }
 
     private String getIndicator() {
-        return durabilityTag + this.durability + "/" + this.material.getDurability();
+        return "§b" + durabilityTag + "§l>§r§f" + this.durability + "/" + this.material.getDurability();
     }
 
     public void setDurability(int value) {
