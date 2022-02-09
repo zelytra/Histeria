@@ -41,6 +41,7 @@ import fr.zelytra.histeria.managers.afk.AfkListener;
 import fr.zelytra.histeria.managers.arena.ArenaListener;
 import fr.zelytra.histeria.managers.enchants.listener.AnvilCustomEnchant;
 import fr.zelytra.histeria.managers.enchants.listener.EnchantingTableCustomEnchant;
+import fr.zelytra.histeria.managers.enchants.listener.GrindStoneCustomEnchant;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.jobs.listener.*;
 import fr.zelytra.histeria.managers.jobs.visual.JobVisualListener;
@@ -160,6 +161,7 @@ public class EventManager {
         /* Custom Enchants */
         pm.registerEvents(new EnchantingTableCustomEnchant(), pl);
         pm.registerEvents(new AnvilCustomEnchant(), pl);
+        pm.registerEvents(new GrindStoneCustomEnchant(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();
