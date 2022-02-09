@@ -12,14 +12,16 @@ package fr.zelytra.histeria.managers.arena;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class ArenaListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGH)
     public void onBreak(BlockBreakEvent e) {
         if (e.getBlock().getType() != Material.CHEST) return;
+        if (e.isCancelled()) return;
 
         ArenaChest toRemove = null;
         for (ArenaChest chest : ArenaChest.chestList) {
