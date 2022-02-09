@@ -11,6 +11,8 @@ package fr.zelytra.histeria.events.items.itemHandler;
 
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -87,12 +89,18 @@ public class DurabilityHandler {
             durability--;
         }
         updateIndicator();
+        durabilityWarning();
         if (durability <= 0) {
             this.slot.removeItem(player);
             for (Player p : Bukkit.getOnlinePlayers()) {
                 p.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
             }
         }
+    }
+
+    private void durabilityWarning() {
+        if (durability <= 100 && durability % 10 == 0)
+            LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "miscellaneous.ItemDurability", String.valueOf(durability));
     }
 
 
@@ -137,9 +145,7 @@ public class DurabilityHandler {
     }
 
     public boolean isBroken() {
-        if (this.durability <= 0) {
-            return true;
-        } else return false;
+        return this.durability <= 0;
     }
 
 
