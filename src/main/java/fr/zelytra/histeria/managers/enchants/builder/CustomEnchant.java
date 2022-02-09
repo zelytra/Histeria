@@ -77,12 +77,15 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public boolean canEnchantItem(@NotNull ItemStack item) {
-        return customEnchantData.enchantItem.contains(item.getType());
+        return customEnchantData.target.includes(item.getType());
     }
 
     @Override
     public @NotNull Component displayName(int level) {
-        return Component.text().content("§r" + customEnchantData.color + customEnchantData.name + " " + RomanNumber.toRoman(level)).build();
+        if (customEnchantData.maxLvl <= 1)
+            return Component.text().content("§r" + customEnchantData.color + customEnchantData.name).build();
+        else
+            return Component.text().content("§r" + customEnchantData.color + customEnchantData.name + " " + RomanNumber.toRoman(level)).build();
     }
 
     @Override
