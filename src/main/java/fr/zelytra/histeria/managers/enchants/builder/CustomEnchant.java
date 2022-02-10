@@ -26,6 +26,7 @@ public class CustomEnchant extends Enchantment {
 
     public final static CustomEnchant BLESS_OF_KEEPING = new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING);
     public final static CustomEnchant LIGHTNING = new CustomEnchant(CustomEnchantData.LIGHTNING);
+    public final static CustomEnchant SHIELD = new CustomEnchant(CustomEnchantData.SHIELD);
 
     private final CustomEnchantData customEnchantData;
 
@@ -66,6 +67,7 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public boolean conflictsWith(@NotNull Enchantment other) {
+        System.out.println(customEnchantData.conflicts.contains(other));
         return customEnchantData.conflicts.contains(other);
     }
 

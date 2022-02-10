@@ -364,9 +364,10 @@ public final class Histeria extends JavaPlugin {
             // Enchants
             CustomEnchant.BLESS_OF_KEEPING.register();
             CustomEnchant.LIGHTNING.register();
+            CustomEnchant.SHIELD.register();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Histeria.log("Failed to register custom enchants", LogType.ERROR);
         }
     }
 

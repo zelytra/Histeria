@@ -41,6 +41,7 @@ import fr.zelytra.histeria.managers.afk.AfkListener;
 import fr.zelytra.histeria.managers.arena.ArenaListener;
 import fr.zelytra.histeria.managers.enchants.content.BlessOfKeeping;
 import fr.zelytra.histeria.managers.enchants.content.Lightning;
+import fr.zelytra.histeria.managers.enchants.content.Shield;
 import fr.zelytra.histeria.managers.enchants.listener.AnvilCustomEnchant;
 import fr.zelytra.histeria.managers.enchants.listener.EnchantingTableCustomEnchant;
 import fr.zelytra.histeria.managers.enchants.listener.GrindStoneCustomEnchant;
@@ -166,6 +167,7 @@ public class EventManager {
         pm.registerEvents(new GrindStoneCustomEnchant(), pl);
         pm.registerEvents(new BlessOfKeeping(), pl);
         pm.registerEvents(new Lightning(), pl);
+        pm.registerEvents(new Shield(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();

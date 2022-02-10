@@ -23,17 +23,25 @@ public enum CustomEnchantData {
     LIGHTNING("Lightning", "lightning", 1, 2,
             ChatColor.BLUE,
             EnchantmentTarget.WEAPON,
-            EnchantmentRarity.COMMON,
+            EnchantmentRarity.VERY_RARE,
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false),
 
     BLESS_OF_KEEPING("Bless Of Keeping", "bless_of_keeping", 1, 1,
             ChatColor.DARK_PURPLE,
-            EnchantmentTarget.WEAPON,
-            EnchantmentRarity.COMMON,
+            EnchantmentTarget.ALL,
+            EnchantmentRarity.VERY_RARE,
             new ArrayList<>(),
-            new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HAND,EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
+            0, false, false, false, false),
+
+    SHIELD("Shield", "shield", 1, 3,
+            ChatColor.AQUA,
+            EnchantmentTarget.WEARABLE,
+            EnchantmentRarity.VERY_RARE,
+            new ArrayList<>(Arrays.asList(Enchantment.THORNS)),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
             0, false, false, false, false);
 
 
