@@ -67,7 +67,6 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public boolean conflictsWith(@NotNull Enchantment other) {
-        System.out.println(customEnchantData.conflicts.contains(other));
         return customEnchantData.conflicts.contains(other);
     }
 

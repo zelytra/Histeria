@@ -48,6 +48,12 @@ public class AnvilCustomEnchant implements Listener {
         if (enchantFrom.size() >= 1)
             for (var enchants : enchantFrom.entrySet()) {
 
+                //Checking enchant conflicts
+                boolean needBreak = false;
+                for (var enchantWithList : enchantWith.entrySet())
+                    needBreak = enchants.getKey().conflictsWith(enchantWithList.getKey());
+                if (needBreak) break;
+
                 if (!CustomEnchantUtils.isCustom(enchants.getKey())) continue;
 
                 // Check enchant not match with second item
