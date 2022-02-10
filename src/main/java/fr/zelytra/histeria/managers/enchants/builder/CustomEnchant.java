@@ -47,11 +47,19 @@ public class CustomEnchant extends Enchantment {
             for (var enchant : ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().entrySet())
                 if (isCustom(enchant.getKey()))
                     return true;
-        }else {
+        } else {
             for (var enchant : item.getEnchantments().entrySet())
                 if (isCustom(enchant.getKey()))
                     return true;
         }
+        return false;
+    }
+
+    public static boolean contain(ItemStack item, CustomEnchant enchant) {
+        if (CustomEnchant.hasCustomEnchants(item))
+            for (var index : item.getEnchantments().entrySet())
+                if (index.getKey().getKey().equals(enchant.getKey()))
+                    return true;
         return false;
     }
 
