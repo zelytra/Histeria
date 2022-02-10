@@ -1,0 +1,136 @@
+@font-face {
+    font-family: Whitney;
+    src: url('https://discordapp.com/assets/6c6374bad0b0b6d204d8d6dc4a18d820.woff');
+    font-weight: 300;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #3d71ad;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+html, body {
+    height: 100%;
+    background-color: #36393f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-decoration: none;
+}
+
+
+header {
+    background-color: #002060;
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+header .title {
+    display: flex;
+    flex-direction: column;
+    color: #dcddde;
+}
+
+header .title .servername {
+    font-size: 50px;
+}
+
+header .subTitle {
+    display: flex;
+}
+
+header .title .channelname {
+    margin-right: 15px;
+}
+
+
+header img {
+    height: 70px;
+    width: 70px;
+    margin-right: 15px;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+main .content{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+main .content h2{
+    color: #dcddde;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+main .content ul{
+    margin-top: 10px;
+    list-style-type:none;
+    padding: 0;
+}
+main .content li{
+    padding-left: 16px;
+    color: #dcddde;
+    margin-top: 5px;
+}
+main .content li::before{
+    content: "⬢";
+    padding-right: 8px;
+    color: #dcddde;
+}
+
+footer {
+    background-color: #2f3136;
+    height: 150px;
+    margin-top: 15px;
+    position: relative;
+}
+
+footer #mention {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+
+footer h2 {
+    color: #dcddde;
+    font-size: 14px;
+}

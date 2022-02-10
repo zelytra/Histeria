@@ -22,10 +22,8 @@ public class BlessOfKeeping implements Listener {
         for (ItemStack item : e.getPlayer().getInventory()) {
             if (item == null) continue;
             if (!CustomEnchant.contain(item, CustomEnchant.BLESS_OF_KEEPING)) continue;
-            System.out.println("trigger");
             e.getDrops().remove(item);
             e.getItemsToKeep().add(item);
-
         }
     }
 }
