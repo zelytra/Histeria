@@ -10,8 +10,6 @@
 package fr.zelytra.histeria.utils;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.model.user.User;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -19,7 +17,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -162,46 +159,4 @@ public abstract class Utils {
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
     }
 
-    public static void updateCustomEnchant(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-
-        List<String> lore;
-        if (meta.getLore() != null)
-            lore = meta.getLore();
-        else
-            lore = new ArrayList<>();
-
-
-        // Creating custom enchant lore
-        List<String> newLore = new ArrayList<>();
-        if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
-            for (var enchant : ((EnchantmentStorageMeta) item.getItemMeta()).getStoredEnchants().entrySet()) {
-                if (CustomEnchant.isCustom(enchant.getKey())) {
-                    newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
-                }
-            }
-        } else {
-            for (var enchant : item.getEnchantments().entrySet()) {
-                if (CustomEnchant.isCustom(enchant.getKey())) {
-                    newLore.add(PlainTextComponentSerializer.plainText().serialize(enchant.getKey().displayName(enchant.getValue())));
-                }
-            }
-        }
-        newLore.add("");
-
-        // Adding old lore without old custom enchant lore
-        boolean isEnchant = true;
-        for (String line : lore) {
-            if (isEnchant) {
-                if (line.equalsIgnoreCase(""))
-                    isEnchant = false;
-                continue;
-            } else
-                newLore.add(line);
-        }
-
-        meta.setLore(newLore);
-        item.setItemMeta(meta);
-
-    }
 }

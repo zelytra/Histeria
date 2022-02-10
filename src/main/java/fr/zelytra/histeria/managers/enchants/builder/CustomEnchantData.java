@@ -20,7 +20,7 @@ import java.util.*;
 
 public enum CustomEnchantData {
 
-    LIGHTNING("Lightning", "lightning", 1, 5,
+    LIGHTNING("Lightning", "lightning", 1, 2,
             ChatColor.BLUE,
             EnchantmentTarget.WEAPON,
             EnchantmentRarity.COMMON,

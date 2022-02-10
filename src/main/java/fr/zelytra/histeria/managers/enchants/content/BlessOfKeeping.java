@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.enchants.content;
 
 import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchantUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -21,7 +22,7 @@ public class BlessOfKeeping implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         for (ItemStack item : e.getPlayer().getInventory()) {
             if (item == null) continue;
-            if (!CustomEnchant.contain(item, CustomEnchant.BLESS_OF_KEEPING)) continue;
+            if (!CustomEnchantUtils.contain(item, CustomEnchant.BLESS_OF_KEEPING)) continue;
             e.getDrops().remove(item);
             e.getItemsToKeep().add(item);
         }

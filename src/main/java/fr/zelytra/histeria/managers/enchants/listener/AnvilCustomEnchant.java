@@ -1,7 +1,6 @@
 package fr.zelytra.histeria.managers.enchants.listener;
 
-import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
-import fr.zelytra.histeria.utils.Utils;
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchantUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -26,7 +25,7 @@ public class AnvilCustomEnchant implements Listener {
         if (firstItem == null || secondItem == null) return;
         if (secondItem.getType() != Material.ENCHANTED_BOOK && firstItem.getType() != secondItem.getType()) return;
 
-        if (CustomEnchant.hasCustomEnchants(firstItem) || CustomEnchant.hasCustomEnchants(secondItem)) {
+        if (CustomEnchantUtils.hasCustomEnchants(firstItem) || CustomEnchantUtils.hasCustomEnchants(secondItem)) {
 
             if (!isVanillaFusion)
                 result = firstItem.clone();
@@ -36,7 +35,7 @@ public class AnvilCustomEnchant implements Listener {
             else
                 result.addEnchantments(getCustomEnchantFusion(firstItem.getEnchantments(), secondItem.getEnchantments()));
 
-            Utils.updateCustomEnchant(result);
+            CustomEnchantUtils.updateCustomEnchant(result);
             e.setResult(result);
         }
 
@@ -49,7 +48,7 @@ public class AnvilCustomEnchant implements Listener {
         if (enchantFrom.size() >= 1)
             for (var enchants : enchantFrom.entrySet()) {
 
-                if (!CustomEnchant.isCustom(enchants.getKey())) continue;
+                if (!CustomEnchantUtils.isCustom(enchants.getKey())) continue;
 
                 // Check enchant not match with second item
                 if (!enchantWith.containsKey(enchants.getKey())) {
