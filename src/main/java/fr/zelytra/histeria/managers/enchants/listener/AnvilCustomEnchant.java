@@ -2,6 +2,7 @@ package fr.zelytra.histeria.managers.enchants.listener;
 
 import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
 import fr.zelytra.histeria.utils.Utils;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +24,8 @@ public class AnvilCustomEnchant implements Listener {
         boolean isVanillaFusion = result != null;
 
         if (firstItem == null || secondItem == null) return;
+        if (secondItem.getType() != Material.ENCHANTED_BOOK && firstItem.getType() != secondItem.getType()) return;
+
         if (CustomEnchant.hasCustomEnchants(firstItem) || CustomEnchant.hasCustomEnchants(secondItem)) {
 
             if (!isVanillaFusion)
