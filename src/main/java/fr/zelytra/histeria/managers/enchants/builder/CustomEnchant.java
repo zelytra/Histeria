@@ -28,6 +28,7 @@ public class CustomEnchant extends Enchantment {
     public final static CustomEnchant LIGHTNING = new CustomEnchant(CustomEnchantData.LIGHTNING);
     public final static CustomEnchant SHIELD = new CustomEnchant(CustomEnchantData.SHIELD);
     public final static CustomEnchant VAMPIRISME = new CustomEnchant(CustomEnchantData.VAMPIRISME);
+    public final static CustomEnchant STUNE = new CustomEnchant(CustomEnchantData.STUNE);
 
     private final CustomEnchantData customEnchantData;
 

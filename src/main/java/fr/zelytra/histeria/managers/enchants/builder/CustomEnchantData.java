@@ -36,6 +36,14 @@ public enum CustomEnchantData {
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND,EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
             0, false, false, false, false),
 
+    STUNE("Stune", "stune", 1, 5,
+            ChatColor.GRAY,
+            EnchantmentTarget.WEAPON,
+            EnchantmentRarity.UNCOMMON,
+            new ArrayList<>(),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
+            0, false, false, false, false),
+
     VAMPIRISME("Vampirisme", "vampirisme", 1, 1,
             ChatColor.DARK_RED,
             EnchantmentTarget.WEAPON,

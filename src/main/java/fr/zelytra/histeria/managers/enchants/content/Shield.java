@@ -41,10 +41,12 @@ public class Shield implements Listener {
             }
         }
 
+        if (totalLuck <= 0) return;
+
         if (totalLuck >= random.nextInt(0, 100)) {
             for (Player connectedPlayer : Bukkit.getOnlinePlayers())
                 connectedPlayer.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_HURT, 1, 2);
-            player.getWorld().spawnParticle(Particle.SWEEP_ATTACK, player.getLocation(), 100, 0.1, 0.1, 0.1, 0.1);
+            player.getWorld().spawnParticle(Particle.SWEEP_ATTACK, player.getLocation(), 100, 0.1, 0.8, 0.1, 0.1);
             e.setDamage(0.0);
         }
 

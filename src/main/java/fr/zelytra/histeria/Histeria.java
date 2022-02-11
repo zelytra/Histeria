@@ -366,6 +366,7 @@ public final class Histeria extends JavaPlugin {
             CustomEnchant.LIGHTNING.register();
             CustomEnchant.SHIELD.register();
             CustomEnchant.VAMPIRISME.register();
+            CustomEnchant.STUNE.register();
 
         } catch (Exception e) {
             Histeria.log("Failed to register custom enchants", LogType.ERROR);

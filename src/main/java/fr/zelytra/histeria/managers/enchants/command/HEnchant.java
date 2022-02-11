@@ -47,8 +47,9 @@ public class HEnchant implements CommandExecutor {
 
                     CustomEnchantUtils.updateCustomEnchant(item);
                     player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou enchant this item with §6§l" + PlainTextComponentSerializer.plainText().serialize(enchant.displayName(Integer.parseInt(args[1]))));
-                } catch (Exception ignored) {
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§cFailed to enchant this item");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§c"+e.getMessage());
                 }
 
                 return true;

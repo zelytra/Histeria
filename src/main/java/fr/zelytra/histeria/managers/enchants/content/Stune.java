@@ -19,10 +19,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
-public class Vampirisme implements Listener {
+public class Stune implements Listener {
 
     private final static int PROC_LUCK = 1; // Luck to proc the effect in %
     private final static Random random = new Random();
@@ -43,12 +45,12 @@ public class Vampirisme implements Listener {
             int level = CustomEnchantUtils.getLevel(item, CustomEnchant.VAMPIRISME);
 
             if (PROC_LUCK * level >= random.nextInt(0, 100)) {
-                ((LivingEntity) e.getEntity()).damage(2.0);
-
-                damager.setHealth(damager.getHealth() + 2.0 >= damager.getMaxHealth() ? damager.getMaxHealth() : damager.getHealth() + 2.0);
-                damager.getWorld().spawnParticle(Particle.GLOW, damager.getLocation(), 10, 0.1, 1, 0.1, 0.1);
+                ((LivingEntity) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,40,0));
+                ((LivingEntity) e.getEntity()).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,40,0));
+                e.getEntity().getWorld().spawnParticle(Particle.SOUL, e.getEntity().getLocation(), 50, 0.1, 1, 0.1, 0.1);
 
             }
         }
     }
+
 }
