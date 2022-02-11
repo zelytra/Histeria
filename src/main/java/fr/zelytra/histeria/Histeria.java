@@ -118,7 +118,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v3.0.2";
+    public static String version = "v3.0.3";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -365,6 +365,7 @@ public final class Histeria extends JavaPlugin {
             CustomEnchant.BLESS_OF_KEEPING.register();
             CustomEnchant.LIGHTNING.register();
             CustomEnchant.SHIELD.register();
+            CustomEnchant.VAMPIRISME.register();
 
         } catch (Exception e) {
             Histeria.log("Failed to register custom enchants", LogType.ERROR);

@@ -27,6 +27,7 @@ public class CustomEnchant extends Enchantment {
     public final static CustomEnchant BLESS_OF_KEEPING = new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING);
     public final static CustomEnchant LIGHTNING = new CustomEnchant(CustomEnchantData.LIGHTNING);
     public final static CustomEnchant SHIELD = new CustomEnchant(CustomEnchantData.SHIELD);
+    public final static CustomEnchant VAMPIRISME = new CustomEnchant(CustomEnchantData.VAMPIRISME);
 
     private final CustomEnchantData customEnchantData;
 
