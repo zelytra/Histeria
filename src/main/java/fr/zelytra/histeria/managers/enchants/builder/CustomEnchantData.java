@@ -30,7 +30,7 @@ public enum CustomEnchantData {
 
     BLESS_OF_KEEPING("Bless Of Keeping", "bless_of_keeping", 1, 1,
             ChatColor.DARK_PURPLE,
-            EnchantmentTarget.ALL,
+            EnchantmentTarget.WEAPON,
             EnchantmentRarity.VERY_RARE,
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND,EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
