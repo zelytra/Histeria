@@ -30,10 +30,36 @@ public class AnvilCustomEnchant implements Listener {
             if (!isVanillaFusion)
                 result = firstItem.clone();
 
-            if (secondItem.getItemMeta() instanceof EnchantmentStorageMeta)
-                result.addEnchantments(getCustomEnchantFusion(firstItem.getEnchantments(), ((EnchantmentStorageMeta) secondItem.getItemMeta()).getStoredEnchants()));
+            // Getting customEnchant to add
+            Map<Enchantment, Integer> enchantToAdd;
+            if (secondItem.getItemMeta() instanceof EnchantmentStorageMeta && firstItem.getItemMeta() instanceof EnchantmentStorageMeta)
+                enchantToAdd = getCustomEnchantFusion(((EnchantmentStorageMeta) firstItem.getItemMeta()).getStoredEnchants(), ((EnchantmentStorageMeta) secondItem.getItemMeta()).getStoredEnchants());
+            else if (secondItem.getItemMeta() instanceof EnchantmentStorageMeta)
+                enchantToAdd = getCustomEnchantFusion(firstItem.getEnchantments(), ((EnchantmentStorageMeta) secondItem.getItemMeta()).getStoredEnchants());
             else
-                result.addEnchantments(getCustomEnchantFusion(firstItem.getEnchantments(), secondItem.getEnchantments()));
+                enchantToAdd = getCustomEnchantFusion(firstItem.getEnchantments(), secondItem.getEnchantments());
+
+            // Check item type conflict
+            for (var enchantConflict : enchantToAdd.entrySet())
+                if (!enchantConflict.getKey().canEnchantItem(firstItem))
+                    return;
+
+
+            // Cancel handler when no enchant custom
+            if (enchantToAdd.isEmpty())
+                return;
+
+            //Adding enchant depending of result type
+            if (result.getItemMeta() instanceof EnchantmentStorageMeta) {
+                EnchantmentStorageMeta meta = (EnchantmentStorageMeta) result.getItemMeta();
+
+                for (var enchantsToAdd : enchantToAdd.entrySet())
+                    meta.addStoredEnchant(enchantsToAdd.getKey(), enchantsToAdd.getValue(), false);
+
+                result.setItemMeta(meta);
+
+            } else
+                result.addEnchantments(enchantToAdd);
 
             CustomEnchantUtils.updateCustomEnchant(result);
             e.setResult(result);

@@ -13,6 +13,7 @@ import fr.zelytra.histeria.utils.RomanNumber;
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.entity.EntityCategory;
@@ -74,7 +75,7 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public boolean canEnchantItem(@NotNull ItemStack item) {
-        return customEnchantData.target.includes(item.getType());
+        return customEnchantData.target.includes(item.getType()) || item.getType() == Material.ENCHANTED_BOOK;
     }
 
     @Override

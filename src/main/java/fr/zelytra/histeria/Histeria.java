@@ -118,7 +118,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v3.0.3";
+    public static String version = "v3.0.4";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
