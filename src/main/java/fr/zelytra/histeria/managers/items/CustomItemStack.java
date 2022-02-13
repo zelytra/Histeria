@@ -64,6 +64,7 @@ public class CustomItemStack {
                 meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, AttributeGenerator.extraHeart(material.getExtraHeart(), material.getSlot()));
                 itemData.set(durabilityKey, PersistentDataType.INTEGER, this.customMaterial.getDurability());
                 ArrayList<String> lore = new ArrayList<>();
+                lore.add("");
                 lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
                 meta.setLore(lore);
                 break;

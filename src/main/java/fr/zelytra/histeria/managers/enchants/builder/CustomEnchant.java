@@ -33,6 +33,10 @@ public class CustomEnchant extends Enchantment {
 
     private final CustomEnchantData customEnchantData;
 
+    /**
+     *  WARNING : if you wanna modificate this class a restart server and not a reloading
+     *
+     */
     public CustomEnchant(CustomEnchantData customEnchantData) {
         super(customEnchantData.getKey());
         this.customEnchantData = customEnchantData;
