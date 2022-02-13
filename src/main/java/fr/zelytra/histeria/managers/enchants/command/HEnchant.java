@@ -36,20 +36,27 @@ public class HEnchant implements CommandExecutor {
 
                 Enchantment enchant = CustomEnchant.getByKey(NamespacedKey.minecraft(args[0]));
                 ItemStack item = player.getInventory().getItemInMainHand();
+
+                int level = Integer.parseInt(args[1]);
+                if (level < enchant.getStartLevel() || level > enchant.getMaxLevel()) {
+                    LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "miscellaneous.outOfBound", String.valueOf(enchant.getMaxLevel()));
+                    return false;
+                }
+
                 try {
-                    if (item.getItemMeta() instanceof EnchantmentStorageMeta){
+                    if (item.getItemMeta() instanceof EnchantmentStorageMeta) {
                         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-                        meta.addStoredEnchant(enchant, Integer.parseInt(args[1]), false);
+                        meta.addStoredEnchant(enchant, level, false);
                         item.setItemMeta(meta);
-                    }else {
-                        item.addEnchantment(enchant, Integer.parseInt(args[1]));
+                    } else {
+                        item.addEnchantment(enchant, level);
                     }
 
                     CustomEnchantUtils.updateCustomEnchant(item);
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou enchant this item with §6§l" + PlainTextComponentSerializer.plainText().serialize(enchant.displayName(Integer.parseInt(args[1]))));
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§aYou enchant this item with §6§l" + PlainTextComponentSerializer.plainText().serialize(enchant.displayName(level)));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§c"+e.getMessage());
+                    player.sendMessage(Message.PLAYER_PREFIX.getMsg() + "§c" + e.getMessage());
                 }
 
                 return true;
