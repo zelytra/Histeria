@@ -59,6 +59,8 @@ public class ArmorsHandler implements Listener {
                 continue;
 
             CustomMaterial material = CustomItemStack.getCustomMaterial(armor);
+            if (material.getItemType() != ItemType.ARMOR) continue;
+
             DurabilityHandler durability = new DurabilityHandler(player, material, SlotEnum.getArmorSlot(armor));
             durability.iterate();
 
