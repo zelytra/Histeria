@@ -17,6 +17,7 @@ public enum Message {
     CONSOLE_PREFIX("§9[§bHisteria§9]§r "),
     HISTALERT("§9[§bHist§3Alert§9]§r "),
     HISTLOGGER("§9[§bHist§3Logger§9]§r "),
+    JOB("§8<§6Job§8>§r "),
     HISTBAN("§4[§cHistBan§4]§r ");
 
 
