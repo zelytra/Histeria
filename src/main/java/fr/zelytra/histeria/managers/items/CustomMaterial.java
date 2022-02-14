@@ -90,8 +90,8 @@ public enum CustomMaterial {
 
     BADGE_MINER("§6Miner","miner_badge",47, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
     BADGE_FARMER("§6Farmer","farmer_badge",48, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_FIGHTER("§6Miner","fighter_badge",49, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_ENCHANTER("§6Miner","miner_badge",50, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FIGHTER("§6Fighter","fighter_badge",49, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_ENCHANTER("§6Enchanter","enchanter_badge",50, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
     ;
 
 
