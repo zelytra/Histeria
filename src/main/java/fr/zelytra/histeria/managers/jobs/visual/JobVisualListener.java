@@ -70,35 +70,36 @@ public class JobVisualListener implements Listener {
         content[49] = new VisualItemStack(Material.BARRIER, "§6Back", false).getItem();
 
         // Generating progress glass display
-        int countLevel = 1;
         int levelSpace = 5;
 
-        for (int x : interfaceOrder) {
 
+        for (int x = 0; x < interfaceOrder.length; x++) {
             Material glass;
+            int glassLevel = levelSpace * (x + 1);
 
-            if (job.getLevel() >= levelSpace * countLevel && job.getLevel() < levelSpace * (countLevel + 1))
-                glass = Material.ORANGE_STAINED_GLASS_PANE;
-
-            else if (job.getLevel() >= levelSpace * countLevel)
+            //Checking job lvl of the player
+            if (job.getLevel() >= glassLevel)
                 glass = Material.LIME_STAINED_GLASS_PANE;
 
-            else glass = Material.RED_STAINED_GLASS_PANE;
+            else if (job.getLevel() < levelSpace * (x + 2) && job.getLevel() > levelSpace * x)
+                glass = Material.ORANGE_STAINED_GLASS_PANE;
 
-            content[x] = new VisualItemStack(glass,
-                    "§6Level §e" + levelSpace * countLevel,
-                    false,
-                    "§6Reward(s):").getItem();
+            else
+                glass = Material.RED_STAINED_GLASS_PANE;
+
+                // Creating display item
+                content[interfaceOrder[x]] = new VisualItemStack(glass,
+                        "§6Level §e" + glassLevel,
+                        false,
+                        "§6Reward(s):").getItem();
 
             // Adding rewards line to lore
-            ItemMeta meta = content[x].getItemMeta();
+            ItemMeta meta = content[interfaceOrder[x]].getItemMeta();
             List<String> lore = meta.getLore();
-            for (String line : job.getReward(levelSpace * countLevel))
+            for (String line : job.getReward(glassLevel))
                 lore.add("§e- " + line);
             meta.setLore(lore);
-            content[x].setItemMeta(meta);
-
-            countLevel++;
+            content[interfaceOrder[x]].setItemMeta(meta);
         }
 
 
