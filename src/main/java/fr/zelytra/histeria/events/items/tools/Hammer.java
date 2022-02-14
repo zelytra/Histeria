@@ -15,11 +15,16 @@ import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hammer implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.HAMMER;
@@ -32,6 +37,7 @@ public class Hammer implements Listener {
         if (e.isCancelled()) return;
 
         Player player = e.getPlayer();
+        List<Block> blockToBreak = new ArrayList<>();
 
 
         Location BLocation = e.getEvent().getBlock().getLocation();
@@ -42,6 +48,8 @@ public class Hammer implements Listener {
                     BLocation.setX(e.getEvent().getBlock().getX() + x);
                     BLocation.setY(e.getEvent().getBlock().getY() + y);
                     BLocation.setZ(e.getEvent().getBlock().getZ() + z);
+
+                    //if (BLocation.getBlock().getLocation() == e.getEvent().getBlock().getLocation()) continue;
 
                     if (Histeria.isSaberFaction()) {
                         FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
@@ -64,12 +72,16 @@ public class Hammer implements Listener {
                             || BLocation.getBlock().getType() == Material.CRYING_OBSIDIAN) {
                         continue;
                     }
-
-                    BLocation.getBlock().breakNaturally();
+                    blockToBreak.add(BLocation.getBlock());
 
                 }
             }
         }
+
+        MinerListener.consumeBlocksXP(player, blockToBreak);
+        for (Block blocks : blockToBreak)
+            blocks.breakNaturally(e.getItem(), true);
+
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
     }

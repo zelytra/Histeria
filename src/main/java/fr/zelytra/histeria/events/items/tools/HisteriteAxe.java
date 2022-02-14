@@ -40,7 +40,7 @@ public class HisteriteAxe implements Listener {
         Location BLocation = e.getEvent().getBlock().getLocation();
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         while (isLogBlock(BLocation.getBlock().getType())) {
-            BLocation.getBlock().breakNaturally();
+            BLocation.getBlock().breakNaturally(e.getItem(), true);
             BLocation.setY(BLocation.getY() + 1);
             durabilityHandler.iterate();
             player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);

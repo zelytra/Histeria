@@ -22,8 +22,9 @@ import java.util.List;
 
 public abstract class JobUtils {
 
-    public static void displayXP(JobType jobType, CustomPlayer player, double xp) {
-
+    public static void displayXP(JobType jobType, CustomPlayer player, int xp) {
+        System.out.println(xp);
+        if (xp <= 0) return;
         Component message = Component.text("§7[" + jobType.name() + "] §8" + player.getLang().get("jobs.xpGain") + " §7" + xp + "xp");
         player.getPlayer().sendActionBar(message);
         //player.getPlayer().playSound(player.getPlayer().getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.1f, 0.1f);

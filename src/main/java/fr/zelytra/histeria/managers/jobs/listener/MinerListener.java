@@ -9,6 +9,8 @@ import fr.zelytra.histeria.managers.player.CustomPlayer;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -17,6 +19,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class MinerListener implements Listener {
 
@@ -67,23 +70,48 @@ public class MinerListener implements Listener {
     @EventHandler
     public void onBreakBlock(BlockBreakEvent e) {
 
-        if (!xpMap.containsKey(e.getBlock().getType())) return;
-
-        // Block logger checker (to avoid player abuse place and break abuse for infinite xp)
-        PersistentDataContainer chunkData = e.getBlock().getChunk().getPersistentDataContainer();
-        if (chunkData.has(generateLocKey(e.getBlock().getLocation()))) {
-            chunkData.remove(generateLocKey(e.getBlock().getLocation()));
-            return;
-        }
+        if (!canConsumeBlock(e.getBlock())) return;
 
         CustomPlayer player = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
         if (player == null) return;
 
         Miner job = (Miner) player.getJob(JobType.MINER);
-        double xp = xpMap.get(e.getBlock().getType());
+        int xp = xpMap.get(e.getBlock().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);
+
+    }
+
+    private static boolean canConsumeBlock(Block block) {
+        if (!xpMap.containsKey(block.getType())) return false;
+
+        // Block logger checker (to avoid player abuse place and break abuse for infinite xp)
+        PersistentDataContainer chunkData = block.getChunk().getPersistentDataContainer();
+        if (chunkData.has(generateLocKey(block.getLocation()))) {
+            chunkData.remove(generateLocKey(block.getLocation()));
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static void consumeBlocksXP(Player player, List<Block> blocksList) {
+
+        CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
+        if (player == null) return;
+
+        Miner job = (Miner) customPlayer.getJob(JobType.MINER);
+        int xp = 0;
+
+        for (Block block : blocksList) {
+            if (!canConsumeBlock(block)) continue;
+            xp += xpMap.get(block.getType());
+        }
+
+        if (job.consumeXP(xp, customPlayer))
+            JobUtils.displayXP(job.getJob(), customPlayer, xp);
 
     }
 
@@ -101,7 +129,7 @@ public class MinerListener implements Listener {
 
     }
 
-    private NamespacedKey generateLocKey(Location location) {
+    private static NamespacedKey generateLocKey(Location location) {
         return new NamespacedKey(Histeria.getInstance(), location.getBlockX() + "_" + location.getBlockY() + "_" + location.getBlockZ());
     }
 

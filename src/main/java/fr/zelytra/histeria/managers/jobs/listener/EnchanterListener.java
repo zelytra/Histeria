@@ -60,7 +60,7 @@ public class EnchanterListener implements Listener {
     @EventHandler
     public void onEnchant(EnchantItemEvent e) {
 
-        double xp = 0;
+        int xp = 0;
 
         CustomPlayer player = CustomPlayer.getCustomPlayer(e.getEnchanter().getName());
         if (player == null) return;

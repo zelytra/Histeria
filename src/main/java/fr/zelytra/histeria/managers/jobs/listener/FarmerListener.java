@@ -74,7 +74,7 @@ public class FarmerListener implements Listener {
         if (player == null) return;
 
         Farmer job = (Farmer) player.getJob(JobType.FARMER);
-        double xp = seedXpMap.get(e.getBlock().getType());
+        int xp = seedXpMap.get(e.getBlock().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);
@@ -93,7 +93,7 @@ public class FarmerListener implements Listener {
         if (player == null) return;
 
         Farmer job = (Farmer) player.getJob(JobType.FARMER);
-        double xp = entityXpMap.get(e.getEntity().getType());
+        int xp = entityXpMap.get(e.getEntity().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);
@@ -118,7 +118,7 @@ public class FarmerListener implements Listener {
         if (player == null) return;
 
         Farmer job = (Farmer) player.getJob(JobType.FARMER);
-        double xp = blockXpMap.get(e.getBlock().getType());
+        int xp = blockXpMap.get(e.getBlock().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);

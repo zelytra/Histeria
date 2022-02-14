@@ -76,7 +76,7 @@ public class FighterListener implements Listener {
         if (player == null) return;
 
         Fighter job = (Fighter) player.getJob(JobType.FIGHTER);
-        double xp = entityXpMap.get(e.getEntity().getType());
+        int xp = entityXpMap.get(e.getEntity().getType());
 
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);

@@ -15,11 +15,15 @@ import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class HisteritePickaxe implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.HISTERITE_PICKAXE;
@@ -57,7 +61,9 @@ public class HisteritePickaxe implements Listener {
             return;
         }
 
-        BLocation.getBlock().breakNaturally();
+        MinerListener.consumeBlocksXP(player,new ArrayList<>(Arrays.asList(BLocation.getBlock())));
+        BLocation.getBlock().breakNaturally(e.getItem(), true);
+
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
 
