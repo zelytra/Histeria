@@ -17,6 +17,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -49,12 +50,12 @@ public class CoreMiningDrill implements Listener {
 
     @EventHandler
     public void openDrill(PlayerInteractEvent e) {
-        if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getHand() != EquipmentSlot.HAND) return;
         if (e.getClickedBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
 
         MiningDrill drill = MiningDrill.getDrill(e.getClickedBlock());
         if (drill == null) return;
-
+        System.out.println("trigger");
         drill.openUI(e.getPlayer());
 
     }
@@ -91,15 +92,15 @@ class MiningDrill {
     public String viewer = null;
 
     {
-        oreContainerList.add(new OreContainer(Material.RAW_COPPER, 1));
-        oreContainerList.add(new OreContainer(Material.RAW_IRON, 1));
+        oreContainerList.add(new OreContainer(Material.RAW_COPPER, 15));
+        oreContainerList.add(new OreContainer(Material.RAW_IRON, 15));
         oreContainerList.add(new OreContainer(Material.RAW_GOLD, 1));
-        oreContainerList.add(new OreContainer(Material.COAL, 1));
-        oreContainerList.add(new OreContainer(Material.DIAMOND, 1));
+        oreContainerList.add(new OreContainer(Material.COAL, 20));
+        oreContainerList.add(new OreContainer(Material.DIAMOND, 5));
         oreContainerList.add(new OreContainer(Material.ANCIENT_DEBRIS, 1));
-        oreContainerList.add(new OreContainer(Material.AMETHYST_SHARD, 1));
-        oreContainerList.add(new OreContainer(Material.QUARTZ, 1));
-        oreContainerList.add(new OreContainer(Material.LAPIS_LAZULI, 1));
+        oreContainerList.add(new OreContainer(Material.AMETHYST_SHARD, 10));
+        oreContainerList.add(new OreContainer(Material.QUARTZ, 10));
+        oreContainerList.add(new OreContainer(Material.LAPIS_LAZULI, 25));
     }
 
     public MiningDrill(Block block) {
@@ -123,11 +124,12 @@ class MiningDrill {
      */
     public void draw(long now) {
         int drawCount = (int) (((now / 3600) - timeFromLastPickup) / drawTime);
-
+        if (drawCount == 0) return;
+        System.out.println(drawCount);
         for (int count = 0; count <= drawCount; count++) {
             for (OreContainer ore : oreContainerList) {
 
-                if (ore.luck <= random.nextInt(0, 100))
+                if (ore.luck >= random.nextInt(0, 100))
                     ore.increment();
 
             }
@@ -183,6 +185,7 @@ class MiningDrill {
     public void updateOreCount(ItemStack[] content) {
         timeFromLastPickup = System.currentTimeMillis() / 3600;
         for (ItemStack item : content) {
+            if (item == null) continue;
             for (OreContainer container : oreContainerList) {
                 if (container.ore == item.getType()) {
                     container.count = item.getAmount();
