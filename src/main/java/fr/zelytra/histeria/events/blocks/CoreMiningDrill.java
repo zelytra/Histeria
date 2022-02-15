@@ -50,12 +50,13 @@ public class CoreMiningDrill implements Listener {
 
     @EventHandler
     public void openDrill(PlayerInteractEvent e) {
-        if (e.getAction() != Action.RIGHT_CLICK_BLOCK && e.getHand() != EquipmentSlot.HAND) return;
+        if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
+        if (e.getHand() != EquipmentSlot.HAND) return;
         if (e.getClickedBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
 
         MiningDrill drill = MiningDrill.getDrill(e.getClickedBlock());
         if (drill == null) return;
-        System.out.println("trigger");
+
         drill.openUI(e.getPlayer());
 
     }
@@ -88,7 +89,7 @@ class MiningDrill {
     private final Block block;
 
     private long timeFromLastPickup; // in secondes
-    private final int drawTime = 2; //Time in seconds to wait before new draw
+    private final int drawTime = 1; //Time in seconds to wait before new draw
     public String viewer = null;
 
     {
@@ -123,18 +124,20 @@ class MiningDrill {
      * @param now Current time in millis
      */
     public void draw(long now) {
-        int drawCount = (int) (((now / 3600) - timeFromLastPickup) / drawTime);
+        double timePaste = (now / 3600) - timeFromLastPickup;
+        int drawCount = (int) (timePaste / drawTime);
         if (drawCount == 0) return;
-        System.out.println(drawCount);
-        for (int count = 0; count <= drawCount; count++) {
+
+        timeFromLastPickup = System.currentTimeMillis() / 3600;
+
+        for (int count = 0; count < drawCount; count++) {
             for (OreContainer ore : oreContainerList) {
-
-                if (ore.luck >= random.nextInt(0, 100))
+                if (ore.luck >= random.nextInt(0, 100)) {
                     ore.increment();
-
+                    break;
+                }
             }
         }
-
     }
 
     private static NamespacedKey keyBuilder(@NotNull Location location) {
@@ -183,15 +186,15 @@ class MiningDrill {
     }
 
     public void updateOreCount(ItemStack[] content) {
-        timeFromLastPickup = System.currentTimeMillis() / 3600;
+        for (OreContainer container : oreContainerList)
+            container.count = 0;
+
         for (ItemStack item : content) {
             if (item == null) continue;
             for (OreContainer container : oreContainerList) {
                 if (container.ore == item.getType()) {
                     container.count = item.getAmount();
-                    break;
                 }
-                container.count = 0;
             }
         }
     }

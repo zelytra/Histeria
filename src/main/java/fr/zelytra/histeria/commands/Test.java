@@ -27,7 +27,7 @@ public class Test implements CommandExecutor {
         //player.getInventory().getItemInMainHand().addEnchantment(Enchantment.DAMAGE_ALL,1);
         //player.getInventory().getItemInMainHand().addEnchantment(CustomEnchant.BLESS_OF_KEEPING,1);
         //player.getInventory().setItemInMainHand(Utils.BookEnchantedItemStack(player.getInventory().getItemInMainHand(), Enchantment.DAMAGE_ALL, 1));
-        System.out.println(player.getInventory().getItemInMainHand());
+        System.out.println(player.getLocation().getChunk().getPersistentDataContainer().getKeys());
         return true;
 
     }
