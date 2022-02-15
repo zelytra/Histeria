@@ -129,7 +129,7 @@ public class Hologram implements Serializable {
 
         }
 
-        Histeria.log(holograms.size() + "§a Holograms has been saved", LogType.INFO);
+        Histeria.log(holograms.size() + " holograms has been saved", LogType.INFO);
     }
 
     public static void load() {

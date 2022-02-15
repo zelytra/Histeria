@@ -1,92 +1,38 @@
-package fr.zelytra.histeria.events.blocks;
+/*
+ * Copyright (c) 2022.
+ * Made by Zelytra :
+ *  - Website : https://zelytra.fr
+ *  - GitHub : http://github.zelytra.fr
+ *
+ * All right reserved
+ */
+
+package fr.zelytra.histeria.events.blocks.miningDrill;
 
 import fr.zelytra.histeria.Histeria;
-import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
 import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
-import fr.zelytra.histeria.managers.items.CustomMaterial;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CoreMiningDrill implements Listener {
+class MiningDrill implements Serializable {
 
-    private final static int LOCKING_AREA_XYZ = 3; //Locking area
-
-    @EventHandler
-    public void drillPlace(BlockPlaceEvent e) {
-        if (e.getBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
-        //TODO handle space between other blocks
-        //TODO handle place on bedrock block
-        new MiningDrill(e.getBlock());
-    }
-
-    @EventHandler
-    public void drillBreak(BlockBreakEvent e) {
-        if (e.getBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
-
-        MiningDrill drill = MiningDrill.getDrill(e.getBlock());
-        if (drill == null) return;
-
-        drill.destroy();
-    }
-
-    @EventHandler
-    public void openDrill(PlayerInteractEvent e) {
-        if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
-        if (e.getHand() != EquipmentSlot.HAND) return;
-        if (e.getClickedBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
-
-        MiningDrill drill = MiningDrill.getDrill(e.getClickedBlock());
-        if (drill == null) return;
-
-        drill.openUI(e.getPlayer());
-
-    }
-
-    @EventHandler
-    public void drillInventoryClose(InventoryCloseEvent e) {
-        if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals("§6Mining Drill")) {
-
-            MiningDrill drill = MiningDrill.getDrill(e.getPlayer().getName());
-            if (drill == null) return;
-
-            drill.viewer = null;
-            drill.updateOreCount(e.getInventory().getContents());
-        }
-    }
-
-    //TODO Handle piston move events
-
-
-}
-
-class MiningDrill {
-
-    private final static Map<UUID, MiningDrill> miningDrillInstance = new HashMap<>();
-    private final static Random random = new Random();
+    public final static Map<UUID, MiningDrill> miningDrillInstance = new HashMap<>();
+    private final transient static Random random = new Random();
 
     private final List<OreContainer> oreContainerList = new ArrayList<>();
     private final UUID uuid = UUID.randomUUID();
-    private final NamespacedKey idKey;
-    private final Block block;
 
     private long timeFromLastPickup; // in secondes
     private final int drawTime = 1; //Time in seconds to wait before new draw
@@ -106,13 +52,11 @@ class MiningDrill {
 
     public MiningDrill(Block block) {
 
-        this.idKey = keyBuilder(block.getLocation());
-        this.block = block;
         this.timeFromLastPickup = System.currentTimeMillis() / 3600;
 
         // Righting uuid in chunk PDC
         PersistentDataContainer dataContainer = block.getChunk().getPersistentDataContainer();
-        dataContainer.set(idKey, PersistentDataType.STRING, uuid.toString());
+        dataContainer.set(keyBuilder(block.getLocation()), PersistentDataType.STRING, uuid.toString());
 
         miningDrillInstance.put(uuid, this);
 
@@ -144,9 +88,9 @@ class MiningDrill {
         return new NamespacedKey(Histeria.getInstance(), location.getX() + "_" + location.getY() + "_" + location.getZ());
     }
 
-    public void destroy() {
+    public void destroy(Block block) {
         PersistentDataContainer dataContainer = block.getChunk().getPersistentDataContainer();
-        dataContainer.remove(idKey);
+        dataContainer.remove(keyBuilder(block.getLocation()));
         miningDrillInstance.remove(uuid);
     }
 
@@ -198,22 +142,8 @@ class MiningDrill {
             }
         }
     }
-}
 
-class OreContainer {
-
-    public final Material ore;
-    public final int luck;
-    public int count = 0;
-
-    public OreContainer(Material material, int luck) {
-        this.ore = material;
-        this.luck = luck;
-    }
-
-    public void increment() {
-        if (count <= ore.getMaxStackSize())
-            count++;
+    public UUID getUuid() {
+        return uuid;
     }
 }
-

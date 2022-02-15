@@ -51,6 +51,7 @@ import fr.zelytra.histeria.commands.worldSpawn.WorldSpawn;
 import fr.zelytra.histeria.events.EventManager;
 import fr.zelytra.histeria.events.antiCheat.ClickLogger;
 import fr.zelytra.histeria.events.antiCheat.XRayDetector;
+import fr.zelytra.histeria.events.blocks.miningDrill.DrillDataPersistor;
 import fr.zelytra.histeria.managers.afk.Afk;
 import fr.zelytra.histeria.managers.arena.ArenaChest;
 import fr.zelytra.histeria.managers.arena.ArenaCommand;
@@ -118,7 +119,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v3.0.4";
+    public static String version = "v3.0.5";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -171,6 +172,7 @@ public final class Histeria extends JavaPlugin {
         NPC.loadAll();
         ArenaChest.loadAll();
         Hologram.load();
+        DrillDataPersistor.load();
         autoReboot();
 
         logs.log("Histeria successfully start", LogType.INFO);
@@ -196,6 +198,7 @@ public final class Histeria extends JavaPlugin {
         NPC.saveAll();
         ArenaChest.saveAll();
         Hologram.save();
+        DrillDataPersistor.saveAll();
         configurationManager.unload();
 
         if (mySQL.isConnected())
