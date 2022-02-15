@@ -70,6 +70,7 @@ public enum CustomMaterial {
     LOOT_BOX("loot_box", Material.END_PORTAL_FRAME, ItemType.BLOCK),
     CAVE_BLOCK("cave_block", Material.CRACKED_NETHER_BRICKS, ItemType.BLOCK),
     CRUSHING_TABLE("crushing_table", Material.FLETCHING_TABLE, ItemType.BLOCK),
+    CORE_MINING_DRILL("core_mining_drill", Material.INFESTED_CRACKED_STONE_BRICKS, ItemType.BLOCK),
 
 
     HISTERITE_HELMET("§cHisterite Helmet", "histerite_helmet", "Durabilité: 1600#Effet: Night Vision", 20, Material.LEATHER_HELMET, ItemType.ARMOR, 1600, 5, 2, EquipmentSlot.HEAD, new PotionEffect(PotionEffectType.NIGHT_VISION, 999999, 0, false, false, true)),

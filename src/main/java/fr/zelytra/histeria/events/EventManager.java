@@ -21,10 +21,7 @@ import fr.zelytra.histeria.commands.worldSpawn.WorldSpawnListener;
 import fr.zelytra.histeria.events.antiCheat.ClickLogger;
 import fr.zelytra.histeria.events.antiCheat.FlyDetector;
 import fr.zelytra.histeria.events.antiCheat.XRayDetector;
-import fr.zelytra.histeria.events.blocks.Elevator;
-import fr.zelytra.histeria.events.blocks.LootBox;
-import fr.zelytra.histeria.events.blocks.LuckyBlock;
-import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
+import fr.zelytra.histeria.events.blocks.*;
 import fr.zelytra.histeria.events.environement.*;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
 import fr.zelytra.histeria.events.items.armors.NocturiteBoots;
@@ -127,6 +124,7 @@ public class EventManager {
         pm.registerEvents(new LuckyBlock(), pl);
         pm.registerEvents(new NocturiteGenerator(), pl);
         pm.registerEvents(new LootBox(), pl);
+        pm.registerEvents(new CoreMiningDrill(), pl);
 
         /* Environment */
         pm.registerEvents(new ShulkerStorage(), pl);
