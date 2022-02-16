@@ -89,10 +89,10 @@ public enum CustomMaterial {
     BUY_BUTTON("§aBuy","buy_button",45, Material.MUTTON, ItemType.SPECIAL),
     VALIDAY("§aConfirm","validay",46, Material.SLIME_BALL, ItemType.SPECIAL),
 
-    BADGE_MINER("§6Miner","miner_badge",47, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_FARMER("§6Farmer","farmer_badge",48, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_FIGHTER("§6Fighter","fighter_badge",49, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_ENCHANTER("§6Enchanter","enchanter_badge",50, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_MINER("§6Miner","miner_badge",54, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FARMER("§6Farmer","farmer_badge",52, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FIGHTER("§6Fighter","fighter_badge",53, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_ENCHANTER("§6Enchanter","enchanter_badge",51, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
     ;
 
 
