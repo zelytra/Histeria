@@ -11,11 +11,10 @@ package fr.zelytra.histeria.events.blocks.miningDrill;
 
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -51,6 +50,8 @@ public class MiningDrillListener implements Listener {
         MiningDrill drill = MiningDrill.getDrill(e.getClickedBlock());
         if (drill == null) return;
 
+        if (drill.viewer != null) return;
+
         drill.openUI(e.getPlayer());
 
     }
@@ -67,7 +68,23 @@ public class MiningDrillListener implements Listener {
         }
     }
 
-    //TODO Handle piston move events
+    @EventHandler
+    public void pistonExtendEvent(BlockPistonExtendEvent e) {
+        for (Block block : e.getBlocks()) {
+            if (block.getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) {
+                e.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void pistonRetractEvent(BlockPistonRetractEvent e) {
+        for (Block block : e.getBlocks()) {
+            if (block.getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) {
+                e.setCancelled(true);
+            }
+        }
+    }
 
 
 }

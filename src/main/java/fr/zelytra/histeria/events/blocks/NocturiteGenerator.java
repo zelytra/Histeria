@@ -69,8 +69,8 @@ public class NocturiteGenerator implements Listener {
 
     @EventHandler
     public void pistonExtendEvent(BlockPistonExtendEvent e) {
-        for (Block block:e.getBlocks()) {
-            if(block.getType()==CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()){
+        for (Block block : e.getBlocks()) {
+            if (block.getType() == CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()) {
                 e.setCancelled(true);
             }
         }
@@ -78,8 +78,8 @@ public class NocturiteGenerator implements Listener {
 
     @EventHandler
     public void pistonRetractEvent(BlockPistonRetractEvent e) {
-        for (Block block:e.getBlocks()) {
-            if(block.getType()==CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()){
+        for (Block block : e.getBlocks()) {
+            if (block.getType() == CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial()) {
                 e.setCancelled(true);
             }
         }
