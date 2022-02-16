@@ -31,7 +31,7 @@ public class HEnchant implements CommandExecutor {
             help.printPlayer(player);
             return true;
 
-        } else if (args.length == 2 && Utils.isNumeric(args[1])) {
+        } else if (args.length == 2 && Utils.isInteger(args[1])) {
             if (CustomEnchant.getByKey(NamespacedKey.minecraft(args[0])) != null && CustomEnchantUtils.isCustom(CustomEnchant.getByKey(NamespacedKey.minecraft(args[0])))) {
 
                 Enchantment enchant = CustomEnchant.getByKey(NamespacedKey.minecraft(args[0]));

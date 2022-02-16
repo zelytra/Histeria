@@ -69,6 +69,18 @@ public abstract class Utils {
         return true;
     }
 
+    public static boolean isInteger(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(strNum);
+        } catch (NumberFormatException ignored) {
+            return false;
+        }
+        return true;
+    }
+
     public static int getEmptySlots(Player player) {
         int i = 0;
         for (ItemStack is : player.getInventory().getContents()) {
