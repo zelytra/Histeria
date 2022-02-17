@@ -34,8 +34,7 @@ public class CustomEnchant extends Enchantment {
     private final CustomEnchantData customEnchantData;
 
     /**
-     *  WARNING : if you wanna modificate this class a restart server and not a reloading
-     *
+     * WARNING : if you wanna modificate this class a restart server and not a reloading
      */
     public CustomEnchant(CustomEnchantData customEnchantData) {
         super(customEnchantData.getKey());
@@ -102,7 +101,7 @@ public class CustomEnchant extends Enchantment {
 
     @Override
     public @NotNull EnchantmentRarity getRarity() {
-        return customEnchantData.rarity;
+        return EnchantmentRarity.VERY_RARE;
     }
 
     @Override
@@ -125,12 +124,20 @@ public class CustomEnchant extends Enchantment {
         return super.key();
     }
 
+    public static CustomEnchant[] values() {
+        return null;
+    }
+
     public void register() {
         try {
             registerEnchantment(this);
         } catch (Exception ignored) {
 
         }
+    }
+
+    public CustomEnchantData getData() {
+        return customEnchantData;
     }
 
 }

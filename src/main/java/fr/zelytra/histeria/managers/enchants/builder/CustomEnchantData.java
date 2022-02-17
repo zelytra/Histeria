@@ -23,7 +23,7 @@ public enum CustomEnchantData {
     LIGHTNING("Lightning", "lightning", 1, 2,
             ChatColor.BLUE,
             EnchantmentTarget.WEAPON,
-            EnchantmentRarity.VERY_RARE,
+            new EnchantRarity(24,4,EnchantmentRarity.VERY_RARE.getWeight(),30),
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false),
@@ -31,7 +31,7 @@ public enum CustomEnchantData {
     BLESS_OF_KEEPING("Bless Of Keeping", "bless_of_keeping", 1, 1,
             ChatColor.DARK_PURPLE,
             EnchantmentTarget.WEAPON,
-            EnchantmentRarity.VERY_RARE,
+            new EnchantRarity(30,0,EnchantmentRarity.VERY_RARE.getWeight(),30),
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND,EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
             0, false, false, false, false),
@@ -39,7 +39,7 @@ public enum CustomEnchantData {
     STUNE("Stune", "stune", 1, 5,
             ChatColor.GRAY,
             EnchantmentTarget.WEAPON,
-            EnchantmentRarity.UNCOMMON,
+            new EnchantRarity(1,5,EnchantmentRarity.UNCOMMON.getWeight(),30),
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false),
@@ -47,7 +47,7 @@ public enum CustomEnchantData {
     VAMPIRISME("Vampirisme", "vampirisme", 1, 1,
             ChatColor.DARK_RED,
             EnchantmentTarget.WEAPON,
-            EnchantmentRarity.VERY_RARE,
+            new EnchantRarity(30,0,EnchantmentRarity.VERY_RARE.getWeight(),30),
             new ArrayList<>(),
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false),
@@ -55,10 +55,12 @@ public enum CustomEnchantData {
     SHIELD("Shield", "shield", 1, 3,
             ChatColor.AQUA,
             EnchantmentTarget.WEARABLE,
-            EnchantmentRarity.VERY_RARE,
+            new EnchantRarity(16,3,EnchantmentRarity.VERY_RARE.getWeight(),30),
             new ArrayList<>(Arrays.asList(Enchantment.THORNS)),
             new HashSet<>(Arrays.asList(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
             0, false, false, false, false);
+
+    //TODO Cursed of fucked up (clear all enchant and lock forever then enchant of the item)
 
 
     public String name;
@@ -67,7 +69,8 @@ public enum CustomEnchantData {
 
     public ChatColor color;
     public EnchantmentTarget target;
-    public EnchantmentRarity rarity;
+    public EnchantRarity enchantRarity;
+
 
     public List<Enchantment> conflicts;
     public Set<EquipmentSlot> activeSlot;
@@ -75,14 +78,14 @@ public enum CustomEnchantData {
     public float damageIncrease;
     public boolean isTreasure, isCursed, isTradeable, isDiscoverable;
 
-    CustomEnchantData(String name, String tag, int minLvl, int maxLvl, ChatColor color, EnchantmentTarget target, EnchantmentRarity rarity, List<Enchantment> conflicts, Set<EquipmentSlot> activeSlot, float damageIncrease, boolean isTreasure, boolean isCursed, boolean isTradeable, boolean isDiscoverable) {
+    CustomEnchantData(String name, String tag, int minLvl, int maxLvl, ChatColor color, EnchantmentTarget target, EnchantRarity rarity, List<Enchantment> conflicts, Set<EquipmentSlot> activeSlot, float damageIncrease, boolean isTreasure, boolean isCursed, boolean isTradeable, boolean isDiscoverable) {
         this.name = name;
         this.tag = tag;
         this.maxLvl = maxLvl;
         this.minLvl = minLvl;
         this.color = color;
         this.target = target;
-        this.rarity = rarity;
+        this.enchantRarity = rarity;
         this.conflicts = conflicts;
         this.activeSlot = activeSlot;
         this.damageIncrease = damageIncrease;
