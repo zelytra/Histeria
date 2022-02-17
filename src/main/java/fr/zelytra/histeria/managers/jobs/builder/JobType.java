@@ -14,10 +14,10 @@ import fr.zelytra.histeria.managers.visual.chat.Emote;
 
 public enum JobType {
 
-    MINER(Emote.FIGHT, CustomMaterial.BADGE_MINER),
-    FARMER(Emote.FIGHT, CustomMaterial.BADGE_FARMER),
-    ENCHANTER(Emote.FIGHT, CustomMaterial.BADGE_ENCHANTER),
-    FIGHTER(Emote.FIGHT, CustomMaterial.BADGE_FIGHTER);
+    MINER(Emote.MINER_LEVEL_UP, CustomMaterial.BADGE_MINER),
+    FARMER(Emote.FARMER_LEVEL_UP, CustomMaterial.BADGE_FARMER),
+    ENCHANTER(Emote.ENCHANTER_LEVEL_UP, CustomMaterial.BADGE_ENCHANTER),
+    FIGHTER(Emote.FIGHTER_LEVEL_UP, CustomMaterial.BADGE_FIGHTER);
 
     public final Emote badge;
     public final CustomMaterial item;

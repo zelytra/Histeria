@@ -43,7 +43,13 @@ public enum Emote {
 
     WWW("\u9019", ":null", EmoteType.ICON),
     DISCORD("\u9020", ":null", EmoteType.ICON),
-    SHOP("\u9021", ":null", EmoteType.ICON);
+    SHOP("\u9021", ":null", EmoteType.ICON),
+
+    FIGHTER_LEVEL_UP("\u9026",":null",EmoteType.ICON),
+    MINER_LEVEL_UP("\u9027",":null",EmoteType.ICON),
+    FARMER_LEVEL_UP("\u9025",":null",EmoteType.ICON),
+    ENCHANTER_LEVEL_UP("\u9024",":null",EmoteType.ICON),
+    ;
 
 
 
