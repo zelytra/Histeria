@@ -22,7 +22,7 @@ public class PluginList implements Listener {
 
     @EventHandler
     public void onPluginList(PlayerCommandPreprocessEvent e) {
-        if (e.getMessage().contains("/plugins")) {
+        if (e.getMessage().contains("/plugins")||e.getMessage().contains("/pl")) {
             e.setCancelled(true);
             e.getPlayer().sendMessage("§8---------------§6 [ Histeria ] §8---------------");
             LangMessage.sendMessage(e.getPlayer(), "", "command.pluginList1", "");
