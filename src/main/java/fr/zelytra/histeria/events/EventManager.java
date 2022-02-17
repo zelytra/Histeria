@@ -114,6 +114,7 @@ public class EventManager {
         pm.registerEvents(new HisteriteShovel(), pl);
         pm.registerEvents(new HisteriteSword(), pl);
         pm.registerEvents(new NocturiteSword(), pl);
+        pm.registerEvents(new AntiNocturiteSword(), pl);
 
         /* Armor */
         pm.registerEvents(new ArmorListener(pl.getConfig().getStringList("blocked")), pl);
