@@ -29,7 +29,7 @@ public class EnchantingTableCustomEnchant implements Listener {
 
         //TODO Handle custom enchant draw
 
-        e.getItem().addEnchantment(CustomEnchant.BLESS_OF_KEEPING,1);
+        e.getItem().addEnchantment(CustomEnchant.BLESS_OF_KEEPING, 1);
         CustomEnchantUtils.updateCustomEnchant(e.getItem());
 
     }

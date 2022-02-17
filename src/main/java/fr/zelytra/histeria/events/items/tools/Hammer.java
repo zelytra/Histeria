@@ -49,8 +49,6 @@ public class Hammer implements Listener {
                     BLocation.setY(e.getEvent().getBlock().getY() + y);
                     BLocation.setZ(e.getEvent().getBlock().getZ() + z);
 
-                    //if (BLocation.getBlock().getLocation() == e.getEvent().getBlock().getLocation()) continue;
-
                     if (Histeria.isSaberFaction()) {
                         FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
                         FLocation fLoc = new FLocation(BLocation);
@@ -77,7 +75,7 @@ public class Hammer implements Listener {
                 }
             }
         }
-
+        e.setCancelled(true);
         MinerListener.consumeBlocksXP(player, blockToBreak);
         for (Block blocks : blockToBreak)
             blocks.breakNaturally(e.getItem(), true);

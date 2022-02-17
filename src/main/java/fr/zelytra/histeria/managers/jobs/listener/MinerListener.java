@@ -71,6 +71,7 @@ public class MinerListener implements Listener {
     public void onBreakBlock(BlockBreakEvent e) {
 
         if (!canConsumeBlock(e.getBlock())) return;
+        if (e.isCancelled()) return;
 
         CustomPlayer player = CustomPlayer.getCustomPlayer(e.getPlayer().getName());
         if (player == null) return;
