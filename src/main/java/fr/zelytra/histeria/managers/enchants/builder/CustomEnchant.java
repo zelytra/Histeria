@@ -21,6 +21,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class CustomEnchant extends Enchantment {
@@ -31,6 +33,7 @@ public class CustomEnchant extends Enchantment {
     public final static CustomEnchant VAMPIRISME = new CustomEnchant(CustomEnchantData.VAMPIRISME);
     public final static CustomEnchant STUNE = new CustomEnchant(CustomEnchantData.STUNE);
 
+    private static final List<Enchantment> enchants = new ArrayList<>();
     private final CustomEnchantData customEnchantData;
 
     /**
@@ -124,12 +127,17 @@ public class CustomEnchant extends Enchantment {
         return super.key();
     }
 
-    public static CustomEnchant[] values() {
-        return null;
+    public static Enchantment[] values() {
+        Enchantment[] enchantList = new CustomEnchant[enchants.size()];
+        for (int x = 0; x < enchantList.length; x++)
+            enchantList[x] = enchants.get(x);
+        return enchantList;
+
     }
 
     public void register() {
         try {
+            enchants.add(this);
             registerEnchantment(this);
         } catch (Exception ignored) {
 
