@@ -25,11 +25,16 @@ public class ShapedRecipeBuilder {
 
     private final ShapedRecipe shapedRecipe;
     private final NamespacedKey itemKey;
-    private final CustomMaterial material;
+    private CustomMaterial material;
     private int amount = 1;
 
     public ShapedRecipeBuilder(CustomMaterial material) {
         this.material = material;
+        this.itemKey = new NamespacedKey(Histeria.getInstance(), material.getName());
+        this.shapedRecipe = new ShapedRecipe(this.itemKey, new CustomItemStack(material, amount).getItem());
+    }
+
+    public ShapedRecipeBuilder(ItemStack item) {
         this.itemKey = new NamespacedKey(Histeria.getInstance(), material.getName());
         this.shapedRecipe = new ShapedRecipe(this.itemKey, new CustomItemStack(material, amount).getItem());
     }

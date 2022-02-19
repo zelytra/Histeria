@@ -52,6 +52,7 @@ import fr.zelytra.histeria.managers.market.shop.ShopListener;
 import fr.zelytra.histeria.managers.market.stand.StandListener;
 import fr.zelytra.histeria.managers.npc.listener.NPCListener;
 import fr.zelytra.histeria.managers.pvp.PvPLogger;
+import fr.zelytra.histeria.managers.spawner.EntityEggListener;
 import fr.zelytra.histeria.managers.visual.chat.ChatListener;
 import net.luckperms.api.event.EventBus;
 import net.luckperms.api.event.user.UserDataRecalculateEvent;
@@ -145,6 +146,7 @@ public class EventManager {
         pm.registerEvents(new TexturePack(), pl);
         pm.registerEvents(new MobSpawnArmor(), pl);
         pm.registerEvents(new VillagerTrade(), pl);
+        pm.registerEvents(new EntityEggListener(), pl);
 
         /* Anti-Cheat */
         pm.registerEvents(new FlyDetector(), pl);

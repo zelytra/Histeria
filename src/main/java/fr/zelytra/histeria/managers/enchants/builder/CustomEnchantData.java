@@ -52,6 +52,14 @@ public enum CustomEnchantData {
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
             0, false, false, false, false),
 
+    PHOENIX_BIRTH("Pheonix Birth", "pheonix_birth", 1, 1,
+            ChatColor.DARK_RED,
+            EnchantmentTarget.WEAPON,
+            new EnchantRarity(30,0,EnchantmentRarity.VERY_RARE.getWeight(),30),
+            new ArrayList<>(),
+            new HashSet<>(Arrays.asList(EquipmentSlot.HAND)),
+            0, false, false, false, false),
+
     SHIELD("Shield", "shield", 1, 3,
             ChatColor.AQUA,
             EnchantmentTarget.WEARABLE,

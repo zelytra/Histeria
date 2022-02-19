@@ -32,6 +32,7 @@ public class CustomEnchant extends Enchantment {
     public final static CustomEnchant SHIELD = new CustomEnchant(CustomEnchantData.SHIELD);
     public final static CustomEnchant VAMPIRISME = new CustomEnchant(CustomEnchantData.VAMPIRISME);
     public final static CustomEnchant STUNE = new CustomEnchant(CustomEnchantData.STUNE);
+    public final static CustomEnchant PHOENIX_BIRTH = new CustomEnchant(CustomEnchantData.PHOENIX_BIRTH);
 
     private static final List<Enchantment> enchants = new ArrayList<>();
     private final CustomEnchantData customEnchantData;

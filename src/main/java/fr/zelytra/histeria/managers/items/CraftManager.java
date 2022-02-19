@@ -12,14 +12,14 @@ package fr.zelytra.histeria.managers.items;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.customCraft.ShapeLessRecipeBuilder;
 import fr.zelytra.histeria.builder.customCraft.ShapedRecipeBuilder;
+import fr.zelytra.histeria.managers.spawner.EntityEgg;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.BlastingRecipe;
-import org.bukkit.inventory.FurnaceRecipe;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
+import org.bukkit.block.CreatureSpawner;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.List;
 
@@ -284,8 +284,25 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.NOCTURITE_CORE);
         shapedRecipeBuilder.register();
 
-        Bukkit.getServer().addRecipe(new FurnaceRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore1"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5,180));
-        Bukkit.getServer().addRecipe(new BlastingRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore2"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(),(float) 1.5, 100));
+        // Spawners register
+        for (EntityEgg entityEgg : EntityEgg.values()) {
+            ItemStack spawner = new ItemStack(Material.SPAWNER);
+            BlockStateMeta bsm = (BlockStateMeta) spawner.getItemMeta();
+            CreatureSpawner cs = (CreatureSpawner) bsm.getBlockState();
+
+            cs.setSpawnedType(entityEgg.entity);
+            bsm.setBlockState(cs);
+            spawner.setItemMeta(bsm);
+
+            ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Histeria.getInstance(), entityEgg.entity.name()), spawner);
+            recipe.shape("///", "/a/", "///");
+            recipe.setIngredient('/', Material.IRON_BARS);
+            recipe.setIngredient('a', entityEgg.egg);
+            Histeria.getInstance().getServer().addRecipe(recipe);
+        }
+
+        Bukkit.getServer().addRecipe(new FurnaceRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore1"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5, 180));
+        Bukkit.getServer().addRecipe(new BlastingRecipe(new NamespacedKey(Histeria.getInstance(), "histerite_ore2"), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 1).getItem(), CustomMaterial.HISTERITE_ORE.getVanillaMaterial(), (float) 1.5, 100));
 
 
     }
