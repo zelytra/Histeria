@@ -25,6 +25,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -82,7 +84,17 @@ public class FarmerListener implements Listener {
 
     }
 
-    //TODO Add craft of spawner canceller
+    @EventHandler
+    public void onSpawnerCraft(PrepareItemCraftEvent e) {
+        ItemStack result = e.getInventory().getResult();
+        if (result != null && result.getType() == Material.SPAWNER) {
+
+            CustomPlayer player = CustomPlayer.getCustomPlayer(e.getView().getPlayer().getName());
+
+            if (player != null && player.getJob(JobType.FARMER).getLevel() != 100)
+                e.getInventory().setResult(null);
+        }
+    }
 
     @EventHandler
     public void onEntityKill(EntityDeathEvent e) {
