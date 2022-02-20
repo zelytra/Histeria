@@ -21,10 +21,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class EntityEggListener implements Listener {
 
-    private final static double dropLuck = 100;
+    private final static double dropLuck = 1;
 
     @EventHandler
     public void onEntityKill(EntityDeathEvent e) {
+        if (e.getEntity().getKiller() == null) return;
         CustomPlayer player = CustomPlayer.getCustomPlayer(e.getEntity().getKiller().getName());
         if (player == null) return;
 

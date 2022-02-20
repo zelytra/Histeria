@@ -35,7 +35,7 @@ class MiningDrill implements Serializable {
     private final UUID uuid = UUID.randomUUID();
 
     private long timeFromLastPickup; // in secondes
-    private final int drawTime = 1; //Time in seconds to wait before new draw
+    private final int drawTime = 60; //Time in seconds to wait before new draw
     public String viewer = null;
 
     {

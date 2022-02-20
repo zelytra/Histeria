@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class AntiNocturiteSword implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.ANTI_NOCTURITE_SWORD;
-    private final int itemCooldown = 1;
+    private final int itemCooldown = 15;
 
     @EventHandler
     public void swordAttack(EntityDamageByEntityEvent e) {
