@@ -284,6 +284,14 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.NOCTURITE_CORE);
         shapedRecipeBuilder.register();
 
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.CORE_MINING_DRILL);
+        shapedRecipeBuilder.setShape("///", "aba", "*c*");
+        shapedRecipeBuilder.assigneSymbol('/', Material.COBBLED_DEEPSLATE);
+        shapedRecipeBuilder.assigneSymbol('a', CustomMaterial.NOCTURITE_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('b', CustomMaterial.HISTERITE_CORE);
+        shapedRecipeBuilder.assigneSymbol('c', Material.POINTED_DRIPSTONE);
+        shapedRecipeBuilder.register();
+
         // Spawners register
         for (EntityEgg entityEgg : EntityEgg.values()) {
             ItemStack spawner = new ItemStack(Material.SPAWNER);

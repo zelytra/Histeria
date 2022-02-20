@@ -82,6 +82,8 @@ public class FarmerListener implements Listener {
 
     }
 
+    //TODO Add craft of spawner canceller
+
     @EventHandler
     public void onEntityKill(EntityDeathEvent e) {
 

@@ -15,6 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -82,6 +84,18 @@ public class MinerListener implements Listener {
         if (job.consumeXP(xp, player))
             JobUtils.displayXP(job.getJob(), player, xp);
 
+    }
+
+    @EventHandler
+    public void onDrillCraft(PrepareItemCraftEvent e) {
+        ItemStack result = e.getInventory().getResult();
+        if (result != null && result.getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) {
+
+            CustomPlayer player = CustomPlayer.getCustomPlayer(e.getView().getPlayer().getName());
+
+            if (player != null && player.getJob(JobType.MINER).getLevel() != 100)
+                e.getInventory().setResult(null);
+        }
     }
 
     private static boolean canConsumeBlock(Block block) {
