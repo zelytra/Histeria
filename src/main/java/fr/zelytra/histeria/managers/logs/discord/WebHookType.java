@@ -10,13 +10,13 @@
 package fr.zelytra.histeria.managers.logs.discord;
 
 public enum WebHookType {
-    BAN("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistBan", "discord.ban"),
-    COMMANDS("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistCommands", "discord.commands"),
-    ERROR("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "ErrorAlert", "discord.error"),
-    CHAT("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistChat", "discord.chat"),
-    CHEATER("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistCheater", "discord.cheater"),
-    SERVER("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistServer", "discord.server"),
-    ORE("https://raw.githubusercontent.com/zelytra/Histeria/master/img/histerite_core.png", "HistOre", "discord.ore");
+    BAN("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "HistBan", "discord.ban"),
+    COMMANDS("https://raw.githubusercontent.com/zelytra/Histeria/ressources/master/img/histerite_core.png", "HistCommands", "discord.commands"),
+    ERROR("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "ErrorAlert", "discord.error"),
+    CHAT("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "HistChat", "discord.chat"),
+    CHEATER("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "HistCheater", "discord.cheater"),
+    SERVER("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "HistServer", "discord.server"),
+    ORE("https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/histerite_core.png", "HistOre", "discord.ore");
 
 
     private final String avatar;
