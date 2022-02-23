@@ -12,6 +12,7 @@ package fr.zelytra.histeria.events.blocks.miningDrill;
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,6 +22,7 @@ import org.bukkit.event.block.*;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 public class MiningDrillListener implements Listener {
 
@@ -86,6 +88,12 @@ public class MiningDrillListener implements Listener {
     @EventHandler
     public void drillBreak(BlockBreakEvent e) {
         if (e.getBlock().getType() != CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) return;
+
+
+        if (e.getPlayer().getGameMode() != GameMode.CREATIVE) {
+            e.getBlock().breakNaturally();
+            e.getBlock().getWorld().dropItem(e.getBlock().getLocation(), new ItemStack(CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()));
+        }
 
         MiningDrill drill = MiningDrill.getDrill(e.getBlock());
         if (drill == null) return;
