@@ -17,6 +17,7 @@ import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.items.ItemType;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -26,6 +27,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -185,53 +187,68 @@ public class Wiki implements CommandExecutor, Listener {
     @EventHandler
     public void InterfaceInteract(InventoryClickEvent e) {
         if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals(wikiName)) {
-            if (e.getCurrentItem() != null) {
-                if (CustomItemStack.getCustomMaterial(e.getCurrentItem()) != null) {
-                    switch (CustomItemStack.getCustomMaterial(e.getCurrentItem())) {
-                        case NEXT_ARROW:
-                            InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, wikiName);
-                            ItemStack[] content = contentBuilder(getPage(e.getInventory().getContents()) + 1);
-                            boolean isEmpty = true;
-                            for (int a = 0; a < 4; a++) {
-                                for (int id = 10; id <= 16; id++) {
-                                    if (content[(id + a * 9)].getType() != Material.AIR) {
-                                        isEmpty = false;
-                                        break;
-                                    }
+
+            if (e.getCurrentItem() == null) return;
+            if (CustomItemStack.getCustomMaterial(e.getCurrentItem()) != null) {
+
+                switch (CustomItemStack.getCustomMaterial(e.getCurrentItem())) {
+
+                    case NEXT_ARROW:
+                        InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, wikiName);
+                        ItemStack[] content = contentBuilder(getPage(e.getInventory().getContents()) + 1);
+                        boolean isEmpty = true;
+                        for (int a = 0; a < 4; a++) {
+                            for (int id = 10; id <= 16; id++) {
+                                if (content[(id + a * 9)].getType() != Material.AIR) {
+                                    isEmpty = false;
+                                    break;
                                 }
-
-                            }
-                            if (!isEmpty) {
-                                interfaceBuilder.setContent(content);
-                            } else {
-                                break;
                             }
 
-                            interfaceBuilder.open((Player) e.getWhoClicked());
+                        }
+                        if (!isEmpty) {
+                            interfaceBuilder.setContent(content);
+                        } else {
                             break;
-                        case PREVIOUS_ARROW:
-                            interfaceBuilder = new InterfaceBuilder(54, wikiName);
-                            interfaceBuilder.setContent(contentBuilder(getPage(e.getInventory().getContents()) - 1));
-                            interfaceBuilder.open((Player) e.getWhoClicked());
-                            break;
-                        default:
+                        }
+
+                        interfaceBuilder.open((Player) e.getWhoClicked());
+                        break;
+                    case PREVIOUS_ARROW:
+                        interfaceBuilder = new InterfaceBuilder(54, wikiName);
+                        interfaceBuilder.setContent(contentBuilder(getPage(e.getInventory().getContents()) - 1));
+                        interfaceBuilder.open((Player) e.getWhoClicked());
+                        break;
+                    default:
+                        // Check if is admin and give item if right click
+                        if (Utils.canByPass((Player) e.getWhoClicked()) && e.getClick() == ClickType.RIGHT) {
+                            e.getWhoClicked().getInventory().addItem(e.getCurrentItem());
+                        } else {
                             interfaceBuilder = new InterfaceBuilder(36, wikiName);
                             interfaceBuilder.setContent(contentCraftBuilder(e.getCurrentItem()));
                             interfaceBuilder.open((Player) e.getWhoClicked());
-                            break;
-                    }
-                } else if (e.getCurrentItem().getType() == Material.BARRIER) {
-                    InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, wikiName);
-                    interfaceBuilder.setContent(contentBuilder(0));
-                    interfaceBuilder.open((Player) e.getWhoClicked());
-                } else if (CustomItemStack.isCustomBlock(e.getCurrentItem())) {
+                        }
+                        break;
+                }
+            } else if (e.getCurrentItem().getType() == Material.BARRIER) {
+                InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, wikiName);
+                interfaceBuilder.setContent(contentBuilder(0));
+                interfaceBuilder.open((Player) e.getWhoClicked());
+
+            } else if (CustomItemStack.isCustomBlock(e.getCurrentItem())) {
+
+                // Check if is admin and give item if right click
+                if (Utils.canByPass((Player) e.getWhoClicked()) && e.getClick() == ClickType.RIGHT) {
+                    e.getWhoClicked().getInventory().addItem(e.getCurrentItem());
+                } else {
                     InterfaceBuilder interfaceBuilder = new InterfaceBuilder(36, wikiName);
                     interfaceBuilder.setContent(contentCraftBuilder(e.getCurrentItem()));
                     interfaceBuilder.open((Player) e.getWhoClicked());
                 }
-                e.setCancelled(true);
             }
         }
+        e.setCancelled(true);
+
     }
 
     private int getPage(ItemStack[] content) {
