@@ -246,8 +246,9 @@ public class Wiki implements CommandExecutor, Listener {
                     interfaceBuilder.open((Player) e.getWhoClicked());
                 }
             }
+            e.setCancelled(true);
         }
-        e.setCancelled(true);
+
 
     }
 
