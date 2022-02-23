@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.builder.customCraft.ShapeLessRecipeBuilder;
 import fr.zelytra.histeria.builder.customCraft.ShapedRecipeBuilder;
 import fr.zelytra.histeria.managers.spawner.EntityEgg;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
@@ -300,6 +301,7 @@ public class CraftManager {
 
             cs.setSpawnedType(entityEgg.entity);
             bsm.setBlockState(cs);
+            bsm.displayName(Component.text().content(entityEgg.name()+"'s Spawner").build());
             spawner.setItemMeta(bsm);
 
             ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Histeria.getInstance(), entityEgg.entity.name()), spawner);
