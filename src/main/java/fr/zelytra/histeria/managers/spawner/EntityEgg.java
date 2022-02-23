@@ -34,6 +34,15 @@ public enum EntityEgg {
     SQUID(EntityType.SQUID, Material.SQUID_SPAWN_EGG),
     SLIME(EntityType.SLIME, Material.SLIME_SPAWN_EGG),
     MAGMA_CUBE(EntityType.MAGMA_CUBE, Material.MAGMA_CUBE_SPAWN_EGG),
+    PIGLIN_BRUTE(EntityType.PIGLIN_BRUTE, Material.PIGLIN_BRUTE_SPAWN_EGG),
+    HOGLIN(EntityType.HOGLIN, Material.HOGLIN_SPAWN_EGG),
+    AXOLOTL(EntityType.AXOLOTL, Material.AXOLOTL_SPAWN_EGG),
+    LLAMA(EntityType.LLAMA, Material.LLAMA_SPAWN_EGG),
+    FOX(EntityType.FOX, Material.FOX_SPAWN_EGG),
+    POLAR_BEAR(EntityType.POLAR_BEAR, Material.POLAR_BEAR_SPAWN_EGG),
+    TROPICAL_FISH(EntityType.TROPICAL_FISH, Material.TROPICAL_FISH_SPAWN_EGG),
+    GOAT(EntityType.GOAT, Material.GOAT_SPAWN_EGG),
+    PARROT(EntityType.PARROT, Material.PARROT_SPAWN_EGG),
     ;
 
     public final EntityType entity;
