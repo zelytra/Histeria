@@ -14,5 +14,6 @@ public enum ItemType {
     TOOL,
     BLOCK,
     SPECIAL,
+    ENCHANT,
     MISCELLANEOUS;
 }

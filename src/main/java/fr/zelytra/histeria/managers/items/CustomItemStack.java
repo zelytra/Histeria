@@ -16,9 +16,11 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -29,22 +31,22 @@ public class CustomItemStack {
     private final static NamespacedKey descriptionKey = new NamespacedKey(Histeria.getInstance(), "description");
     private final static NamespacedKey durabilityKey = new NamespacedKey(Histeria.getInstance(), "durability");
 
-    private final ItemStack item;
-    private final CustomMaterial customMaterial;
+    private ItemStack item;
+    private CustomMaterial customMaterial;
 
     /**
      * @param material Custom material of the item
      * @param amount   Item amount
      */
-    public CustomItemStack(CustomMaterial material, int amount) {
+    public CustomItemStack(@NotNull CustomMaterial material, int amount) {
         this.customMaterial = material;
 
-        if (material.getItemType() == ItemType.BLOCK) {
-            this.item = new ItemStack(material.getVanillaMaterial(),amount);
-            return;
+        switch (material.getItemType()) {
+            case BLOCK -> this.item = new ItemStack(material.getVanillaMaterial(), amount);
+            case ENCHANT -> this.item = new ItemStack(Material.ENCHANTED_BOOK);
+            default -> this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
         }
 
-        this.item = new ItemStack(this.customMaterial.getVanillaMaterial(), amount);
         ItemMeta meta = this.item.getItemMeta();
         assert meta != null;
         meta.setCustomModelData(this.customMaterial.getCustomModelData());
@@ -52,6 +54,7 @@ public class CustomItemStack {
 
         PersistentDataContainer itemData = meta.getPersistentDataContainer();
         itemData.set(itemKey, PersistentDataType.STRING, this.customMaterial.getName());
+
         if (this.customMaterial.getDescription() != null) {
             itemData.set(descriptionKey, PersistentDataType.STRING, this.customMaterial.getDescription());
         }
@@ -82,8 +85,16 @@ public class CustomItemStack {
                     meta.setLore(lore);
                 }
                 break;
-            case MISCELLANEOUS:
+
+            case ENCHANT:
+                EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) item.getItemMeta();
+                enchantmentStorageMeta.addStoredEnchant(customMaterial.getEnchant(), customMaterial.getEnchant().getMaxLevel(), false);
+                item.setItemMeta(meta);
                 break;
+
+            default:
+                break;
+
 
         }
         this.item.setItemMeta(meta);

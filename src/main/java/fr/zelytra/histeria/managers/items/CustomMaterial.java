@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.managers.items;
 
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
 import org.bukkit.Material;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.potion.PotionEffect;
@@ -84,23 +85,25 @@ public enum CustomMaterial {
     NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 9, 6, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
     NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 5, 4, EquipmentSlot.FEET),
 
-    NEXT_ARROW("§bNext", "next_arrow",42, Material.POTATO, ItemType.SPECIAL),
-    PREVIOUS_ARROW("§bPrevious","previous_arrow",43, Material.BAKED_POTATO, ItemType.SPECIAL),
-    SELL_BUTTON("§aSell","sell_button",44, Material.COOKED_MUTTON, ItemType.SPECIAL),
-    BUY_BUTTON("§aBuy","buy_button",45, Material.MUTTON, ItemType.SPECIAL),
-    VALIDAY("§aConfirm","validay",46, Material.SLIME_BALL, ItemType.SPECIAL),
+    NEXT_ARROW("§bNext", "next_arrow", 42, Material.POTATO, ItemType.SPECIAL),
+    PREVIOUS_ARROW("§bPrevious", "previous_arrow", 43, Material.BAKED_POTATO, ItemType.SPECIAL),
+    SELL_BUTTON("§aSell", "sell_button", 44, Material.COOKED_MUTTON, ItemType.SPECIAL),
+    BUY_BUTTON("§aBuy", "buy_button", 45, Material.MUTTON, ItemType.SPECIAL),
+    VALIDAY("§aConfirm", "validay", 46, Material.SLIME_BALL, ItemType.SPECIAL),
 
-    BADGE_MINER("§6Miner","miner_badge",54, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_FARMER("§6Farmer","farmer_badge",52, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_FIGHTER("§6Fighter","fighter_badge",53, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-    BADGE_ENCHANTER("§6Enchanter","enchanter_badge",51, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_MINER("§6Miner", "miner_badge", 54, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FARMER("§6Farmer", "farmer_badge", 52, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_FIGHTER("§6Fighter", "fighter_badge", 53, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+    BADGE_ENCHANTER("§6Enchanter", "enchanter_badge", 51, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
+
+    BLESS_OF_KEEPING(CustomEnchant.BLESS_OF_KEEPING,"Ne fait pas dropé la pièce enchanté lors de la mort#Enchantable sur les outils et épées#Enchantement tr-s rare", ItemType.ENCHANT),
     ;
 
 
     private String displayName;
     private String name;
     private int customModelData;
-    private final Material vanillaMaterial;
+    private Material vanillaMaterial;
     private final ItemType itemType;
 
     private EquipmentSlot slot;
@@ -111,12 +114,16 @@ public enum CustomMaterial {
     private String description;
     private PotionEffect[] potions;
 
+    private CustomEnchant enchant;
+
+    // Block
     CustomMaterial(String name, Material material, ItemType itemType) {
         this.name = name;
         this.vanillaMaterial = material;
         this.itemType = itemType;
     }
 
+    // Item
     CustomMaterial(String displayName, String name, int CMD, Material material, ItemType itemType) {
         this.displayName = displayName;
         this.name = name;
@@ -125,6 +132,7 @@ public enum CustomMaterial {
         this.itemType = itemType;
     }
 
+    // Item with description
     CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType) {
         this.displayName = displayName;
         this.name = name;
@@ -134,6 +142,7 @@ public enum CustomMaterial {
         this.description = description;
     }
 
+    // Armor piece
     CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int armor, int extraHeart, EquipmentSlot slot, PotionEffect... potions) {
         this.displayName = displayName;
         this.name = name;
@@ -148,6 +157,7 @@ public enum CustomMaterial {
         this.potions = potions;
     }
 
+    // Sword
     CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability, int damage, EquipmentSlot slot) {
         this.displayName = displayName;
         this.name = name;
@@ -160,6 +170,7 @@ public enum CustomMaterial {
         this.damage = damage;
     }
 
+    // Tool
     CustomMaterial(String displayName, String name, String description, int CMD, Material material, ItemType itemType, int durability) {
         this.displayName = displayName;
         this.name = name;
@@ -168,6 +179,17 @@ public enum CustomMaterial {
         this.itemType = itemType;
         this.description = description;
         this.durability = durability;
+    }
+
+    // Enchant
+    CustomMaterial(CustomEnchant enchant, String description, ItemType itemType) {
+        this.enchant = enchant;
+        this.description = description;
+        this.itemType = itemType;
+    }
+
+    public CustomEnchant getEnchant() {
+        return enchant;
     }
 
     public int getCustomModelData() {
@@ -214,10 +236,10 @@ public enum CustomMaterial {
         return potions;
     }
 
-    public static List<Material> getCustomBlocks(){
+    public static List<Material> getCustomBlocks() {
         List<Material> materials = new ArrayList<>();
-        for (CustomMaterial material: CustomMaterial.values()) {
-            if(material.getItemType()==ItemType.BLOCK){
+        for (CustomMaterial material : CustomMaterial.values()) {
+            if (material.getItemType() == ItemType.BLOCK) {
                 materials.add(material.getVanillaMaterial());
             }
         }
