@@ -10,6 +10,7 @@
 package fr.zelytra.histeria.managers.items;
 
 import fr.zelytra.histeria.Histeria;
+import fr.zelytra.histeria.managers.enchants.builder.CustomEnchantUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -70,6 +71,7 @@ public class CustomItemStack {
                 lore.add("");
                 lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
                 meta.setLore(lore);
+                item.setItemMeta(meta);
                 break;
             case TOOL:
                 meta.setUnbreakable(true);
@@ -84,20 +86,23 @@ public class CustomItemStack {
                     lore.add("§bDurability §l>§r§f" + this.customMaterial.getDurability() + "/" + this.customMaterial.getDurability());
                     meta.setLore(lore);
                 }
-                break;
-
-            case ENCHANT:
-                EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) item.getItemMeta();
-                enchantmentStorageMeta.addStoredEnchant(customMaterial.getEnchant(), customMaterial.getEnchant().getMaxLevel(), false);
                 item.setItemMeta(meta);
                 break;
 
+            case ENCHANT:
+                EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) meta;
+                enchantmentStorageMeta.addStoredEnchant(customMaterial.getEnchant(), customMaterial.getEnchant().getMaxLevel(), false);
+                item.setItemMeta(enchantmentStorageMeta);
+                CustomEnchantUtils.updateCustomEnchant(item);
+                break;
+
             default:
+                item.setItemMeta(meta);
                 break;
 
 
         }
-        this.item.setItemMeta(meta);
+
 
     }
 
@@ -171,7 +176,7 @@ public class CustomItemStack {
     public static CustomMaterial getCustomMaterial(String name) {
 
         for (CustomMaterial material : CustomMaterial.values())
-            if (material.getName().equalsIgnoreCase(name))
+            if (material.getName() != null && material.getName().equalsIgnoreCase(name))
                 return material;
 
         return null;

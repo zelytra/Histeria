@@ -36,6 +36,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Wiki implements CommandExecutor, Listener {
@@ -170,7 +171,13 @@ public class Wiki implements CommandExecutor, Listener {
 
             if (CustomItemStack.getCustomMaterial(content[13]) != null && CustomItemStack.getCustomMaterial(content[13]).getDescription() != null) {
                 ItemMeta meta = content[13].getItemMeta();
-                ArrayList<String> lore = new ArrayList<>();
+                List<String> lore;
+
+                if (meta.getLore() != null)
+                    lore = meta.getLore();
+                else
+                    lore = new ArrayList<>();
+
                 String[] texte = CustomItemStack.getCustomMaterial(content[13]).getDescription().split("#");
                 for (String string : texte) {
                     lore.add(string);

@@ -85,6 +85,14 @@ public enum CustomMaterial {
     NOCTURITE_LEGGINGS("§5Nocturite Leggings", "nocturite_leggings", "Durabilité: 3100#Effet: Jump Boost III | Haste", 25, Material.CHAINMAIL_LEGGINGS, ItemType.ARMOR, 3100, 9, 6, EquipmentSlot.LEGS, new PotionEffect(PotionEffectType.SPEED, 999999, 1, false, false, true)),
     NOCTURITE_BOOTS("§5Nocturite Boots", "nocturite_boots", "Durabilité: 2900#Effet: Jump Boost III", 27, Material.CHAINMAIL_BOOTS, ItemType.ARMOR, 2900, 5, 4, EquipmentSlot.FEET),
 
+    BLESS_OF_KEEPING(CustomEnchant.BLESS_OF_KEEPING,"BLESS_OF_KEEPING", "Ne fait pas dropé la pièce enchanté lors de la mort#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
+    LIGHTNING(CustomEnchant.LIGHTNING,"LIGHTNING", "A une chance de faire tomber la foudre sur l'adversaire#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
+    PHOENIX_BIRTH(CustomEnchant.PHOENIX_BIRTH,"PHOENIX_BIRTH", "Fait dropé un oeuf du mob tué#ne fonctionne que quand le joueur est lvl100 Farmer#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
+    SHIELD(CustomEnchant.SHIELD,"SHIELD", "Chance de parré 100% des dégat subis lors d'un combat#Enchantable sur les armures#Enchantement rare", ItemType.ENCHANT),
+    STUNE(CustomEnchant.STUNE,"STUNE", "Possibilité de sonner son adversaire#Enchantable sur les épées#Enchantement commun", ItemType.ENCHANT),
+    VAMPIRISME(CustomEnchant.VAMPIRISME,"VAMPIRISME", "A une chance de voler de la vie a son adversaire#Enchantable sur les épées#Enchantement très rare", ItemType.ENCHANT),
+
+
     NEXT_ARROW("§bNext", "next_arrow", 42, Material.POTATO, ItemType.SPECIAL),
     PREVIOUS_ARROW("§bPrevious", "previous_arrow", 43, Material.BAKED_POTATO, ItemType.SPECIAL),
     SELL_BUTTON("§aSell", "sell_button", 44, Material.COOKED_MUTTON, ItemType.SPECIAL),
@@ -95,13 +103,11 @@ public enum CustomMaterial {
     BADGE_FARMER("§6Farmer", "farmer_badge", 52, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
     BADGE_FIGHTER("§6Fighter", "fighter_badge", 53, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
     BADGE_ENCHANTER("§6Enchanter", "enchanter_badge", 51, Material.PHANTOM_MEMBRANE, ItemType.SPECIAL),
-
-    BLESS_OF_KEEPING(CustomEnchant.BLESS_OF_KEEPING,"Ne fait pas dropé la pièce enchanté lors de la mort#Enchantable sur les outils et épées#Enchantement tr-s rare", ItemType.ENCHANT),
     ;
 
 
     private String displayName;
-    private String name;
+    private final String name;
     private int customModelData;
     private Material vanillaMaterial;
     private final ItemType itemType;
@@ -182,7 +188,8 @@ public enum CustomMaterial {
     }
 
     // Enchant
-    CustomMaterial(CustomEnchant enchant, String description, ItemType itemType) {
+    CustomMaterial(CustomEnchant enchant,String name, String description, ItemType itemType) {
+        this.name = name;
         this.enchant = enchant;
         this.description = description;
         this.itemType = itemType;
@@ -205,7 +212,7 @@ public enum CustomMaterial {
     }
 
     public String getName() {
-        return name;
+        return name == null ? "undefined" : name;
     }
 
     public int getDamage() {
