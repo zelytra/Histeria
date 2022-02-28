@@ -88,9 +88,7 @@ public class NPC implements Serializable {
         }
 
         ServerPlayer entity = new ServerPlayer(nmsServer, nmsWorld, gameProfile);
-        entity.setPosRaw(location.getX(), location.getY(), location.getZ());
-        entity.setYHeadRot(location.getYaw());
-        entity.setXRot(location.getPitch());
+        move(entity, location);
 
         npcList.add(this);
         return entity;
@@ -126,17 +124,28 @@ public class NPC implements Serializable {
 
     }
 
-    public void move(Location location) {
+    public void move(ServerPlayer npc, Location location) {
+        packetMove(npc, location);
+    }
 
+    public void move(Location location) {
+        packetMove(npc, location);
+    }
+
+    private void packetMove(ServerPlayer npc, Location location) {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
             ServerGamePacketListenerImpl connection = getPlayerConnection(player);
             npc.setPosRaw(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5);
-            npc.setYHeadRot(location.getYaw());
+            npc.setRot(location.getYaw(), location.getPitch());
             connection.send(new ClientboundTeleportEntityPacket(npc));
+
+            Float yaw = location.getYaw() * 256.0F / 360.0F;
+            connection.send(new ClientboundRotateHeadPacket(npc, yaw.byteValue()));
 
         }
     }
+
 
     public void setSkin(String url) {
 

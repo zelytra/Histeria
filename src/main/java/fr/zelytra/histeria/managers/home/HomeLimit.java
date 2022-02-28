@@ -15,7 +15,7 @@ public enum HomeLimit {
 
     DEFAULT(new String[]{"default", "vote"}, 2),
     LORD(new String[]{"lord"}, 4),
-    MONARCH(new String[]{"monarch"}, 6),
+    MONARCH(new String[]{"monarch","guide"}, 6),
     DEMIGOD(new String[]{"demigod"}, 8),
     ADMIN(new String[]{}, 50);
 
