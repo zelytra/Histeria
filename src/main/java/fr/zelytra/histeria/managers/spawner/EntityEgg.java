@@ -9,8 +9,12 @@
 
 package fr.zelytra.histeria.managers.spawner;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BlockStateMeta;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -67,5 +71,17 @@ public enum EntityEgg {
             if (egg == entityEgg.egg)
                 return entityEgg.entity;
         return null;
+    }
+
+    public ItemStack getSpawner(){
+        ItemStack spawner = new ItemStack(Material.SPAWNER);
+        BlockStateMeta bsm = (BlockStateMeta) spawner.getItemMeta();
+        CreatureSpawner cs = (CreatureSpawner) bsm.getBlockState();
+
+        cs.setSpawnedType(entity);
+        bsm.setBlockState(cs);
+        bsm.displayName(Component.text().content(name()+"'s Spawner").build());
+        spawner.setItemMeta(bsm);
+        return spawner;
     }
 }
