@@ -128,6 +128,25 @@ public class MiningDrillListener implements Listener {
 
             drill.viewer = null;
             drill.updateOreCount(e.getInventory().getContents());
+
+            //Checking obstructed item
+            for (ItemStack item : e.getInventory().getContents()) {
+                if (item == null) continue;
+                boolean isOre = false;
+
+                // Check item type ore
+                for (OreContainer oreContainer : drill.getOreContainerList()) {
+                    isOre = item.getType() == oreContainer.ore;
+                    if (isOre) break;
+                }
+
+                // Returning obstructed item in player inventory
+                if (!isOre)
+                    e.getPlayer().getInventory().addItem(item);
+
+
+            }
+
         }
     }
 

@@ -146,4 +146,8 @@ class MiningDrill implements Serializable {
     public UUID getUuid() {
         return uuid;
     }
+
+    public List<OreContainer> getOreContainerList() {
+        return oreContainerList;
+    }
 }
