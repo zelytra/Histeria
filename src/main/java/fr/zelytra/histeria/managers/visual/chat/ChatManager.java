@@ -34,6 +34,7 @@ public class ChatManager {
         groupWhitelist.add("monarch");
         groupWhitelist.add("lord");
         groupWhitelist.add("demigod");
+        groupWhitelist.add("guide");
     }
 
 

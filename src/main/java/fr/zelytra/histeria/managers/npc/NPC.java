@@ -89,7 +89,8 @@ public class NPC implements Serializable {
 
         ServerPlayer entity = new ServerPlayer(nmsServer, nmsWorld, gameProfile);
         entity.setPosRaw(location.getX(), location.getY(), location.getZ());
-        entity.setRot(location.getYaw(), location.getPitch());
+        entity.setYHeadRot(location.getYaw());
+        entity.setXRot(location.getPitch());
 
         npcList.add(this);
         return entity;
@@ -131,7 +132,7 @@ public class NPC implements Serializable {
 
             ServerGamePacketListenerImpl connection = getPlayerConnection(player);
             npc.setPosRaw(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5);
-            npc.setRot(location.getYaw(), location.getPitch());
+            npc.setYHeadRot(location.getYaw());
             connection.send(new ClientboundTeleportEntityPacket(npc));
 
         }
