@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Patch Notes</title>
     <link rel="stylesheet" href="index.css">
+    <meta content="Patch Note: 3.0" property="og:title" />
+    <meta content="All news of Our Labour Update" property="og:description" />
+    <meta content="https://histeria.fr/patch/java_3_0.html" property="og:url" />
+    <meta content="https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/H.png" property="og:image" />
+    <meta content="#ff8000" data-react-helmet="true" name="theme-color" />
 </head>
 <body>
 <header>
@@ -22,7 +27,7 @@
         <h2>Jobs</h2>
         <ul>
             <li>Ajout d'un nouveau plan de game play : les jobs. Ces jobs implémentent un système de niveau et
-                d'éxpérience calculé sur les actions effectué par le joueur durant sa partie. Il existe plusieurs
+                d'éxpérience calculé sur les actions effectués par le joueur durant sa partie. Il existe plusieurs
                 catégories de jobs possédant tous un niveau maximal égale à 100
             </li>
             <li>Job Miner : Le joueur peut monter ce job en minant différant type de minerais</li>
@@ -55,8 +60,11 @@
             </li>
             <li><b>Vampirism:</b> Enchantement rare permettant de voler un nombre de point de vie d'un joueur touché
             </li>
-            <li><b>Lightning:</b> Enchantement très rare qui foudroi l'adversaire d'un coup d'éclaire. Le mettant en feu et
-                lui infligant des dégats
+            <li><b>Lightning:</b> Enchantement très rare qui foudroi l'adversaire d'un coup d'éclaire. Le mettant en feu
+                et lui infligant des dégats (ne fonctionne pas si le ciel au dessus du joueur n'est dégagé)
+            </li>
+            <li><b>Phoenix Rebirth:</b> Enchantement très rare qui permet de faire dropé un oeuf du mob tué (ne
+                fonctionne que si le joueur tenant l'arme est niveau 100 au job Farmer)
             </li>
         </ul>
 
@@ -64,12 +72,12 @@
         <ul>
             <li>Ajout du craft custom des spawner de mobs (débloqué au niveau 100 du job Farmer)
             </li>
-            <li>Ajout d'une nouvelle épée : ???-Nocturite Sword. Elle fait autant de dégats que la Nocturite sword mais
-                son effet spécial et d'attirer les énemis au près du porteur de l'épée (débloqué au niveau 100 du job
+            <li>Ajout d'une nouvelle épée : Anti-Nocturite Sword. Elle fait 1 point de dégats en plus que la Nocturite sword et
+                son effet spécial et d'attirer les énemis au près du porteur de l'épée (craft débloqué au niveau 100 du job
                 Fighter)
             </li>
-            <li>Ajout d'un block : Core Mining Drill. Block générant tout les x temps une quantité de minerais
-                aléatoires (débloqué au niveau 100 du job Mineur)
+            <li>Ajout d'un block : Core Mining Drill. Block générant toutes les 60 secondes une quantité de minerais
+                aléatoires (craft débloqué au niveau 100 du job Mineur)
             </li>
         </ul>
 
@@ -81,7 +89,7 @@
             <li>Ajout d'une action au NPC permettant au joueur d'accéder au BlackMarket</li>
             <li>Ajout d'une action au NPC permettant au joueur d'accéder a l'interface de progression des jobs</li>
             <li>Ajout de la synchronisation du gamemode entre les serveurs</li>
-            <li>Ajout d'une interface d'échange sécuriser entre joueur via la commande /trade [pseudo]</li>
+            <li>Ajout de la possibilité au staff de se give via l'interface du wiki</li>
             <li>Portage du serveur en 1.18.1</li>
         </ul>
 
