@@ -212,6 +212,9 @@ public class TradeCanal {
             }
 
         }
+
+        LangMessage.sendMessage(firstPlayer, "trade.canceled");
+        LangMessage.sendMessage(secondPlayer, "trade.canceled");
     }
 
     private boolean containInt(int[] values, int x) {
