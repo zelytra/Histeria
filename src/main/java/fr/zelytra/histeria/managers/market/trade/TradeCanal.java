@@ -14,6 +14,7 @@ import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
 import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -125,7 +126,8 @@ public class TradeCanal {
             if (content[index] == null) continue;
             firstPlayer.getInventory().addItem(content[index]);
         }
-        //TODO success message
+        LangMessage.sendMessage(firstPlayer, "trade.success");
+        LangMessage.sendMessage(secondPlayer, "trade.success");
     }
 
     public void cancelTrade() {
@@ -133,7 +135,9 @@ public class TradeCanal {
         isTrading = false;
         progression = 0;
         resetProgressBar();
-        //TODO cancel message
+
+        LangMessage.sendMessage(firstPlayer, "trade.canceled");
+        LangMessage.sendMessage(secondPlayer, "trade.canceled");
     }
 
     public void destroy() {
@@ -219,11 +223,11 @@ public class TradeCanal {
     public void validationClick(ItemStack item, Player player, int slot) {
         if (firstPlayer.getName().equalsIgnoreCase(player.getName())) {
             if (slot != firstPlayerValidationSlot) return;
-            gui.getInventory().setItem(slot, item.getType() == Material.BARRIER ? VisualType.VALIDAY.getItem() : new VisualItemStack(Material.BARRIER, "§cClick here to cancel the trade", false).getItem());
+            gui.getInventory().setItem(slot, item.getType() == Material.BARRIER ? new VisualItemStack(CustomMaterial.VALIDAY, "§aClick here to confirm your trade", false).getItem() : new VisualItemStack(Material.BARRIER, "§cClick here to cancel the trade", false).getItem());
         }
         if (secondPlayer.getName().equalsIgnoreCase(player.getName())) {
             if (slot != secondPlayerValidationSlot) return;
-            gui.getInventory().setItem(slot, item.getType() == Material.BARRIER ? VisualType.VALIDAY.getItem() : new VisualItemStack(Material.BARRIER, "§cClick here to cancel the trade", false).getItem());
+            gui.getInventory().setItem(slot, item.getType() == Material.BARRIER ? new VisualItemStack(CustomMaterial.VALIDAY, "§aClick here to confirm your trade", false).getItem() : new VisualItemStack(Material.BARRIER, "§cClick here to cancel the trade", false).getItem());
         }
 
     }
