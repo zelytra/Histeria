@@ -80,6 +80,7 @@ import fr.zelytra.histeria.managers.loottable.LootTableManager;
 import fr.zelytra.histeria.managers.market.blackMarket.MarketCommand;
 import fr.zelytra.histeria.managers.market.shop.Shop;
 import fr.zelytra.histeria.managers.market.stand.StandSerializer;
+import fr.zelytra.histeria.managers.market.trade.TradeCommand;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.npc.NPC;
 import fr.zelytra.histeria.managers.npc.command.NPCCommand;
@@ -340,6 +341,9 @@ public final class Histeria extends JavaPlugin {
 
         /* BlackMarket */
         getCommand("blackmarket").setExecutor(new MarketCommand());
+
+        /* Trade */
+        getCommand("trade").setExecutor(new TradeCommand());
 
     }
 

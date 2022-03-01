@@ -50,6 +50,7 @@ import fr.zelytra.histeria.managers.logs.listener.OreLogger;
 import fr.zelytra.histeria.managers.market.blackMarket.MarketListener;
 import fr.zelytra.histeria.managers.market.shop.ShopListener;
 import fr.zelytra.histeria.managers.market.stand.StandListener;
+import fr.zelytra.histeria.managers.market.trade.TradeListener;
 import fr.zelytra.histeria.managers.npc.listener.NPCListener;
 import fr.zelytra.histeria.managers.pvp.PvPLogger;
 import fr.zelytra.histeria.managers.spawner.EntityEggListener;
@@ -89,6 +90,7 @@ public class EventManager {
         pm.registerEvents(new StandListener(), pl);
         pm.registerEvents(new KitCommand(), pl);
         pm.registerEvents(new MarketListener(), pl);
+        pm.registerEvents(new TradeListener(), pl);
 
         /* Items */
         pm.registerEvents(new CustomItemHandler(), pl);

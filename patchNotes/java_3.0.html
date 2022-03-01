@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <title>Patch Notes</title>
     <link rel="stylesheet" href="index.css">
-    <meta content="Patch Note: 3.0" property="og:title" />
-    <meta content="All news of Our Labour Update" property="og:description" />
-    <meta content="https://histeria.fr/patch/java_3_0.html" property="og:url" />
-    <meta content="https://raw.githubusercontent.com/zelytra/Histeria/master/ressources/img/H.png" property="og:image" />
-    <meta content="#ff8000" data-react-helmet="true" name="theme-color" />
 </head>
 <body>
 <header>
@@ -24,81 +19,78 @@
 <main>
     <div class="content">
 
-        <h2>Jobs</h2>
+        <h2>Les Métiers</h2>
         <ul>
-            <li>Ajout d'un nouveau plan de game play : les jobs. Ces jobs implémentent un système de niveau et
-                d'éxpérience calculé sur les actions effectués par le joueur durant sa partie. Il existe plusieurs
-                catégories de jobs possédant tous un niveau maximal égale à 100
+            <li>Ajout d'un nouveau pan de gameplay : les métiers. Ceux-ci implémentent un système de niveaux et d'éxpérience calculé sur les actions effectuées par le joueur durant sa partie. Il existe plusieurs catégories de métiers possédant toutes un niveau maximal égal à 100
             </li>
-            <li>Job Miner : Le joueur peut monter ce job en minant différant type de minerais</li>
-            <li>Job Farmer : Le joueur peut monter ce job en récoltant différant type de plantes ou en tuant certains
-                mobs passif
+            <li><b>Miner :</b> Progression du métier en récoltant différents types de minerais
+           </li>
+            <li><b>Farmer :</b> Progression du métier en récoltant différents types de plantes ou en tuant certains mobs passifs
             </li>
-            <li>Job Enchanter : Le joueur peut monter ce job en enchantant des items dans une table d'enchant. Niveau
-                d'expérience récupéré celon la quantité d'enchantement et de son niveau
+            <li><b>Enchanter :</b> Progression du métier en utilisant la table d'enchantement sur des items. Expérience acquise selon le nombre d'enchantements que possède un item et leurs niveaux
             </li>
-            <li>Job Fighter : Le joueur peut monter ce job en tuant d'autre joueur ou en tuant différant mob aggressif
+            <li><b>Fighter :</b> Progression du métier en tuant d'autres joueurs ou différents mobs aggressifs
             </li>
-            <li>Ajout d'une interface de visualisation de progressions des différents jobs via la commande /job</li>
-            <li>Ajout d'un système de reward lors d'un level up d'un job modulo 5</li>
+            <li>Ajout d'une interface de visualisation pour la progression des différents métiers. Accessible via la commande /job
+           </li>
+            <li>Ajout d'un système de récompense lorsque le joueur atteint un palier tous les 5 niveaux
+           </li>
         </ul>
 
-        <h2>Custom Enchants</h2>
+        <h2>Enchantements customs</h2>
         <ul>
-            <li>Ajout d'un nouveau système d'enchantement custom géré par le serveur. Incluant la gestion de la table
-                d'enchantement, le système de fusion, la grindstone et de son affichage dans le lore de l'item. Cette
-                nouvelle fonctionnalité n'est débloquée qu'à partir du niveau 100 du job Enchanter
-                Plusieurs enchantments ont été ajoutés pour l'occasion.
+            <li>Ajout d'un nouveau système d'enchantements customs. Incluant la gestion de la table d'enchantement, le système de fusion, la grindstone, et l'affichage dans le lore de l'item. Fonctionnalité débloquée au niveau 100 du métier Enchanter. Plusieurs enchantements ont été ajoutés pour l'occasion
             </li>
-            <li><b>Bless Of Keeping:</b> Enchantement très rare permettant de garder l'item enchanté en cas de mort du
-                joueur le portant
+            <li><b>Bless Of Keeping :</b> Très rare, l'item enchanté sera conservé dans l'invertaire malgré la mort du joueur
             </li>
-            <li><b>Shield:</b> Enchantement très rare permettant d'encaisser 100% des dégats d'un coup (celon un
-                pourcentage défini). Pourcentage de proc cummulable avec les enchants de plusieurs pièces d'armures
+            <li><b>Shield :</b> Très rare, octroie un pourcentage de chance d'encaisser l'entièreté des dégâts d'un coup. Plus le joueur porte de pièces d'armures enchantées, plus le pourcentage accroît
             </li>
-            <li><b>Stune:</b> Enchantement peu commun qui donne un effet de blindness et slowness à l'opposant
+            <li><b>Stun :</b> Peu commun, donne un effet de blindness et de slowness au joueur touché
             </li>
-            <li><b>Vampirism:</b> Enchantement rare permettant de voler un nombre de point de vie d'un joueur touché
+            <li><b>Vampirism :</b> Rare, permet de récupérer de la vie en infligeant des dégâts à un joueur
             </li>
-            <li><b>Lightning:</b> Enchantement très rare qui foudroi l'adversaire d'un coup d'éclaire. Le mettant en feu
-                et lui infligant des dégats (ne fonctionne pas si le ciel au dessus du joueur n'est dégagé)
+            <li><b>Lightning :</b> Très rare, fait tomber la foudre sur le joueur touché. Nécessite un accès au ciel
             </li>
-            <li><b>Phoenix Rebirth:</b> Enchantement très rare qui permet de faire dropé un oeuf du mob tué (ne
-                fonctionne que si le joueur tenant l'arme est niveau 100 au job Farmer)
-            </li>
+            <li><b>Phoenix Rebirth :</b> Très rare, permet de récupérer l'œuf d'un mob tué. Nécessite que le joueur ait atteint le niveau 100 du métier Farmer
+           </li>
         </ul>
 
-        <h2>Block & Items custom</h2>
+        <h2>Blocs & Items customs</h2>
         <ul>
-            <li>Ajout du craft custom des spawner de mobs (débloqué au niveau 100 du job Farmer)
+            <li>Ajout du craft custom des spawners de mobs. Fonctionnalité débloquée au niveau 100 du métier Farmer
             </li>
-            <li>Ajout d'une nouvelle épée : Anti-Nocturite Sword. Elle fait 1 point de dégats en plus que la Nocturite sword et
-                son effet spécial et d'attirer les énemis au près du porteur de l'épée (craft débloqué au niveau 100 du job
-                Fighter)
+            <li>Ajout d'une nouvelle épée : l'Anti-Nocturite Sword. Elle fait 1 point de dégat de plus que la Nocturite Sword et son effet spécial attire les ennemis au près du porteur. Craft débloqué au niveau 100 du métier Fighter
             </li>
-            <li>Ajout d'un block : Core Mining Drill. Block générant toutes les 60 secondes une quantité de minerais
-                aléatoires (craft débloqué au niveau 100 du job Mineur)
+            <li>Ajout d'un nouveau bloc : le Core Mining Drill. Ce bloc génère un minerai aléatoire toutes les 60 secondes. Craft débloqué au niveau 100 du métier Miner
             </li>
         </ul>
 
         <h2>Features</h2>
         <ul>
-            <li>Ajout du BlackMarket : Shop mettant à disposition des joueurs la possibilité de vendre des items entre
-                joueurs.
+            <li>Ajout du BlackMarket : Shop permettant aux joueurs de vendre des items entre eux
             </li>
-            <li>Ajout d'une action au NPC permettant au joueur d'accéder au BlackMarket</li>
-            <li>Ajout d'une action au NPC permettant au joueur d'accéder a l'interface de progression des jobs</li>
-            <li>Ajout de la synchronisation du gamemode entre les serveurs</li>
-            <li>Ajout de la possibilité au staff de se give via l'interface du wiki</li>
-            <li>Portage du serveur en 1.18.1</li>
+            <li>Ajout d'une action pour les NPC permettant aux joueurs d'accéder au BlackMarket
+           </li>
+            <li>Ajout d'une action pour les NPC permettant aux joueurs d'accéder à l'interface de progression des métiers
+           </li>
+            <li>Ajout de la synchronisation du gamemode entre les serveurs
+           </li>
+            <li>Ajout de la possibilité pour le staff de se give via l'interface du wiki
+           </li>
+            <li>Portage du serveur en 1.18.1
+           </li>
         </ul>
 
         <h2>Bug fix & Patch</h2>
         <ul>
-            <li>Fix des messages de time out lors d'un switch server</li>
-            <li>Fix de la récupération des kits lorsque l'inventaire du joueur est plein</li>
-            <li>Patch des arena chest qui se casse par des joueurs sans permission</li>
-            <li>Patch de l'affiche des messages indiquant la faible durabilité de l'item custom</li>
+            <li>Fix des messages de time out lors d'un switch server
+           </li>
+            <li>Fix de la récupération des kits lorsque l'inventaire du joueur est plein
+           </li>
+            <li>Patch des Arena Chests empêchant les joueurs sans permission de les casser
+           </li>
+            <li>Patch de l'affichage des messages indiquant la faible durabilité d'un item custom
+           </li>
         </ul>
     </div>
 </main>

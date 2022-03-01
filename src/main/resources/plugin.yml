@@ -309,3 +309,7 @@ commands:
   henchant:
     description: Add custom enchant to an item
     permission: histeria.henchant
+
+  trade:
+    description: Create a secure trade canal between two player
+    permission: histeria.trade
