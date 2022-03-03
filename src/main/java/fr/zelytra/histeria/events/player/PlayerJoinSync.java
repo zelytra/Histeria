@@ -24,7 +24,7 @@ public class PlayerJoinSync implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent e) {
-        if (!Histeria.synchro)return;
+        if (!Histeria.synchro) return;
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             SyncServer server = new SyncServer(e.getPlayer(), Request.GET);
             server.execute();

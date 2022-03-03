@@ -30,7 +30,7 @@ import java.util.List;
 public class PlayerShop implements Listener {
     private static List<PlayerShop> openShop = new ArrayList<>();
 
-    private String shopName = "§6Shop : ";
+    private String shopName = " §6Shop : ";
     private String interfaceTag;
     private Player player;
     private CustomPlayer customPlayer;

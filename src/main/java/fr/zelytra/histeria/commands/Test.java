@@ -9,6 +9,8 @@
 
 package fr.zelytra.histeria.commands;
 
+import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -21,13 +23,9 @@ public class Test implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        //new MarketItem(player.getName(), new Random().nextInt(1, 500), player.getInventory().getItemInMainHand()).publish();
-        //player.getInventory().getItemInMainHand().addEnchantment(new CustomEnchant(CustomEnchantData.BLESS_OF_KEEPING),1);
-        //new PlayerMarket(player);
-        //player.getInventory().getItemInMainHand().addEnchantment(Enchantment.DAMAGE_ALL,1);
-        //player.getInventory().getItemInMainHand().addEnchantment(CustomEnchant.BLESS_OF_KEEPING,1);
-        //player.getInventory().setItemInMainHand(Utils.BookEnchantedItemStack(player.getInventory().getItemInMainHand(), Enchantment.DAMAGE_ALL, 1));
-        System.out.println(player.getLocation().getChunk().getPersistentDataContainer().getKeys());
+
+        InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, Emote.BUY_PAGE.toString());
+        interfaceBuilder.open(player);
         return true;
 
     }
