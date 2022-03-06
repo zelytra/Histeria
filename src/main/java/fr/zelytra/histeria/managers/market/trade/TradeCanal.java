@@ -15,6 +15,7 @@ import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -119,12 +120,12 @@ public class TradeCanal {
         // Giving items to players
         for (int index : firstPlayerSlot) {
             if (content[index] == null) continue;
-            secondPlayer.getInventory().addItem(content[index]);
+            Utils.safeGive(secondPlayer,content[index]);
         }
 
         for (int index : secondPlayerSlot) {
             if (content[index] == null) continue;
-            firstPlayer.getInventory().addItem(content[index]);
+            Utils.safeGive(firstPlayer,content[index]);
         }
         LangMessage.sendMessage(firstPlayer, "trade.success");
         LangMessage.sendMessage(secondPlayer, "trade.success");

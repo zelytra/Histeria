@@ -12,10 +12,12 @@ package fr.zelytra.histeria.events.blocks.miningDrill;
 import fr.zelytra.histeria.builder.guiBuilder.CustomGUI;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
@@ -141,8 +143,9 @@ public class MiningDrillListener implements Listener {
                 }
 
                 // Returning obstructed item in player inventory
-                if (!isOre)
-                    e.getPlayer().getInventory().addItem(item);
+                if (!isOre) {
+                    Utils.safeGive((Player) e.getPlayer(),item);
+                }
 
 
             }

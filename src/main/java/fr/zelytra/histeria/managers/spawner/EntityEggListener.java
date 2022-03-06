@@ -21,7 +21,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class EntityEggListener implements Listener {
 
-    private final static double dropLuck = 1;
+    private final static double dropLuck = 0.01;
 
     @EventHandler
     public void onEntityKill(EntityDeathEvent e) {

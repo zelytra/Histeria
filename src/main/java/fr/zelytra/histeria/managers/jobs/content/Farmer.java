@@ -83,8 +83,6 @@ public class Farmer extends Job implements JobInterface {
                 player.getBankAccount().addMoney(4500);
                 break;
             case 25:
-                item = Utils.EnchantedItemStack(Material.DIAMOND_PICKAXE, Enchantment.DIG_SPEED, 2);
-                //Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(5500);
                 break;
             case 30:
@@ -97,8 +95,6 @@ public class Farmer extends Job implements JobInterface {
                 player.getBankAccount().addMoney(10000);
                 break;
             case 40:
-                item = Utils.EnchantedItemStack(Material.DIAMOND_PICKAXE, Enchantment.DIG_SPEED, 4);
-                //Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(12500);
                 break;
             case 45:
@@ -108,8 +104,6 @@ public class Farmer extends Job implements JobInterface {
 
                 break;
             case 55:
-                item = new CustomItemStack(CustomMaterial.HISTERITE_PICKAXE, 1).getItem();
-                //Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(100000);
                 break;
             case 60:
@@ -121,7 +115,6 @@ public class Farmer extends Job implements JobInterface {
                 Utils.safeGive(player.getPlayer(), EntityEgg.SKELETON.getSpawner());
                 break;
             case 70:
-                //Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_INGOT, 2).getItem());
                 player.getBankAccount().addMoney(200000);
                 break;
             case 75:
@@ -176,11 +169,10 @@ public class Farmer extends Job implements JobInterface {
                 lore.add(formatBigNumber(7500) + "§f" + Emote.GOLD);
                 break;
             case 35:
-                lore.add("x1 Diamon hoe [Unbreaking II]");
+                lore.add("x1 Diamond hoe [Unbreaking II]");
                 lore.add(formatBigNumber(10000) + "§f" + Emote.GOLD);
                 break;
             case 40:
-                lore.add("?");
                 lore.add(formatBigNumber(12500) + "§f" + Emote.GOLD);
                 break;
             case 45:
@@ -199,7 +191,6 @@ public class Farmer extends Job implements JobInterface {
                 lore.add("x1 Skeleton's Spawner");
                 break;
             case 70:
-                lore.add("?");
                 lore.add(formatBigNumber(200000) + "§f" + Emote.GOLD);
                 break;
             case 75:
@@ -213,7 +204,7 @@ public class Farmer extends Job implements JobInterface {
                 break;
             case 90:
                 lore.add("x1 Enderman's Brute Spawner");
-                lore.add(formatBigNumber(1) + "§f" + Emote.GOLD+" (yes, yes 1)");
+                lore.add(formatBigNumber(1) + "§f" + Emote.GOLD+"§e (yes, yes 1)");
                 break;
             case 95:
                 lore.add(formatBigNumber(1000000) + "§f" + Emote.GOLD);
