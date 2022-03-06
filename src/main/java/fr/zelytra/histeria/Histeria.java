@@ -363,6 +363,7 @@ public final class Histeria extends JavaPlugin {
 
     private void regEnchants() {
         try {
+
             // Opening accessibility field
             Field f = Enchantment.class.getDeclaredField("acceptingNew");
             f.setAccessible(true);
@@ -402,7 +403,6 @@ public final class Histeria extends JavaPlugin {
             Histeria.getInstance().getServer().getConsoleSender().sendMessage(Message.CONSOLE_PREFIX.getMsg() + type.color + msg);
         }
         logs.log(msg, type);
-
     }
 
     private void setupServer() {
