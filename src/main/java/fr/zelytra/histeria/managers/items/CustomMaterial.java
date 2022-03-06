@@ -87,7 +87,7 @@ public enum CustomMaterial {
 
     BLESS_OF_KEEPING(CustomEnchant.BLESS_OF_KEEPING,"BLESS_OF_KEEPING", "Ne fait pas dropé la pièce enchanté lors de la mort#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
     LIGHTNING(CustomEnchant.LIGHTNING,"LIGHTNING", "A une chance de faire tomber la foudre sur l'adversaire#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
-    PHOENIX_BIRTH(CustomEnchant.PHOENIX_BIRTH,"PHOENIX_BIRTH", "Fait dropé un oeuf du mob tué#ne fonctionne que quand le joueur est lvl100 Farmer#Enchantable sur les outils et épées#Enchantement très rare", ItemType.ENCHANT),
+    PHOENIX_BIRTH(CustomEnchant.PHOENIX_BIRTH,"PHOENIX_BIRTH", "Fait dropé un oeuf du mob tué#ne fonctionne que quand le joueur est lvl100 Farmer#Enchantable sur les épées#Enchantement très rare", ItemType.ENCHANT),
     SHIELD(CustomEnchant.SHIELD,"SHIELD", "Chance de parré 100% des dégat subis lors d'un combat#Enchantable sur les armures#Enchantement rare", ItemType.ENCHANT),
     STUNE(CustomEnchant.STUNE,"STUNE", "Possibilité de sonner son adversaire#Enchantable sur les épées#Enchantement commun", ItemType.ENCHANT),
     VAMPIRISME(CustomEnchant.VAMPIRISME,"VAMPIRISME", "A une chance de voler de la vie a son adversaire#Enchantable sur les épées#Enchantement très rare", ItemType.ENCHANT),
