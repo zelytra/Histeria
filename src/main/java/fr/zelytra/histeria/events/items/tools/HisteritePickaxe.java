@@ -45,7 +45,8 @@ public class HisteritePickaxe implements Listener {
                 || BLocation.getBlock().getType().equals(Material.COMMAND_BLOCK)
                 || BLocation.getBlock().getType().equals(Material.LODESTONE)
                 || BLocation.getBlock().getType().equals(Material.INFESTED_COBBLESTONE)
-                || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME)) {
+                || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME
+                || BLocation.getBlock().getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial())) {
             return;
         }
 
