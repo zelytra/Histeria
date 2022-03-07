@@ -92,6 +92,10 @@ class MiningDrill implements Serializable {
         PersistentDataContainer dataContainer = block.getChunk().getPersistentDataContainer();
         dataContainer.remove(keyBuilder(block.getLocation()));
         miningDrillInstance.remove(uuid);
+
+        //Dropping content on the ground
+        for (OreContainer ore : oreContainerList)
+            block.getWorld().dropItem(block.getLocation(), new ItemStack(ore.ore, ore.count));
     }
 
     public static @Nullable MiningDrill getDrill(@NotNull Block block) {
