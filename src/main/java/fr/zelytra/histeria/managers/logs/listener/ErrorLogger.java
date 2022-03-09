@@ -22,6 +22,6 @@ public class ErrorLogger implements Listener {
     @EventHandler
     public void onError(ServerExceptionEvent e) {
         Histeria.log("An error has occurred, please report this to an admin.\n " + e.getException().getMessage(), LogType.ERROR);
-        new DiscordLog(WebHookType.ERROR, "**An error has occurred on server :** " + Histeria.getInstance().getDataFolder().getAbsolutePath().replace("\\",".").replace("/",".") + " **, please report this to an admin.** " + e.getException().getMessage());
+        new DiscordLog(WebHookType.ERROR, "**[:no_entry:] An error has occurred on server :** " + Histeria.getInstance().getDataFolder().getAbsolutePath().replace("\\",".").replace("/",".") + " **, please report this to an admin.** " + e.getException().getMessage());
     }
 }

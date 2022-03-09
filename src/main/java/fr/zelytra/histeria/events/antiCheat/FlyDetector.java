@@ -20,7 +20,7 @@ public class FlyDetector implements Listener {
         if (Utils.canByPass(e.getPlayer())) return;
 
         double speed = e.getFrom().distance(e.getTo()) * 20;
-        if (speed >= 25.0) {
+        if (speed >= 50.0) {
 
             if (!Cooldown.cooldownCheck(e.getPlayer(), "flyDetector", false))
                 return;
@@ -30,7 +30,7 @@ public class FlyDetector implements Listener {
             String format = "0.00";
             NumberFormat formatter = new DecimalFormat(format);
             Histeria.log(e.getPlayer().getName() + " move at " + formatter.format(speed) + " block/s", LogType.WARN);
-            new DiscordLog(WebHookType.CHEATER, "**" + e.getPlayer().getName() + "**" + " move at **" + formatter.format(speed) + " block/s** on server " + Histeria.server.getServerName().replace("§ca",""));
+            new DiscordLog(WebHookType.CHEATER, "**" + e.getPlayer().getName() + "**" + " move at **" + formatter.format(speed) + " block/s** on server " + Histeria.server.getServerName().replace("§ca", ""));
         }
 
 
