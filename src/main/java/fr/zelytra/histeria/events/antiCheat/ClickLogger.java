@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ClickLogger implements Listener {
 
         if (!(e.getDamager() instanceof Player)) return;
         PlayerClick playerClick = getPlayerClick((Player) e.getDamager());
-
+        if (e.getCause() == EntityDamageEvent.DamageCause.ENTITY_SWEEP_ATTACK) return;
         if (playerClick == null) {
             playerClick = new PlayerClick(e.getDamager().getName());
             playersClick.add(playerClick);

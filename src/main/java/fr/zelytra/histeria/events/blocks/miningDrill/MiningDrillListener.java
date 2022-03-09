@@ -26,6 +26,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MiningDrillListener implements Listener {
 
     private final static int LOCKING_AREA_XYZ = 3; //Locking area
@@ -121,6 +124,7 @@ public class MiningDrillListener implements Listener {
 
     }
 
+
     @EventHandler
     public void drillInventoryClose(InventoryCloseEvent e) {
         if (e.getInventory().getHolder() instanceof CustomGUI && e.getView().getTitle().equals("§6Mining Drill")) {
@@ -132,23 +136,45 @@ public class MiningDrillListener implements Listener {
             drill.updateOreCount(e.getInventory().getContents());
 
             //Checking obstructed item
+            Map<Material, Integer> oreOverflow = new HashMap<>();
             for (ItemStack item : e.getInventory().getContents()) {
                 if (item == null) continue;
                 boolean isOre = false;
+                int oreCount = 0;
 
                 // Check item type ore
                 for (OreContainer oreContainer : drill.getOreContainerList()) {
                     isOre = item.getType() == oreContainer.ore;
-                    if (isOre) break;
+                    if (isOre) {
+                        oreCount -= oreContainer.count;
+                        break;
+                    }
+                }
+
+                //Check ore overFlow
+                if (!oreOverflow.containsKey(item.getType())) {
+                    for (ItemStack ore : e.getInventory().getContents()) {
+                        if (ore == null) continue;
+                        if (isOre && ore.getType() == item.getType())
+                            oreCount += ore.getAmount();
+                    }
+                }
+
+                if (oreCount > 0) {
+                    oreOverflow.put(item.getType(), oreCount);
+                    continue;
                 }
 
                 // Returning obstructed item in player inventory
                 if (!isOre) {
-                    Utils.safeGive((Player) e.getPlayer(),item);
+                    Utils.safeGive((Player) e.getPlayer(), item);
                 }
 
-
             }
+
+            for (var ore : oreOverflow.entrySet())
+                Utils.safeGive((Player) e.getPlayer(), new ItemStack(ore.getKey(), ore.getValue()));
+
 
         }
     }

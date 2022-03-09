@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2022.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr
@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.commands.miscellaneous;
+package fr.zelytra.histeria.commands.report;
 
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.discord.DiscordLog;
@@ -27,7 +27,7 @@ public class Bug implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length <= 1) {
+        if (args.length < 1) {
             LangMessage.sendMessage(player, "command.wrongSyntax");
             return false;
         }

@@ -33,6 +33,8 @@ import fr.zelytra.histeria.commands.moderation.HKick;
 import fr.zelytra.histeria.commands.moderation.Mute.MuteCommand;
 import fr.zelytra.histeria.commands.moderation.Mute.UnMuteCommand;
 import fr.zelytra.histeria.commands.moderation.Mute.UnMuteTab;
+import fr.zelytra.histeria.commands.report.Bug;
+import fr.zelytra.histeria.commands.report.BugTab;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.shop.ShopCommand;
 import fr.zelytra.histeria.commands.shop.StandCommand;
@@ -260,6 +262,7 @@ public final class Histeria extends JavaPlugin {
         getCommand("stats").setExecutor(new Stats());
         getCommand("emote").setExecutor(new EmoteCommand());
         getCommand("bug").setExecutor(new Bug());
+        getCommand("bug").setTabCompleter(new BugTab());
         getCommand("social").setExecutor(new Social());
         getCommand("compress").setExecutor(new Compress());
         getCommand("near").setExecutor(new Near());

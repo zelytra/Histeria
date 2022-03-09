@@ -27,11 +27,7 @@ public class DiscordLog {
                 webhook.setAvatarUrl(type.getAvatar());
                 webhook.setUsername(type.getUserName());
 
-                if (type == WebHookType.CHAT)
-                    webhook.setContent(message.replace("@", "").replace("http", "").replace("https", "").replace("/", ""));
-                else
-                    webhook.setContent(message);
-
+                webhook.setContent(message.replace("@", "").replace("http", "").replace("https", "").replace("/", ""));
 
                 try {
                     webhook.execute();
