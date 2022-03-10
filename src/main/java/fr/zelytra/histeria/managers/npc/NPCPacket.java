@@ -22,9 +22,11 @@ public class NPCPacket {
 
     public void setSkin(Skin skin) {
 
-        GameProfile gameProfile = npc.getGameProfile();
-        gameProfile.getProperties().removeAll("textures");
-        gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
+        if (skin != null) {
+            GameProfile gameProfile = npc.getGameProfile();
+            gameProfile.getProperties().removeAll("textures");
+            gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
+        }
 
         SynchedEntityData watcher = npc.getEntityData();
         connection.send(new ClientboundSetEntityDataPacket(npc.getId(), watcher, true));

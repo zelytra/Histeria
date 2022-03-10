@@ -120,16 +120,15 @@ public class NPC implements Serializable {
 
     private void showNPCMethod(Player player) {
         NPCPacket npcPacket = new NPCPacket(player, npc);
-        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
-        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.removeFromTab(), 1);
-        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.hide(), 1);
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setSkin(skin), 1);
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setPosition(location), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.removeFromTab(), 60);
     }
 
     public void move(Location location) {
         this.location = location;
+        this.Clocation = new CLocation(location);
         for (Player player : Bukkit.getOnlinePlayers())
             new NPCPacket(player, npc).setPosition(location);
     }
@@ -151,6 +150,8 @@ public class NPC implements Serializable {
                 Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.hide(), 1);
                 Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setSkin(skin), 1);
                 Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setPosition(location), 1);
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.removeFromTab(), 60);
             }
 
         });
