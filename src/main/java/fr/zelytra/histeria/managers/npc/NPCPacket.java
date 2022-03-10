@@ -29,6 +29,7 @@ public class NPCPacket {
         }
 
         SynchedEntityData watcher = npc.getEntityData();
+        //watcher.watch(10, (byte) 127); no more functional
         connection.send(new ClientboundSetEntityDataPacket(npc.getId(), watcher, true));
     }
 

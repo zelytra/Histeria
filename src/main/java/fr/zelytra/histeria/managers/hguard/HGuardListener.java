@@ -290,9 +290,17 @@ public class HGuardListener implements Listener {
 
     @EventHandler
     public void onDropItem(PlayerDropItemEvent e) {
-        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
+
+        if (HGuard.getByLocation(e.getPlayer().getLocation()) == null)
             return;
+
+        HGuard hguard = HGuard.getByLocation(e.getPlayer().getLocation());
+        if (Histeria.getLuckPerms() != null) {
+            User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(e.getPlayer());
+            if (hguard.getGroupWhiteList().contains(user.getPrimaryGroup()))
+                return;
         }
+
         e.setCancelled(true);
 
 

@@ -156,6 +156,7 @@ public final class Histeria extends JavaPlugin {
         EventManager.regEvents(this);
 
 
+
         new CraftManager();
         vote = new Vote();
         server = new Server();
