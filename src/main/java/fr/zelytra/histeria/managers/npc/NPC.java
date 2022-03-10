@@ -14,17 +14,13 @@ import com.mojang.authlib.properties.Property;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.logs.LogType;
 import fr.zelytra.histeria.utils.CLocation;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -37,7 +33,7 @@ public class NPC implements Serializable {
 
     private final String name;
     private final transient ServerPlayer npc;
-    private final transient Location location;
+    private transient Location location;
     private NPCAction action = NPCAction.DEFAULT;
     private String serverName;
 
@@ -88,7 +84,7 @@ public class NPC implements Serializable {
         }
 
         ServerPlayer entity = new ServerPlayer(nmsServer, nmsWorld, gameProfile);
-        move(entity, location);
+        showNPC();
 
         npcList.add(this);
         return entity;
@@ -96,9 +92,9 @@ public class NPC implements Serializable {
 
     public void destroy() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
-            connection.send(new ClientboundRemoveEntitiesPacket(npc.getId()));
+            new NPCPacket(player, npc).hide();
         }
+
         npcList.remove(this);
         String folderPath = Histeria.getInstance().getDataFolder().getPath() + File.separator + "NPC";
         File file = new File(folderPath + File.separator + name + ".npc");
@@ -113,37 +109,29 @@ public class NPC implements Serializable {
     public void showNPC() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            addNPCPacket(player);
+            showNPCMethod(player);
         }
 
     }
 
     public void showNPC(Player player) {
-
-        addNPCPacket(player);
-
+        showNPCMethod(player);
     }
 
-    public void move(ServerPlayer npc, Location location) {
-        packetMove(npc, location);
+    private void showNPCMethod(Player player) {
+        NPCPacket npcPacket = new NPCPacket(player, npc);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.removeFromTab(), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.hide(), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setSkin(skin), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
+        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setPosition(location), 1);
     }
 
     public void move(Location location) {
-        packetMove(npc, location);
-    }
-
-    private void packetMove(ServerPlayer npc, Location location) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-
-            ServerGamePacketListenerImpl connection = getPlayerConnection(player);
-            npc.setPosRaw(location.getBlockX() + 0.5, location.getY(), location.getBlockZ() + 0.5);
-            npc.setRot(location.getYaw(), location.getPitch());
-            connection.send(new ClientboundTeleportEntityPacket(npc));
-
-            Float yaw = location.getYaw() * 256.0F / 360.0F;
-            connection.send(new ClientboundRotateHeadPacket(npc, yaw.byteValue()));
-
-        }
+        this.location = location;
+        for (Player player : Bukkit.getOnlinePlayers())
+            new NPCPacket(player, npc).setPosition(location);
     }
 
 
@@ -158,20 +146,11 @@ public class NPC implements Serializable {
                 return;
             }
 
-            GameProfile gameProfile = npc.getGameProfile();
-            gameProfile.getProperties().removeAll("textures");
-            gameProfile.getProperties().put("textures", new Property("textures", skin.getTexture(), skin.getSignature()));
-
-
             for (Player player : Bukkit.getOnlinePlayers()) {
-                removeNPCPacket(player);
-
-                SynchedEntityData watcher = npc.getEntityData();
-                ClientboundSetEntityDataPacket packet = new ClientboundSetEntityDataPacket(npc.getId(), watcher, true);
-                ((CraftPlayer) player).getHandle().connection.send(packet);
-
-                addNPCPacket(player);
-
+                NPCPacket npcPacket = new NPCPacket(player, npc);
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.hide(), 1);
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.setSkin(skin), 1);
+                Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> npcPacket.show(), 1);
             }
 
         });
@@ -203,12 +182,6 @@ public class NPC implements Serializable {
         return null;
     }
 
-    private ServerGamePacketListenerImpl getPlayerConnection(Player player) {
-
-        return ((CraftPlayer) player).getHandle().connection;
-
-    }
-
     public NPCAction getAction() {
         return action;
     }
@@ -216,29 +189,6 @@ public class NPC implements Serializable {
     public void setAction(NPCAction action) {
         this.action = action;
     }
-
-    private void removeNPCPacket(Player player) {
-
-        ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
-        connection.send(new ClientboundRemoveEntitiesPacket(npc.getId()));
-
-    }
-
-    private void addNPCPacket(Player player) {
-
-        Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
-            ServerGamePacketListenerImpl connection = ((CraftPlayer) player).getHandle().connection;
-            connection.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.ADD_PLAYER, npc));
-            connection.send(new ClientboundAddPlayerPacket(npc));
-            connection.send(new ClientboundRotateHeadPacket(npc, (byte) (npc.getBukkitYaw() * 256 / 360)));
-
-            SynchedEntityData watcher = npc.getEntityData();
-            connection.send(new ClientboundSetEntityDataPacket(npc.getId(), watcher, true));
-            Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> connection.send(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.REMOVE_PLAYER, npc)), 1);
-        }, 20);
-
-    }
-
 
     public String getServer() {
         return serverName;
