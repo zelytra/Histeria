@@ -9,6 +9,7 @@
 
 package fr.zelytra.histeria.managers.jobs.listener;
 
+import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.jobs.builder.JobType;
 import fr.zelytra.histeria.managers.jobs.content.Fighter;
 import fr.zelytra.histeria.managers.jobs.utils.JobUtils;
@@ -17,6 +18,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
@@ -83,6 +86,19 @@ public class FighterListener implements Listener {
 
 
     }
+
+    @EventHandler
+    public void onDrillCraft(PrepareItemCraftEvent e) {
+        ItemStack result = e.getInventory().getResult();
+        if (result != null && result.getType() == CustomMaterial.ANTI_NOCTURITE_SWORD.getVanillaMaterial()) {
+
+            CustomPlayer player = CustomPlayer.getCustomPlayer(e.getView().getPlayer().getName());
+
+            if (player != null && player.getJob(JobType.FIGHTER).getLevel() != 100)
+                e.getInventory().setResult(null);
+        }
+    }
+
 
 
 }

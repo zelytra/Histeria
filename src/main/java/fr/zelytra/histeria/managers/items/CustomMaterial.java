@@ -35,7 +35,7 @@ public enum CustomMaterial {
     ALPIN_HOOK("§bAlpin Hook", "alpin_hook", "Permet l'ascension de toute surface verticale", 39, Material.STONE_PICKAXE, ItemType.TOOL),
     UNCLAIM_FINDER("§9Unclaim Finder", "unclaim_finder", "Cet item vous indique le nombre#de coffres dans zone de 128x128#autour de vous", 40, Material.COMPASS, ItemType.MISCELLANEOUS),
 
-    ANTI_NOCTURITE_SWORD("§5Anti-Nocturite Sword", "anti-nocturite_sword", "Durabilité: 3600#Pouvoir: attire ses enemies", 52, Material.NETHERITE_SWORD, ItemType.TOOL, 4000, 13, EquipmentSlot.HAND),
+    ANTI_NOCTURITE_SWORD("§5Anti-Nocturite Sword", "anti-nocturite_sword", "Durabilité: 4000#Pouvoir: attire ses enemies", 52, Material.NETHERITE_SWORD, ItemType.TOOL, 4000, 13, EquipmentSlot.HAND),
     NOCTURITE_SWORD("§5Nocturite Sword", "nocturite_sword", "Durabilité: 3600#Pouvoir: projette toute entité alentour", 30, Material.GOLDEN_SWORD, ItemType.TOOL, 3600, 12, EquipmentSlot.HAND),
     HISTERITE_SWORD("§cHisterite Sword", "histerite_sword", "Durabilité: 2800", 28, Material.GOLDEN_SWORD, ItemType.TOOL, 2800, 10, EquipmentSlot.HAND),
     HISTERITE_PICKAXE("§cHisterite Pickaxe", "histerite_pickaxe", "Durabilité: 3000#Casse une colonne de deux blocs de haut", 5, Material.NETHERITE_PICKAXE, ItemType.TOOL, 3000),

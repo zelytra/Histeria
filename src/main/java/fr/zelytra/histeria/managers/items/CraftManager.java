@@ -278,6 +278,12 @@ public class CraftManager {
         shapedRecipeBuilder.assigneSymbol('a', Material.STICK);
         shapedRecipeBuilder.register();
 
+        shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.ANTI_NOCTURITE_SWORD);
+        shapedRecipeBuilder.setShape("a**", "/**", "/**");
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_CRYSTAL);
+        shapedRecipeBuilder.assigneSymbol('a', Material.STICK);
+        shapedRecipeBuilder.register();
+
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_GENERATOR);
         shapedRecipeBuilder.setShape("///", "aba", "///");
         shapedRecipeBuilder.assigneSymbol('/', Material.CRYING_OBSIDIAN);

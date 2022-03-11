@@ -239,7 +239,7 @@ public class Enchanter extends Job implements JobInterface {
                 lore.add(formatBigNumber(1000000) + "§f" + Emote.GOLD);
                 break;
             case 100:
-                lore.add("Unlock craft of : Core Mining Drill");
+                lore.add("Unlock possibility of getting custom enchant in enchanting table");
                 break;
         }
         return lore;
