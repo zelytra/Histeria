@@ -36,7 +36,7 @@ public enum CustomEnchantData {
             new HashSet<>(Arrays.asList(EquipmentSlot.HAND,EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET)),
             0, false, false, false, false),
 
-    STUNE("Stune", "stune", 1, 5,
+    STUN("Stun", "stun", 1, 5,
             ChatColor.GRAY,
             EnchantmentTarget.WEAPON,
             new EnchantRarity(1,5,EnchantmentRarity.UNCOMMON.getWeight(),30),

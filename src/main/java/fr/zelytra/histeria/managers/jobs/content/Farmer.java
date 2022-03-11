@@ -161,7 +161,6 @@ public class Farmer extends Job implements JobInterface {
                 lore.add(formatBigNumber(4500) + "§f" + Emote.GOLD);
                 break;
             case 25:
-                lore.add("?");
                 lore.add(formatBigNumber(5500) + "§f" + Emote.GOLD);
                 break;
             case 30:

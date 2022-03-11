@@ -174,7 +174,7 @@ public class EventManager {
         pm.registerEvents(new Lightning(), pl);
         pm.registerEvents(new Shield(), pl);
         pm.registerEvents(new Vampirisme(), pl);
-        pm.registerEvents(new Stune(), pl);
+        pm.registerEvents(new Stun(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();

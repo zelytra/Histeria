@@ -24,7 +24,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
-public class Stune implements Listener {
+public class Stun implements Listener {
 
     private final static int PROC_LUCK = 1; // Luck to proc the effect in %
     private final static Random random = new Random();

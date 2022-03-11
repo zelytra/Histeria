@@ -29,7 +29,7 @@ dependencies {
     compileOnly("com.sk89q.worldedit:worldedit-bukkit:7.3.0-SNAPSHOT")
     compileOnly("net.luckperms:api:5.3")
     paperDevBundle("1.18.1-R0.1-SNAPSHOT")
-    compileOnly("com.github.zelytra:MoreStats:0.0.6")
+    //compileOnly("com.github.zelytra:MoreStats:0.0.6")
 }
 
 group = "fr.zelytra"

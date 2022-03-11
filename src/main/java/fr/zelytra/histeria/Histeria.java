@@ -205,7 +205,7 @@ public final class Histeria extends JavaPlugin {
         DrillDataPersistor.saveAll();
         configurationManager.unload();
 
-        if (mySQL.isConnected())
+        if (mySQL.isConnected()) // -105 87 -196
             mySQL.closeConnection();
     }
 
@@ -378,7 +378,7 @@ public final class Histeria extends JavaPlugin {
             CustomEnchant.LIGHTNING.register();
             CustomEnchant.SHIELD.register();
             CustomEnchant.VAMPIRISME.register();
-            CustomEnchant.STUNE.register();
+            CustomEnchant.STUN.register();
             CustomEnchant.PHOENIX_BIRTH.register();
 
         } catch (Exception e) {
