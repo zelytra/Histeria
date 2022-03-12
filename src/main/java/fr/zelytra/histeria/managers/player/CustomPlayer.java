@@ -94,6 +94,7 @@ public class CustomPlayer {
                 this.id = getBaseID();
                 this.loadData();
             }
+
             dcChecker();
             customPlayerList.add(this);
 
@@ -104,18 +105,22 @@ public class CustomPlayer {
     private void dcChecker() {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
             try {
-                ResultSet result = Histeria.mySQL.query("SELECT `ip`,`name` FROM `Player` WHERE `ip` = '" + this.ip + "';");
-                int count = 0;
-                StringBuilder linkedAccount = new StringBuilder();
+                synchronized (syncObject) {
+                    ResultSet result = Histeria.mySQL.query("SELECT `ip`,`name` FROM `Player` WHERE `ip` = '" + this.ip + "';");
+                    int count = 0;
+                    StringBuilder linkedAccount = new StringBuilder();
 
-                while (result.next()) {
-                    linkedAccount.append(result.getString("name") + " ");
-                    count++;
-                }
+                    while (result.next()) {
+                        linkedAccount.append(result.getString("name") + " ");
+                        count++;
+                    }
 
-                if (count > 1) {
-                    Histeria.log("DC detected on player " + name + " | IP: " + ip + " | Linked account: " + linkedAccount, LogType.WARN);
-                    new DiscordLog(WebHookType.CHEATER, "DC detected on player **" + name + "** | IP: **" + ip + "** | Linked account: " + linkedAccount);
+                    if (count > 1) {
+                        Histeria.log("DC detected on player " + name + " | IP: " + ip + " | Linked account: " + linkedAccount, LogType.WARN);
+                        new DiscordLog(WebHookType.CHEATER, "DC detected on player **" + name + "** | IP: **" + ip + "** | Linked account: " + linkedAccount);
+                    }
+
+                    result.close();
                 }
 
             } catch (SQLException e) {

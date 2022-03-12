@@ -37,6 +37,7 @@ public class HisteritePickaxe implements Listener {
 
         Player player = e.getPlayer();
 
+        if (player.isSneaking()) return;
 
         Location BLocation = e.getEvent().getBlock().getLocation();
         Material block = e.getEvent().getBlock().getType();

@@ -50,7 +50,10 @@ public class UnclaimFinder implements Listener {
                 }
 
                 for (BlockState blockState : entities) {
-                    if (blockState.getBlock().getType() == Material.CHEST || blockState.getBlock().getType() == Material.TRAPPED_CHEST || blockState.getBlock().getType() == Material.BARREL || blockState.getBlock().getType() == Material.ENDER_CHEST) {
+                    if (blockState.getBlock().getType() == Material.CHEST ||
+                            blockState.getBlock().getType() == Material.TRAPPED_CHEST ||
+                            blockState.getBlock().getType() == Material.BARREL ||
+                            blockState.getBlock().getType() == Material.ENDER_CHEST) {
                         count++;
                         player.setCompassTarget(blockState.getLocation());
                     }

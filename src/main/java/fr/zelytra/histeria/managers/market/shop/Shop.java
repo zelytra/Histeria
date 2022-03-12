@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
-    private final List<ShopItem> shopItemList = new ArrayList<>();
+    private List<ShopItem> shopItemList;
 
     private List<ShopItem> filterBlocks = new ArrayList<>();
     private List<ShopItem> filterItems = new ArrayList<>();
@@ -35,7 +35,22 @@ public class Shop {
 
     public Shop() {
         Histeria.log("Start loading shop...", LogType.INFO);
+        loadShopData();
+    }
+
+    public void reload() {
+        loadShopData();
+    }
+
+    private void loadShopData() {
         MySQL mySQL = Histeria.mySQL;
+
+        shopItemList = new ArrayList<>();
+        filterBlocks = new ArrayList<>();
+        filterItems = new ArrayList<>();
+        filterOres = new ArrayList<>();
+        filterCustom = new ArrayList<>();
+
         try {
             ResultSet resultSet = mySQL.query("SELECT * FROM `Shop`");
 
@@ -55,7 +70,6 @@ public class Shop {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-
     }
 
     private void updateFilter() {

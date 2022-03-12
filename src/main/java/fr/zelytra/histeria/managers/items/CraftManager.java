@@ -146,7 +146,7 @@ public class CraftManager {
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_PICKAXE);
         shapedRecipeBuilder.setShape("///", "*%*", "*%*");
         shapedRecipeBuilder.assigneSymbol('%', CustomMaterial.HISTERITE_STICK);
-        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_INGOT);
         shapedRecipeBuilder.register();
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_CRYSTAL);
