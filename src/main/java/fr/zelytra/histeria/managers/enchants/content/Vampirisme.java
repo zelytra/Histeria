@@ -31,7 +31,8 @@ public class Vampirisme implements Listener {
     public void onDamage(EntityDamageByEntityEvent e) {
 
         if (e.isCancelled()) return;
-        if (!(e.getDamager() instanceof Player) && (e.getEntity() instanceof LivingEntity)) return;
+        if (!(e.getDamager() instanceof Player)) return;
+        if (!(e.getEntity() instanceof LivingEntity)) return;
 
         Player damager = (Player) e.getDamager();
         ItemStack item = damager.getInventory().getItemInMainHand();
