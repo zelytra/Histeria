@@ -19,6 +19,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class CustomItemHandler implements Listener {
@@ -86,6 +87,12 @@ public class CustomItemHandler implements Listener {
 
         }
 
+    }
+
+    @EventHandler
+    public void onCustomItemDamage(PlayerItemDamageEvent e) {
+        if (CustomItemStack.hasTag(e.getItem()))
+            e.setCancelled(true);
     }
 
 

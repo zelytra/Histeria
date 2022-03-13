@@ -15,7 +15,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -62,8 +61,8 @@ public class CustomItemStack {
 
         switch (material.getItemType()) {
             case ARMOR:
-                meta.setUnbreakable(true);
-                meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+                //meta.setUnbreakable(true);
+                //meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                 meta.addAttributeModifier(Attribute.GENERIC_ARMOR, AttributeGenerator.armor(material.getArmor(), material.getSlot()));
                 meta.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH, AttributeGenerator.extraHeart(material.getExtraHeart(), material.getSlot()));
                 itemData.set(durabilityKey, PersistentDataType.INTEGER, this.customMaterial.getDurability());
@@ -74,8 +73,8 @@ public class CustomItemStack {
                 item.setItemMeta(meta);
                 break;
             case TOOL:
-                meta.setUnbreakable(true);
-                meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+                //meta.setUnbreakable(true);
+                //meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                 if (this.customMaterial.getDamage() != 0) {
                     meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, AttributeGenerator.attack(material.getDamage(), material.getSlot()));
                 }
