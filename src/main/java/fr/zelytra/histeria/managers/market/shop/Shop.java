@@ -62,7 +62,6 @@ public class Shop {
                         resultSet.getInt("buyPrice"),
                         resultSet.getString("type"));
                 this.shopItemList.add(shopItem);
-                System.out.println(shopItem);
 
             }
             updateFilter();

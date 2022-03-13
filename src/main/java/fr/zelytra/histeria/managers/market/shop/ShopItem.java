@@ -53,9 +53,9 @@ public class ShopItem {
     private List<String> loreBuilder() {
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§bBuy for: §6" + buyPrice + "§f " + Emote.GOLD);
+        lore.add("§bBuy for: §6" + buyPrice + "§f" + Emote.GOLD);
         lore.add("");
-        lore.add("§bSell for: §6" + sellPrice + "§f " + Emote.GOLD);
+        lore.add("§bSell for: §6" + sellPrice + "§f" + Emote.GOLD);
 
         return lore;
     }
@@ -66,7 +66,7 @@ public class ShopItem {
 
         List<String> lore = new ArrayList<>();
         lore.add("");
-        lore.add("§bPrice -> §6" + buyPrice * amount + "§f " + Emote.GOLD);
+        lore.add("§bPrice -> §6" + buyPrice * amount + "§f" + Emote.GOLD);
         meta.setLore(lore);
         item.setItemMeta(meta);
         item.setAmount(amount);
