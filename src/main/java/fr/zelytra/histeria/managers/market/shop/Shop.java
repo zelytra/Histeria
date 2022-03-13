@@ -62,6 +62,7 @@ public class Shop {
                         resultSet.getInt("buyPrice"),
                         resultSet.getString("type"));
                 this.shopItemList.add(shopItem);
+                System.out.println(shopItem);
 
             }
             updateFilter();
@@ -272,16 +273,25 @@ public class Shop {
 
     public ShopItem getItemShop(ItemStack item) {
         CustomMaterial material = CustomItemStack.getCustomMaterial(item);
-        if (material != null || CustomMaterial.getCustomBlocks().contains(item.getType())) {
+
+        if (material != null) {
             for (ShopItem items : Histeria.shop.shopItemList)
                 if (material == CustomItemStack.getCustomMaterial(items.getItem()))
                     return items;
+
+
+        } else if (CustomMaterial.getCustomBlocks().contains(item.getType())) {
+            for (ShopItem items : Histeria.shop.shopItemList)
+                if (items.getItem().getType() == CustomItemStack.getCustomBlockMaterial(item))
+                    return items;
+
         } else {
             for (ShopItem items : Histeria.shop.shopItemList)
                 if (items.getItem().getType() == item.getType() && items.getFilter() != ShopFilter.CUSTOM_ITEM)
                     return items;
 
         }
+
         return null;
     }
 

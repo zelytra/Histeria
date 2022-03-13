@@ -27,8 +27,11 @@ public class AnvilListener implements Listener {
     @EventHandler
     public void anvilListener(PrepareAnvilEvent e) {
         ItemStack[] content = e.getInventory().getContents();
+
         if (CustomItemStack.hasTag(content[0])) {
+
             CustomRepair itemRepair = CustomRepair.getByCustomMaterial(CustomItemStack.getCustomMaterial(content[0]));
+
             if (itemRepair != null && itemRepair.getMaterial() == CustomItemStack.getCustomMaterial(content[1])) {
                 ItemStack result = content[0].clone();
                 DurabilityHandler durabilityHandler = new DurabilityHandler(result, itemRepair.getItem());

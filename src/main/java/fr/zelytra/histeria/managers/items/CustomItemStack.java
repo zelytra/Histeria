@@ -182,6 +182,15 @@ public class CustomItemStack {
         return null;
     }
 
+    public static Material getCustomBlockMaterial(ItemStack item) {
+
+        for (Material material : CustomMaterial.getCustomBlocks())
+            if (material == item.getType())
+                return material;
+
+        return null;
+    }
+
     public static NamespacedKey getDescriptionKey() {
         return descriptionKey;
     }
