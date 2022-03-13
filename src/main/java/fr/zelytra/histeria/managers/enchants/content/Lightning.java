@@ -28,7 +28,8 @@ public class Lightning implements Listener {
     public void onDamage(EntityDamageByEntityEvent e) {
 
         if (e.isCancelled()) return;
-        if (!(e.getDamager() instanceof Player) && (e.getEntity() instanceof LivingEntity)) return;
+        if (!(e.getDamager() instanceof Player)) return;
+        if (!(e.getEntity() instanceof LivingEntity)) return;
 
         Player damager = (Player) e.getDamager();
         ItemStack item = damager.getInventory().getItemInMainHand();
@@ -38,8 +39,8 @@ public class Lightning implements Listener {
             if (!CustomEnchantUtils.contain(item, CustomEnchant.LIGHTNING)) return;
 
             int level = CustomEnchantUtils.getLevel(item, CustomEnchant.LIGHTNING);
-           
-            if (PROC_LUCK * level >= random.nextInt(0, 100)) {                
+
+            if (PROC_LUCK * level >= random.nextInt(0, 100)) {
                 if (e.getEntity().getLocation().getY() >= e.getEntity().getWorld().getHighestBlockAt(e.getEntity().getLocation()).getY())
                     lightning(e.getEntity());
             }
@@ -50,10 +51,10 @@ public class Lightning implements Listener {
     }
 
     private void lightning(Entity entity) {
-        LivingEntity livingEntity =(LivingEntity) entity;
-        
+        LivingEntity livingEntity = (LivingEntity) entity;
+
         livingEntity.setFireTicks(20 * 2);
-        livingEntity.damage(2.0);        
+        livingEntity.damage(2.0);
         entity.getWorld().strikeLightningEffect(entity.getLocation());
 
     }
