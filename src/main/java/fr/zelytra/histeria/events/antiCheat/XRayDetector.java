@@ -90,6 +90,11 @@ class XRayProfiler {
             case DIRT:
             case GRANITE:
             case NETHERRACK:
+            case DEEPSLATE:
+            case COBBLED_DEEPSLATE:
+            case TUFF:
+            case GRAVEL:
+            case AMETHYST_BLOCK:
                 commonBlockCount++;
                 break;
 

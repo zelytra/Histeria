@@ -65,6 +65,7 @@ public class HisteritePickaxe implements Listener {
         }
 
         e.setCancelled(true);
+
         List<Block> blockToBreak = new ArrayList<>();
         blockToBreak.add(BLocation.getBlock());
         blockToBreak.add(e.getEvent().getBlock());
