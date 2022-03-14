@@ -70,6 +70,7 @@ public class SyncServer {
 
                     Histeria.log("Requesting " + player.getName() + " data...", LogType.INFO);
                     Timer timer = new Timer();
+
                     // Sending GET request
                     List<Capsule> capsuleList = new ArrayList<>();
                     capsuleList.add(new IDCapsule(request));
@@ -96,7 +97,7 @@ public class SyncServer {
                     // Reading data sent
                     PlayerData playerData = new PlayerData(player);
 
-                    if (messageSize<=2){
+                    if (messageSize <= 2) {
                         Histeria.log(player.getName() + " has an empty file, clearing player data §7[" + timer.stop() + "]", LogType.INFO);
                         server.close();
                         isCommunicationOver = true;

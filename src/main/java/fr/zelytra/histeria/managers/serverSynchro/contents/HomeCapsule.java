@@ -88,7 +88,6 @@ public class HomeCapsule implements Capsule {
         byte[] buffer = new byte[4];
         if (ByteBuffer.wrap(message).getInt() < 1) return data;
 
-
         // Reading coordinates
         input.read(buffer);
         int x = ByteBuffer.wrap(buffer).getInt();
