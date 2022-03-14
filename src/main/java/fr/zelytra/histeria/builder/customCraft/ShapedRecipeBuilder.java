@@ -12,6 +12,7 @@ package fr.zelytra.histeria.builder.customCraft;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.items.ItemType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -68,8 +69,18 @@ public class ShapedRecipeBuilder {
         CraftPattern[] craftPatterns = new CraftPattern(this.shapedRecipe.getShape()).getAllPossibilities();
         int count = 0;
         for (CraftPattern pattern : craftPatterns) {
-            NamespacedKey key = new NamespacedKey(Histeria.getInstance(), material.getName() + count);
-            ShapedRecipe recipe = new ShapedRecipe(key, new CustomItemStack(material, this.amount).getItem());
+
+            ShapedRecipe recipe;
+            NamespacedKey key;
+
+            if (material.getItemType() == ItemType.BLOCK) {
+                key = new NamespacedKey(Histeria.getInstance(), material.name() + count);
+                recipe = new ShapedRecipe(key, new ItemStack(material.getVanillaMaterial(), this.amount));
+            } else {
+                key = new NamespacedKey(Histeria.getInstance(), material.getName() + count);
+                recipe = new ShapedRecipe(key, new CustomItemStack(material, this.amount).getItem());
+            }
+
             recipe.shape(pattern.getShapeArray());
 
             for (Map.Entry<Character, ItemStack> map : this.shapedRecipe.getIngredientMap().entrySet()) {
@@ -86,4 +97,6 @@ public class ShapedRecipeBuilder {
             count++;
         }
     }
+
+
 }

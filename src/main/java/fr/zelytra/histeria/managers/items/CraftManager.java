@@ -307,7 +307,7 @@ public class CraftManager {
 
             cs.setSpawnedType(entityEgg.entity);
             bsm.setBlockState(cs);
-            bsm.displayName(Component.text().content(entityEgg.name()+"'s Spawner").build());
+            bsm.displayName(Component.text().content(entityEgg.name() + "'s Spawner").build());
             spawner.setItemMeta(bsm);
 
             ShapedRecipe recipe = new ShapedRecipe(new NamespacedKey(Histeria.getInstance(), entityEgg.entity.name()), spawner);
