@@ -15,7 +15,6 @@ import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -84,8 +83,7 @@ public class HisteritePickaxe implements Listener {
         blockToBreak.add(BLocation.getBlock());
         blockToBreak.add(e.getEvent().getBlock());
 
-        MinerListener.consumeBlocksXP(player, blockToBreak);
-
+        System.out.println("trigger");
         playerTask.put(player.getName(), 1);
 
         for (Block blocks : blockToBreak)

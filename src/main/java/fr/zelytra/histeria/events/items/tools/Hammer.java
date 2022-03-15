@@ -93,7 +93,6 @@ public class Hammer implements Listener {
             }
         }
         e.setCancelled(true);
-        MinerListener.consumeBlocksXP(player, blockToBreak);
 
         playerTask.put(player.getName(), 1);
 

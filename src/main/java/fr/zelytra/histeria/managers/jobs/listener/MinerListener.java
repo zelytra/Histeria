@@ -105,9 +105,10 @@ public class MinerListener implements Listener {
         PersistentDataContainer chunkData = block.getChunk().getPersistentDataContainer();
         if (chunkData.has(generateLocKey(block.getLocation()))) {
             chunkData.remove(generateLocKey(block.getLocation()));
+            System.out.println("is placed");
             return false;
         }
-
+        System.out.println("is natural");
         return true;
 
     }
@@ -140,7 +141,6 @@ public class MinerListener implements Listener {
         if (chunkData.has(generateLocKey(e.getBlock().getLocation()))) return;
 
         chunkData.set(generateLocKey(e.getBlock().getLocation()), PersistentDataType.STRING, "jobBlockLogs_miner");
-
 
     }
 
