@@ -24,9 +24,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HisteritePickaxe implements Listener {
+
+    private final static Map<String, Integer> playerTask = new HashMap<>();
     private final CustomMaterial customMaterial = CustomMaterial.HISTERITE_PICKAXE;
 
     @EventHandler
@@ -35,7 +39,19 @@ public class HisteritePickaxe implements Listener {
         if (e.getMaterial() != customMaterial) return;
         if (e.isCancelled()) return;
 
+
         Player player = e.getPlayer();
+
+        // Block infinit loop
+        if (playerTask.containsKey(player.getName())) {
+            if (playerTask.get(player.getName()) <= 2) {
+                playerTask.put(player.getName(), playerTask.get(player.getName()) + 1);
+                System.out.println("putting: " + playerTask.get(player.getName()));
+                return;
+            }
+            playerTask.remove(player.getName());
+            System.out.println("out of task");
+        }
 
         if (player.isSneaking()) return;
 
@@ -71,8 +87,13 @@ public class HisteritePickaxe implements Listener {
         blockToBreak.add(e.getEvent().getBlock());
 
         MinerListener.consumeBlocksXP(player, blockToBreak);
+
+        playerTask.put(player.getName(), 1);
         for (Block blocks : blockToBreak)
-            blocks.breakNaturally(e.getItem(), true);
+            player.breakBlock(blocks);
+
+
+        System.out.println("Starting task");
 
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
