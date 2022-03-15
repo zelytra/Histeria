@@ -20,6 +20,7 @@ public class OreLogger implements Listener {
     @EventHandler
     public void onOre(BlockBreakEvent e) {
         switch (e.getBlock().getType()) {
+            case DEEPSLATE_DIAMOND_ORE:
             case DIAMOND_ORE:
                 new DiscordLog(WebHookType.ORE, e.getPlayer().getName() + " a miné un minerais de **DIAMAND** ");
                 break;
