@@ -42,15 +42,13 @@ public class HisteritePickaxe implements Listener {
 
         Player player = e.getPlayer();
 
-        // Block infinit loop
+        // Block infinite loop
         if (playerTask.containsKey(player.getName())) {
             if (playerTask.get(player.getName()) <= 2) {
                 playerTask.put(player.getName(), playerTask.get(player.getName()) + 1);
-                System.out.println("putting: " + playerTask.get(player.getName()));
                 return;
             }
             playerTask.remove(player.getName());
-            System.out.println("out of task");
         }
 
         if (player.isSneaking()) return;
@@ -89,11 +87,9 @@ public class HisteritePickaxe implements Listener {
         MinerListener.consumeBlocksXP(player, blockToBreak);
 
         playerTask.put(player.getName(), 1);
+
         for (Block blocks : blockToBreak)
             player.breakBlock(blocks);
-
-
-        System.out.println("Starting task");
 
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();

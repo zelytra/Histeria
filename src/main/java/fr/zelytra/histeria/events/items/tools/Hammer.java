@@ -24,10 +24,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hammer implements Listener {
+
     private final CustomMaterial customMaterial = CustomMaterial.HAMMER;
+    private final static Map<String, Integer> playerTask = new HashMap<>();
+
     private final int range = 1;
 
     @EventHandler
@@ -39,12 +44,22 @@ public class Hammer implements Listener {
         Player player = e.getPlayer();
         List<Block> blockToBreak = new ArrayList<>();
 
+        // Block infinite loop
+        if (playerTask.containsKey(player.getName())) {
+            if (playerTask.get(player.getName()) <= 27) {
+                playerTask.put(player.getName(), playerTask.get(player.getName()) + 1);
+                return;
+            }
+            playerTask.remove(player.getName());
+        }
+
 
         Location BLocation = e.getEvent().getBlock().getLocation();
         Material block = e.getEvent().getBlock().getType();
         for (int x = -range; x <= range; x++) {
             for (int y = -range; y <= range; y++) {
                 for (int z = -range; z <= range; z++) {
+
                     BLocation.setX(e.getEvent().getBlock().getX() + x);
                     BLocation.setY(e.getEvent().getBlock().getY() + y);
                     BLocation.setZ(e.getEvent().getBlock().getZ() + z);
@@ -71,6 +86,7 @@ public class Hammer implements Listener {
                             || BLocation.getBlock().getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) {
                         continue;
                     }
+
                     blockToBreak.add(BLocation.getBlock());
 
                 }
@@ -78,8 +94,11 @@ public class Hammer implements Listener {
         }
         e.setCancelled(true);
         MinerListener.consumeBlocksXP(player, blockToBreak);
+
+        playerTask.put(player.getName(), 1);
+
         for (Block blocks : blockToBreak)
-            blocks.breakNaturally(e.getItem(), true);
+            player.breakBlock(blocks);
 
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
