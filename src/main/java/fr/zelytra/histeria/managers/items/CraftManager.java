@@ -187,11 +187,11 @@ public class CraftManager {
         shapedRecipeBuilder.register();
 
         ShapeLessRecipeBuilder shapelessRecipe = new ShapeLessRecipeBuilder(CustomMaterial.HISTERITE_INGOT, 9);
-        shapelessRecipe.setIngredient(CustomMaterial.HISTERITE_BLOCK);
+        shapelessRecipe.setIngredient(CustomMaterial.HISTERITE_BLOCK.getVanillaMaterial());
         shapelessRecipe.register();
 
         shapelessRecipe = new ShapeLessRecipeBuilder(CustomMaterial.NOCTURITE_INGOT, 9);
-        shapelessRecipe.setIngredient(CustomMaterial.NOCTURITE_BLOCK);
+        shapelessRecipe.setIngredient(CustomMaterial.NOCTURITE_BLOCK.getVanillaMaterial());
         shapelessRecipe.register();
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_NUGGET, 9);
