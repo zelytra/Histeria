@@ -37,7 +37,6 @@ public class TradeCommand implements CommandExecutor {
 
         // Check double trade request
         if (getRequest(target.getName(), player.getName()) != null) {
-            System.out.println("double trade request");
             requestList.remove(getRequest(target.getName(), player.getName()));
             new TradeCanal(target, player);
             return true;
@@ -54,7 +53,6 @@ public class TradeCommand implements CommandExecutor {
             return false;
         }
 
-        System.out.println("start request");
         new TradeRequest(player, target).startTimeOut();
 
         return true;

@@ -151,12 +151,12 @@ public class CraftManager {
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.NOCTURITE_CRYSTAL);
         shapedRecipeBuilder.setShape("///", "///", "///");
-        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.NOCTURITE_BLOCK.getVanillaMaterial());
         shapedRecipeBuilder.register();
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.HISTERITE_CRYSTAL);
         shapedRecipeBuilder.setShape("///", "///", "///");
-        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_BLOCK);
+        shapedRecipeBuilder.assigneSymbol('/', CustomMaterial.HISTERITE_BLOCK.getVanillaMaterial());
         shapedRecipeBuilder.register();
 
         shapedRecipeBuilder = new ShapedRecipeBuilder(CustomMaterial.COMPRESS_COBBLESTONE);

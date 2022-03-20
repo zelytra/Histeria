@@ -83,7 +83,6 @@ public class HisteritePickaxe implements Listener {
         blockToBreak.add(BLocation.getBlock());
         blockToBreak.add(e.getEvent().getBlock());
 
-        System.out.println("trigger");
         playerTask.put(player.getName(), 1);
 
         for (Block blocks : blockToBreak)
