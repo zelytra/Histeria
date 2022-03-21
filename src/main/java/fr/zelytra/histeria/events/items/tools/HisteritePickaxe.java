@@ -32,6 +32,19 @@ public class HisteritePickaxe implements Listener {
     private final static Map<String, Integer> playerTask = new HashMap<>();
     private final CustomMaterial customMaterial = CustomMaterial.HISTERITE_PICKAXE;
 
+    private static final List<Material> blackListMaterial = new ArrayList<>();
+
+    {
+        blackListMaterial.add(Material.BEDROCK);
+        blackListMaterial.add(Material.COMMAND_BLOCK);
+        blackListMaterial.add(CustomMaterial.REINFORCED_OBSIDIAN.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.LOOT_BOX.getVanillaMaterial());
+        blackListMaterial.add(Material.WATER);
+        blackListMaterial.add(Material.LAVA);
+    }
+
     @EventHandler
     public void breakBlock(CustomItemBreakBlockEvent e) {
 
@@ -60,14 +73,8 @@ public class HisteritePickaxe implements Listener {
         Location BLocation = e.getEvent().getBlock().getLocation();
         Material block = e.getEvent().getBlock().getType();
         BLocation.setY(BLocation.getY() - 1);
-        if ((BLocation.getBlock().getType().equals(Material.BEDROCK)
-                || BLocation.getBlock().getType().equals(Material.COMMAND_BLOCK)
-                || BLocation.getBlock().getType().equals(Material.LODESTONE)
-                || BLocation.getBlock().getType().equals(Material.INFESTED_COBBLESTONE)
-                || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME
-                || BLocation.getBlock().getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial())) {
-            return;
-        }
+
+        if (blackListMaterial.contains(BLocation.getBlock().getType())) return;
 
         if (Histeria.isSaberFaction()) {
             FPlayer fplayer = FPlayers.getInstance().getByPlayer(e.getPlayer());
