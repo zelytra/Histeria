@@ -28,7 +28,7 @@ public class Admin implements CommandExecutor {
         Player player = (Player) sender;
 
         User user = Histeria.getLuckPerms().getPlayerAdapter(Player.class).getUser(player);
-        System.out.println(user.getPrimaryGroup());
+
         if (user.getPrimaryGroup().equalsIgnoreCase("administrator")) {
             user.data().add(Node.builder("group.demigod").build());
             user.data().remove(Node.builder("group.administrator").build());

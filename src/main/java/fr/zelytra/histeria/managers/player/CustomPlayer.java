@@ -299,10 +299,17 @@ public class CustomPlayer {
 
     @Nullable
     public static CustomPlayer getCustomPlayer(String playerName) {
+
         for (CustomPlayer customPlayer : customPlayerList) {
             if (customPlayer.getName().equalsIgnoreCase(playerName))
                 return customPlayer;
         }
+
+        if (Bukkit.getPlayer(playerName) != null) {
+            Histeria.log(playerName + " has been desync and is now resynch", LogType.WARN);
+            return new CustomPlayer(Bukkit.getPlayer(playerName));
+        }
+
         return null;
     }
 
