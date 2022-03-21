@@ -15,7 +15,6 @@ import fr.zelytra.histeria.events.items.itemHandler.DurabilityHandler;
 import fr.zelytra.histeria.events.items.itemHandler.SlotEnum;
 import fr.zelytra.histeria.events.items.itemHandler.events.CustomItemBreakBlockEvent;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
-import fr.zelytra.histeria.managers.jobs.listener.MinerListener;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,6 +31,19 @@ public class Hammer implements Listener {
 
     private final CustomMaterial customMaterial = CustomMaterial.HAMMER;
     private final static Map<String, Integer> playerTask = new HashMap<>();
+
+    private static final List<Material> blackListMaterial = new ArrayList<>();
+
+    {
+        blackListMaterial.add(Material.BEDROCK);
+        blackListMaterial.add(Material.COMMAND_BLOCK);
+        blackListMaterial.add(CustomMaterial.REINFORCED_OBSIDIAN.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.NOCTURITE_GENERATOR.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial());
+        blackListMaterial.add(CustomMaterial.LOOT_BOX.getVanillaMaterial());
+        blackListMaterial.add(Material.WATER);
+        blackListMaterial.add(Material.LAVA);
+    }
 
     private final int range = 1;
 
@@ -77,15 +89,7 @@ public class Hammer implements Listener {
                         continue;
                     }
 
-                    if (BLocation.getBlock().getType().equals(Material.BEDROCK)
-                            || BLocation.getBlock().getType().equals(Material.COMMAND_BLOCK)
-                            || BLocation.getBlock().getType().equals(Material.LODESTONE)
-                            || BLocation.getBlock().getType().equals(Material.INFESTED_COBBLESTONE)
-                            || BLocation.getBlock().getType() == Material.END_PORTAL_FRAME
-                            || BLocation.getBlock().getType() == Material.CRYING_OBSIDIAN
-                            || BLocation.getBlock().getType() == CustomMaterial.CORE_MINING_DRILL.getVanillaMaterial()) {
-                        continue;
-                    }
+                    if (blackListMaterial.contains(BLocation.getBlock().getType())) return;
 
                     blockToBreak.add(BLocation.getBlock());
 
