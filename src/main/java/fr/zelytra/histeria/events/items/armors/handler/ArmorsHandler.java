@@ -21,6 +21,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ArmorsHandler implements Listener {
 
     @EventHandler
@@ -44,6 +47,16 @@ public class ArmorsHandler implements Listener {
         }
     }
 
+    List<EntityDamageEvent.DamageCause> blacklistCause = new ArrayList<>();
+
+    {
+        blacklistCause.add(EntityDamageEvent.DamageCause.LAVA);
+        blacklistCause.add(EntityDamageEvent.DamageCause.POISON);
+        blacklistCause.add(EntityDamageEvent.DamageCause.STARVATION);
+        blacklistCause.add(EntityDamageEvent.DamageCause.THORNS);
+        blacklistCause.add(EntityDamageEvent.DamageCause.MAGIC);
+    }
+
     @EventHandler
     public void armorDamageEvent(EntityDamageEvent e) {
 
@@ -52,6 +65,8 @@ public class ArmorsHandler implements Listener {
 
         Player player = (Player) e.getEntity();
         ItemStack[] armors = player.getInventory().getArmorContents();
+
+        if (blacklistCause.contains(e.getCause())) return;
 
         for (ItemStack armor : armors) {
 
