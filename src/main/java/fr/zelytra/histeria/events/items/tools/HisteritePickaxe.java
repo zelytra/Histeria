@@ -50,7 +50,12 @@ public class HisteritePickaxe implements Listener {
             playerTask.remove(player.getName());
         }
 
-        if (player.isSneaking()) return;
+        DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
+
+        if (player.isSneaking()) {
+            durabilityHandler.iterate();
+            return;
+        }
 
         Location BLocation = e.getEvent().getBlock().getLocation();
         Material block = e.getEvent().getBlock().getType();
@@ -88,7 +93,6 @@ public class HisteritePickaxe implements Listener {
         for (Block blocks : blockToBreak)
             player.breakBlock(blocks);
 
-        DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
 
     }
