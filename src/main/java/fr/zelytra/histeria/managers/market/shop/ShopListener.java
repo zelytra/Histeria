@@ -75,6 +75,7 @@ public class ShopListener implements Listener {
                             playerShop.openMenuPage();
                             break;
                         case BLUE_STAINED_GLASS_PANE:
+                        case PLAYER_HEAD:
                             break;
                         default:
                             playerShop.openItemBuyPage(e.getCurrentItem());
@@ -127,14 +128,15 @@ public class ShopListener implements Listener {
                             break;
                         default:
                             Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
+                            System.out.println("good item: " + e.isCancelled());
                             break;
 
                     }
                     return;
                 }
                 Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
-
             }
+            System.out.println(e.isCancelled());
         }
     }
 

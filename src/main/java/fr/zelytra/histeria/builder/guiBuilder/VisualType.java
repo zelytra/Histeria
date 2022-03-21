@@ -29,7 +29,7 @@ public enum VisualType {
     BUY(new VisualItemStack(CustomMaterial.BUY_BUTTON, "§bBuy", false)),
     SELL(new VisualItemStack(CustomMaterial.SELL_BUTTON, "§bSell", false)),
     VALIDAY(new VisualItemStack(CustomMaterial.VALIDAY, "§bValide sell", false)),
-    RETURN(new VisualItemStack(Material.BARRIER, "§cBack", false,"Back to main page"));
+    RETURN(new VisualItemStack(Material.BARRIER, "§cBack", false, "Back to main page"));
 
     private final VisualItemStack item;
 
@@ -41,7 +41,21 @@ public enum VisualType {
         return item.getItem();
     }
 
-    public Material getType(){
+    public Material getType() {
         return this.item.getItem().getType();
+    }
+
+    public boolean isCustom() {
+        switch (this) {
+            case BUY:
+            case SELL:
+            case RETURN:
+            case VALIDAY:
+            case NEXT_ARROW:
+            case PREVIOUS_ARROW:
+                return true;
+            default:
+                return false;
+        }
     }
 }
