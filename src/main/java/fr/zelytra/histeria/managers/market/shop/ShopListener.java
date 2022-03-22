@@ -128,7 +128,6 @@ public class ShopListener implements Listener {
                             break;
                         default:
                             Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
-                            System.out.println("good item: " + e.isCancelled());
                             break;
 
                     }
@@ -136,7 +135,6 @@ public class ShopListener implements Listener {
                 }
                 Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> playerShop.refreshSellPage(getSellPrice(e.getInventory(), playerShop)), 1);
             }
-            System.out.println(e.isCancelled());
         }
     }
 

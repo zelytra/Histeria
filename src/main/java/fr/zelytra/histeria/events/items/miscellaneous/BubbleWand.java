@@ -20,7 +20,7 @@ import org.bukkit.event.Listener;
 
 public class BubbleWand implements Listener {
     private final CustomMaterial customMaterial = CustomMaterial.BUBBLE_WAND;
-    private final int range = 3;
+    private final int range = 1;
 
     @EventHandler
     public void onInteract(CustomItemUseEvent e) {
