@@ -23,8 +23,8 @@ import fr.zelytra.histeria.events.antiCheat.FlyDetector;
 import fr.zelytra.histeria.events.antiCheat.XRayDetector;
 import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
-import fr.zelytra.histeria.events.blocks.luckyBlock.LuckyBlock;
 import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
+import fr.zelytra.histeria.events.blocks.luckyBlock.listeer.LuckyPlace;
 import fr.zelytra.histeria.events.blocks.miningDrill.MiningDrillListener;
 import fr.zelytra.histeria.events.environement.*;
 import fr.zelytra.histeria.events.gui.InterfaceHandler;
@@ -129,7 +129,7 @@ public class EventManager {
 
         /* Blocks */
         pm.registerEvents(new Elevator(), pl);
-        pm.registerEvents(new LuckyBlock(), pl);
+        pm.registerEvents(new LuckyPlace(), pl);
         pm.registerEvents(new NocturiteGenerator(), pl);
         pm.registerEvents(new LootBox(), pl);
         pm.registerEvents(new MiningDrillListener(), pl);
