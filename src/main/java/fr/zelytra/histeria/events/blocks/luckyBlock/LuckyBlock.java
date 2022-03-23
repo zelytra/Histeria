@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021.
+ * Copyright (c) 2021-2022.
  * Made by Zelytra :
  *  - Website : https://zelytra.fr
  *  - GitHub : http://github.zelytra.fr
@@ -7,7 +7,7 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.events.blocks;
+package fr.zelytra.histeria.events.blocks.luckyBlock;
 
 import com.sk89q.worldedit.EditSession;
 import com.sk89q.worldedit.WorldEdit;

@@ -23,7 +23,7 @@ import fr.zelytra.histeria.events.antiCheat.FlyDetector;
 import fr.zelytra.histeria.events.antiCheat.XRayDetector;
 import fr.zelytra.histeria.events.blocks.Elevator;
 import fr.zelytra.histeria.events.blocks.LootBox;
-import fr.zelytra.histeria.events.blocks.LuckyBlock;
+import fr.zelytra.histeria.events.blocks.luckyBlock.LuckyBlock;
 import fr.zelytra.histeria.events.blocks.NocturiteGenerator;
 import fr.zelytra.histeria.events.blocks.miningDrill.MiningDrillListener;
 import fr.zelytra.histeria.events.environement.*;
