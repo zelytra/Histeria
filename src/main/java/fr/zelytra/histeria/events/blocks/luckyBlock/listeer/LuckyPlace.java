@@ -32,27 +32,27 @@ public class LuckyPlace implements Listener {
     private final static int outOf = 1000, origin = 1;
 
     {
-        luckyEventList.add(new AnvilRain(1));
-        luckyEventList.add(new AttackOnDado(1));
-        luckyEventList.add(new BadPotions(1));
-        luckyEventList.add(new BBQ(1));
-        luckyEventList.add(new BlockSpreading(1));
-        luckyEventList.add(new CakeLie(1));
+        luckyEventList.add(new AnvilRain(72));
+        luckyEventList.add(new AttackOnDado(60));
+        luckyEventList.add(new BadPotions(42));
+        luckyEventList.add(new BBQ(62));
+        luckyEventList.add(new BlockSpreading(72));
+        luckyEventList.add(new CakeLie(52));
         luckyEventList.add(new Foucault(1));
-        luckyEventList.add(new FakeBedrock(1));
-        luckyEventList.add(new GoodDogo(1));
-        luckyEventList.add(new HisteriteIngot(1));
-        luckyEventList.add(new Kaboom(1));
-        luckyEventList.add(new LuckyBlockCeption(1));
+        luckyEventList.add(new FakeBedrock(32));
+        luckyEventList.add(new GoodDogo(62));
+        luckyEventList.add(new HisteriteIngot(52));
+        luckyEventList.add(new Kaboom(22));
+        luckyEventList.add(new LuckyBlockCeption(62));
         luckyEventList.add(new NocturiteCore(1));
-        luckyEventList.add(new NotchWither(1));
-        luckyEventList.add(new ObsidianTrap(1));
-        luckyEventList.add(new Raid(1));
-        luckyEventList.add(new SpiderTrap(1));
-        luckyEventList.add(new VillagerHero(1));
-        luckyEventList.add(new XPShower(1));
-        luckyEventList.add(new Zaucisse(1));
-        luckyEventList.add(new CuteFish(1));
+        luckyEventList.add(new NotchWither(12));
+        luckyEventList.add(new ObsidianTrap(62));
+        luckyEventList.add(new Raid(22));
+        luckyEventList.add(new SpiderTrap(62));
+        luckyEventList.add(new VillagerHero(52));
+        luckyEventList.add(new XPShower(32));
+        luckyEventList.add(new Zaucisse(52));
+        luckyEventList.add(new CuteFish(72));
     }
 
     @EventHandler
