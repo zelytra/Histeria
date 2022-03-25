@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.commands.freeze.FreezeListener;
 import fr.zelytra.histeria.commands.inventoryLooker.InventoryListener;
 import fr.zelytra.histeria.commands.kit.KitCommand;
+import fr.zelytra.histeria.commands.message.PrivateMessageListener;
 import fr.zelytra.histeria.commands.moderation.Ban.BanListener;
 import fr.zelytra.histeria.commands.serverSwitch.ServerSelector;
 import fr.zelytra.histeria.commands.vanish.VanishListener;
@@ -84,6 +85,7 @@ public class EventManager {
         pm.registerEvents(new VanishListener(), pl);
         pm.registerEvents(new PvPLogger(), pl);
         pm.registerEvents(new PVPJoin(), pl);
+        pm.registerEvents(new PrivateMessageListener(), pl);
 
         /* Interface */
         pm.registerEvents(new InterfaceHandler(), pl);
