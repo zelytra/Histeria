@@ -19,8 +19,8 @@ import java.util.List;
 
 public class Enchanter extends Job implements JobInterface {
 
-    public Enchanter(int level, int xp) {
-        super(level, xp);
+    public Enchanter(int xp) {
+        super(xp);
     }
 
     @Override

@@ -19,8 +19,8 @@ import java.util.List;
 
 public class Fighter extends Job implements JobInterface {
 
-    public Fighter(int level, int xp) {
-        super(level, xp);
+    public Fighter(int xp) {
+        super(xp);
     }
 
     @Override

@@ -175,10 +175,10 @@ public class CustomPlayer {
                     + formatter.format(date) + "','"
                     + lang.name() + "');");
 
-            jobs.add(new Miner(0, 0));
-            jobs.add(new Farmer(0, 0));
-            jobs.add(new Fighter(0, 0));
-            jobs.add(new Enchanter(0, 0));
+            jobs.add(new Miner(0));
+            jobs.add(new Farmer(0));
+            jobs.add(new Fighter(0));
+            jobs.add(new Enchanter(0));
 
         }
 
@@ -270,21 +270,22 @@ public class CustomPlayer {
                     switch (resultSet.getString("type")) {
 
                         case "MINER":
-                            jobs.add(new Miner(resultSet.getInt("level"), resultSet.getInt("experience")));
+                            jobs.add(new Miner(resultSet.getInt("experience")));
                             break;
                         case "FARMER":
-                            jobs.add(new Farmer(resultSet.getInt("level"), resultSet.getInt("experience")));
+                            jobs.add(new Farmer(resultSet.getInt("experience")));
                             break;
                         case "ENCHANTER":
-                            jobs.add(new Enchanter(resultSet.getInt("level"), resultSet.getInt("experience")));
+                            jobs.add(new Enchanter(resultSet.getInt("experience")));
                             break;
                         case "FIGHTER":
-                            jobs.add(new Fighter(resultSet.getInt("level"), resultSet.getInt("experience")));
+                            jobs.add(new Fighter(resultSet.getInt("experience")));
                             break;
 
                     }
 
                 }
+
                 //Completing job init if already not
                 jobs = JobUtils.completeJobList(jobs);
                 resultSet.close();

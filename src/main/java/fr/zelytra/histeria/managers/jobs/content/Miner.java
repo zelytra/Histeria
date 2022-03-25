@@ -19,8 +19,8 @@ import java.util.List;
 
 public class Miner extends Job implements JobInterface {
 
-    public Miner(int level, int xp) {
-        super(level, xp);
+    public Miner(int xp) {
+        super(xp);
     }
 
     @Override
@@ -67,49 +67,49 @@ public class Miner extends Job implements JobInterface {
                 break;
             case 10:
                 item = Utils.EnchantedItemStack(Material.IRON_PICKAXE, Enchantment.DIG_SPEED, 2);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(5000);
                 break;
             case 15:
                 item = Utils.EnchantedItemStack(Material.IRON_PICKAXE, Enchantment.DIG_SPEED, 4);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(10000);
                 break;
             case 20:
-                Utils.safeGive(player.getPlayer(), new ItemStack(Material.IRON_INGOT,64));
+                Utils.safeGive(player.getPlayer(), new ItemStack(Material.IRON_INGOT, 64));
                 player.getBankAccount().addMoney(15000);
                 break;
             case 25:
                 item = Utils.EnchantedItemStack(Material.DIAMOND_PICKAXE, Enchantment.DIG_SPEED, 2);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(20000);
                 break;
             case 30:
-                Utils.safeGive(player.getPlayer(), new ItemStack(Material.DIAMOND,32));
+                Utils.safeGive(player.getPlayer(), new ItemStack(Material.DIAMOND, 32));
                 player.getBankAccount().addMoney(25000);
                 break;
             case 35:
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT,15).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 15).getItem());
                 player.getBankAccount().addMoney(30000);
                 break;
             case 40:
                 item = Utils.EnchantedItemStack(Material.DIAMOND_PICKAXE, Enchantment.DIG_SPEED, 4);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(35000);
                 break;
             case 45:
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT,32).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 32).getItem());
                 player.getBankAccount().addMoney(37500);
                 break;
             case 50:
 
                 break;
             case 55:
-                item = new CustomItemStack(CustomMaterial.HISTERITE_PICKAXE,1).getItem();
+                item = new CustomItemStack(CustomMaterial.HISTERITE_PICKAXE, 1).getItem();
                 item = Utils.EnchantedItemStack(item, Enchantment.DIG_SPEED, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 break;
@@ -117,36 +117,36 @@ public class Miner extends Job implements JobInterface {
                 player.getBankAccount().addMoney(150000);
                 break;
             case 65:
-                item = new CustomItemStack(CustomMaterial.HISTERITE_PICKAXE,1).getItem();
+                item = new CustomItemStack(CustomMaterial.HISTERITE_PICKAXE, 1).getItem();
                 item = Utils.EnchantedItemStack(item, Enchantment.DIG_SPEED, 5);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 player.getBankAccount().addMoney(50000);
                 break;
             case 70:
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT,64).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.HISTERITE_INGOT, 64).getItem());
                 break;
             case 75:
                 item = Utils.EnchantedItemStack(Material.DIAMOND_PICKAXE, Enchantment.DIG_SPEED, 7);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 break;
             case 80:
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_CORE,1).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_CORE, 1).getItem());
                 break;
             case 85:
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_INGOT,2).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_INGOT, 2).getItem());
                 player.getBankAccount().addMoney(300000);
                 break;
             case 90:
-                item = new CustomItemStack(CustomMaterial.HAMMER,1).getItem();
+                item = new CustomItemStack(CustomMaterial.HAMMER, 1).getItem();
                 item = Utils.EnchantedItemStack(item, Enchantment.DIG_SPEED, 10);
-                item = Utils.EnchantedItemStack(item,Enchantment.DURABILITY,2);
+                item = Utils.EnchantedItemStack(item, Enchantment.DURABILITY, 2);
                 Utils.safeGive(player.getPlayer(), item);
                 break;
             case 95:
                 player.getBankAccount().addMoney(1000000);
-                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_GENERATOR,1).getItem());
+                Utils.safeGive(player.getPlayer(), new CustomItemStack(CustomMaterial.NOCTURITE_GENERATOR, 1).getItem());
                 break;
             case 100:
                 break;

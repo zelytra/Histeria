@@ -20,8 +20,8 @@ import java.util.List;
 
 public class Farmer extends Job implements JobInterface {
 
-    public Farmer(int level, int xp) {
-        super(level, xp);
+    public Farmer(int xp) {
+        super(xp);
     }
 
     @Override
@@ -203,7 +203,7 @@ public class Farmer extends Job implements JobInterface {
                 break;
             case 90:
                 lore.add("x1 Enderman's Brute Spawner");
-                lore.add(formatBigNumber(1) + "§f" + Emote.GOLD+"§e (yes, yes 1)");
+                lore.add(formatBigNumber(1) + "§f" + Emote.GOLD + "§e (yes, yes 1)");
                 break;
             case 95:
                 lore.add(formatBigNumber(1000000) + "§f" + Emote.GOLD);

@@ -16,8 +16,8 @@ public class Job {
     public int level;
     public int xp;
 
-    public Job(int level, int experience) {
-        this.level = level;
+    public Job(int experience) {
+        this.level = ExperienceMath.getLevelFromXp(experience);
         this.xp = experience;
     }
 

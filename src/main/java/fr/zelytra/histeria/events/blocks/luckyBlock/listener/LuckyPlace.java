@@ -7,12 +7,13 @@
  * All right reserved
  */
 
-package fr.zelytra.histeria.events.blocks.luckyBlock.listeer;
+package fr.zelytra.histeria.events.blocks.luckyBlock.listener;
 
 import fr.zelytra.histeria.events.blocks.luckyBlock.builder.LuckyEvent;
 import fr.zelytra.histeria.events.blocks.luckyBlock.event.*;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.utils.Message;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -64,7 +65,9 @@ public class LuckyPlace implements Listener {
     @EventHandler
     public void onPlace(BlockBreakEvent e) {
 
-        //if (e.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
+        if (e.getBlock().getType() != luckyBlockType) return;
+
+        if (e.getPlayer().getGameMode() != GameMode.SURVIVAL) return;
 
         //Checking silk touch enchant
         if (e.getPlayer().getItemInUse() != null) {

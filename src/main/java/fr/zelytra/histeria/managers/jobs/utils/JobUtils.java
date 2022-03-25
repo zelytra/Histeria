@@ -42,25 +42,25 @@ public abstract class JobUtils {
         for (JobInterface job : jobs)
             if (job.getJob() == JobType.MINER)
                 jobExist = true;
-        if (!jobExist) jobs.add(new Miner(0, 0));
+        if (!jobExist) jobs.add(new Miner(0));
 
         jobExist = false;
         for (JobInterface job : jobs)
             if (job.getJob() == JobType.FARMER)
                 jobExist = true;
-        if (!jobExist) jobs.add(new Farmer(0, 0));
+        if (!jobExist) jobs.add(new Farmer(0));
 
         jobExist = false;
         for (JobInterface job : jobs)
             if (job.getJob() == JobType.FIGHTER)
                 jobExist = true;
-        if (!jobExist) jobs.add(new Fighter(0, 0));
+        if (!jobExist) jobs.add(new Fighter(0));
 
         jobExist = false;
         for (JobInterface job : jobs)
             if (job.getJob() == JobType.ENCHANTER)
                 jobExist = true;
-        if (!jobExist) jobs.add(new Enchanter(0, 0));
+        if (!jobExist) jobs.add(new Enchanter(0));
 
         return jobs;
 
