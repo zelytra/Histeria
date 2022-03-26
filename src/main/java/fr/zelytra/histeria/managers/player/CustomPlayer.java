@@ -498,8 +498,7 @@ public class CustomPlayer {
             mySQL.update("INSERT IGNORE INTO `Jobs` SET " +
                     "`uuid` = '" + this.uuid +
                     "' ,`type` = '" + jobInterface.getJob().name() +
-                    "' ,`level` = " + jobInterface.getLevel() +
-                    " ,`experience` = " + jobInterface.getXP() + ";");
+                    "' ,`experience` = " + jobInterface.getXP() + ";");
         }
     }
 
