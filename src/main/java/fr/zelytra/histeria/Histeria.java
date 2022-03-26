@@ -74,6 +74,8 @@ import fr.zelytra.histeria.managers.home.AdminHomeTab;
 import fr.zelytra.histeria.managers.home.HomeCommand;
 import fr.zelytra.histeria.managers.home.HomeTab;
 import fr.zelytra.histeria.managers.items.CraftManager;
+import fr.zelytra.histeria.managers.jobs.command.AdminJob;
+import fr.zelytra.histeria.managers.jobs.command.AdminJobTab;
 import fr.zelytra.histeria.managers.jobs.command.JobMenuCommand;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.logs.LogType;
@@ -338,6 +340,8 @@ public final class Histeria extends JavaPlugin {
 
         /* Job */
         getCommand("job").setExecutor(new JobMenuCommand());
+        getCommand("adminjob").setExecutor(new AdminJob());
+        getCommand("adminjob").setTabCompleter(new AdminJobTab());
 
         /* Custom Enchant */
         getCommand("henchant").setExecutor(new HEnchant());

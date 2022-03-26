@@ -33,4 +33,12 @@ public enum JobType {
                 return type;
         return null;
     }
+
+
+    public static JobType getEnum(String name) {
+        for (JobType jobType : JobType.values())
+            if (jobType.name().equalsIgnoreCase(name))
+                return jobType;
+        return null;
+    }
 }

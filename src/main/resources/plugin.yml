@@ -313,3 +313,7 @@ commands:
   trade:
     description: Create a secure trade canal between two player
     permission: histeria.trade
+
+  adminjob:
+    description: Change/get level of a job
+    permission: histeria.adminjob

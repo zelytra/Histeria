@@ -20,7 +20,9 @@ public interface JobInterface {
 
     int getLevel();
 
-    double getXP();
+    void setLevel(int level);
+
+    int getXP();
 
     VisualItemStack getItemMenu();
 

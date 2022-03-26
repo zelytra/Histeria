@@ -39,7 +39,12 @@ public class Miner extends Job implements JobInterface {
     }
 
     @Override
-    public double getXP() {
+    public void setLevel(int level) {
+        super.setLevel(level);
+    }
+
+    @Override
+    public int getXP() {
         return xp;
     }
 

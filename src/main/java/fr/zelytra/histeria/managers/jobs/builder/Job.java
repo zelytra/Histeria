@@ -23,12 +23,17 @@ public class Job {
 
     public String getProgression() {
         int totalXP = ExperienceMath.getRecursiveXpFromLevel(100);
-        double progression = (100.0 * xp) /  totalXP;
+        double progression = (100.0 * xp) / totalXP;
 
         String format = "0.000";
         NumberFormat formatter = new DecimalFormat(format);
 
         return formatter.format(progression) + "%";
+    }
+
+    public void setLevel(int level) {
+        xp = ExperienceMath.getRecursiveXpFromLevel(level);
+        this.level = ExperienceMath.getLevelFromXp(xp);
     }
 
     /**
