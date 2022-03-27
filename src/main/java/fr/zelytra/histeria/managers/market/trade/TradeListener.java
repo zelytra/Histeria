@@ -82,6 +82,9 @@ public class TradeListener implements Listener {
         TradeCanal tradeCanal = TradeCanal.getByPlayerName(e.getPlayer().getName());
         if (tradeCanal == null) return;
 
+        if (tradeCanal.isTrading())
+            tradeCanal.cancelTrade();
+
         if (tradeCanal.isTradeSuccess())
             return;
 
