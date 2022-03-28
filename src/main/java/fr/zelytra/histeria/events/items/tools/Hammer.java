@@ -89,7 +89,7 @@ public class Hammer implements Listener {
                         continue;
                     }
 
-                    if (blackListMaterial.contains(BLocation.getBlock().getType())) return;
+                    if (blackListMaterial.contains(BLocation.getBlock().getType())) continue;
 
                     blockToBreak.add(BLocation.getBlock());
 
