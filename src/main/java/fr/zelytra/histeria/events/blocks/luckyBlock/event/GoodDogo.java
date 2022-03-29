@@ -33,6 +33,7 @@ public class GoodDogo implements LuckyEvent {
 
     @Override
     public void run(BlockBreakEvent e) {
+        e.setCancelled(true);
         e.getBlock().setType(Material.BARREL);
         Barrel barrel = (Barrel) e.getBlock().getState();
         ItemStack[] contents = barrel.getInventory().getContents();

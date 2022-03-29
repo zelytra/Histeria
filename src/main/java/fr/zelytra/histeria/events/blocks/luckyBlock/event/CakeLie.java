@@ -34,6 +34,7 @@ public class CakeLie implements LuckyEvent {
 
     @Override
     public void run(BlockBreakEvent e) {
+        e.setCancelled(true);
         e.getBlock().setType(Material.CAKE);
         e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 2, false, false, true));
         Location fLocation = new Location(e.getBlock().getWorld(), e.getBlock().getLocation().getX() + 0.5, e.getBlock().getLocation().getY(), e.getBlock().getLocation().getZ() + 0.5);

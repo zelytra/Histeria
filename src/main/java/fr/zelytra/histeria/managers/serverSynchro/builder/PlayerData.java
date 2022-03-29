@@ -26,6 +26,7 @@ public class PlayerData {
     private final Player player;
     private ItemStack[] inventory;
     private ItemStack[] enderChest;
+    private ItemStack cursor;
     private PotionEffect[] effects;
     private double health;
     private int food;
@@ -74,6 +75,10 @@ public class PlayerData {
         this.gameMode = gameMode;
     }
 
+    public void setCursor(ItemStack cursor) {
+        this.cursor = cursor;
+    }
+
     public void buildPlayer() {
         //Set inventory
         player.getInventory().setContents(this.inventory);
@@ -116,6 +121,9 @@ public class PlayerData {
             Vanish.vanish(player);
         else
             Vanish.unvanish(player);
+
+        //Cursor item
+        //player.setItemOnCursor(cursor);
 
 
     }

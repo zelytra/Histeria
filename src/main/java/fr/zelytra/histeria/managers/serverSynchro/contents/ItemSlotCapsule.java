@@ -9,25 +9,27 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
-import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
-import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 
 public class ItemSlotCapsule implements Capsule {
 
     private byte[] message;
     public static final int length = 4;
 
-    public ItemSlotCapsule(Player player){
-        byte[] inventoryContent = ByteConverter.itemStackArrayToBase64(player.getItemOnCursor().getContents());
-        byte[] inventoryLength = ByteBuffer.allocate(4).putInt(inventoryContent.length).array();
-        this.message = ArrayUtils.addAll(inventoryLength, inventoryContent);
+    public ItemSlotCapsule(Player player) {
+        /*
+        byte[] itemContent = ByteConverter.itemStackToBase64(player.getItemOnCursor());
+        byte[] itemLength = ByteBuffer.allocate(4).putInt(itemContent.length).array();
+        this.message = ArrayUtils.addAll(itemLength, itemContent);*/
+    }
+
+    public ItemSlotCapsule() {
+
     }
 
     @Override
