@@ -17,6 +17,7 @@ import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
 import fr.zelytra.histeria.managers.serverSynchro.builder.SynchroConfig;
 import fr.zelytra.histeria.managers.serverSynchro.contents.*;
 import fr.zelytra.histeria.utils.timer.Timer;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
@@ -154,6 +155,8 @@ public class SyncServer {
 
                     // Sending capsules
                     sendCapsule(output, capsuleList);
+                    player.getInventory().clear();
+                    player.getItemOnCursor().setType(Material.AIR);
 
                     // Getting server response status
                     response = new byte[4];
@@ -166,6 +169,9 @@ public class SyncServer {
                         server.close();
                         return;
                     }
+
+                    player.getInventory().clear();
+                    player.getItemOnCursor().setType(Material.AIR);
 
                     isCommunicationOver = true;
                     Histeria.log("Inventory received §7[" + timer.stop() + "]", LogType.INFO);

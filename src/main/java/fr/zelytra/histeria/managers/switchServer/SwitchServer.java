@@ -71,8 +71,10 @@ public class SwitchServer {
 
             Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
                 if (!playerSwitching.contains(player)) return;
-                LangMessage.sendMessage(player, "server.offline");
                 playerSwitching.remove(player);
+                LangMessage.sendMessage(player,"server.offline");
+                new SyncServer(player, Request.GET).execute();
+
                 return;
             }, 40);
 
