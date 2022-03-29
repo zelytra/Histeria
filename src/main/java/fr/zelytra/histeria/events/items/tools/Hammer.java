@@ -30,7 +30,7 @@ import java.util.Map;
 public class Hammer implements Listener {
 
     private final CustomMaterial customMaterial = CustomMaterial.HAMMER;
-    private final static Map<String, Integer> playerTask = new HashMap<>();
+    private final static Map<String, BreakRecorder> playerTask = new HashMap<>();
 
     private static final List<Material> blackListMaterial = new ArrayList<>();
 
@@ -58,8 +58,8 @@ public class Hammer implements Listener {
 
         // Block infinite loop
         if (playerTask.containsKey(player.getName())) {
-            if (playerTask.get(player.getName()) <= 27) {
-                playerTask.put(player.getName(), playerTask.get(player.getName()) + 1);
+            if (playerTask.get(player.getName()).count <= playerTask.get(player.getName()).totalCount) {
+                playerTask.put(player.getName(), new BreakRecorder(playerTask.get(player.getName()).count + 1, playerTask.get(player.getName()).totalCount));
                 return;
             }
             playerTask.remove(player.getName());
@@ -98,13 +98,16 @@ public class Hammer implements Listener {
         }
         e.setCancelled(true);
 
-        playerTask.put(player.getName(), 1);
+        playerTask.put(player.getName(), new BreakRecorder(1,blockToBreak.size()));
 
         for (Block blocks : blockToBreak)
             player.breakBlock(blocks);
 
         DurabilityHandler durabilityHandler = new DurabilityHandler(player, customMaterial, SlotEnum.MAIN_HAND);
         durabilityHandler.iterate();
+    }
+
+    record BreakRecorder(int count, int totalCount) {
     }
 }
 
