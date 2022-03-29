@@ -18,9 +18,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public abstract class Utils {
 
@@ -169,6 +174,16 @@ public abstract class Utils {
         else
             player.getInventory().addItem(item);
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
+    }
+
+    public static String formatBigNumber(int value) {
+        BigDecimal bd = new BigDecimal(value);
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+
+        symbols.setGroupingSeparator(' ');
+        formatter.setDecimalFormatSymbols(symbols);
+        return formatter.format(bd.longValue());
     }
 
 }

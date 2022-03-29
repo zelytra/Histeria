@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -72,7 +73,7 @@ public class Bank {
         skull.setDisplayName("§b" + player.getName());
 
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("§6" + money + " §f" + Emote.GOLD);
+        lore.add("§6" + Utils.formatBigNumber(money) + " §f" + Emote.GOLD);
 
         skull.setLore(lore);
         skull.setOwningPlayer(player.getPlayer());

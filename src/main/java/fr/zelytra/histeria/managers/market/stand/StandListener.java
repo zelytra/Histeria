@@ -14,6 +14,7 @@ import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -64,7 +65,7 @@ public class StandListener implements Listener {
                             } else {
                                 customPlayer.getBankAccount().takeMoney(stand.getPrice());
                                 player.getInventory().addItem(stand.getItem());
-                                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.buyItem", "§6" + stand.getItemName() + " §a-> §6" + stand.getPrice() + " §f" + Emote.GOLD);
+                                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.buyItem", "§6" + stand.getItemName() + " §a-> §6" + Utils.formatBigNumber(stand.getPrice()) + " §f" + Emote.GOLD);
                                 e.getInventory().close();
                             }
                             break;

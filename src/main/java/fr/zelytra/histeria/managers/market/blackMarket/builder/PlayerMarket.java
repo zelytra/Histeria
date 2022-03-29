@@ -102,7 +102,7 @@ public class PlayerMarket {
         item.delete();
         LangMessage.sendMessage(player.getPlayer(), "blackmarket.purchaseSuccess");
         if (Bukkit.getPlayer(item.getSeller()) != null)
-            LangMessage.sendMessage(target.getPlayer(), Message.PLAYER_PREFIX.getMsg(), "blackmarket.purchaseReceived", " §6" + item.getPrice() + Emote.GOLD);
+            LangMessage.sendMessage(target.getPlayer(), Message.PLAYER_PREFIX.getMsg(), "blackmarket.purchaseReceived", " §6" + Utils.formatBigNumber(item.getPrice()) + Emote.GOLD);
         else {
             target.saveData();
             target.destroy();

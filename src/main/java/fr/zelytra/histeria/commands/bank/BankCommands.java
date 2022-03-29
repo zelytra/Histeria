@@ -70,7 +70,7 @@ public class BankCommands implements CommandExecutor {
 
                 CustomPlayer customPlayer = CustomPlayer.getCustomPlayer(player.getName());
                 assert customPlayer != null;
-                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.yourAccount", "§6" + customPlayer.getBankAccount().getMoney() + Emote.GOLD);
+                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "bank.yourAccount", "§6" + Utils.formatBigNumber(customPlayer.getBankAccount().getMoney()) + Emote.GOLD);
 
             } else if (args.length == 1 && args[0].equalsIgnoreCase("help")) {
 

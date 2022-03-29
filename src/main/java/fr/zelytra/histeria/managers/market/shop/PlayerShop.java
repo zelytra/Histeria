@@ -121,7 +121,7 @@ public class PlayerShop implements Listener {
     }
 
     public void refreshSellPage(int sellPrice) {
-        interfaceBuilder.getInventory().setItem(49, new VisualItemStack(Material.SPRUCE_SIGN, "§6Total : §b" + sellPrice + " §f" + Emote.GOLD, false).getItem());
+        interfaceBuilder.getInventory().setItem(49, new VisualItemStack(Material.SPRUCE_SIGN, "§6Total : §b" + Utils.formatBigNumber(sellPrice) + " §f" + Emote.GOLD, false).getItem());
     }
 
     public int getSellPrice(List<ItemStack> content) {
@@ -146,7 +146,7 @@ public class PlayerShop implements Listener {
         skull.setDisplayName("§b" + player.getName());
 
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("§6" + customPlayer.getBankAccount().getMoney() + " §f" + Emote.GOLD);
+        lore.add("§6" + Utils.formatBigNumber(customPlayer.getBankAccount().getMoney()) + " §f" + Emote.GOLD);
 
         skull.setLore(lore);
         skull.setOwningPlayer(player);
@@ -169,7 +169,7 @@ public class PlayerShop implements Listener {
             } else {
                 customPlayer.getBankAccount().takeMoney(finalPrice);
                 player.getInventory().addItem(shopItem.getFinalItemStack(currentItem.getAmount()));
-                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.buyItem", "§6" + shopItem.getDisplayName() + " x" + currentItem.getAmount() + " §a-> §6" + finalPrice + " §f" + Emote.GOLD);
+                LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.buyItem", "§6" + shopItem.getDisplayName() + " x" + currentItem.getAmount() + " §a-> §6" + Utils.formatBigNumber(finalPrice) + " §f" + Emote.GOLD);
             }
         }
     }
@@ -186,6 +186,6 @@ public class PlayerShop implements Listener {
 
             }
         }
-        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.sellItems", "§6" + sellPrice + " §f" + Emote.GOLD);
+        LangMessage.sendMessage(player, Message.PLAYER_PREFIX.getMsg(), "shop.sellItems", "§6" + Utils.formatBigNumber(sellPrice) + " §f" + Emote.GOLD);
     }
 }

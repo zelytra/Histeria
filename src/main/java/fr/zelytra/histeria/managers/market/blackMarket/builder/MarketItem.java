@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.mysql.MySQL;
 import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -130,7 +131,7 @@ public class MarketItem {
                 lore = meta.getLore();
             lore.add("");
             lore.add("§8● §6Seller: §f" + seller);
-            lore.add("§8● §6Price: §f" + price + Emote.GOLD);
+            lore.add("§8● §6Price: §f" + Utils.formatBigNumber(price) + Emote.GOLD);
             lore.add("§8● §6ID: §f" + id);
             meta.setLore(lore);
 
@@ -178,7 +179,7 @@ public class MarketItem {
         if (meta.getLore() != null)
             lore = meta.getLore();
         lore.add("§8● §6Seller: §f" + seller);
-        lore.add("§8● §6Price: §f" + price + Emote.GOLD);
+        lore.add("§8● §6Price: §f" + Utils.formatBigNumber(price) + Emote.GOLD);
         lore.add("§8● §6ID: §f" + id);
         meta.setLore(lore);
 

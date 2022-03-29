@@ -6,6 +6,7 @@ import fr.zelytra.histeria.builder.guiBuilder.VisualItemStack;
 import fr.zelytra.histeria.builder.guiBuilder.VisualType;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -125,7 +126,7 @@ public class Stand implements Serializable {
         standPos.setY(standPos.getY() - 0.25);
         as = location.getWorld().spawn(standPos, ArmorStand.class);
         configStand(as);
-        as.setCustomName("§6" + price + " §f" + Emote.GOLD);
+        as.setCustomName("§6" + Utils.formatBigNumber(price) + " §f" + Emote.GOLD);
         as.setCustomNameVisible(true);
 
 
@@ -171,7 +172,7 @@ public class Stand implements Serializable {
         ItemStack item = getItem().clone();
         ItemMeta meta = item.getItemMeta();
         ArrayList<String> lore = new ArrayList<>();
-        lore.add("§6" + price + " §f" + Emote.GOLD);
+        lore.add("§6" + Utils.formatBigNumber(price) + " §f" + Emote.GOLD);
         meta.setLore(lore);
         meta.getPersistentDataContainer().set(shopKey, PersistentDataType.STRING, uuid);
         item.setItemMeta(meta);

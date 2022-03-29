@@ -73,7 +73,7 @@ public class Stats implements CommandExecutor {
             player.sendMessage("§6 Kill       : §e" + target.getKill());
             player.sendMessage("§6 Death   : §e" + target.getDeath());
             player.sendMessage("§6 Ratio    : §e" + dec.format(ratio));
-            player.sendMessage("§6 Money   : §e" + target.getBankAccount().getMoney());
+            player.sendMessage("§6 Money   : §e" + Utils.formatBigNumber(target.getBankAccount().getMoney()));
 
             player.sendMessage("§9|-----------------------------------|");
 
