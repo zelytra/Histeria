@@ -45,6 +45,7 @@ import fr.zelytra.histeria.managers.enchants.content.*;
 import fr.zelytra.histeria.managers.enchants.listener.AnvilCustomEnchant;
 import fr.zelytra.histeria.managers.enchants.listener.EnchantingTableCustomEnchant;
 import fr.zelytra.histeria.managers.enchants.listener.GrindStoneCustomEnchant;
+import fr.zelytra.histeria.managers.evenements.dragonBoss.TheDragonListener;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.jobs.listener.*;
 import fr.zelytra.histeria.managers.jobs.visual.JobVisualListener;
@@ -177,6 +178,9 @@ public class EventManager {
         pm.registerEvents(new Shield(), pl);
         pm.registerEvents(new Vampirisme(), pl);
         pm.registerEvents(new Stun(), pl);
+
+        /* Custom Boss */
+        pm.registerEvents(new TheDragonListener(), pl);
 
         /* LuckPerms */
         EventBus eventBus = Histeria.getLuckPerms().getEventBus();

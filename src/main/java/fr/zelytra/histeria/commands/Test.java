@@ -9,8 +9,7 @@
 
 package fr.zelytra.histeria.commands;
 
-import fr.zelytra.histeria.builder.guiBuilder.InterfaceBuilder;
-import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.managers.evenements.dragonBoss.TheDragon;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,8 +23,7 @@ public class Test implements CommandExecutor {
         Player player = (Player) sender;
 
 
-        InterfaceBuilder interfaceBuilder = new InterfaceBuilder(54, Emote.BUY_PAGE.toString());
-        interfaceBuilder.open(player);
+        new TheDragon(player.getLocation());
         return true;
 
     }
