@@ -12,7 +12,14 @@ package fr.zelytra.histeria.managers.evenements.dragonBoss;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.evenements.boss.Boss;
 import fr.zelytra.histeria.managers.evenements.boss.BossProperty;
+import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
+import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
+import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Message;
+import fr.zelytra.histeria.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -44,9 +51,10 @@ public class TheDragon extends BossProperty implements Boss {
     public TheDragon(Location location) {
 
         super(name);
-        origin = location;
+        origin = location.clone();
 
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
+            location.setY(location.getY() + 50);
             dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
             dragon.setPhase(EnderDragon.Phase.SEARCH_FOR_BREATH_ATTACK_TARGET);
             dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
@@ -57,6 +65,7 @@ public class TheDragon extends BossProperty implements Boss {
             getBossBar().setVisible(true);
 
             dragon.getPersistentDataContainer().set(key, PersistentDataType.STRING, uuid.toString());
+            LangMessage.broadcast("","boss.theDragonStart","");
         }, 15 * 20);
 
         startBossBarListener(this);
@@ -137,8 +146,41 @@ public class TheDragon extends BossProperty implements Boss {
     }
 
     @Override
-    public void death() {
+    public void death(Location location) {
         killBossBar();
+
+        // Spawn histerite block
+        for (int x = 0; x <= new Random().nextInt(64, 128); x++)
+            location.getWorld().dropItem(drawCustomLoc(location, 15), new CustomItemStack(CustomMaterial.HISTERITE_BLOCK, 1).getItem());
+
+        // Spawn nocturite nuggets
+        for (int x = 0; x <= new Random().nextInt(64, 128); x++)
+            location.getWorld().dropItem(drawCustomLoc(location, 15), new CustomItemStack(CustomMaterial.NOCTURITE_NUGGET, 1).getItem());
+
+        // Drop unique items
+        location.getWorld().dropItem(location, new CustomItemStack(CustomMaterial.DRAGON_WING, 1).getItem());
+        location.getWorld().dropItem(drawCustomLoc(location, 15), new CustomItemStack(CustomMaterial.RED_MATTER, 1).getItem());
+
+        displayDamageStats();
+
+        // Give rewards for the 5 best damagers
+        List<PlayerDamager> bestDamagers = getSortedDamager();
+        int multplier = 5;
+        int goldReward = 250000;
+
+        for (int x = 0; x <= 4; x++) {
+            CustomPlayer player = CustomPlayer.getCustomPlayer(bestDamagers.get(x).getPlayer().getName());
+            player.getBankAccount().addMoney(goldReward * multplier);
+            player.getPlayer().sendMessage(Message.PLAYER_PREFIX + "§a You won " + Utils.formatBigNumber(goldReward * multplier) + "§f" + Emote.GOLD + " §ato be the N°" + (x + 1) + " damage dealer !");
+        }
+    }
+
+    private Location drawCustomLoc(Location location, int radius) {
+        Location radomLoc = location.clone();
+        radomLoc.setZ(location.getZ() + new Random().nextInt(-radius, radius));
+        radomLoc.setX(location.getX() + new Random().nextInt(-radius, radius));
+        radomLoc.setY(location.getY() + new Random().nextInt(-radius, radius));
+        return radomLoc;
     }
 
     @Override

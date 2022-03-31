@@ -9,11 +9,12 @@
 
 package fr.zelytra.histeria.managers.evenements.boss;
 
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 
 public interface Boss {
 
-    void death();
+    void death(Location location);
 
     void drawCustomAttack();
 

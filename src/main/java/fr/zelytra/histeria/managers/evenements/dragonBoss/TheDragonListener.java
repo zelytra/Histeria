@@ -9,7 +9,6 @@
 
 package fr.zelytra.histeria.managers.evenements.dragonBoss;
 
-import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,11 +40,6 @@ public class TheDragonListener implements Listener {
             }
         }
 
-
-        for (PlayerDamager playerDamager : dragon.getSortedDamager())
-            System.out.println(playerDamager);
-
-
     }
 
     @EventHandler
@@ -55,7 +49,7 @@ public class TheDragonListener implements Listener {
         TheDragon dragon = TheDragon.getSpecifiedBoss(e.getEntity());
         if (dragon == null) return;
 
-        dragon.death();
+        dragon.death(e.getEntity().getLocation());
     }
 
 
