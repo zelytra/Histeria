@@ -39,7 +39,7 @@ public class TheDragon extends BossProperty implements Boss {
 
     private final static Map<UUID, TheDragon> dragonList = new HashMap<>();
 
-    private final static double maxHealth = 10;
+    private final static double maxHealth = 1500;
     private final static String name = "§bThe Dragon";
 
     private final UUID uuid = UUID.randomUUID();
@@ -56,11 +56,12 @@ public class TheDragon extends BossProperty implements Boss {
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
             location.setY(location.getY() + 50);
             dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
-            dragon.setPhase(EnderDragon.Phase.SEARCH_FOR_BREATH_ATTACK_TARGET);
+            dragon.setPhase(EnderDragon.Phase.CIRCLING);
             dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
             dragon.setHealth(maxHealth);
             dragon.setCustomName(name);
 
+            getBossBar().setProgress(1);
             getBossBar().setColor(BarColor.BLUE);
             getBossBar().setVisible(true);
 
