@@ -124,7 +124,7 @@ public final class Histeria extends JavaPlugin {
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
 
-    public static String version = "v3.8";
+    public static String version = "v3.9";
     public static MySQL mySQL;
     public static Shop shop;
     public static Vote vote;
@@ -138,7 +138,6 @@ public final class Histeria extends JavaPlugin {
     public static Histeria getInstance() {
         return instance;
     }
-
 
     @Override
     public void onLoad() {
@@ -156,8 +155,6 @@ public final class Histeria extends JavaPlugin {
         regPluginMessage();
         setupServer();
         EventManager.regEvents(this);
-
-
 
         new CraftManager();
         vote = new Vote();

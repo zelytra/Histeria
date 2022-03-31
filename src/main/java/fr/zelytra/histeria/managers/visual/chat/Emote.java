@@ -28,6 +28,7 @@ public enum Emote {
     JAVA("\u9009", ":java", EmoteType.EMOTE),
     BEDROCK("\u9010", ":bedrock", EmoteType.EMOTE),
     GOLD("\u9022", ":gold", EmoteType.EMOTE),
+    HEART("\u9028", ":heart", EmoteType.EMOTE),
     FIGHT("\u9023", ":null", EmoteType.ICON),
 
     ALMIGHTY("\u9011", ":null", EmoteType.BADGE),

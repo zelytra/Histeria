@@ -39,7 +39,7 @@ public class TheDragon extends BossProperty implements Boss {
 
     private final static Map<UUID, TheDragon> dragonList = new HashMap<>();
 
-    private final static double maxHealth = 1500;
+    private final static double maxHealth = 10;
     private final static String name = "§bThe Dragon";
 
     private final UUID uuid = UUID.randomUUID();
@@ -65,7 +65,7 @@ public class TheDragon extends BossProperty implements Boss {
             getBossBar().setVisible(true);
 
             dragon.getPersistentDataContainer().set(key, PersistentDataType.STRING, uuid.toString());
-            LangMessage.broadcast("","boss.theDragonStart","");
+            LangMessage.broadcast("", "boss.theDragonStart", "");
         }, 15 * 20);
 
         startBossBarListener(this);
@@ -159,7 +159,10 @@ public class TheDragon extends BossProperty implements Boss {
 
         // Drop unique items
         location.getWorld().dropItem(location, new CustomItemStack(CustomMaterial.DRAGON_WING, 1).getItem());
-        location.getWorld().dropItem(drawCustomLoc(location, 15), new CustomItemStack(CustomMaterial.RED_MATTER, 1).getItem());
+
+        // Spawn red matter
+        for (int x = 0; x <= new Random().nextInt(1, 8); x++)
+            location.getWorld().dropItem(drawCustomLoc(location, 15), new CustomItemStack(CustomMaterial.RED_MATTER, 1).getItem());
 
         displayDamageStats();
 
@@ -168,10 +171,12 @@ public class TheDragon extends BossProperty implements Boss {
         int multplier = 5;
         int goldReward = 250000;
 
-        for (int x = 0; x <= 4; x++) {
+        for (int x = 0; x <= multplier - 1; x++) {
+            if (x >= bestDamagers.size()) return;
             CustomPlayer player = CustomPlayer.getCustomPlayer(bestDamagers.get(x).getPlayer().getName());
             player.getBankAccount().addMoney(goldReward * multplier);
             player.getPlayer().sendMessage(Message.PLAYER_PREFIX + "§a You won " + Utils.formatBigNumber(goldReward * multplier) + "§f" + Emote.GOLD + " §ato be the N°" + (x + 1) + " damage dealer !");
+            multplier--;
         }
     }
 

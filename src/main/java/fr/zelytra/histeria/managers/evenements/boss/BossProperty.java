@@ -11,6 +11,7 @@ package fr.zelytra.histeria.managers.evenements.boss;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.visual.chat.Emote;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -103,10 +104,11 @@ public class BossProperty {
 
     public void displayDamageStats() {
         // Display informations
-        LangMessage.broadcast("boss.title");
+        LangMessage.broadcast("", "boss.title", "");
         List<PlayerDamager> playerDamagers = getSortedDamager();
         for (int x = 0; x <= 9; x++) {
-            Bukkit.broadcastMessage("§8" + (x + 1) + ". §6" + playerDamagers.get(x).getPlayer().getName() + ": §f" + playerDamagers.get(x).getTotalDamage());
+            if (x >= playerDamagers.size()) return;
+            Bukkit.broadcastMessage("§8" + (x + 1) + ". §6" + playerDamagers.get(x).getPlayer().getName() + ": §f" + playerDamagers.get(x).getTotalDamage() + "§f " + Emote.HEART);
         }
     }
 

@@ -9,12 +9,15 @@
 
 package fr.zelytra.histeria.managers.serverSynchro.contents;
 
+import fr.zelytra.histeria.managers.serverSynchro.builder.ByteConverter;
 import fr.zelytra.histeria.managers.serverSynchro.builder.Capsule;
 import fr.zelytra.histeria.managers.serverSynchro.builder.PlayerData;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.ByteBuffer;
 
 public class ItemSlotCapsule implements Capsule {
 
