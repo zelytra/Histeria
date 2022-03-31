@@ -9,8 +9,12 @@
 
 package fr.zelytra.histeria.managers.evenements.dragonBoss;
 
+import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
+import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
@@ -18,17 +22,34 @@ public class TheDragonListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
+
         if (e.getEntityType() != TheDragon.type) return;
 
         TheDragon dragon = TheDragon.getSpecifiedBoss(e.getEntity());
         if (dragon == null) return;
 
         dragon.updateBossBar(dragon);
+        if (e instanceof EntityDamageByEntityEvent) {
+
+            EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent) e;
+
+            if (damageEvent.getDamager() instanceof Player) {
+                dragon.damage((Player) damageEvent.getDamager(), damageEvent.getDamage());
+            } else if (damageEvent.getDamager() instanceof AbstractArrow) {
+                AbstractArrow abstractArrow = (AbstractArrow) damageEvent.getDamager();
+                dragon.damage((Player) abstractArrow.getShooter(), damageEvent.getDamage());
+            }
+        }
+
+
+        for (PlayerDamager playerDamager : dragon.getSortedDamager())
+            System.out.println(playerDamager);
+
 
     }
 
     @EventHandler
-    public void onDeath(EntityDeathEvent e){
+    public void onDeath(EntityDeathEvent e) {
         if (e.getEntityType() != TheDragon.type) return;
 
         TheDragon dragon = TheDragon.getSpecifiedBoss(e.getEntity());
@@ -36,4 +57,6 @@ public class TheDragonListener implements Listener {
 
         dragon.death();
     }
+
+
 }

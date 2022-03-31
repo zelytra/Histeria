@@ -20,12 +20,16 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class BossProperty {
 
     private final BossBar bossBar;
+    private final List<PlayerDamager> damagerList = new ArrayList<>();
+
     private int listenerId;
     private final int schedulerTime = 1; //time in seconds
 
@@ -78,6 +82,22 @@ public class BossProperty {
     public void killBossBar() {
         Bukkit.getScheduler().cancelTask(listenerId);
         bossBar.removeAll();
+    }
+
+    public void damage(Player player, double damage) {
+        for (PlayerDamager playerDamager : damagerList) {
+            if (playerDamager.getPlayer().getName().equalsIgnoreCase(player.getName())) {
+                playerDamager.damage(damage);
+                return;
+            }
+        }
+
+        damagerList.add(new PlayerDamager(player, damage));
+    }
+
+    public List<PlayerDamager> getSortedDamager() {
+        Collections.sort(damagerList);
+        return damagerList;
     }
 
     private double getDistance(Location loc1, Location loc2) {

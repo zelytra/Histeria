@@ -12,6 +12,7 @@ package fr.zelytra.histeria.commands.stats;
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
+import fr.zelytra.histeria.utils.Utils;
 import fr.zelytra.histeria.utils.timer.TimeFormater;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -103,7 +104,7 @@ public class TopStats implements CommandExecutor {
 
                     for (int x = 0; x < 10; x++)
                         if (result.next())
-                            sender.sendMessage("§8● §6" + result.getString("name") + " §8: §6" + result.getInt("money") + Emote.GOLD);
+                            sender.sendMessage("§8● §6" + result.getString("name") + " §8: §6" + Utils.formatBigNumber(result.getInt("money")) + Emote.GOLD);
 
                     result.close();
                 } catch (SQLException e) {
@@ -112,7 +113,7 @@ public class TopStats implements CommandExecutor {
 
             });
 
-        }else{
+        } else {
             LangMessage.sendMessage((Player) sender, "command.wrongSyntax");
             return false;
         }
