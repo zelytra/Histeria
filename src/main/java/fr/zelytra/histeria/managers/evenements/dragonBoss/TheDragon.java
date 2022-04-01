@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.evenements.boss.Boss;
 import fr.zelytra.histeria.managers.evenements.boss.BossProperty;
 import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
+import fr.zelytra.histeria.managers.evenements.visual.Laser;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
 import fr.zelytra.histeria.managers.languages.LangMessage;
@@ -38,24 +39,28 @@ import java.util.*;
 public class TheDragon extends BossProperty implements Boss {
 
     private final static Map<UUID, TheDragon> dragonList = new HashMap<>();
-
-    private final static double maxHealth = 1500;
     private final static String name = "§bThe Dragon";
 
+    private final double maxHealth;
     private final UUID uuid = UUID.randomUUID();
+    private final Location origin;
+    private final Location dragonSpawn;
+
+    private EnderDragon dragon;
+
     public final static NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "TheDragon");
     public final static EntityType type = EntityType.ENDER_DRAGON;
-    private EnderDragon dragon;
-    private final Location origin;
 
     public TheDragon(Location location) {
 
         super(name);
         origin = location.clone();
+        maxHealth = lifeScaling(location);
+        location.setY(location.getY() + 50);
+        dragonSpawn = location.clone();
 
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
-            location.setY(location.getY() + 50);
-            dragon = (EnderDragon) location.getWorld().spawnEntity(location, EntityType.ENDER_DRAGON);
+            dragon = (EnderDragon) dragonSpawn.getWorld().spawnEntity(dragonSpawn, EntityType.ENDER_DRAGON);
             dragon.setPhase(EnderDragon.Phase.CIRCLING);
             dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
             dragon.setHealth(maxHealth);
@@ -67,7 +72,7 @@ public class TheDragon extends BossProperty implements Boss {
 
             dragon.getPersistentDataContainer().set(key, PersistentDataType.STRING, uuid.toString());
             LangMessage.broadcast("", "boss.theDragonStart", "");
-        }, 15 * 20);
+        }, 30 * 20);
 
         startBossBarListener(this);
         dragonList.put(uuid, this);
@@ -78,7 +83,6 @@ public class TheDragon extends BossProperty implements Boss {
 
     private void summonPillar() {
         Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-            List<Material> pillarMaterials = new ArrayList<>(Arrays.asList(Material.OBSIDIAN, Material.CRYING_OBSIDIAN, CustomMaterial.REINFORCED_OBSIDIAN.getVanillaMaterial()));
 
             int radius = 60;
             for (int d = 0; d <= 12; d++) {
@@ -87,31 +91,44 @@ public class TheDragon extends BossProperty implements Boss {
 
                 pillarCenter.setX(Math.round(pillarCenter.getX() + Math.cos(d) * radius));
                 pillarCenter.setZ(Math.round(pillarCenter.getZ() + Math.sin(d) * radius));
+                pillarCenter.setY(20);
                 pillarCenter.toCenterLocation();
 
                 int pillarHeight = new Random().nextInt(80, 140);
 
+                // Build pillar
                 Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
-                    double pillarRadius = 2;
-                    for (int y = 20; y <= pillarHeight; y++) {
-                        for (int x = (int) -pillarRadius; x <= pillarRadius; x++) {
-                            for (int z = (int) -pillarRadius; z <= pillarRadius; z++) {
-                                int finalX = x, finalY = y, finalZ = z;
-                                if (Math.pow(x, 2) + Math.pow(z, 2) <= Math.pow(pillarRadius, 2)) {
-                                    Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
-                                        origin.getWorld().getBlockAt((int) (finalX + pillarCenter.getX()), finalY, (int) (finalZ + pillarCenter.getZ())).setType(drawMaterial());
-                                    });
-                                }
-                                try {
-                                    Thread.sleep(1);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                    try {
+
+                        double pillarRadius = 2;
+                        Laser laserBuilder = new Laser.CrystalLaser(origin.clone(), pillarCenter.clone(), 200, radius);
+                        laserBuilder.start(Histeria.getInstance());
+
+                        for (int y = 20; y <= pillarHeight; y++) {
+                            for (int x = (int) -pillarRadius; x <= pillarRadius; x++) {
+                                for (int z = (int) -pillarRadius; z <= pillarRadius; z++) {
+
+                                    int finalX = x, finalY = y, finalZ = z;
+
+                                    if (Math.pow(x, 2) + Math.pow(z, 2) <= Math.pow(pillarRadius, 2)) {
+                                        Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
+                                            origin.getWorld().getBlockAt((int) (finalX + pillarCenter.getX()), finalY, (int) (finalZ + pillarCenter.getZ())).setType(drawMaterial());
+                                        });
+                                    }
+
+                                    Thread.sleep(2);
                                 }
                             }
+                            pillarRadius += 0.025;
+                            pillarCenter.setY(y);
+                            laserBuilder.moveEnd(pillarCenter);
                         }
-                        pillarRadius += 0.025;
+                        laserBuilder.stop();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
+                    // Spawn ender crystal at the top of the pillar
                     Bukkit.getScheduler().runTask(Histeria.getInstance(), () -> {
                         Location dragonCore = pillarCenter.clone();
                         dragonCore.setY(pillarHeight + 1);

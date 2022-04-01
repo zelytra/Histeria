@@ -112,6 +112,11 @@ public class BossProperty {
         }
     }
 
+    public double lifeScaling(Location location) {
+        double defaultLife = 500.0;
+        return defaultLife * Bukkit.getOnlinePlayers().size();
+    }
+
     private double getDistance(Location loc1, Location loc2) {
         double deltaX = loc1.getX() - loc2.getX();
         double deltaZ = (loc1.getZ() - loc2.getZ());
