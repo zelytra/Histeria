@@ -72,7 +72,7 @@ public class TheDragon extends BossProperty implements Boss {
 
             dragon.getPersistentDataContainer().set(key, PersistentDataType.STRING, uuid.toString());
             LangMessage.broadcast("", "boss.theDragonStart", "");
-        }, 30 * 20);
+        }, 15 * 20);
 
         startBossBarListener(this);
         dragonList.put(uuid, this);
@@ -116,7 +116,7 @@ public class TheDragon extends BossProperty implements Boss {
                                         });
                                     }
 
-                                    Thread.sleep(2);
+                                    Thread.sleep(1);
                                 }
                             }
                             pillarRadius += 0.025;
