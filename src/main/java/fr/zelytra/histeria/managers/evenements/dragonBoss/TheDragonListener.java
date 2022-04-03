@@ -53,6 +53,8 @@ public class TheDragonListener implements Listener {
 
         // Player ejected when destroying ender cystal
         if (e.getEntityType() == EntityType.ENDER_CRYSTAL && e.getEntity().getWorld().getName().equalsIgnoreCase("world_the_end")) {
+            if (!e.getEntity().getPersistentDataContainer().has(TheDragon.key)) return;
+
             List<Entity> nearEntities = e.getEntity().getNearbyEntities(10, 10, 10);
             for (Entity entity : nearEntities) {
 
@@ -69,6 +71,7 @@ public class TheDragonListener implements Listener {
 
             }
             e.getEntity().getWorld().spawnParticle(Particle.DRAGON_BREATH, e.getEntity().getLocation(), 190);
+            e.getEntity().getWorld().spawnEntity(e.getEntity().getLocation(), EntityType.WITHER);
         }
     }
 

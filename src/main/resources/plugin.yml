@@ -317,3 +317,7 @@ commands:
   adminjob:
     description: Change/get level of a job
     permission: histeria.adminjob
+
+  event:
+    description: Event starter command
+    permission: histeria.event

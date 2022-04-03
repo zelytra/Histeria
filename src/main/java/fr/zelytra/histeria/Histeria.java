@@ -63,6 +63,8 @@ import fr.zelytra.histeria.managers.configuration.ConfigurationManager;
 import fr.zelytra.histeria.managers.enchants.builder.CustomEnchant;
 import fr.zelytra.histeria.managers.enchants.command.HEnchant;
 import fr.zelytra.histeria.managers.enchants.command.HEnchantTab;
+import fr.zelytra.histeria.managers.evenements.command.EventCommand;
+import fr.zelytra.histeria.managers.evenements.command.EventTab;
 import fr.zelytra.histeria.managers.hguard.HGuardListener;
 import fr.zelytra.histeria.managers.hguard.command.HGuardCreator;
 import fr.zelytra.histeria.managers.hguard.command.HGuardTabCompleter;
@@ -119,7 +121,7 @@ public final class Histeria extends JavaPlugin {
 
     private static Histeria instance;
     public static boolean log = true;
-    public static boolean synchro = false;
+    public static boolean synchro = true;
     private static boolean saberFaction = false;
     public static boolean isReloading = false;
     private static LuckPerms luckPerms;
@@ -349,6 +351,10 @@ public final class Histeria extends JavaPlugin {
 
         /* Trade */
         getCommand("trade").setExecutor(new TradeCommand());
+
+        /* Event */
+        getCommand("event").setExecutor(new EventCommand());
+        getCommand("event").setTabCompleter(new EventTab());
 
     }
 

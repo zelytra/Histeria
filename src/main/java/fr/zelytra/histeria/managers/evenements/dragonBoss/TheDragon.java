@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.evenements.boss.Boss;
 import fr.zelytra.histeria.managers.evenements.boss.BossProperty;
 import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
+import fr.zelytra.histeria.managers.evenements.visual.CustomAttack;
 import fr.zelytra.histeria.managers.evenements.visual.Laser;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
 import fr.zelytra.histeria.managers.items.CustomMaterial;
@@ -47,6 +48,7 @@ public class TheDragon extends BossProperty implements Boss {
     private final Location dragonSpawn;
 
     private EnderDragon dragon;
+    private int attackSchedulerId;
 
     public final static NamespacedKey key = new NamespacedKey(Histeria.getInstance(), "TheDragon");
     public final static EntityType type = EntityType.ENDER_DRAGON;
@@ -55,9 +57,11 @@ public class TheDragon extends BossProperty implements Boss {
 
         super(name);
         origin = location.clone();
-        maxHealth = lifeScaling(location);
+        maxHealth = lifeScaling();
         location.setY(location.getY() + 50);
         dragonSpawn = location.clone();
+
+        Bukkit.broadcastMessage("§6Something is approaching...");
 
         Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
             dragon = (EnderDragon) dragonSpawn.getWorld().spawnEntity(dragonSpawn, EntityType.ENDER_DRAGON);
@@ -65,6 +69,7 @@ public class TheDragon extends BossProperty implements Boss {
             dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(maxHealth);
             dragon.setHealth(maxHealth);
             dragon.setCustomName(name);
+            resistanceScaling(dragon);
 
             getBossBar().setProgress(1);
             getBossBar().setColor(BarColor.BLUE);
@@ -72,6 +77,7 @@ public class TheDragon extends BossProperty implements Boss {
 
             dragon.getPersistentDataContainer().set(key, PersistentDataType.STRING, uuid.toString());
             LangMessage.broadcast("", "boss.theDragonStart", "");
+            startCustomAttackListener();
         }, 15 * 20);
 
         startBossBarListener(this);
@@ -79,6 +85,10 @@ public class TheDragon extends BossProperty implements Boss {
 
         summonPillar();
 
+    }
+
+    private void startCustomAttackListener() {
+        attackSchedulerId = Bukkit.getScheduler().runTaskTimer(Histeria.getInstance(), () -> drawCustomAttack(), 0, 5 * 20).getTaskId();
     }
 
     private void summonPillar() {
@@ -136,8 +146,10 @@ public class TheDragon extends BossProperty implements Boss {
                         dragonCore.setZ(dragonCore.getZ() + 0.5);
                         dragonCore.getBlock().setType(Material.ANCIENT_DEBRIS);
                         dragonCore.setY(dragonCore.getY() + 1);
-                        dragonCore.getWorld().spawnEntity(dragonCore, EntityType.ENDER_CRYSTAL);
                         dragonCore.getWorld().strikeLightningEffect(dragonCore);
+
+                        Entity crystal = dragonCore.getWorld().spawnEntity(dragonCore, EntityType.ENDER_CRYSTAL);
+                        crystal.getPersistentDataContainer().set(key, PersistentDataType.STRING, "crystal");
                     });
 
                 });
@@ -166,6 +178,7 @@ public class TheDragon extends BossProperty implements Boss {
     @Override
     public void death(Location location) {
         killBossBar();
+        Bukkit.getScheduler().cancelTask(attackSchedulerId);
 
         // Spawn histerite block
         for (int x = 0; x <= new Random().nextInt(64, 128); x++)
@@ -186,10 +199,11 @@ public class TheDragon extends BossProperty implements Boss {
 
         // Give rewards for the 5 best damagers
         List<PlayerDamager> bestDamagers = getSortedDamager();
+
         int multplier = 5;
         int goldReward = 250000;
 
-        for (int x = 0; x <= multplier - 1; x++) {
+        for (int x = 0; x <= 4; x++) {
             if (x >= bestDamagers.size()) return;
             CustomPlayer player = CustomPlayer.getCustomPlayer(bestDamagers.get(x).getPlayer().getName());
             player.getBankAccount().addMoney(goldReward * multplier);
@@ -208,6 +222,16 @@ public class TheDragon extends BossProperty implements Boss {
 
     @Override
     public void drawCustomAttack() {
+        if (new Random().nextInt(1, 100) >= 25) return;
+
+        switch (dragon.getPhase()) {
+            case CIRCLING:
+                CustomAttack.potionBombingRaid(dragon);
+                break;
+            case LAND_ON_PORTAL:
+                CustomAttack.dragonBall(dragon, EntityType.DRAGON_FIREBALL);
+                break;
+        }
 
     }
 

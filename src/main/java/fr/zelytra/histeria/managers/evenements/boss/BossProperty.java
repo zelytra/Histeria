@@ -15,11 +15,13 @@ import fr.zelytra.histeria.managers.visual.chat.Emote;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -112,9 +114,16 @@ public class BossProperty {
         }
     }
 
-    public double lifeScaling(Location location) {
+    public double lifeScaling() {
         double defaultLife = 500.0;
-        return defaultLife * Bukkit.getOnlinePlayers().size();
+        defaultLife = defaultLife * Bukkit.getOnlinePlayers().size() >= 2048 ? 2047 : defaultLife * Bukkit.getOnlinePlayers().size();
+        return defaultLife;
+    }
+
+    public void resistanceScaling(LivingEntity entity) {
+        double defaultArmor = 3.0;
+        defaultArmor = defaultArmor * Bukkit.getOnlinePlayers().size() >= 30 ? 30 : defaultArmor * Bukkit.getOnlinePlayers().size();
+        entity.getAttribute(Attribute.GENERIC_ARMOR).setBaseValue(defaultArmor);
     }
 
     private double getDistance(Location loc1, Location loc2) {
