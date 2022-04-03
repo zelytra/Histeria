@@ -110,7 +110,7 @@ public class BossProperty {
         List<PlayerDamager> playerDamagers = getSortedDamager();
         for (int x = 0; x <= 9; x++) {
             if (x >= playerDamagers.size()) return;
-            Bukkit.broadcastMessage("§8" + (x + 1) + ". §6" + playerDamagers.get(x).getPlayer().getName() + ": §f" + playerDamagers.get(x).getTotalDamage() + "§f " + Emote.HEART);
+            Bukkit.broadcastMessage("§8" + (x + 1) + ". §6" + playerDamagers.get(x).getPlayer().getName() + ": §f" + (int) playerDamagers.get(x).getTotalDamage() + "§f " + Emote.HEART);
         }
     }
 
