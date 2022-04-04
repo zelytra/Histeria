@@ -27,8 +27,9 @@ public class CustomItemHandler implements Listener {
     @EventHandler
     public void onCustomItemUse(PlayerInteractEvent e) {
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR) {
 
+            // Cancel world edit compass de c mort... nique
             if (e.getPlayer().isOp() && (e.getAction() == Action.LEFT_CLICK_AIR || e.getAction() == Action.LEFT_CLICK_BLOCK) && e.getPlayer().getInventory().getItemInMainHand().getType() == Material.COMPASS) {
                 e.setCancelled(true);
             }
