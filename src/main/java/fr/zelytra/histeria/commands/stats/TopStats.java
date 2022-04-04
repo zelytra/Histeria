@@ -11,6 +11,7 @@ package fr.zelytra.histeria.commands.stats;
 
 import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.languages.LangMessage;
+import fr.zelytra.histeria.managers.player.CustomPlayer;
 import fr.zelytra.histeria.managers.visual.chat.Emote;
 import fr.zelytra.histeria.utils.Utils;
 import fr.zelytra.histeria.utils.timer.TimeFormater;
@@ -23,6 +24,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TopStats implements CommandExecutor {
 
@@ -98,15 +102,27 @@ public class TopStats implements CommandExecutor {
 
             Bukkit.getScheduler().runTaskAsynchronously(Histeria.getInstance(), () -> {
 
+                List<BankStat> bankStatList = new ArrayList<>();
                 ResultSet result = Histeria.mySQL.query("SELECT `name`,`money`  FROM `Bank` ORDER BY `money` DESC;");
-                LangMessage.sendMessage((Player) sender, "", "command.stats", "");
                 try {
 
+                    //Filling sql data list
                     for (int x = 0; x < 10; x++)
                         if (result.next())
-                            sender.sendMessage("§8● §6" + result.getString("name") + " §8: §6" + Utils.formatBigNumber(result.getInt("money")) + Emote.GOLD);
-
+                            bankStatList.add(new BankStat(result.getString("name"), result.getInt("money")));
                     result.close();
+
+                    //Filling local data
+                    for (CustomPlayer customPlayer : CustomPlayer.getList())
+                        bankStatList.add(new BankStat(customPlayer.getName(), customPlayer.getBankAccount().getMoney()));
+
+                    Collections.sort(bankStatList);
+
+                    LangMessage.sendMessage((Player) sender, "", "command.stats", "");
+
+                    for (int x = 0; x < 10; x++)
+                        sender.sendMessage("§8● §6" + bankStatList.get(x).name() + " §8: §6" + Utils.formatBigNumber(bankStatList.get(x).gold()) + Emote.GOLD);
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -120,6 +136,14 @@ public class TopStats implements CommandExecutor {
         return true;
     }
 
+}
+
+record BankStat(String name, int gold) implements Comparable<BankStat> {
+
+    @Override
+    public int compareTo(@NotNull BankStat o) {
+        return ((Integer) o.gold).compareTo(this.gold);
+    }
 }
 
 

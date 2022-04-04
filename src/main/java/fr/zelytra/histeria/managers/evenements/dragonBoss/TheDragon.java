@@ -236,7 +236,6 @@ public class TheDragon extends BossProperty implements Boss {
                 CustomAttack.vortex(dragon, AttackIntensity.MEDIUM, 50);
                 break;
         }
-
     }
 
     @Override
