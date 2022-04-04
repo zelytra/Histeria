@@ -122,7 +122,7 @@ public class HGuardListener implements Listener {
                 return;
             }
             hguard = HGuard.getByLocation(e.getClickedBlock().getLocation());
-            if (hguard.getInteractWhiteList().contains(e.getClickedBlock().getType()) || (hguard.getInteractWhiteList().contains(e.getMaterial())) || Utils.isFood(e.getMaterial()))
+            if (hguard.getInteractWhiteList().contains(e.getClickedBlock().getType()) || (hguard.getInteractWhiteList().contains(e.getMaterial())))
                 return;
         } else {
             if (HGuard.getByLocation(e.getPlayer().getLocation()) == null) {
