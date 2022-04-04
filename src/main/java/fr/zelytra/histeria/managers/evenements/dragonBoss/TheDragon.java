@@ -13,6 +13,7 @@ import fr.zelytra.histeria.Histeria;
 import fr.zelytra.histeria.managers.evenements.boss.Boss;
 import fr.zelytra.histeria.managers.evenements.boss.BossProperty;
 import fr.zelytra.histeria.managers.evenements.boss.PlayerDamager;
+import fr.zelytra.histeria.managers.evenements.visual.AttackIntensity;
 import fr.zelytra.histeria.managers.evenements.visual.CustomAttack;
 import fr.zelytra.histeria.managers.evenements.visual.Laser;
 import fr.zelytra.histeria.managers.items.CustomItemStack;
@@ -230,6 +231,9 @@ public class TheDragon extends BossProperty implements Boss {
                 break;
             case LAND_ON_PORTAL:
                 CustomAttack.dragonBall(dragon, EntityType.DRAGON_FIREBALL);
+                break;
+            case FLY_TO_PORTAL:
+                CustomAttack.vortex(dragon, AttackIntensity.MEDIUM, 50);
                 break;
         }
 

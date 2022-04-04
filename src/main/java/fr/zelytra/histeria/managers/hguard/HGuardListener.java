@@ -140,7 +140,6 @@ public class HGuardListener implements Listener {
         if (hguard.canBreakBlock() || hguard.canPlaceBlock())
             return;
 
-
         e.setCancelled(true);
 
     }

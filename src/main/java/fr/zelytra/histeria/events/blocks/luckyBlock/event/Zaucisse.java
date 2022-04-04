@@ -36,6 +36,7 @@ public class Zaucisse implements LuckyEvent {
     @Override
     public void run(BlockBreakEvent e) {
         Player player = e.getPlayer();
+        count = 0;
         for (int x = 0; x <= 150; x++) {
             Bukkit.getScheduler().runTaskLater(Histeria.getInstance(), () -> {
 

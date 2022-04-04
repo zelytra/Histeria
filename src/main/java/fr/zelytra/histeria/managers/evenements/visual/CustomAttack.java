@@ -141,9 +141,3 @@ public abstract class CustomAttack {
     }
 
 }
-
-enum AttackIntensity {
-    LIGHT,
-    MEDIUM,
-    HARD;
-}
