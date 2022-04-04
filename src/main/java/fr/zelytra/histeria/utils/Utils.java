@@ -109,7 +109,7 @@ public abstract class Utils {
 
     public static ItemStack BookEnchantedItemStack(ItemStack item, Enchantment enchantment, int lvl) {
         EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
-        meta.addStoredEnchant(enchantment, lvl, false);
+        meta.addStoredEnchant(enchantment, lvl, true);
         item.setItemMeta(meta);
         return item;
     }
