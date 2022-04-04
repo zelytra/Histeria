@@ -13,6 +13,8 @@ import fr.zelytra.histeria.events.blocks.luckyBlock.builder.LuckyEvent;
 import org.bukkit.Sound;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import java.util.Random;
+
 public class XPShower implements LuckyEvent {
 
     private final int luck;
@@ -29,7 +31,7 @@ public class XPShower implements LuckyEvent {
     @Override
     public void run(BlockBreakEvent e) {
         e.getPlayer().playSound(e.getBlock().getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-        e.getPlayer().setLevel(e.getPlayer().getLevel() + (80 / (e.getPlayer().getLevel() + 1)));
+        e.getPlayer().setLevel(e.getPlayer().getLevel() + new Random().nextInt(10, 50));
         e.getPlayer().sendMessage("§aYou feel lucky today !");
 
     }

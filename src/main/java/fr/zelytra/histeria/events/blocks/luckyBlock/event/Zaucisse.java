@@ -31,7 +31,8 @@ public class Zaucisse implements LuckyEvent {
         return luck;
     }
 
-    private static int count = 0; //TODO clean this code
+    private int count = 0; //TODO clean this code
+
     @Override
     public void run(BlockBreakEvent e) {
         Player player = e.getPlayer();

@@ -62,7 +62,7 @@ public class MarketCommand implements CommandExecutor {
                 }
 
                 if (count >= playerMarketLimit.getMarketLimit()) {
-                    LangMessage.sendMessage(player, "home.reachLimit");
+                    LangMessage.sendMessage(player, "blackmarket.maxItemSell");
                     return;
                 }
 

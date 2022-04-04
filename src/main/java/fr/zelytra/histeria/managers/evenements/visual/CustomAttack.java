@@ -16,6 +16,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -53,6 +54,11 @@ public abstract class CustomAttack {
         });
     }
 
+    /**
+     * Summon lingering potions and make it rain on the ground
+     *
+     * @param entity who execute the attack
+     */
     public static void potionBombingRaid(Entity entity) {
         List<PotionEffectType> potionEffectTypeList = new ArrayList<>();
 
@@ -94,4 +100,50 @@ public abstract class CustomAttack {
 
         });
     }
+
+    /**
+     * Levitate all player in the air and push them back to ground very hard
+     *
+     * @param entity who execute the attack
+     * @param intensity of the attack
+     * @param radius of the attack (in blocks)
+     */
+    public static void vortex(Entity entity, AttackIntensity intensity, int radius) {
+        List<Entity> nearbyEntities = entity.getNearbyEntities(radius, radius, radius);
+
+        for (Entity e : nearbyEntities) {
+
+            if (!(e instanceof LivingEntity)) continue;
+            Vector toVortex = e.getLocation().toVector().subtract(e.getLocation().toVector()).normalize();
+
+            switch (intensity) {
+                case LIGHT -> {
+                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 60, 1, true, true));
+                    e.setVelocity(toVortex.multiply(-0.7));
+                    break;
+                }
+
+                case MEDIUM -> {
+                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 80, 2, true, true));
+                    e.setVelocity(toVortex.multiply(-1));
+                    break;
+                }
+
+                case HARD -> {
+                    ((LivingEntity) e).addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION, 100, 3, true, true));
+                    e.setVelocity(toVortex.multiply(-2));
+                    break;
+                }
+
+            }
+
+        }
+    }
+
+}
+
+enum AttackIntensity {
+    LIGHT,
+    MEDIUM,
+    HARD;
 }
