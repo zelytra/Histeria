@@ -39,6 +39,7 @@ public class CraftManager {
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.CRACKED_NETHER_BRICKS)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.PURPUR_PILLAR)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.PURPUR_SLAB)));
+        recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.PURPUR_STAIRS)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.LODESTONE)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.CHAINMAIL_HELMET)));
         recipes.addAll(Bukkit.getRecipesFor(new ItemStack(Material.CHAINMAIL_CHESTPLATE)));
