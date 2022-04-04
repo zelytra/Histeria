@@ -93,7 +93,7 @@ public class Market {
 
         try {
             MySQL mySQL = Histeria.mySQL;
-            ResultSet result = mySQL.query("SELECT * FROM `BlackMarket`");
+            ResultSet result = mySQL.query("SELECT * FROM `BlackMarket` ORDER BY `id` DESC");
 
             while (result.next()) {
                 items.add(new MarketItem(
